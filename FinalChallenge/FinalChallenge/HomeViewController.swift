@@ -11,7 +11,8 @@ import UIKit
 class HomeViewController: UIViewController {
 
     var fatherTableView: UITableView!
-    var reuseIdentifier = "CustomCell"
+    var reuseIdentifier = "CategoriesTableViewCell"
+    var artistsReuseIdentifier = "ArtistsTableViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTableView()
@@ -23,8 +24,8 @@ class HomeViewController: UIViewController {
 , style: .plain)
         self.fatherTableView.delegate = self
         self.fatherTableView.dataSource = self
-        fatherTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-      //  tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "NormalCell")
+        fatherTableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        fatherTableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
         self.fatherTableView.tableFooterView = UIView()
         self.view.addSubview(fatherTableView)
     }
@@ -47,17 +48,24 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CustomTableViewCell
-        cell.fatherController = self
+        
         switch indexPath.section {
         case 0:
             print("categorias")
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
+            cell.fatherController = self
+            return cell
         case 1:
             print("artistas")
+            let cell = tableView.dequeueReusableCell(withIdentifier: artistsReuseIdentifier, for: indexPath) as! ArtistsTableViewCell
+            cell.fatherController = self
+            return cell
         default:
             print("eventos")
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
+            cell.fatherController = self
+            return cell
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -82,7 +90,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        switch indexPath.section {
+        case 0:
+            print("categorias")
+            return 150
+        case 1:
+            print("artistas")
+            return 30
+        default:
+            print("eventos")
+            return 150
+        }
     }
     
 }

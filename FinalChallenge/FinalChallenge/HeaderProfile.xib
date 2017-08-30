@@ -45,7 +45,7 @@
                     <state key="normal" title="box"/>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="pGl-Do-7up" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5WH-IR-Yh6"/>
                 <constraint firstItem="bGo-rb-aYv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HK8-8Q-2OC"/>

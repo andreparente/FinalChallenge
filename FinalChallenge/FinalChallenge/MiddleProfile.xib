@@ -33,19 +33,19 @@
                     <rect key="frame" x="107" y="0.0" width="107" height="63"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="curtidas" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CdC-Vy-MJZ">
-                            <rect key="frame" x="26" y="40" width="56" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="34.5" y="46" width="39.5" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjV-yd-vjj">
-                            <rect key="frame" x="49" y="14" width="10" height="21"/>
+                            <rect key="frame" x="49" y="20" width="10" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.57728191342822899" green="1" blue="0.99934173018259065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="CdC-Vy-MJZ" secondAttribute="bottom" constant="5" id="GTA-BB-vQR"/>
                         <constraint firstItem="wjV-yd-vjj" firstAttribute="centerX" secondItem="Gtl-Qh-PE4" secondAttribute="centerX" id="SwG-kx-EL9"/>
@@ -57,19 +57,19 @@
                     <rect key="frame" x="214" y="0.0" width="107" height="63"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="criadores favoritos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nle-SL-nSs">
-                            <rect key="frame" x="5" y="40" width="97" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="5" y="46" width="97" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfJ-mS-B1h">
-                            <rect key="frame" x="48" y="14" width="10" height="21"/>
+                            <rect key="frame" x="48" y="20" width="10" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.98234632097509555" green="1" blue="0.65278166260155435" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="nle-SL-nSs" firstAttribute="leading" secondItem="3Zf-0B-9HE" secondAttribute="leading" constant="5" id="44n-mw-vsO"/>
                         <constraint firstItem="nle-SL-nSs" firstAttribute="top" secondItem="pfJ-mS-B1h" secondAttribute="bottom" constant="5" id="88e-Lp-64j"/>
@@ -82,19 +82,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="107" height="63"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWM-UT-R3F">
-                            <rect key="frame" x="48" y="14" width="10" height="21"/>
+                            <rect key="frame" x="48" y="20" width="10" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publicações" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-MS-ZWE">
-                            <rect key="frame" x="12" y="40" width="83" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publicações" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-MS-ZWE">
+                            <rect key="frame" x="12" y="46" width="83" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.60483543890000002" green="1" blue="0.59544892650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.99194461107254028" green="0.99615627527236938" blue="0.99600595235824585" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="PFW-MS-ZWE" firstAttribute="leading" secondItem="uA5-nZ-VzO" secondAttribute="leading" constant="12" id="2O7-EV-kdS"/>
                         <constraint firstItem="PFW-MS-ZWE" firstAttribute="centerX" secondItem="uA5-nZ-VzO" secondAttribute="centerX" id="3Bm-5U-HKD"/>

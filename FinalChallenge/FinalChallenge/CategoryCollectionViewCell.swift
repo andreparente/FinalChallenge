@@ -1,5 +1,5 @@
 //
-//  CategoriesCollectionViewCell.swift
+//  CategoryCollectionViewCell.swift
 //  FinalChallenge
 //
 //  Created by Andre Machado Parente on 29/08/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoriesCollectionViewCell: UICollectionViewCell {
+class CategoryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var categorieLbl: UILabel!
     

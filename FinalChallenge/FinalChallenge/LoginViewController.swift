@@ -60,13 +60,12 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         Auth.auth().signIn(withEmail: emailTxtField.text!, password: passwordTxtField.text!) { (user, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print((error?.localizedDescription)!)
                 return
             }
             if user != nil {
                 //user logado com sucesso
                 self.performSegue(withIdentifier: "LoginToMain", sender: self)
-                print(user?.displayName)
             }
         }
     }
@@ -74,13 +73,12 @@ class LoginViewController: UIViewController {
     @IBAction func register(_ sender: Any) {
         Auth.auth().createUser(withEmail: emailTxtField.text!, password: passwordTxtField.text!) { (user, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print((error?.localizedDescription)!)
                 return
             }
             if user != nil {
                 
                 //user criado com sucesso
-                print(user?.displayName)
             }
         }
     }
@@ -99,7 +97,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "name,picture,email"]).start(completionHandler: { (connection, result, error) in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print((error?.localizedDescription)!)
                         return
                     }
                     if result != nil {

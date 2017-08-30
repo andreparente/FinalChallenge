@@ -18,11 +18,13 @@ class HeaderProfile: UIView {
  
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.layer.addSublayer(Gradient.sharedInstance.bluePinkGradient(view: self, vertical: false))
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.layer.addSublayer(Gradient.sharedInstance.bluePinkGradient(view: self, vertical: false))
         commonInit()
     }
 
@@ -33,8 +35,4 @@ class HeaderProfile: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
-    
-//    class func instanceFromNib() -> UIView {
-//        return UINib(nibName: "HeaderProfile", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
-//    }
 }

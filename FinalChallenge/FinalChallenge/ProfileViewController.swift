@@ -32,19 +32,31 @@ class ProfileViewController: UIViewController {
         self.fatherTableView.delegate = self
         self.fatherTableView.dataSource = self
         self.fatherTableView.tableHeaderView = headerView
+        
         self.view.addSubview(fatherTableView)
     }
 
     func setHeaderView() {
         self.headerView = HeaderProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
         self.headerView.profileNameLbl.text = "André Parente"
+        self.headerView.bringSubview(toFront: self.headerView.profileImage)
+        self.headerView.bringSubview(toFront: self.headerView.profileNameLbl)
+        self.headerView.bringSubview(toFront: self.headerView.editProfileButton)
+        self.headerView.bringSubview(toFront: self.headerView.inboxButton)
+
     }
     
     func setMiddleView() {
-        self.middleView = MiddleProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 70))
+        self.middleView = MiddleProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        self.middleView.favoriteArtsView.layer.addBorder(edge: .right, color: .lightGray, thickness: 1)
+        self.middleView.favoriteArtsView.layer.addBorder(edge: .left, color: .lightGray, thickness: 1)
         self.middleView.artWorksView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.artWorksClicked)))
+        
         self.middleView.favoriteArtistsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.favoriteArtistsClicked)))
+        
         self.middleView.favoriteArtsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.likesClicked)))
+        
+
         self.middleView.setArtWorksSelected()
     }
 
