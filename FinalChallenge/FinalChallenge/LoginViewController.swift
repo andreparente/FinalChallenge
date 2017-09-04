@@ -90,7 +90,6 @@ class LoginViewController: UIViewController {
             }
             if user != nil {
                 //adiciona email e nome ao path do Uid (ok)
-                
                 let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                 
@@ -126,8 +125,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                 return
                             }
                             else {
-                                //firebase user is finally logged
                                 
+                                //firebase user is finally logged
                                 if let resultado = result as? Dictionary<String,AnyObject> {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)

@@ -12,14 +12,22 @@ import Firebase
 
 class DatabaseAccess {
     
-    var usersRef : DatabaseReference?
-    
+    var usersRef: DatabaseReference?
+    var artWorksRef: DatabaseReference?
+    var artsRef: DatabaseReference?
+
     //Singleton!
     static let sharedInstance = DatabaseAccess()
     
     private init(){
         usersRef = Database.database().reference()
         usersRef = usersRef?.child("users")
+        
+        artWorksRef = Database.database().reference()
+        artWorksRef = usersRef?.child("artWorks")
+        
+        artsRef = Database.database().reference()
+        artsRef = usersRef?.child("arts")
     }
     
     func databaseAccessWriteCreateUser(user:User) {
