@@ -12,16 +12,33 @@ import Firebase
 
 class DatabaseAccess {
     
-    var addUserRef : DatabaseReference?
+    var usersRef : DatabaseReference?
     
-    init(){
-        addUserRef = Database.database().reference()
-        addUserRef = addUserRef?.child("users")
+    //Singleton!
+    static let sharedInstance = DatabaseAccess()
+    
+    private init(){
+        usersRef = Database.database().reference()
+        usersRef = usersRef?.child("users")
     }
     
-    func databaseAccessWriteCreateUser(user:User) -> Bool{
+    func databaseAccessWriteCreateUser(user:User) {
         let userInfo = ["email": user.email as Any, "name": user.name as Any]
-        addUserRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
-        return true
+        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
+        return
+    }
+    
+    func fetchUserInfo(callback: @escaping((_ success: Bool)->())) {
+        usersRef?.queryOrdered(byChild: "email").queryEqual(toValue: User.sharedInstance.email).observeSingleEvent(of: .value, with: { snapshot in
+            let userDict = snapshot.value as? [String: Any] ?? [:]
+            
+            if !userDict.isEmpty {
+                
+                //preencher as infos no user local
+                callback(true)
+            } else {
+                callback(false)
+            }
+        })
     }
 }

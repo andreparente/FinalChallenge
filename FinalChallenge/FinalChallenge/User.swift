@@ -16,6 +16,7 @@ class User {
     var friendsId: [String] = []
     var favoriteArts: [String] = []
     var favoriteArtists: [String] = []
+    var id: String!
     //Singleton!
     static let sharedInstance = User()
     

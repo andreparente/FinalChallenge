@@ -17,8 +17,8 @@ class LoginViewController: UIViewController {
 //    @IBOutlet weak var registerView: UIView!
 //    @IBOutlet weak var loginView: UIView!
     let fbButton = FBSDKLoginButton()
-    var databaseAccess : DatabaseAccess?
-//    var dbFirebaseRef : DatabaseReference?
+    //   var databaseAccess : DatabaseAccess?
+    //    var dbFirebaseRef : DatabaseReference?
     
     @IBOutlet weak var nameTxtField: UITextField!
     @IBOutlet weak var emailTxtField: UITextField!
@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        databaseAccess = DatabaseAccess()
+   //     databaseAccess = DatabaseAccess()
         fbLoginButton.readPermissions = ["email","public_profile"]
 //        self.view.addSubview(fbButton)
         //fbLoginButton.center = self.view.center
@@ -68,7 +68,16 @@ class LoginViewController: UIViewController {
             }
             if user != nil {
                 //user logado com sucesso
-                self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                //puxar infos do database do user
+                User.sharedInstance.email = self.emailTxtField.text!
+                DatabaseAccess.sharedInstance.fetchUserInfo(callback: { (success: Bool) in
+                    if success {
+                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                    } else {
+                        
+                    }
+                })
+                
             }
         }
     }
@@ -83,8 +92,9 @@ class LoginViewController: UIViewController {
                 //adiciona email e nome ao path do Uid (ok)
                 
                 let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
-                self.databaseAccess?.databaseAccessWriteCreateUser(user: user)
-//                self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
+                
+                //self.performSegue(withIdentifier: "LoginToMain", sender: self)
 
             }
         }
@@ -122,7 +132,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)
                                     let user = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
-                                    self.databaseAccess?.databaseAccessWriteCreateUser(user: user)
+                                    DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                                 }
                                 
                             }
