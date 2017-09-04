@@ -23,4 +23,11 @@ class User {
         self.name = ""
         self.email = ""
     }
+    
+    init (name:String, email: String){
+        self.name = name
+        self.email = email
+    }
+    
+    
 }

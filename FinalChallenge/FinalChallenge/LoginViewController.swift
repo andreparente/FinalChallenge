@@ -11,12 +11,14 @@ import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
 
+
 class LoginViewController: UIViewController {
 
 //    @IBOutlet weak var registerView: UIView!
 //    @IBOutlet weak var loginView: UIView!
     let fbButton = FBSDKLoginButton()
-    
+    var databaseAccess : DatabaseAccess?
+//    var dbFirebaseRef : DatabaseReference?
     
     @IBOutlet weak var nameTxtField: UITextField!
     @IBOutlet weak var emailTxtField: UITextField!
@@ -25,6 +27,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        databaseAccess = DatabaseAccess()
         fbLoginButton.readPermissions = ["email","public_profile"]
 //        self.view.addSubview(fbButton)
         //fbLoginButton.center = self.view.center
@@ -77,8 +80,12 @@ class LoginViewController: UIViewController {
                 return
             }
             if user != nil {
+                //adiciona email e nome ao path do Uid (ok)
                 
-                //user criado com sucesso
+                let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
+                self.databaseAccess?.databaseAccessWriteCreateUser(user: user)
+//                self.performSegue(withIdentifier: "LoginToMain", sender: self)
+
             }
         }
     }
@@ -93,6 +100,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
             return
         } else {
             if result != nil {
+                
                 //transform facebook's credential in  firebase's credential
                 let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields" : "name,picture,email"]).start(completionHandler: { (connection, result, error) in
@@ -106,12 +114,17 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                             if let error = error {
                                 print(error)
                                 return
-                            } else {
+                            }
+                            else {
                                 //firebase user is finally logged
+                                
                                 if let resultado = result as? Dictionary<String,AnyObject> {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)
+                                    let user = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
+                                    self.databaseAccess?.databaseAccessWriteCreateUser(user: user)
                                 }
+                                
                             }
                         }
                     }

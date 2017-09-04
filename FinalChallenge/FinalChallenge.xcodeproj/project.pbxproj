@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0957F9E0242A2DB53493AB05 /* Pods_FinalChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD4258FC2A67A37B02384E6 /* Pods_FinalChallenge.framework */; };
 		0B227DA9B7468AEB3F7ADD9E /* Pods_FinalChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */; };
+		26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */; };
 		44D9554716FE6DDBAB41328E /* Pods_FinalChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */; };
 		8A40BC651F54A3C700A12EBA /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC641F54A3C700A12EBA /* Gradients.swift */; };
 		8A40BC671F55945700A12EBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC661F55945700A12EBA /* LoginViewController.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
 		2FDDDB4C3A8ECC249F9178A1 /* Pods-FinalChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		3C5BE2810165BEA7BFFBF385 /* Pods-FinalChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DD4258FC2A67A37B02384E6 /* Pods_FinalChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		26C2B9671F5C961600666E8D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8A40BC711F55A26100A12EBA /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		26C2B9681F5CD17B00666E8D /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */,
+			);
+			name = DAO;
+			sourceTree = "<group>";
+		};
 		8A40BC701F55A24800A12EBA /* FacebookFrameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +250,8 @@
 		8ACFD66D1F44B72E008DF502 /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				26C2B9681F5CD17B00666E8D /* DAO */,
+				26C2B9671F5C961600666E8D /* Models */,
 				8A9548E81F55EA9600FDA06A /* Home */,
 				8A40BC7B1F55BAE900A12EBA /* Profile */,
 				8A40BC701F55A24800A12EBA /* FacebookFrameworks */,
@@ -243,7 +263,6 @@
 				8ACFD69C1F44E561008DF502 /* GoogleService-Info.plist */,
 				8A40BC641F54A3C700A12EBA /* Gradients.swift */,
 				8A40BC661F55945700A12EBA /* LoginViewController.swift */,
-				8A40BC711F55A26100A12EBA /* User.swift */,
 				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
 				8A40BC791F55BA4200A12EBA /* InboxViewController.swift */,
 				8A9548EE1F55F59500FDA06A /* CategoryViewController.swift */,
@@ -357,7 +376,7 @@
 				TargetAttributes = {
 					8ACFD66A1F44B72E008DF502 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = C5676RKFWG;
+						DevelopmentTeam = A2ZTH56XFL;
 						ProvisioningStyle = Automatic;
 					};
 					8ACFD67E1F44B72E008DF502 = {
@@ -584,6 +603,7 @@
 				8A40BC671F55945700A12EBA /* LoginViewController.swift in Sources */,
 				8ACFD66F1F44B72E008DF502 /* AppDelegate.swift in Sources */,
 				8A9548EF1F55F59500FDA06A /* CategoryViewController.swift in Sources */,
+				26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */,
 				8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */,
 				8A40BC651F54A3C700A12EBA /* Gradients.swift in Sources */,
 				8A9548F11F560FA400FDA06A /* Extensions.swift in Sources */,
@@ -739,12 +759,13 @@
 			baseConfigurationReference = 2FDDDB4C3A8ECC249F9178A1 /* Pods-FinalChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5676RKFWG;
+				DEVELOPMENT_TEAM = A2ZTH56XFL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",
 				);
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andremachadoparente.FinalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -757,12 +778,13 @@
 			baseConfigurationReference = FCD705B0A55EB2839B95FFF5 /* Pods-FinalChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5676RKFWG;
+				DEVELOPMENT_TEAM = A2ZTH56XFL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",
 				);
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andremachadoparente.FinalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
