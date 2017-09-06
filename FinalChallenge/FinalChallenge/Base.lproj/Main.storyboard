@@ -131,6 +131,131 @@
             </objects>
             <point key="canvasLocation" x="2761" y="1316"/>
         </scene>
+        <!--Likes View Controller-->
+        <scene sceneID="ht1-BF-2UH">
+            <objects>
+                <viewController storyboardIdentifier="LikesVC" id="5Uq-p9-Gsy" customClass="LikesViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ihs-C7-LHN"/>
+                        <viewControllerLayoutGuide type="bottom" id="9YI-vX-BPr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DGJ-6E-Xjv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="teste likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knP-aA-NCr">
+                                <rect key="frame" x="149" y="323" width="77" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="knP-aA-NCr" firstAttribute="centerY" secondItem="DGJ-6E-Xjv" secondAttribute="centerY" id="DeL-Kl-hpT"/>
+                            <constraint firstItem="knP-aA-NCr" firstAttribute="centerX" secondItem="DGJ-6E-Xjv" secondAttribute="centerX" id="d6A-5X-M8p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I6h-pp-CSt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2376" y="2005"/>
+        </scene>
+        <!--Following View Controller-->
+        <scene sceneID="cZu-HD-5eT">
+            <objects>
+                <viewController storyboardIdentifier="FollowingVC" id="OP6-dw-NMn" customClass="FollowingViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rs8-71-yPn"/>
+                        <viewControllerLayoutGuide type="bottom" id="MWJ-Qa-eqX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wBz-fQ-BWm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="teste following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZo-ne-e8q">
+                                <rect key="frame" x="131" y="323" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iZo-ne-e8q" firstAttribute="centerX" secondItem="wBz-fQ-BWm" secondAttribute="centerX" id="esU-Em-hny"/>
+                            <constraint firstItem="iZo-ne-e8q" firstAttribute="centerY" secondItem="wBz-fQ-BWm" secondAttribute="centerY" id="h5h-8P-H6l"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ngS-1N-AFe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3201" y="2003"/>
+        </scene>
+        <!--Art Works View Controller-->
+        <scene sceneID="hN1-pD-3t1">
+            <objects>
+                <viewController storyboardIdentifier="ArtWorksVC" id="QeC-26-zUb" customClass="ArtWorksViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YfR-UF-Ecy"/>
+                        <viewControllerLayoutGuide type="bottom" id="fjn-cb-Ied"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Gl-H5-g8h">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="teste arts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFz-Ar-eP2">
+                                <rect key="frame" x="151" y="323" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZFz-Ar-eP2" firstAttribute="centerX" secondItem="9Gl-H5-g8h" secondAttribute="centerX" id="hgI-Pr-L1m"/>
+                            <constraint firstItem="ZFz-Ar-eP2" firstAttribute="centerY" secondItem="9Gl-H5-g8h" secondAttribute="centerY" id="xO3-3e-01e"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vd7-vT-ah7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4038" y="1999"/>
+        </scene>
+        <!--Header View Controller-->
+        <scene sceneID="Sf5-Gg-hw0">
+            <objects>
+                <viewController storyboardIdentifier="HeaderVC" id="Ok3-mA-Uma" customClass="HeaderViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XBi-PF-a6h"/>
+                        <viewControllerLayoutGuide type="bottom" id="0sG-f8-RoA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EZs-hJ-PP2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJU-3O-hZ3" customClass="HeaderProfile" customModule="FinalChallenge" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NJU-3O-hZ3" firstAttribute="top" secondItem="EZs-hJ-PP2" secondAttribute="top" id="JG9-zq-0WQ"/>
+                            <constraint firstItem="NJU-3O-hZ3" firstAttribute="leading" secondItem="EZs-hJ-PP2" secondAttribute="leading" id="Lha-Gf-DMc"/>
+                            <constraint firstItem="0sG-f8-RoA" firstAttribute="top" secondItem="NJU-3O-hZ3" secondAttribute="bottom" id="MMJ-lI-vgh"/>
+                            <constraint firstAttribute="trailing" secondItem="NJU-3O-hZ3" secondAttribute="trailing" id="Urf-9K-fe1"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="240"/>
+                    <connections>
+                        <outlet property="headerView" destination="NJU-3O-hZ3" id="ipP-ym-M3a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5TI-Nu-GCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3200.8000000000002" y="2535.832083958021"/>
+        </scene>
         <!--Inbox View Controller-->
         <scene sceneID="Hns-ev-Q9A">
             <objects>

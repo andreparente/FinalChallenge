@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import SJSegmentedScrollView
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: SJSegmentedViewController {
 
     var fatherTableView: UITableView!
-    var middleView: MiddleProfile!
-    var headerView: HeaderProfile!
+    var view1 = UILabel()
+    var view2 = UILabel()
+    var view3 = UILabel()
     
     override func viewDidLoad() {
+        self.sjViewControllerSetup()
         super.viewDidLoad()
-        self.setTableView()
         // Do any additional setup after loading the view.
     }
 
@@ -25,103 +27,77 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setTableView() {
-        self.setHeaderView()
-        self.setMiddleView()
-        self.fatherTableView = UITableView(frame: self.view.frame, style: .plain)
-        self.fatherTableView.delegate = self
-        self.fatherTableView.dataSource = self
-        self.fatherTableView.tableHeaderView = headerView
-        
-        self.view.addSubview(fatherTableView)
+    func sjViewControllerSetup() {
+        if let storyboard = self.storyboard {
+            
+            let headerVC = storyboard.instantiateViewController(withIdentifier: "HeaderVC") as! HeaderViewController
+            
+            let likesVC = storyboard.instantiateViewController(withIdentifier: "LikesVC") as! LikesViewController
+            
+            // ------ isso é gambiarra pra teste
+           
+            view1.frame.size.width = 80
+            view1.text = "n\nobras curtidas"
+            view1.textAlignment = .center
+            view1.numberOfLines = 2
+            likesVC.navigationItem.titleView = view1
+            // -------- end of gambiarra
+
+            
+            let followingVC = storyboard.instantiateViewController(withIdentifier: "FollowingVC") as! FollowingViewController
+            
+            // ------ isso é gambiarra pra teste
+            
+            view2.frame.size.width = 80
+            view2.text = "n\nseguidores"
+            view2.textAlignment = .center
+            view2.numberOfLines = 2
+            followingVC.navigationItem.titleView = view2
+            // -------- end of gambiarra
+
+            
+            let artWorksVC = storyboard.instantiateViewController(withIdentifier: "ArtWorksVC") as! ArtWorksViewController
+            
+            // ------ isso é gambiarra pra teste
+
+            view3.frame.size.width = 80
+            view3.text = "n\nobras"
+            view3.textAlignment = .center
+            view3.numberOfLines = 2
+            artWorksVC.navigationItem.titleView = view3
+            // -------- end of gambiarra
+            
+            self.selectedSegmentViewColor = .gray
+            self.headerViewController = headerVC
+            self.headerViewHeight = 240
+            self.segmentControllers = [likesVC, followingVC,artWorksVC]
+            self.segmentViewHeight = 60
+            self.delegate = self
+            self.segmentShadow = .init(offset: CGSize(width: 0, height: 0), color: .clear, radius: 0, opacity: 0)
+            self.selectedSegmentViewColor = .clear
+        }
     }
-
-    func setHeaderView() {
-        self.headerView = HeaderProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
-        self.headerView.profileNameLbl.text = "André Parente"
-        self.headerView.bringSubview(toFront: self.headerView.profileImage)
-        self.headerView.bringSubview(toFront: self.headerView.profileNameLbl)
-        self.headerView.bringSubview(toFront: self.headerView.editProfileButton)
-        self.headerView.bringSubview(toFront: self.headerView.inboxButton)
-
-    }
-    
-    func setMiddleView() {
-        self.middleView = MiddleProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
-        self.middleView.favoriteArtsView.layer.addBorder(edge: .right, color: .lightGray, thickness: 1)
-        self.middleView.favoriteArtsView.layer.addBorder(edge: .left, color: .lightGray, thickness: 1)
-        self.middleView.artWorksView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.artWorksClicked)))
-        
-        self.middleView.favoriteArtistsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.favoriteArtistsClicked)))
-        
-        self.middleView.favoriteArtsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.likesClicked)))
-        
-
-        self.middleView.setArtWorksSelected()
-    }
-
 }
 
 
-extension ProfileViewController {
+extension ProfileViewController: SJSegmentedViewControllerDelegate {
     
-    func artWorksClicked() {
-        //fazer mudancas necessarias na table view, recarregar as celulas
-        self.middleView.setArtWorksSelected()
-        print(self.middleView.indexSelected)
-    }
-    
-    func favoriteArtistsClicked() {
-        //fazer mudancas necessarias na table view, recarregar as celulas
-        self.middleView.setFavArtistsSelected()
-        print(self.middleView.indexSelected)
-    }
-    
-    func likesClicked() {
-        //fazer mudancas necessarias na table view, recarregar as celulas
-        self.middleView.setLikesSelected()
-        print(self.middleView.indexSelected)
-    }
-    
-}
-
-
-extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        
-        //configurar as celulas de acordo com qual index foi escolhido
-        switch self.middleView.indexSelected {
+    func didMoveToPage(_ controller: UIViewController, segment: SJSegmentTab?, index: Int) {
+        self.segments[index].frame.size.width = self.view.frame.width/3
+        switch index {
         case 0:
-            print("artworks")
+            self.view1.textColor = UIColor.customLightBlue
+            self.view2.textColor = .lightGray
+            self.view3.textColor = .lightGray
         case 1:
-            print("curtidas")
+            self.view1.textColor = .lightGray
+            self.view2.textColor = UIColor.customLightBlue
+            self.view3.textColor = .lightGray
         default:
-            print("artistas")
+            self.view1.textColor = .lightGray
+            self.view2.textColor = .lightGray
+            self.view3.textColor = UIColor.customLightBlue
 
         }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
-    
-    //header da section -- MiddleView
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return middleView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return middleView.frame.height
     }
 }

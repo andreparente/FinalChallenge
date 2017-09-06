@@ -34,6 +34,10 @@
 		8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548F31F56DECC00FDA06A /* ArtistsTableViewCell.swift */; };
 		8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */; };
 		8A9548FA1F56DF5F00FDA06A /* ArtistCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A9548F81F56DF5F00FDA06A /* ArtistCollectionViewCell.xib */; };
+		8ACD5B861F601D850063162A /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B841F601D850063162A /* LikesViewController.swift */; };
+		8ACD5B871F601D850063162A /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B851F601D850063162A /* FollowingViewController.swift */; };
+		8ACD5B891F601E760063162A /* ArtWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B881F601E760063162A /* ArtWorksViewController.swift */; };
+		8ACD5B8B1F6021970063162A /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B8A1F6021970063162A /* HeaderViewController.swift */; };
 		8ACFD66F1F44B72E008DF502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACFD66E1F44B72E008DF502 /* AppDelegate.swift */; };
 		8ACFD6741F44B72E008DF502 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACFD6721F44B72E008DF502 /* Main.storyboard */; };
 		8ACFD6761F44B72E008DF502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ACFD6751F44B72E008DF502 /* Assets.xcassets */; };
@@ -92,6 +96,10 @@
 		8A9548F31F56DECC00FDA06A /* ArtistsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsTableViewCell.swift; sourceTree = "<group>"; };
 		8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A9548F81F56DF5F00FDA06A /* ArtistCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistCollectionViewCell.xib; sourceTree = "<group>"; };
+		8ACD5B841F601D850063162A /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
+		8ACD5B851F601D850063162A /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
+		8ACD5B881F601E760063162A /* ArtWorksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorksViewController.swift; sourceTree = "<group>"; };
+		8ACD5B8A1F6021970063162A /* HeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		8ACFD66B1F44B72E008DF502 /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ACFD66E1F44B72E008DF502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ACFD6731F44B72E008DF502 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -187,6 +195,10 @@
 			isa = PBXGroup;
 			children = (
 				8A40BC751F55B98A00A12EBA /* ProfileViewController.swift */,
+				8ACD5B8A1F6021970063162A /* HeaderViewController.swift */,
+				8ACD5B881F601E760063162A /* ArtWorksViewController.swift */,
+				8ACD5B841F601D850063162A /* LikesViewController.swift */,
+				8ACD5B851F601D850063162A /* FollowingViewController.swift */,
 				8A40BC7C1F55BB8C00A12EBA /* HeaderProfile.xib */,
 				8A40BC7E1F55BD3400A12EBA /* HeaderProfile.swift */,
 				8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */,
@@ -454,13 +466,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FinalChallenge-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		428CA92FA220E102FDE32C73 /* [CP] Copy Pods Resources */ = {
@@ -499,13 +514,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FinalChallengeUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D4A81EAB4EC91E470FAC4604 /* [CP] Embed Pods Frameworks */ = {
@@ -544,9 +562,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SJSegmentedScrollView/SJSegmentedScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJSegmentedScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -574,13 +603,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FinalChallengeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -598,15 +630,19 @@
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,
 				8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */,
 				8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */,
+				8ACD5B8B1F6021970063162A /* HeaderViewController.swift in Sources */,
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8A40BC721F55A26100A12EBA /* User.swift in Sources */,
 				8A40BC671F55945700A12EBA /* LoginViewController.swift in Sources */,
 				8ACFD66F1F44B72E008DF502 /* AppDelegate.swift in Sources */,
+				8ACD5B871F601D850063162A /* FollowingViewController.swift in Sources */,
+				8ACD5B861F601D850063162A /* LikesViewController.swift in Sources */,
 				8A9548EF1F55F59500FDA06A /* CategoryViewController.swift in Sources */,
 				26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */,
 				8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */,
 				8A40BC651F54A3C700A12EBA /* Gradients.swift in Sources */,
 				8A9548F11F560FA400FDA06A /* Extensions.swift in Sources */,
+				8ACD5B891F601E760063162A /* ArtWorksViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

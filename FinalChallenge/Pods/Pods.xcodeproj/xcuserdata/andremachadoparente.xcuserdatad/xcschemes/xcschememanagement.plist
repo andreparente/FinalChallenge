@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SJSegmentedScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,17 +62,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>71458668730CCDBE12F859E7C30C3CED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAA71E474A2C1A3ED10853A0951F3383</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E99CBCF3DD4DA40E9378E4EA45AB03BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
