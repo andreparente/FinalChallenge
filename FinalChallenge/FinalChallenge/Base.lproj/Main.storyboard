@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,68 +20,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5K-2e-NhD">
-                                <rect key="frame" x="16" y="113" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="nome" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BA6-gu-Qli">
-                                <rect key="frame" x="16" y="75" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="senha" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RzG-0a-AhX">
-                                <rect key="frame" x="16" y="151" width="343" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2U-F9-Pez">
-                                <rect key="frame" x="16" y="189" width="38" height="30"/>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OuE-64-bmc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="681-7q-P7I">
-                                <rect key="frame" x="297" y="189" width="62" height="30"/>
-                                <state key="normal" title="Registrar"/>
-                                <connections>
-                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q3B-u3-heP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqu-Bl-1BB" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="164" y="189" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="b2U-F9-Pez" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="09Q-An-bKD"/>
-                            <constraint firstItem="b2U-F9-Pez" firstAttribute="top" secondItem="RzG-0a-AhX" secondAttribute="bottom" constant="8" id="12Z-E3-W7s"/>
-                            <constraint firstItem="BA6-gu-Qli" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="55" id="4ko-93-8K0"/>
-                            <constraint firstItem="RzG-0a-AhX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6ZN-Va-KSa"/>
-                            <constraint firstItem="E5K-2e-NhD" firstAttribute="top" secondItem="BA6-gu-Qli" secondAttribute="bottom" constant="8" id="Bck-eC-kKi"/>
-                            <constraint firstItem="E5K-2e-NhD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="I9w-0Q-F7C"/>
-                            <constraint firstItem="681-7q-P7I" firstAttribute="top" secondItem="RzG-0a-AhX" secondAttribute="bottom" constant="8" id="Jz3-Vw-RhU"/>
-                            <constraint firstItem="BA6-gu-Qli" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="LSq-cH-FGQ"/>
-                            <constraint firstItem="fqu-Bl-1BB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LoT-gP-Bn7"/>
-                            <constraint firstItem="RzG-0a-AhX" firstAttribute="top" secondItem="E5K-2e-NhD" secondAttribute="bottom" constant="8" id="TTc-Hq-ufF"/>
-                            <constraint firstItem="BA6-gu-Qli" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="UWX-Hm-dZe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="681-7q-P7I" secondAttribute="trailing" id="Zwf-9O-0tO"/>
-                            <constraint firstItem="RzG-0a-AhX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="div-RK-SPY"/>
-                            <constraint firstItem="fqu-Bl-1BB" firstAttribute="top" secondItem="RzG-0a-AhX" secondAttribute="bottom" constant="8" id="xQK-HK-AH5"/>
-                            <constraint firstItem="E5K-2e-NhD" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="xfe-dm-x20"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTxtField" destination="E5K-2e-NhD" id="JuQ-T5-sgT"/>
-                        <outlet property="fbLoginButton" destination="fqu-Bl-1BB" id="GnD-cs-ngj"/>
-                        <outlet property="nameTxtField" destination="BA6-gu-Qli" id="xvE-Bx-xD6"/>
-                        <outlet property="passwordTxtField" destination="RzG-0a-AhX" id="fYA-Ej-oCI"/>
                         <segue destination="Ekz-k2-h2W" kind="show" identifier="LoginToMain" id="hvy-5I-WNy"/>
                     </connections>
                 </viewController>

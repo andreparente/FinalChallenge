@@ -71,3 +71,30 @@ extension CALayer {
     }
     
 }
+
+extension UILabel {
+    
+    func makeHorizontal() {
+        var count = 0
+        var chars: [String] = []
+        print("width original :: ",  (self.text?.width(withConstraintedHeight: 0, font: self.font))!)
+        print("height original :: ",  (self.text?.height(withConstrainedWidth: 0, font: self.font))!)
+        
+        self.frame.size.height = (self.text?.width(withConstraintedHeight: 0, font: self.font))!
+        self.frame.size.width  = (self.text?.height(withConstrainedWidth: 0, font: self.font))!
+        
+        print(self.frame.size.height)
+        for index in (self.text?.characters.indices)! {
+            count += 1
+            chars.append((self.text?[(self.text?.index(index, offsetBy: 0))!...(self.text?.index(index, offsetBy: 0))!])!)
+        }
+        //        self.frame.size.height = (CGFloat(Int(self.frame.size.height) * count))/3
+        self.numberOfLines = chars.count
+        self.lineBreakMode = .byWordWrapping
+        self.textAlignment = .center
+        print(chars)
+        self.text = chars.joined(separator: "\n")
+        self.frame.size.height = (self.text?.height(withConstrainedWidth: 0, font: self.font))!
+        print(self.text)
+    }
+}

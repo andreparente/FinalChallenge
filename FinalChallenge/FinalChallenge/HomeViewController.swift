@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTableView()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -96,7 +97,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return 150
         case 1:
             print("artistas")
-            return 30
+            return 207 //altura
         default:
             print("eventos")
             return 150

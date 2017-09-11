@@ -9,11 +9,12 @@
 import UIKit
 
 class ArtistsTableViewCell: UITableViewCell {
-
+    
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "ArtistCollectionViewCell"
     var fatherController: HomeViewController!
-    var arrayOfNames: [String] = ["- Letícia Parente -","- Belchior -","- Eu -","- Letícia Parente -","- Letícia Parente -","- Letícia Parente -","- Letícia Parente -","- Letícia Parente -","- Letícia Parente -","- Letícia Parente -"]
+    var arrayOfNames: [String] = ["Letícia Parente","Belchior","Eu","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente"]
+    var profileImage = [UIImage(named: "profileImage1.jpg")]
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,8 +22,7 @@ class ArtistsTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        self.frame.size.height = 30
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 30), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 207), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
@@ -47,25 +47,24 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return arrayOfNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! ArtistCollectionViewCell
-       // cell.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "backgroundArtistCell"))
+        // cell.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "backgroundArtistCell"))
+        cell.backgroundColor = .white
         
+        cell.profileImage.layer.cornerRadius = 70;
+        cell.profileImage.layer.masksToBounds = true;
+        cell.profileImage.image = profileImage[0]
         cell.nameLbl.text = arrayOfNames[indexPath.item]
-        for each in cell.constraints {
-            each.isActive = false
-        }
         
-        cell.layer.addBorder(edge: .right, color: .black, thickness: 1)
-        cell.layer.addBorder(edge: .left, color: .black, thickness: 1)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: arrayOfNames[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 15)), height: arrayOfNames[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15)))
+        return CGSize(width: 140, height: 207 ) //altura
     }
     
     
@@ -84,6 +83,6 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return -1
+        return 5
     }
 }

@@ -1,3 +1,4 @@
+
 //
 //  LoginViewController.swift
 //  FinalChallenge
@@ -13,54 +14,185 @@ import FBSDKLoginKit
 
 
 class LoginViewController: UIViewController {
-
-//    @IBOutlet weak var registerView: UIView!
-//    @IBOutlet weak var loginView: UIView!
-    let fbButton = FBSDKLoginButton()
-    //   var databaseAccess : DatabaseAccess?
-    //    var dbFirebaseRef : DatabaseReference?
     
-    @IBOutlet weak var nameTxtField: UITextField!
-    @IBOutlet weak var emailTxtField: UITextField!
-    @IBOutlet weak var passwordTxtField: UITextField!
-    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
+    var nameTxtField: UITextField!
+    var emailTxtField: UITextField!
+    var passwordTxtField: UITextField!
+    var fbLoginButton: FBSDKLoginButton!
+    var loginButton: UIButton!
+    
+    var nameRegisterTxtField: UITextField!
+    var emailRegisterTxtField: UITextField!
+    var passwordRegisterTxtField: UITextField!
+    var fbRegisterButton: FBSDKLoginButton!
+    var registerButton: UIButton!
+    
+    var loginView: UIView!
+    var registerView: UIView!
+    
+    var entrarLbl: UILabel!
+    var registrarLbl: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   //     databaseAccess = DatabaseAccess()
-        fbLoginButton.readPermissions = ["email","public_profile"]
-//        self.view.addSubview(fbButton)
-        //fbLoginButton.center = self.view.center
-        fbLoginButton.delegate = self
-
+        setLoginView()
+        setRegisterView()
+        
         // Do any additional setup after loading the view.
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     
     func setLoginView() {
+        loginView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
+        self.loginView.backgroundColor = .lightGray
+        self.loginView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.loginSelected)))
+        self.view.addSubview(loginView)
+        entrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
+        entrarLbl.text = "Entrar"
+        entrarLbl.makeHorizontal()
+        entrarLbl.center.x = loginView.center.x
+        self.loginView.addSubview(entrarLbl)
         
+        emailTxtField = UITextField()
+        emailTxtField.frame.size.width = 200
+        emailTxtField.frame.size.height = 25
+        emailTxtField.center.y = entrarLbl.center.y - 40
+        emailTxtField.frame.origin.x = entrarLbl.frame.maxX + 10
+        emailTxtField.alpha = 0
+        emailTxtField.borderStyle = .roundedRect
+        emailTxtField.placeholder = "insira seu email"
+        self.loginView.addSubview(emailTxtField)
+        
+        passwordTxtField = UITextField()
+        passwordTxtField.frame.size.width = 200
+        passwordTxtField.frame.size.height = 25
+        passwordTxtField.center.y = emailTxtField.center.y + 40
+        passwordTxtField.center.x = emailTxtField.center.x
+        passwordTxtField.alpha = 0
+        passwordTxtField.borderStyle = .roundedRect
+        passwordTxtField.placeholder = "insira sua senha"
+        self.loginView.addSubview(passwordTxtField)
+        
+        loginButton = UIButton()
+        loginButton.frame.size.width = 200
+        loginButton.frame.size.height = 30
+        loginButton.center.x = passwordTxtField.center.x
+        loginButton.center.y = passwordTxtField.center.y + 40
+        loginButton.alpha = 0
+        loginButton.backgroundColor = .gray
+        loginButton.setTitle("entrar", for: .normal)
+        loginButton.addTarget(self, action: #selector(LoginViewController.login), for: .touchUpInside)
+        self.loginView.addSubview(loginButton)
+        
+        
+        fbLoginButton = FBSDKLoginButton()
+        fbLoginButton.readPermissions = ["email","public_profile"]
+        fbLoginButton.delegate = self
+        fbLoginButton.center.x = loginButton.center.x
+        fbLoginButton.center.y = loginButton.center.y + 40
+        fbLoginButton.alpha = 0
+        self.loginView.addSubview(fbLoginButton)
+        
+    }
+    
+    func loginSelected(){
+        UIView.animate(withDuration: 0.5) {
+            self.view.bringSubview(toFront: self.loginView)
+            self.loginView.frame.size.width = self.view.frame.width
+            self.fbLoginButton.alpha = 1
+            self.emailTxtField.alpha = 1
+            self.passwordTxtField.alpha = 1
+            self.loginButton.alpha = 1
+            
+        }
     }
     
     func setRegisterView() {
+        registerView = UIView(frame: CGRect(x: self.view.frame.width/2, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
+        self.registerView.backgroundColor = UIColor.customLightBlue
+        self.registerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.registerSelected)))
+        self.view.addSubview(registerView)
+        registrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
+        registrarLbl.text = "Registrar"
+        registrarLbl.makeHorizontal()
+        self.registerView.addSubview(registrarLbl)
+        registrarLbl.center.x = registerView.frame.width/2
+        
+        
+        nameRegisterTxtField = UITextField()
+        nameRegisterTxtField.frame.size.width = 200
+        nameRegisterTxtField.frame.size.height = 25
+        nameRegisterTxtField.center.y = registrarLbl.center.y - 40
+        nameRegisterTxtField.frame.origin.x = registrarLbl.frame.maxX + 10
+        nameRegisterTxtField.alpha = 0
+        nameRegisterTxtField.borderStyle = .roundedRect
+        nameRegisterTxtField.placeholder = "insira seu nome"
+        self.registerView.addSubview(nameRegisterTxtField)
+        
+        emailRegisterTxtField = UITextField()
+        emailRegisterTxtField.frame.size.width = 200
+        emailRegisterTxtField.frame.size.height = 25
+        emailRegisterTxtField.center.y = nameRegisterTxtField.center.y + 40
+        emailRegisterTxtField.center.x = nameRegisterTxtField.center.x
+        emailRegisterTxtField.alpha = 0
+        emailRegisterTxtField.borderStyle = .roundedRect
+        emailRegisterTxtField.placeholder = "insira seu email"
+        self.registerView.addSubview(emailRegisterTxtField)
+        
+        passwordRegisterTxtField = UITextField()
+        passwordRegisterTxtField.frame.size.width = 200
+        passwordRegisterTxtField.frame.size.height = 25
+        passwordRegisterTxtField.center.y = emailRegisterTxtField.center.y + 40
+        passwordRegisterTxtField.center.x = emailRegisterTxtField.center.x
+        passwordRegisterTxtField.alpha = 0
+        passwordRegisterTxtField.borderStyle = .roundedRect
+        passwordRegisterTxtField.placeholder = "insira sua senha"
+        self.registerView.addSubview(passwordRegisterTxtField)
+        
+        registerButton = UIButton()
+        registerButton.frame.size.width = 200
+        registerButton.frame.size.height = 30
+        registerButton.center.x = passwordRegisterTxtField.center.x
+        registerButton.center.y = passwordRegisterTxtField.center.y + 40
+        registerButton.alpha = 0
+        registerButton.backgroundColor = .gray
+        registerButton.setTitle("entrar", for: .normal)
+        registerButton.addTarget(self, action: #selector(LoginViewController.register), for: .touchUpInside)
+        self.registerView.addSubview(registerButton)
+        
+        
+        fbRegisterButton = FBSDKLoginButton()
+        fbRegisterButton.readPermissions = ["email","public_profile"]
+        fbRegisterButton.delegate = self
+        fbRegisterButton.center.x = registerButton.center.x
+        fbRegisterButton.center.y = registerButton.center.y + 40
+        fbRegisterButton.alpha = 0
+        self.registerView.addSubview(fbRegisterButton)
         
     }
-
-    @IBAction func login(_ sender: Any) {
+    
+    func registerSelected() {
+        UIView.animate(withDuration: 0.5) {
+            self.view.bringSubview(toFront: self.registerView)
+            self.registerView.frame.origin.x = 0
+            self.registerView.frame.size.width = self.view.frame.width
+            self.fbRegisterButton.alpha = 1
+            self.registerButton.alpha = 1
+            self.passwordRegisterTxtField.alpha = 1
+            self.emailRegisterTxtField.alpha = 1
+            self.nameRegisterTxtField.alpha = 1
+        }
+    }
+    
+    func login() {
         Auth.auth().signIn(withEmail: emailTxtField.text!, password: passwordTxtField.text!) { (user, error) in
             if error != nil {
                 print((error?.localizedDescription)!)
@@ -68,21 +200,24 @@ class LoginViewController: UIViewController {
             }
             if user != nil {
                 //user logado com sucesso
-                //puxar infos do database do user
+                //puxar infos do database do us
+                
+             
+                
                 User.sharedInstance.email = self.emailTxtField.text!
                 DatabaseAccess.sharedInstance.fetchUserInfo(callback: { (success: Bool) in
-                    if success {
-                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
-                    } else {
-                        
-                    }
+                if success {
+                self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                } else {
+                
+                }
                 })
                 
             }
         }
     }
     
-    @IBAction func register(_ sender: Any) {
+    func register() {
         Auth.auth().createUser(withEmail: emailTxtField.text!, password: passwordTxtField.text!) { (user, error) in
             if error != nil {
                 print((error?.localizedDescription)!)
@@ -94,7 +229,7 @@ class LoginViewController: UIViewController {
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                 
                 //self.performSegue(withIdentifier: "LoginToMain", sender: self)
-
+                
             }
         }
     }
@@ -152,4 +287,3 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         }
     }
 }
-    
