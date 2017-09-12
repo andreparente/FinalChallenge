@@ -15,15 +15,15 @@ import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
-    var nameTxtField: UITextField!
-    var emailTxtField: UITextField!
-    var passwordTxtField: UITextField!
+    var nameTxtField: KaedeTextField!
+    var emailTxtField: KaedeTextField!
+    var passwordTxtField: KaedeTextField!
     var fbLoginButton: FBSDKLoginButton!
     var loginButton: UIButton!
     
-    var nameRegisterTxtField: UITextField!
-    var emailRegisterTxtField: UITextField!
-    var passwordRegisterTxtField: UITextField!
+    var nameRegisterTxtField: KaedeTextField!
+    var emailRegisterTxtField: KaedeTextField!
+    var passwordRegisterTxtField: KaedeTextField!
     var fbRegisterButton: FBSDKLoginButton!
     var registerButton: UIButton!
     
@@ -61,23 +61,26 @@ class LoginViewController: UIViewController {
         entrarLbl.center.x = loginView.center.x
         self.loginView.addSubview(entrarLbl)
         
-        emailTxtField = UITextField()
+        emailTxtField = KaedeTextField()
+        emailTxtField.foregroundColor = .red
+        emailTxtField.backgroundColor = .blue
+        emailTxtField.placeholderFontScale = 9
+        emailTxtField.placeholderColor = UIColor.customLightBlue
+        emailTxtField.placeholderLabel.text = "email"
         emailTxtField.frame.size.width = 200
         emailTxtField.frame.size.height = 25
         emailTxtField.center.y = entrarLbl.center.y - 40
         emailTxtField.frame.origin.x = entrarLbl.frame.maxX + 10
         emailTxtField.alpha = 0
-        emailTxtField.borderStyle = .roundedRect
-        emailTxtField.placeholder = "insira seu email"
+//        emailTxtField.placeholder = "insira seu email"
         self.loginView.addSubview(emailTxtField)
         
-        passwordTxtField = UITextField()
+        passwordTxtField = KaedeTextField()
         passwordTxtField.frame.size.width = 200
         passwordTxtField.frame.size.height = 25
         passwordTxtField.center.y = emailTxtField.center.y + 40
         passwordTxtField.center.x = emailTxtField.center.x
         passwordTxtField.alpha = 0
-        passwordTxtField.borderStyle = .roundedRect
         passwordTxtField.placeholder = "insira sua senha"
         self.loginView.addSubview(passwordTxtField)
         
@@ -127,33 +130,30 @@ class LoginViewController: UIViewController {
         registrarLbl.center.x = registerView.frame.width/2
         
         
-        nameRegisterTxtField = UITextField()
+        nameRegisterTxtField = KaedeTextField()
         nameRegisterTxtField.frame.size.width = 200
         nameRegisterTxtField.frame.size.height = 25
         nameRegisterTxtField.center.y = registrarLbl.center.y - 40
         nameRegisterTxtField.frame.origin.x = registrarLbl.frame.maxX + 10
         nameRegisterTxtField.alpha = 0
-        nameRegisterTxtField.borderStyle = .roundedRect
         nameRegisterTxtField.placeholder = "insira seu nome"
         self.registerView.addSubview(nameRegisterTxtField)
         
-        emailRegisterTxtField = UITextField()
+        emailRegisterTxtField = KaedeTextField()
         emailRegisterTxtField.frame.size.width = 200
         emailRegisterTxtField.frame.size.height = 25
         emailRegisterTxtField.center.y = nameRegisterTxtField.center.y + 40
         emailRegisterTxtField.center.x = nameRegisterTxtField.center.x
         emailRegisterTxtField.alpha = 0
-        emailRegisterTxtField.borderStyle = .roundedRect
         emailRegisterTxtField.placeholder = "insira seu email"
         self.registerView.addSubview(emailRegisterTxtField)
         
-        passwordRegisterTxtField = UITextField()
+        passwordRegisterTxtField = KaedeTextField()
         passwordRegisterTxtField.frame.size.width = 200
         passwordRegisterTxtField.frame.size.height = 25
         passwordRegisterTxtField.center.y = emailRegisterTxtField.center.y + 40
         passwordRegisterTxtField.center.x = emailRegisterTxtField.center.x
         passwordRegisterTxtField.alpha = 0
-        passwordRegisterTxtField.borderStyle = .roundedRect
         passwordRegisterTxtField.placeholder = "insira sua senha"
         self.registerView.addSubview(passwordRegisterTxtField)
         
