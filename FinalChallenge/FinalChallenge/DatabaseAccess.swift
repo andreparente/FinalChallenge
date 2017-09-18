@@ -36,8 +36,12 @@ class DatabaseAccess {
     }
     
     func databaseAccessWriteCreateUser(user:User) {
+        //verificacao com do profile picture URL para caso de login com facebook
         let userInfo = ["email": user.email as String, "name": user.name as String, "profilePictureURL": "" as String]
-        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
+//        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("email").setValue(user.email as String)
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("name").setValue(user.name)
+//        usersRef?.child((Auth.auth().currentUser?.uid)!).child("profilePictureURL").setValue(Any?)
         
         User.sharedInstance.name = user.name
         User.sharedInstance.email = user.email

@@ -29,6 +29,11 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>SJSegmentedScrollView.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -53,6 +58,16 @@
 			<true/>
 		</dict>
 		<key>266AE1506DAD13D34C0725E909C0C476</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>71458668730CCDBE12F859E7C30C3CED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAA71E474A2C1A3ED10853A0951F3383</key>
 		<dict>
 			<key>primary</key>
 			<true/>

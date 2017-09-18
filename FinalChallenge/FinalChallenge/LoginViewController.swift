@@ -259,16 +259,24 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                 print(error)
                                 return
                             }
-                            else {
+                            else {                        
                                 
                                 //firebase user is finally logged
                                 if let resultado = result as? Dictionary<String,AnyObject> {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)
                                     let user = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
-                                    User.sharedInstance.name = resultado["name"] as! String
-                                    User.sharedInstance.email = resultado["email"] as! String
+//                                    User.sharedInstance.name = resultado["name"] as! String
+//                                    User.sharedInstance.email = resultado["email"] as! String
+//                                    User.sharedInstance.id = Auth.auth().currentUser?.uid
                                     DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
+                                    DatabaseAccess.sharedInstance.fetchUserInfo(email: user.email, callback: { (success: Bool) in
+                                        if success {
+                                            self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                                        } else {
+                                            
+                                        }
+                                    })
                                 }
                                 
                             }

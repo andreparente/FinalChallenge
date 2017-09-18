@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "databaseAccessWriteCreateUser(user:)"
-            landmarkType = "7">
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -31,8 +31,248 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "init()"
+            landmarkName = "DatabaseAccess"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.DatabaseAccess.init () -&gt; FinalChallenge.DatabaseAccess"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
+                  timestampString = "527463856.953809"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "71">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.DatabaseAccess.storageRef.setter : Swift.Optional&lt;__ObjC.StorageReference&gt;"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
+                  timestampString = "527463856.959141"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "54">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/DatabaseAccess.swift"
+            timestampString = "527462067.10392"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "uploadProfileImage(image:callback:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/DatabaseAccess.swift"
+            timestampString = "527463375.799298"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "fetchUserInfo(email:callback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/LoginViewController.swift"
+            timestampString = "527463477.132609"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463856.97701"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "410">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463856.97955"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "769">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/LoginViewController.swift"
+            timestampString = "527463618.137614"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/LoginViewController.swift"
+            timestampString = "527463710.601973"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463856.987953"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "410">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463856.990048"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "265"
+                  endingLineNumber = "265"
+                  offsetFromSymbolStart = "769">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/LoginViewController.swift"
+            timestampString = "527463722.233973"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/LoginViewController.swift"
+            timestampString = "527463723.333584"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
+            landmarkName = "loginButton(_:didCompleteWith:error:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463856.998183"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "273"
+                  endingLineNumber = "273"
+                  offsetFromSymbolStart = "2393">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.LoginViewController.(loginButton (Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginButton&gt;, didCompleteWith : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FBSDKLoginManagerLoginResult&gt;, error : Swift.Optional&lt;Swift.Error&gt;) -&gt; ()).(closure #1).(closure #1).(closure #1)"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/LoginViewController.swift"
+                  timestampString = "527463857.000143"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "274"
+                  endingLineNumber = "274"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

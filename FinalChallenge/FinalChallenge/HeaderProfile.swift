@@ -34,10 +34,12 @@ class HeaderProfile: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        print(User.sharedInstance.profilePictureURL)
         if let imageString = User.sharedInstance.profilePictureURL {
             self.profileImage.downloadedFrom(url: URL(string: imageString)!)
         }
         
+    
     }
 }
 
