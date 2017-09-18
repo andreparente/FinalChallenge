@@ -15,6 +15,8 @@ class DatabaseAccess {
     var usersRef: DatabaseReference?
     var artWorksRef: DatabaseReference?
     var artsRef: DatabaseReference?
+    
+    var storageRef: StorageReference?
 
     //Singleton!
     static let sharedInstance = DatabaseAccess()
@@ -28,24 +30,62 @@ class DatabaseAccess {
         
         artsRef = Database.database().reference()
         artsRef = usersRef?.child("arts")
+        
+        var storage = Storage.storage()
+        self.storageRef = storage.reference()
     }
     
     func databaseAccessWriteCreateUser(user:User) {
-        let userInfo = ["email": user.email as Any, "name": user.name as Any]
+        let userInfo = ["email": user.email as String, "name": user.name as String, "profilePictureURL": "" as String]
         usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
+        
+        User.sharedInstance.name = user.name
+        User.sharedInstance.email = user.email
         return
     }
     
-    func fetchUserInfo(callback: @escaping((_ success: Bool)->())) {
-        usersRef?.queryOrdered(byChild: "email").queryEqual(toValue: User.sharedInstance.email).observeSingleEvent(of: .value, with: { snapshot in
+    func fetchUserInfo(email: String, callback: @escaping((_ success: Bool)->())) {
+        usersRef?.queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { snapshot in
             let userDict = snapshot.value as? [String: Any] ?? [:]
             
             if !userDict.isEmpty {
-                
+                print(userDict)
                 //preencher as infos no user local
+                User.sharedInstance.id = Auth.auth().currentUser?.uid
+                let userDict2 = userDict[(Auth.auth().currentUser?.uid)!] as! [String: Any]
+                User.sharedInstance.email = userDict2["email"] as! String
+                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+
                 callback(true)
             } else {
                 callback(false)
+            }
+        })
+    }
+    
+    func uploadProfileImage(image: UIImage, callback: @escaping((_ success: Bool, _ response: String)->())) {
+        
+        var dataToUpload = UIImagePNGRepresentation(image)
+        
+        storageRef = DatabaseAccess.sharedInstance.storageRef!
+        print(storageRef)
+        storageRef = storageRef?.child(User.sharedInstance.id).child("profilePicture.png")
+        
+        storageRef?.putData(dataToUpload!, metadata: nil, completion: {(metadata, error) in
+            if error != nil{
+                print (error)
+                callback(false,(error?.localizedDescription)!)
+                return
+            }
+            else{
+                print(metadata)
+                User.sharedInstance.profilePictureURL = metadata?.downloadURL()?.absoluteString
+              //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
+                self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
+                
+                
+                
+                callback(true,"True")
             }
         })
     }

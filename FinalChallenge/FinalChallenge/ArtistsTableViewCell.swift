@@ -12,7 +12,7 @@ class ArtistsTableViewCell: UITableViewCell {
     
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "ArtistCollectionViewCell"
-    var fatherController: HomeViewController!
+    var fatherController: HomeTVC!
     var arrayOfNames: [String] = ["Letícia Parente","Belchior","Eu","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente"]
     var profileImage = [UIImage(named: "profileImage1.jpg")]
     

@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
         emailTxtField.center.y = entrarLbl.center.y - 40
         emailTxtField.frame.origin.x = entrarLbl.frame.maxX + 10
         emailTxtField.alpha = 0
-//        emailTxtField.placeholder = "insira seu email"
+        //        emailTxtField.placeholder = "insira seu email"
         self.loginView.addSubview(emailTxtField)
         
         passwordTxtField = KaedeTextField()
@@ -202,15 +202,14 @@ class LoginViewController: UIViewController {
                 //user logado com sucesso
                 //puxar infos do database do us
                 
-             
                 
-                User.sharedInstance.email = self.emailTxtField.text!
-                DatabaseAccess.sharedInstance.fetchUserInfo(callback: { (success: Bool) in
-                if success {
-                self.performSegue(withIdentifier: "LoginToMain", sender: self)
-                } else {
                 
-                }
+                DatabaseAccess.sharedInstance.fetchUserInfo(email: self.emailTxtField.text!, callback: { (success: Bool) in
+                    if success {
+                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                    } else {
+                        
+                    }
                 })
                 
             }
@@ -226,6 +225,7 @@ class LoginViewController: UIViewController {
             if user != nil {
                 //adiciona email e nome ao path do Uid (ok)
                 let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
+                
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                 
                 //self.performSegue(withIdentifier: "LoginToMain", sender: self)
@@ -266,6 +266,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)
                                     let user = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
+                                    User.sharedInstance.name = resultado["name"] as! String
+                                    User.sharedInstance.email = resultado["email"] as! String
                                     DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                                 }
                                 
@@ -287,3 +289,5 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         }
     }
 }
+
+

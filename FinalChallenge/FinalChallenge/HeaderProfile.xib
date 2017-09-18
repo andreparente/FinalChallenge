@@ -23,8 +23,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="272"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bGo-rb-aYv">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bGo-rb-aYv">
                     <rect key="frame" x="120" y="96" width="80" height="80"/>
+                    <color key="backgroundColor" red="0.0063441186212003231" green="1" blue="0.15596431493759155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="LER-Mt-SwC"/>
                         <constraint firstAttribute="width" constant="80" id="al4-Nj-WH0"/>

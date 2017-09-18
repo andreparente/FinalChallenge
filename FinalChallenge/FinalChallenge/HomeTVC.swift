@@ -8,29 +8,19 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeTVC: UITableViewController {
 
-    var fatherTableView: UITableView!
     var reuseIdentifier = "CategoriesTableViewCell"
     var artistsReuseIdentifier = "ArtistsTableViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setTableView()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
         
         // Do any additional setup after loading the view.
     }
-    
-    func setTableView() {
-        self.fatherTableView = UITableView(frame: CGRect(x: 15, y: 25, width: self.view.frame.width - 30, height: self.view.frame.height - 15)
-, style: .plain)
-        self.fatherTableView.delegate = self
-        self.fatherTableView.dataSource = self
-        fatherTableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        fatherTableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
-        self.fatherTableView.tableFooterView = UIView()
-        self.view.addSubview(fatherTableView)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,17 +28,17 @@ class HomeViewController: UIViewController {
 }
 
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeTVC {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0:
@@ -69,7 +59,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 30))
         switch section {
         case 0:
@@ -86,11 +76,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return label
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             print("categorias")

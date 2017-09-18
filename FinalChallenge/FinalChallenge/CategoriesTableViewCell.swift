@@ -12,7 +12,7 @@ class CategoriesTableViewCell: UITableViewCell {
 
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "CategoryCollectionViewCell"
-    var fatherController: HomeViewController!
+    var fatherController: HomeTVC!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

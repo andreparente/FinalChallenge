@@ -74,7 +74,11 @@ class ProfileViewController: SJSegmentedViewController {
             self.segmentViewHeight = 60
             self.delegate = self
             self.segmentShadow = .init(offset: CGSize(width: 0, height: 0), color: .clear, radius: 0, opacity: 0)
-            self.selectedSegmentViewColor = .clear
+            self.selectedSegmentViewColor = .lightGray
+            self.segmentBounces = false
+            self.segments.forEach({ (segment: SJSegmentTab) in
+                segment.frame.size.width = self.view.frame.width/3
+            })
         }
     }
 }
