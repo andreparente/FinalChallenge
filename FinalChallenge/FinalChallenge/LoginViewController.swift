@@ -202,8 +202,6 @@ class LoginViewController: UIViewController {
                 //user logado com sucesso
                 //puxar infos do database do us
                 
-                
-                
                 DatabaseAccess.sharedInstance.fetchUserInfo(email: self.emailTxtField.text!, callback: { (success: Bool) in
                     if success {
                         self.performSegue(withIdentifier: "LoginToMain", sender: self)
@@ -253,32 +251,30 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                         return
                     }
                     if result != nil {
-                        //agora sim fazer login com firebase
+                        //Autentica firebase
                         Auth.auth().signIn(with: credential) { (user, error) in
                             if let error = error {
                                 print(error)
                                 return
                             }
-                            else {                        
-                                
-                                //firebase user is finally logged
+                            //Autenticacao OK
+                            else {
                                 if let resultado = result as? Dictionary<String,AnyObject> {
                                     print(resultado["name"] as! String)
                                     print(resultado["email"] as! String)
-                                    let user = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
-//                                    User.sharedInstance.name = resultado["name"] as! String
-//                                    User.sharedInstance.email = resultado["email"] as! String
-//                                    User.sharedInstance.id = Auth.auth().currentUser?.uid
-                                    DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
-                                    DatabaseAccess.sharedInstance.fetchUserInfo(email: user.email, callback: { (success: Bool) in
+                                    let userDatabase = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
+                                    
+                                    // ELE JA EXISTE NO FIREBASE?
+                                    DatabaseAccess.sharedInstance.fetchUserInfo(email: userDatabase.email, callback: { (success: Bool) in
                                         if success {
                                             self.performSegue(withIdentifier: "LoginToMain", sender: self)
                                         } else {
-                                            
+                                            //SE NAO EXISTIR, CRIA NO FIREBASE
+                                            DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: userDatabase)
+                                            self.performSegue(withIdentifier: "LoginToMain", sender: self)
                                         }
                                     })
                                 }
-                                
                             }
                         }
                     }

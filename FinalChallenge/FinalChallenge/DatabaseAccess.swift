@@ -41,7 +41,12 @@ class DatabaseAccess {
 //        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
         usersRef?.child((Auth.auth().currentUser?.uid)!).child("email").setValue(user.email as String)
         usersRef?.child((Auth.auth().currentUser?.uid)!).child("name").setValue(user.name)
-//        usersRef?.child((Auth.auth().currentUser?.uid)!).child("profilePictureURL").setValue(Any?)
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("profilePictureURL").setValue("")
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("friendsId").setValue("")
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("favoriteArts").setValue("")
+        usersRef?.child((Auth.auth().currentUser?.uid)!).child("favoriteArtists").setValue("")
+
+
         
         User.sharedInstance.name = user.name
         User.sharedInstance.email = user.email
@@ -57,8 +62,10 @@ class DatabaseAccess {
                 //preencher as infos no user local
                 User.sharedInstance.id = Auth.auth().currentUser?.uid
                 let userDict2 = userDict[(Auth.auth().currentUser?.uid)!] as! [String: Any]
+                User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
                 User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                //TODO FETCH friendsID/favoriteArts/favoriteArtists
 
                 callback(true)
             } else {
