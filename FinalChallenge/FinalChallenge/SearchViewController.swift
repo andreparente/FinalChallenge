@@ -28,8 +28,8 @@ class SearchViewController: UIViewController {
     
     func setTableView() {
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), style: .grouped)
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.view.addSubview(tableView)
     }
@@ -45,33 +45,33 @@ class SearchViewController: UIViewController {
     */
 
 }
-
-
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return arrayOfNames.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UITableViewCell
-        cell.textLabel?.text = arrayOfNames[indexPath.section]
-        return cell
-    }
-    
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return abc
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        
-        
-        var temp = abc as NSArray
-        return temp.index(of:title)
-        
-    }
-}
+//
+//
+//extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+//    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return arrayOfNames.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! UITableViewCell
+//        cell.textLabel?.text = arrayOfNames[indexPath.section]
+//        return cell
+//    }
+//    
+//    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return abc
+//    }
+//    
+//    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+//        
+//        
+//        let temp = abc as NSArray
+//        return temp.index(of:title)
+//        
+//    }
+//}

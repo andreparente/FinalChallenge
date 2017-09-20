@@ -130,41 +130,44 @@ class LoginViewController: UIViewController {
         registrarLbl.center.x = registerView.frame.width/2
         
         
-        nameRegisterTxtField = KaedeTextField()
-        nameRegisterTxtField.frame.size.width = 200
-        nameRegisterTxtField.frame.size.height = 25
-        nameRegisterTxtField.center.y = registrarLbl.center.y - 40
-        nameRegisterTxtField.frame.origin.x = registrarLbl.frame.maxX + 10
-        nameRegisterTxtField.alpha = 0
-        nameRegisterTxtField.placeholder = "insira seu nome"
-        self.registerView.addSubview(nameRegisterTxtField)
         
-        emailRegisterTxtField = KaedeTextField()
-        emailRegisterTxtField.frame.size.width = 200
-        emailRegisterTxtField.frame.size.height = 25
-        emailRegisterTxtField.center.y = nameRegisterTxtField.center.y + 40
-        emailRegisterTxtField.center.x = nameRegisterTxtField.center.x
-        emailRegisterTxtField.alpha = 0
-        emailRegisterTxtField.placeholder = "insira seu email"
-        self.registerView.addSubview(emailRegisterTxtField)
+        
+        
         
         passwordRegisterTxtField = KaedeTextField()
         passwordRegisterTxtField.frame.size.width = 200
         passwordRegisterTxtField.frame.size.height = 25
-        passwordRegisterTxtField.center.y = emailRegisterTxtField.center.y + 40
-        passwordRegisterTxtField.center.x = emailRegisterTxtField.center.x
+        self.passwordRegisterTxtField.center = self.view.center
         passwordRegisterTxtField.alpha = 0
         passwordRegisterTxtField.placeholder = "insira sua senha"
         self.registerView.addSubview(passwordRegisterTxtField)
         
+        emailRegisterTxtField = KaedeTextField()
+        emailRegisterTxtField.frame.size.width = 200
+        emailRegisterTxtField.frame.size.height = 25
+        emailRegisterTxtField.center.y = passwordRegisterTxtField.center.y - 40
+        emailRegisterTxtField.center.x = self.view.center.x
+        emailRegisterTxtField.alpha = 0
+        emailRegisterTxtField.placeholder = "insira seu email"
+        self.registerView.addSubview(emailRegisterTxtField)
+        
+        nameRegisterTxtField = KaedeTextField()
+        nameRegisterTxtField.frame.size.width = 200
+        nameRegisterTxtField.frame.size.height = 25
+        nameRegisterTxtField.center.y = emailRegisterTxtField.center.y - 40
+        nameRegisterTxtField.center.x = self.view.center.x
+        nameRegisterTxtField.alpha = 0
+        nameRegisterTxtField.placeholder = "insira seu nome"
+        self.registerView.addSubview(nameRegisterTxtField)
+        
         registerButton = UIButton()
         registerButton.frame.size.width = 200
         registerButton.frame.size.height = 30
-        registerButton.center.x = passwordRegisterTxtField.center.x
+        registerButton.center.x = self.view.center.x
         registerButton.center.y = passwordRegisterTxtField.center.y + 40
         registerButton.alpha = 0
         registerButton.backgroundColor = .gray
-        registerButton.setTitle("entrar", for: .normal)
+        registerButton.setTitle("Registrar", for: .normal)
         registerButton.addTarget(self, action: #selector(LoginViewController.register), for: .touchUpInside)
         self.registerView.addSubview(registerButton)
         
@@ -180,13 +183,19 @@ class LoginViewController: UIViewController {
     }
     
     func registerSelected() {
+        
         UIView.animate(withDuration: 0.5) {
             self.view.bringSubview(toFront: self.registerView)
             self.registerView.frame.origin.x = 0
             self.registerView.frame.size.width = self.view.frame.width
+            self.registrarLbl.center.x = 40
+            self.registrarLbl.center.y = self.view.center.y
+            
+            self.passwordRegisterTxtField.alpha = 1
+            self.registerView.layoutSubviews()
             self.fbRegisterButton.alpha = 1
             self.registerButton.alpha = 1
-            self.passwordRegisterTxtField.alpha = 1
+            
             self.emailRegisterTxtField.alpha = 1
             self.nameRegisterTxtField.alpha = 1
         }
@@ -225,8 +234,7 @@ class LoginViewController: UIViewController {
                 let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
                 
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
-                
-                //self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                self.performSegue(withIdentifier: "LoginToMain", sender: self)
                 
             }
         }

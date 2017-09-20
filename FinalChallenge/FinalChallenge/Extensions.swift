@@ -94,7 +94,7 @@ extension UILabel {
         print(chars)
         self.text = chars.joined(separator: "\n")
         self.frame.size.height = (self.text?.height(withConstrainedWidth: 0, font: self.font))!
-        print(self.text)
+        print(self.text ?? 0)
     }
 }
 

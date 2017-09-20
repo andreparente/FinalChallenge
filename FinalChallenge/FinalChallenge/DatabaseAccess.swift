@@ -31,13 +31,12 @@ class DatabaseAccess {
         artsRef = Database.database().reference()
         artsRef = usersRef?.child("arts")
         
-        var storage = Storage.storage()
+        let storage = Storage.storage()
         self.storageRef = storage.reference()
     }
     
     func databaseAccessWriteCreateUser(user:User) {
         //verificacao com do profile picture URL para caso de login com facebook
-        let userInfo = ["email": user.email as String, "name": user.name as String, "profilePictureURL": "" as String]
 //        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
         usersRef?.child((Auth.auth().currentUser?.uid)!).child("email").setValue(user.email as String)
         usersRef?.child((Auth.auth().currentUser?.uid)!).child("name").setValue(user.name)
@@ -76,20 +75,20 @@ class DatabaseAccess {
     
     func uploadProfileImage(image: UIImage, callback: @escaping((_ success: Bool, _ response: String)->())) {
         
-        var dataToUpload = UIImagePNGRepresentation(image)
+        let dataToUpload = UIImagePNGRepresentation(image)
         
         storageRef = DatabaseAccess.sharedInstance.storageRef!
-        print(storageRef)
+        print(storageRef ?? 0)
         storageRef = storageRef?.child(User.sharedInstance.id).child("profilePicture.png")
         
         storageRef?.putData(dataToUpload!, metadata: nil, completion: {(metadata, error) in
             if error != nil{
-                print (error)
+                print (error ?? 0)
                 callback(false,(error?.localizedDescription)!)
                 return
             }
             else{
-                print(metadata)
+                print(metadata ?? 0)
                 User.sharedInstance.profilePictureURL = metadata?.downloadURL()?.absoluteString
               //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
                 self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
