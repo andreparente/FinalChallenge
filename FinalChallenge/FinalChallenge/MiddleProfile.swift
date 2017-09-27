@@ -14,13 +14,16 @@ class MiddleProfile: UIView {
     @IBOutlet weak var artWorksView: UIView!
     @IBOutlet weak var numberOfArtWorksLbl: UILabel!
     @IBOutlet weak var artWorksLbl: UILabel!
-    @IBOutlet weak var favoriteArtsView: UIView!
+    @IBOutlet weak var favArtsView: UIView!
     @IBOutlet weak var numberOfLikesLbl: UILabel!
     @IBOutlet weak var likesLbl: UILabel!
-    @IBOutlet weak var favoriteArtistsView: UIView!
+    @IBOutlet weak var favArtists: UIView!
     @IBOutlet weak var numberOfFavArtistsLbl: UILabel!
     @IBOutlet weak var favoriteArtistsLbl: UILabel!
     var indexSelected: Int = 0
+    
+    weak var delegate: MiddleProfileDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -37,6 +40,10 @@ class MiddleProfile: UIView {
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.artWorksView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setArtWorksSelected)))
+        self.favArtsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setFavArtWorksSelected)))
+        self.favArtists.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setFavArtistsSelected)))
+
     }
     
     
@@ -52,9 +59,11 @@ class MiddleProfile: UIView {
         
         self.likesLbl.textColor = UIColor.lightGray
         self.numberOfLikesLbl.textColor = UIColor.lightGray
+        
+        self.delegate?.artWorksSelected()
     }
     
-    func setLikesSelected() {
+    func setFavArtWorksSelected() {
         
         self.indexSelected = 1
 
@@ -66,6 +75,8 @@ class MiddleProfile: UIView {
         
         self.likesLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
         self.numberOfLikesLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
+        
+        self.delegate?.favArtWorksSelected()
     }
     
     func setFavArtistsSelected() {
@@ -80,5 +91,13 @@ class MiddleProfile: UIView {
         
         self.likesLbl.textColor = UIColor.lightGray
         self.numberOfLikesLbl.textColor = UIColor.lightGray
+        self.delegate?.favArtistsSelected()
     }
+}
+
+
+protocol MiddleProfileDelegate: class {
+    func artWorksSelected()
+    func favArtistsSelected()
+    func favArtWorksSelected()
 }

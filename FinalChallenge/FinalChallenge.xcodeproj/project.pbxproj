@@ -39,7 +39,6 @@
 		8ACD5B861F601D850063162A /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B841F601D850063162A /* LikesViewController.swift */; };
 		8ACD5B871F601D850063162A /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B851F601D850063162A /* FollowingViewController.swift */; };
 		8ACD5B891F601E760063162A /* ArtWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B881F601E760063162A /* ArtWorksViewController.swift */; };
-		8ACD5B8B1F6021970063162A /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B8A1F6021970063162A /* HeaderViewController.swift */; };
 		8ACFD66F1F44B72E008DF502 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACFD66E1F44B72E008DF502 /* AppDelegate.swift */; };
 		8ACFD6741F44B72E008DF502 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACFD6721F44B72E008DF502 /* Main.storyboard */; };
 		8ACFD6761F44B72E008DF502 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ACFD6751F44B72E008DF502 /* Assets.xcassets */; };
@@ -114,7 +113,6 @@
 		8ACD5B841F601D850063162A /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		8ACD5B851F601D850063162A /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		8ACD5B881F601E760063162A /* ArtWorksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorksViewController.swift; sourceTree = "<group>"; };
-		8ACD5B8A1F6021970063162A /* HeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		8ACFD66B1F44B72E008DF502 /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ACFD66E1F44B72E008DF502 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ACFD6731F44B72E008DF502 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				8A40BC751F55B98A00A12EBA /* ProfileViewController.swift */,
-				8ACD5B8A1F6021970063162A /* HeaderViewController.swift */,
 				8ACD5B881F601E760063162A /* ArtWorksViewController.swift */,
 				8ACD5B841F601D850063162A /* LikesViewController.swift */,
 				8ACD5B851F601D850063162A /* FollowingViewController.swift */,
@@ -645,6 +642,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SJSegmentedScrollView/SJSegmentedScrollView.framework",
@@ -653,6 +651,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJSegmentedScrollView.framework",
@@ -713,7 +712,6 @@
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,
 				8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */,
 				8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */,
-				8ACD5B8B1F6021970063162A /* HeaderViewController.swift in Sources */,
 				8AD744F91F682F8B00DC0F75 /* YoshikoTextField.swift in Sources */,
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8AD744F81F682F8B00DC0F75 /* YokoTextField.swift in Sources */,

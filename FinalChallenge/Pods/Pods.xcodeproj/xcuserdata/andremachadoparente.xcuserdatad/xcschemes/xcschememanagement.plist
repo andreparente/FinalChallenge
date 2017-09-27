@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ESTabBarController-swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,6 +57,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0BB3A7E97748117F86995C85C05AB8BB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
@@ -62,17 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71458668730CCDBE12F859E7C30C3CED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AAA71E474A2C1A3ED10853A0951F3383</key>
+		<key>5E707FF8CB3D090CCB960ECC250DC20F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DB772E2B3182FEC798F9C5B520DED258</key>
 		<dict>
 			<key>primary</key>
 			<true/>

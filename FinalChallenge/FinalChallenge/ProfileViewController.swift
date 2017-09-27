@@ -7,101 +7,120 @@
 //
 
 import UIKit
-import SJSegmentedScrollView
 
-class ProfileViewController: SJSegmentedViewController {
-
-    var fatherTableView: UITableView!
-    var view1 = UILabel()
-    var view2 = UILabel()
-    var view3 = UILabel()
+class ProfileViewController: UITableViewController {
+    
+    
+    var headerView: HeaderProfile!
+    var middleView: MiddleProfile!
+    
     
     override func viewDidLoad() {
-        self.sjViewControllerSetup()
         super.viewDidLoad()
+        self.setHeaderView()
+        self.tableView.tableHeaderView = headerView
         // Do any additional setup after loading the view.
     }
-
+    
+    func setHeaderView() {
+        self.headerView = HeaderProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 250))
+        self.headerView.profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.pickImg)))
+    }
+    
+    func setMiddleView() {
+        self.middleView = MiddleProfile(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        self.middleView.delegate = self
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func sjViewControllerSetup() {
-        if let storyboard = self.storyboard {
-            
-            let headerVC = storyboard.instantiateViewController(withIdentifier: "HeaderVC") as! HeaderViewController
-            
-            let likesVC = storyboard.instantiateViewController(withIdentifier: "LikesVC") as! LikesViewController
-            
-            // ------ isso é gambiarra pra teste
-           
-            view1.frame.size.width = 80
-            view1.text = "n\nobras curtidas"
-            view1.textAlignment = .center
-            view1.numberOfLines = 2
-            likesVC.navigationItem.titleView = view1
-            // -------- end of gambiarra
-
-            
-            let followingVC = storyboard.instantiateViewController(withIdentifier: "FollowingVC") as! FollowingViewController
-            
-            // ------ isso é gambiarra pra teste
-            
-            view2.frame.size.width = 80
-            view2.text = "n\nseguidores"
-            view2.textAlignment = .center
-            view2.numberOfLines = 2
-            followingVC.navigationItem.titleView = view2
-            // -------- end of gambiarra
-
-            
-            let artWorksVC = storyboard.instantiateViewController(withIdentifier: "ArtWorksVC") as! ArtWorksViewController
-            
-            // ------ isso é gambiarra pra teste
-
-            view3.frame.size.width = 80
-            view3.text = "n\nobras"
-            view3.textAlignment = .center
-            view3.numberOfLines = 2
-            artWorksVC.navigationItem.titleView = view3
-            // -------- end of gambiarra
-            
-            self.selectedSegmentViewColor = .gray
-            self.headerViewController = headerVC
-            self.headerViewHeight = 240
-            self.segmentControllers = [likesVC, followingVC,artWorksVC]
-            self.segmentViewHeight = 60
-            self.delegate = self
-            self.segmentShadow = .init(offset: CGSize(width: 0, height: 0), color: .clear, radius: 0, opacity: 0)
-            self.selectedSegmentViewColor = .lightGray
-            self.segmentBounces = false
-            self.segments.forEach({ (segment: SJSegmentTab) in
-                segment.frame.size.width = self.view.frame.width/3
-            })
-        }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 800
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.setMiddleView()
+        return middleView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+        
     }
 }
 
-
-extension ProfileViewController: SJSegmentedViewControllerDelegate {
+extension ProfileViewController: MiddleProfileDelegate {
     
-    func didMoveToPage(_ controller: UIViewController, segment: SJSegmentTab?, index: Int) {
-        self.segments[index].frame.size.width = self.view.frame.width/3
-        switch index {
-        case 0:
-            self.view1.textColor = UIColor.customLightBlue
-            self.view2.textColor = .lightGray
-            self.view3.textColor = .lightGray
-        case 1:
-            self.view1.textColor = .lightGray
-            self.view2.textColor = UIColor.customLightBlue
-            self.view3.textColor = .lightGray
-        default:
-            self.view1.textColor = .lightGray
-            self.view2.textColor = .lightGray
-            self.view3.textColor = UIColor.customLightBlue
+    func artWorksSelected() {
+        //  carregar as artes do proprio usuário, se ele tiver.
+        
+    }
+    
+    func favArtistsSelected() {
+        //   mostrar os artistas que ele segue/favoritou
+        
+    }
+    
+    func favArtWorksSelected() {
+        //  mostrar as obras que ele curtiu!
+    }
+    
+}
 
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func pickImg(){
+        let picker = UIImagePickerController()
+        
+        picker.delegate = self
+        picker.allowsEditing = true
+        self.present(picker, animated: true, completion: {})
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectedImageFromPicker : UIImage?
+        
+        if let originalImage = info["UIImagePickerControllerOriginalImage"] {
+            print((originalImage as! UIImage).size)
+            selectedImageFromPicker = originalImage as! UIImage
         }
+        else if let croppedImage = info["UIImagePickerControllerEditedImage"]{
+            print((croppedImage as! UIImage).size)
+            selectedImageFromPicker = croppedImage as! UIImage
+        }
+        
+        if let selectedImage = selectedImageFromPicker {
+            DatabaseAccess.sharedInstance.uploadProfileImage(image: selectedImage, callback: { (success: Bool, response: String) in
+                if success {
+                    //deu certo pra guardar imagem
+                    
+                } else {
+                    //deu ruim pra guardar imagem
+                    
+                }
+            })
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("picking image cancelled")
     }
 }

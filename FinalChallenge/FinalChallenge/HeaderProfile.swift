@@ -35,11 +35,15 @@ class HeaderProfile: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         print(User.sharedInstance.profilePictureURL)
+        self.profileNameLbl.text = User.sharedInstance.name
         if let imageString = User.sharedInstance.profilePictureURL {
-            self.profileImage.downloadedFrom(url: URL(string: imageString)!)
+            
+            if imageString == "" {
+                
+            } else {
+                self.profileImage.downloadedFrom(url: URL(string: imageString)!)
+            }
         }
-        
-    
     }
 }
 

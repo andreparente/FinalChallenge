@@ -61,6 +61,15 @@ class LoginViewController: UIViewController {
         entrarLbl.center.x = loginView.center.x
         self.loginView.addSubview(entrarLbl)
         
+        
+        passwordTxtField = KaedeTextField()
+        passwordTxtField.frame.size.width = 200
+        passwordTxtField.frame.size.height = 25
+        self.passwordTxtField.center = self.view.center
+        passwordTxtField.alpha = 0
+        passwordTxtField.placeholder = "insira sua senha"
+        self.loginView.addSubview(passwordTxtField)
+        
         emailTxtField = KaedeTextField()
         emailTxtField.foregroundColor = .red
         emailTxtField.backgroundColor = .blue
@@ -69,20 +78,13 @@ class LoginViewController: UIViewController {
         emailTxtField.placeholderLabel.text = "email"
         emailTxtField.frame.size.width = 200
         emailTxtField.frame.size.height = 25
-        emailTxtField.center.y = entrarLbl.center.y - 40
-        emailTxtField.frame.origin.x = entrarLbl.frame.maxX + 10
+        emailTxtField.center.y = passwordTxtField.center.y - 40
+        emailTxtField.center.x = self.view.center.x
         emailTxtField.alpha = 0
-        //        emailTxtField.placeholder = "insira seu email"
+        emailTxtField.autocapitalizationType = .none
         self.loginView.addSubview(emailTxtField)
         
-        passwordTxtField = KaedeTextField()
-        passwordTxtField.frame.size.width = 200
-        passwordTxtField.frame.size.height = 25
-        passwordTxtField.center.y = emailTxtField.center.y + 40
-        passwordTxtField.center.x = emailTxtField.center.x
-        passwordTxtField.alpha = 0
-        passwordTxtField.placeholder = "insira sua senha"
-        self.loginView.addSubview(passwordTxtField)
+
         
         loginButton = UIButton()
         loginButton.frame.size.width = 200
@@ -110,6 +112,11 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.bringSubview(toFront: self.loginView)
             self.loginView.frame.size.width = self.view.frame.width
+
+            
+            self.entrarLbl.center.x = 40
+            self.entrarLbl.center.y = self.view.center.y
+            
             self.fbLoginButton.alpha = 1
             self.emailTxtField.alpha = 1
             self.passwordTxtField.alpha = 1
@@ -128,11 +135,6 @@ class LoginViewController: UIViewController {
         registrarLbl.makeHorizontal()
         self.registerView.addSubview(registrarLbl)
         registrarLbl.center.x = registerView.frame.width/2
-        
-        
-        
-        
-        
         
         passwordRegisterTxtField = KaedeTextField()
         passwordRegisterTxtField.frame.size.width = 200
@@ -224,14 +226,14 @@ class LoginViewController: UIViewController {
     }
     
     func register() {
-        Auth.auth().createUser(withEmail: emailTxtField.text!, password: passwordTxtField.text!) { (user, error) in
+        Auth.auth().createUser(withEmail: emailRegisterTxtField.text!, password: passwordRegisterTxtField.text!) { (user, error) in
             if error != nil {
                 print((error?.localizedDescription)!)
                 return
             }
             if user != nil {
                 //adiciona email e nome ao path do Uid (ok)
-                let user = User(name: self.nameTxtField.text!, email: Auth.auth().currentUser!.email!)
+                let user = User(name: self.nameRegisterTxtField.text!, email: Auth.auth().currentUser!.email!)
                 
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
                 self.performSegue(withIdentifier: "LoginToMain", sender: self)
