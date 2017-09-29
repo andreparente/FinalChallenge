@@ -11,6 +11,14 @@
 		0B227DA9B7468AEB3F7ADD9E /* Pods_FinalChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */; };
 		26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */; };
 		44D9554716FE6DDBAB41328E /* Pods_FinalChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */; };
+		8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */; };
+		8A3DF37F1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */; };
+		8A3DF3831F7C112E00A59A05 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3821F7C112E00A59A05 /* ProfileTableViewCell.swift */; };
+		8A3DF3851F7E5A1F00A59A05 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */; };
+		8A3DF3881F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */; };
+		8A3DF3891F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */; };
+		8A3DF38C1F7E682200A59A05 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */; };
+		8A3DF38D1F7E682200A59A05 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */; };
 		8A40BC651F54A3C700A12EBA /* Gradients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC641F54A3C700A12EBA /* Gradients.swift */; };
 		8A40BC671F55945700A12EBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC661F55945700A12EBA /* LoginViewController.swift */; };
 		8A40BC691F55959C00A12EBA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A40BC681F55959C00A12EBA /* Bolts.framework */; };
@@ -85,6 +93,14 @@
 		4DD4258FC2A67A37B02384E6 /* Pods_FinalChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorkCollectionViewCell.swift; sourceTree = "<group>"; };
+		8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtWorkCollectionViewCell.xib; sourceTree = "<group>"; };
+		8A3DF3821F7C112E00A59A05 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
+		8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomProfileHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		8A40BC641F54A3C700A12EBA /* Gradients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradients.swift; sourceTree = "<group>"; };
 		8A40BC661F55945700A12EBA /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8A40BC681F55959C00A12EBA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -206,6 +222,26 @@
 			name = DAO;
 			sourceTree = "<group>";
 		};
+		8A3DF3801F7C0DE200A59A05 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */,
+				8A9548F81F56DF5F00FDA06A /* ArtistCollectionViewCell.xib */,
+				8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8A3DF3811F7C0F7500A59A05 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */,
+				8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */,
+				8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8A40BC701F55A24800A12EBA /* FacebookFrameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +264,7 @@
 				8A40BC7E1F55BD3400A12EBA /* HeaderProfile.swift */,
 				8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */,
 				8A40BC821F55C76D00A12EBA /* MiddleProfile.swift */,
+				8A3DF3821F7C112E00A59A05 /* ProfileTableViewCell.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -244,6 +281,7 @@
 		8A70BA191F704F2D00BE9BE7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8A3DF3801F7C0DE200A59A05 /* Cells */,
 				8ACFD6721F44B72E008DF502 /* Main.storyboard */,
 				8ACFD6771F44B72E008DF502 /* LaunchScreen.storyboard */,
 			);
@@ -253,6 +291,7 @@
 		8A70BA1A1F704F3200BE9BE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8A3DF3811F7C0F7500A59A05 /* Cells */,
 				8A40BC661F55945700A12EBA /* LoginViewController.swift */,
 				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
 				8A40BC791F55BA4200A12EBA /* InboxViewController.swift */,
@@ -293,8 +332,6 @@
 			isa = PBXGroup;
 			children = (
 				8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */,
-				8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */,
-				8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -303,8 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				8A9548F31F56DECC00FDA06A /* ArtistsTableViewCell.swift */,
-				8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */,
-				8A9548F81F56DF5F00FDA06A /* ArtistCollectionViewCell.xib */,
 			);
 			name = Artists;
 			sourceTree = "<group>";
@@ -338,6 +373,11 @@
 				8A70BA1A1F704F3200BE9BE7 /* Controller */,
 				8A70BA191F704F2D00BE9BE7 /* View */,
 				8A70BA181F704F2500BE9BE7 /* Model */,
+				8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */,
+				8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */,
+				8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */,
+				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
+				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -509,6 +549,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A40BC811F55C4D000A12EBA /* MiddleProfile.xib in Resources */,
+				8A3DF37F1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib in Resources */,
+				8A3DF38D1F7E682200A59A05 /* ProfileCollectionViewCell.xib in Resources */,
+				8A3DF3891F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib in Resources */,
 				8ACFD6791F44B72E008DF502 /* LaunchScreen.storyboard in Resources */,
 				8AD744F11F682F8B00DC0F75 /* Info.plist in Resources */,
 				8A40BC7D1F55BB8C00A12EBA /* HeaderProfile.xib in Resources */,
@@ -708,6 +751,7 @@
 				8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */,
 				8AD744F21F682F8B00DC0F75 /* IsaoTextField.swift in Sources */,
 				8A40BC781F55B9C700A12EBA /* SearchViewController.swift in Sources */,
+				8A3DF3851F7E5A1F00A59A05 /* ProfileCollectionViewController.swift in Sources */,
 				8A40BC741F55B96D00A12EBA /* HomeTVC.swift in Sources */,
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,
 				8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */,
@@ -715,12 +759,16 @@
 				8AD744F91F682F8B00DC0F75 /* YoshikoTextField.swift in Sources */,
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8AD744F81F682F8B00DC0F75 /* YokoTextField.swift in Sources */,
+				8A3DF3881F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift in Sources */,
 				8AD744EF1F682F8B00DC0F75 /* AkiraTextField.swift in Sources */,
+				8A3DF38C1F7E682200A59A05 /* ProfileCollectionViewCell.swift in Sources */,
 				8AD744F51F682F8B00DC0F75 /* MadokaTextField.swift in Sources */,
 				8A40BC721F55A26100A12EBA /* User.swift in Sources */,
+				8A3DF3831F7C112E00A59A05 /* ProfileTableViewCell.swift in Sources */,
 				8A40BC671F55945700A12EBA /* LoginViewController.swift in Sources */,
 				8ACFD66F1F44B72E008DF502 /* AppDelegate.swift in Sources */,
 				8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */,
+				8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */,
 				8ACD5B871F601D850063162A /* FollowingViewController.swift in Sources */,
 				8ACD5B861F601D850063162A /* LikesViewController.swift in Sources */,
 				8A9548EF1F55F59500FDA06A /* CategoryViewController.swift in Sources */,

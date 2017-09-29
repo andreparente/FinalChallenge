@@ -19,6 +19,7 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
         self.setHeaderView()
         self.tableView.tableHeaderView = headerView
+        self.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
         // Do any additional setup after loading the view.
     }
     
@@ -46,12 +47,14 @@ class ProfileViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
+        cell.fatherController = self
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 800
+        print(self.view.frame.height)
+        return (self.view.frame.height - 50)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -69,16 +72,21 @@ extension ProfileViewController: MiddleProfileDelegate {
     
     func artWorksSelected() {
         //  carregar as artes do proprio usuário, se ele tiver.
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         
     }
     
     func favArtistsSelected() {
         //   mostrar os artistas que ele segue/favoritou
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+
         
     }
     
     func favArtWorksSelected() {
         //  mostrar as obras que ele curtiu!
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+
     }
     
 }

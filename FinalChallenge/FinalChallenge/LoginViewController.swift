@@ -28,6 +28,7 @@ class LoginViewController: UIViewController {
     var registerButton: UIButton!
     
     var loginView: UIView!
+    var loginGradient: CAGradientLayer!
     var registerView: UIView!
     
     var entrarLbl: UILabel!
@@ -52,7 +53,8 @@ class LoginViewController: UIViewController {
     
     func setLoginView() {
         loginView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
-        self.loginView.backgroundColor = .lightGray
+        loginGradient = Gradient.sharedInstance.bluePinkGradient(view: loginView, vertical: true)
+        loginView.layer.insertSublayer(loginGradient, at: 0)
         self.loginView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.loginSelected)))
         self.view.addSubview(loginView)
         entrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
@@ -112,10 +114,10 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.bringSubview(toFront: self.loginView)
             self.loginView.frame.size.width = self.view.frame.width
-
             
             self.entrarLbl.center.x = 40
             self.entrarLbl.center.y = self.view.center.y
+            self.loginGradient.frame = self.loginView.frame
             
             self.fbLoginButton.alpha = 1
             self.emailTxtField.alpha = 1

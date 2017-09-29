@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="U6b-Vx-4bR" customClass="CustomProfileHeaderCollectionReusableView" customModule="FinalChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWE-Ql-hpw" customClass="HeaderProfile" customModule="FinalChallenge" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o67-Fz-MsW" customClass="MiddleProfile" customModule="FinalChallenge" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="250" width="320" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rml-F9-aaW"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="WWE-Ql-hpw" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="3pj-fI-1vy"/>
+                <constraint firstItem="WWE-Ql-hpw" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="GMQ-AT-FGa"/>
+                <constraint firstItem="o67-Fz-MsW" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Irt-Wh-KkT"/>
+                <constraint firstAttribute="trailing" secondItem="o67-Fz-MsW" secondAttribute="trailing" id="W6f-Vn-nMz"/>
+                <constraint firstAttribute="trailing" secondItem="WWE-Ql-hpw" secondAttribute="trailing" id="jtu-Mi-jKG"/>
+                <constraint firstItem="o67-Fz-MsW" firstAttribute="top" secondItem="WWE-Ql-hpw" secondAttribute="bottom" id="kUz-NP-8Pq"/>
+                <constraint firstItem="o67-Fz-MsW" firstAttribute="top" secondItem="WWE-Ql-hpw" secondAttribute="bottom" id="oLg-lN-gt8"/>
+                <constraint firstAttribute="bottom" secondItem="o67-Fz-MsW" secondAttribute="bottom" id="qeB-Q4-Htc"/>
+            </constraints>
+            <connections>
+                <outlet property="headerProfile" destination="WWE-Ql-hpw" id="0EH-sS-chf"/>
+                <outlet property="middleProfile" destination="o67-Fz-MsW" id="iQh-ni-KJW"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>

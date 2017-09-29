@@ -8,6 +8,7 @@
 
 import UIKit
 
+var indexSelected: Int = 0
 class MiddleProfile: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -20,7 +21,6 @@ class MiddleProfile: UIView {
     @IBOutlet weak var favArtists: UIView!
     @IBOutlet weak var numberOfFavArtistsLbl: UILabel!
     @IBOutlet weak var favoriteArtistsLbl: UILabel!
-    var indexSelected: Int = 0
     
     weak var delegate: MiddleProfileDelegate?
     
@@ -43,13 +43,23 @@ class MiddleProfile: UIView {
         self.artWorksView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setArtWorksSelected)))
         self.favArtsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setFavArtWorksSelected)))
         self.favArtists.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MiddleProfile.setFavArtistsSelected)))
+        indexSelected = 0
+        
+        self.artWorksLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
+        self.numberOfArtWorksLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
+        
+        self.favoriteArtistsLbl.textColor = UIColor.lightGray
+        self.numberOfFavArtistsLbl.textColor = UIColor.lightGray
+        
+        self.likesLbl.textColor = UIColor.lightGray
+        self.numberOfLikesLbl.textColor = UIColor.lightGray
 
     }
     
     
     func setArtWorksSelected() {
         
-        self.indexSelected = 0
+        indexSelected = 0
 
         self.artWorksLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
         self.numberOfArtWorksLbl.textColor = UIColor(red: 54/255, green: 94/255, blue: 219/255, alpha: 1)
@@ -65,7 +75,7 @@ class MiddleProfile: UIView {
     
     func setFavArtWorksSelected() {
         
-        self.indexSelected = 1
+        indexSelected = 1
 
         self.artWorksLbl.textColor = UIColor.lightGray
         self.numberOfArtWorksLbl.textColor = UIColor.lightGray
@@ -81,7 +91,7 @@ class MiddleProfile: UIView {
     
     func setFavArtistsSelected() {
         
-        self.indexSelected = 2
+        indexSelected = 2
 
         self.artWorksLbl.textColor = UIColor.lightGray
         self.numberOfArtWorksLbl.textColor = UIColor.lightGray
