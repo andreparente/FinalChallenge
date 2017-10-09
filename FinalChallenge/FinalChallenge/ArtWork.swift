@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ArtWork {
+class ArtWork: NSObject {
     
     var title: String!
     var descricao: String!
@@ -19,9 +19,11 @@ class ArtWork {
     var height: Double!
     var width: Double!
     var category: String!
+    var id: String!
+    
     
    // var
-    init() {
+    override init() {
         
     }
 }

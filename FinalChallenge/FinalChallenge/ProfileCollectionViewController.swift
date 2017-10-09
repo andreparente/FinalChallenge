@@ -14,7 +14,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("----------- ENTROU AQUI -----------")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -69,14 +69,12 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
-            //   cell.artWorkImage.downloadedFrom(url: URL(string: foto)!, contentMode: .scaleAspectFill)
             cell.backgroundColor = .blue
             cell.artWorkImage.layer.masksToBounds = true
         case 1:
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
-            //   cell.artWorkImage.downloadedFrom(url: URL(string: foto)!, contentMode: .scaleAspectFill)
             cell.backgroundColor = .blue
             cell.artWorkImage.layer.masksToBounds = true
         default:
@@ -141,7 +139,14 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "ProfileToAddArtWork", sender: self)
+        switch indexSelected {
+        case 0:
+            self.performSegue(withIdentifier: "ProfileToAddArtWork", sender: self)
+        case 1:
+            return
+        default:
+            return
+        }
     }
 }
 

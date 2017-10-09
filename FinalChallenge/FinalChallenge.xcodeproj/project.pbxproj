@@ -36,7 +36,6 @@
 		8A40BC811F55C4D000A12EBA /* MiddleProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */; };
 		8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC821F55C76D00A12EBA /* MiddleProfile.swift */; };
 		8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */; };
-		8A70BA171F6BFAFF00BE9BE7 /* AddArtWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70BA161F6BFAFF00BE9BE7 /* AddArtWorkViewController.swift */; };
 		8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */; };
 		8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */; };
 		8A9548EC1F55EB7500FDA06A /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */; };
@@ -123,7 +122,6 @@
 		8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleProfile.xib; sourceTree = "<group>"; };
 		8A40BC821F55C76D00A12EBA /* MiddleProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleProfile.swift; sourceTree = "<group>"; };
 		8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWork.swift; sourceTree = "<group>"; };
-		8A70BA161F6BFAFF00BE9BE7 /* AddArtWorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArtWorkViewController.swift; sourceTree = "<group>"; };
 		8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -301,19 +299,14 @@
 		8A70BA1A1F704F3200BE9BE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8AA615A61F8BF12500E54815 /* Profile2(AddArtWork) */,
 				8A3DF3811F7C0F7500A59A05 /* Cells */,
 				8A40BC661F55945700A12EBA /* LoginViewController.swift */,
 				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
 				8A40BC791F55BA4200A12EBA /* InboxViewController.swift */,
 				8A9548EE1F55F59500FDA06A /* CategoryViewController.swift */,
-				8A70BA161F6BFAFF00BE9BE7 /* AddArtWorkViewController.swift */,
 				8A40BC7B1F55BAE900A12EBA /* Profile */,
 				8A9548E81F55EA9600FDA06A /* Home */,
-				8A3DF3901F87C77C00A59A05 /* AddArtWorkTVC.swift */,
-				8AA615931F8BD46600E54815 /* AddArtWorkTableViewCell.swift */,
-				8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */,
-				8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */,
-				8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -359,6 +352,23 @@
 			name = Artists;
 			sourceTree = "<group>";
 		};
+		8AA615A61F8BF12500E54815 /* Profile2(AddArtWork) */ = {
+			isa = PBXGroup;
+			children = (
+				8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */,
+				8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */,
+				8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */,
+				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
+				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
+				8A3DF3901F87C77C00A59A05 /* AddArtWorkTVC.swift */,
+				8AA615931F8BD46600E54815 /* AddArtWorkTableViewCell.swift */,
+				8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */,
+				8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */,
+				8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */,
+			);
+			name = "Profile2(AddArtWork)";
+			sourceTree = "<group>";
+		};
 		8ACFD6621F44B72E008DF502 = {
 			isa = PBXGroup;
 			children = (
@@ -388,11 +398,6 @@
 				8A70BA1A1F704F3200BE9BE7 /* Controller */,
 				8A70BA191F704F2D00BE9BE7 /* View */,
 				8A70BA181F704F2500BE9BE7 /* Model */,
-				8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */,
-				8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */,
-				8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */,
-				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
-				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
 			);
 			path = FinalChallenge;
 			sourceTree = "<group>";
@@ -793,7 +798,6 @@
 				26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */,
 				8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */,
 				8AA6159A1F8BDADA00E54815 /* AddArtWorkHeader.swift in Sources */,
-				8A70BA171F6BFAFF00BE9BE7 /* AddArtWorkViewController.swift in Sources */,
 				8AD744F71F682F8B00DC0F75 /* TextFieldEffects.swift in Sources */,
 				8AD744F41F682F8B00DC0F75 /* KaedeTextField.swift in Sources */,
 				8A40BC651F54A3C700A12EBA /* Gradients.swift in Sources */,

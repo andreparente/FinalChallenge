@@ -46,7 +46,12 @@ class AddArtWorkTVC: UITableViewController {
     }
 
     @objc private func saveArtWork() {
+        
         //funcao do olenka!
+        let id = User.sharedInstance.id + Date().description
+        artWork.id = id
+        
+        
     }
 
     // MARK: - Table view data source
