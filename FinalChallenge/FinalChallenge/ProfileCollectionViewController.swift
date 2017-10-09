@@ -63,10 +63,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCollectionViewCell
-    
 
-        
-        
         switch indexSelected {
         case 0:
             cell.artWorkImage.isHidden = false
@@ -97,7 +94,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("Entrou no size")
         switch indexSelected {
         case 0:
             return CGSize(width: collectionView.frame.size.width/3 - 1, height: collectionView.frame.size.width/3)
@@ -142,6 +138,10 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             
             assert(false, "Unexpected element kind")
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ProfileToAddArtWork", sender: self)
     }
 }
 

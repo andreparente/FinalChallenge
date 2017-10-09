@@ -7,12 +7,21 @@
 //
 
 import Foundation
-
+import UIKit
 
 class ArtWork {
     
     var title: String!
     var descricao: String!
     var urlPhotos: [String]!
+    var images: [UIImage] = []
+    var value: Double!
+    var height: Double!
+    var width: Double!
+    var category: String!
+    
    // var
+    init() {
+        
+    }
 }
