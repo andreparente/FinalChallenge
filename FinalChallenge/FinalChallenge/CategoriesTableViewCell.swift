@@ -51,8 +51,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
-        cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, vertical: true), at: 0)
-        
+        cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
         cell.categorieLbl.text = "Tatuagem"
         cell.categorieLbl.frame.size.height = 140
         cell.categorieLbl.frame.size.width = 20

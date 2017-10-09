@@ -1,10 +1,9 @@
-
 //
 //  LoginViewController.swift
 //  FinalChallenge
 //
 //  Created by Andre Machado Parente on 29/08/17.
-//  Copyright © 2017 Andre Machado Parente. All rights reserved.
+//  Copyright :copyright: 2017 Andre Machado Parente. All rights reserved.
 //
 
 import UIKit
@@ -33,6 +32,7 @@ class LoginViewController: UIViewController {
     
     var entrarLbl: UILabel!
     var registrarLbl: UILabel!
+    // var registerGradient: CAGradientLayer!
     
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
         setLoginView()
         setRegisterView()
         
-        // Do any additional setup after loading the view.
+        // Do  any additional setup after loading the view.
     }
     
     
@@ -53,43 +53,46 @@ class LoginViewController: UIViewController {
     
     func setLoginView() {
         loginView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
-        loginGradient = Gradient.sharedInstance.bluePinkGradient(view: loginView, vertical: true)
+        loginGradient = Gradient.sharedInstance.entrarGradient(view: loginView, vertical: true)
         loginView.layer.insertSublayer(loginGradient, at: 0)
         self.loginView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.loginSelected)))
         self.view.addSubview(loginView)
         entrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
         entrarLbl.text = "Entrar"
+        entrarLbl.textColor = UIColor.white
         entrarLbl.makeHorizontal()
         entrarLbl.center.x = loginView.center.x
         self.loginView.addSubview(entrarLbl)
         
         
         passwordTxtField = KaedeTextField()
-        passwordTxtField.frame.size.width = 200
-        passwordTxtField.frame.size.height = 25
+        passwordTxtField.foregroundColor = .white
+        passwordTxtField.backgroundColor = .blue
+        passwordTxtField.frame.size.width = 250
+        passwordTxtField.frame.size.height = 35
         self.passwordTxtField.center = self.view.center
         passwordTxtField.alpha = 0
-        passwordTxtField.placeholder = "insira sua senha"
+        passwordTxtField.textColor = .white
+        passwordTxtField.placeholder = "senha"
+        passwordTxtField.placeholderColor = .blue
         self.loginView.addSubview(passwordTxtField)
+        passwordTxtField.isSecureTextEntry = true
         
         emailTxtField = KaedeTextField()
-        emailTxtField.foregroundColor = .red
+        emailTxtField.foregroundColor = .white
         emailTxtField.backgroundColor = .blue
-        emailTxtField.placeholderFontScale = 9
-        emailTxtField.placeholderColor = UIColor.customLightBlue
-        emailTxtField.placeholderLabel.text = "email"
-        emailTxtField.frame.size.width = 200
-        emailTxtField.frame.size.height = 25
+        emailTxtField.frame.size.width = 250
+        emailTxtField.frame.size.height = 35
         emailTxtField.center.y = passwordTxtField.center.y - 40
         emailTxtField.center.x = self.view.center.x
         emailTxtField.alpha = 0
         emailTxtField.autocapitalizationType = .none
+        emailTxtField.textColor = .white
+        emailTxtField.placeholder = "email"
+        emailTxtField.placeholderColor = .blue
         self.loginView.addSubview(emailTxtField)
-        
-
-        
         loginButton = UIButton()
-        loginButton.frame.size.width = 200
+        loginButton.frame.size.width = 250
         loginButton.frame.size.height = 30
         loginButton.center.x = passwordTxtField.center.x
         loginButton.center.y = passwordTxtField.center.y + 40
@@ -114,10 +117,10 @@ class LoginViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.bringSubview(toFront: self.loginView)
             self.loginView.frame.size.width = self.view.frame.width
-            
-            self.entrarLbl.center.x = 40
-            self.entrarLbl.center.y = self.view.center.y
             self.loginGradient.frame = self.loginView.frame
+            
+            self.entrarLbl.center.x = self.emailTxtField.frame.minX
+            self.entrarLbl.frame.origin.y = self.emailTxtField.frame.minY - self.entrarLbl.frame.height - 15
             
             self.fbLoginButton.alpha = 1
             self.emailTxtField.alpha = 1
@@ -129,44 +132,61 @@ class LoginViewController: UIViewController {
     
     func setRegisterView() {
         registerView = UIView(frame: CGRect(x: self.view.frame.width/2, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
-        self.registerView.backgroundColor = UIColor.customLightBlue
+        registerView.backgroundColor = .white
+        //registerGradient = Gradient.sharedInstance.registrarGradient(view: registerView, vertical: true)
+        //registerView.layer.insertSublayer(registerGradient, at: 0)
         self.registerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.registerSelected)))
         self.view.addSubview(registerView)
-        registrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
+        registrarLbl = UILabel(frame: CGRect(x: 15, y: 350, width: 2.5*self.registerView.frame.width/3, height: 50))
         registrarLbl.text = "Registrar"
+        registrarLbl.textColor = .blue
+        registrarLbl.font = UIFont(name: "helvetica", size: 14)
         registrarLbl.makeHorizontal()
         self.registerView.addSubview(registrarLbl)
         registrarLbl.center.x = registerView.frame.width/2
         
         passwordRegisterTxtField = KaedeTextField()
-        passwordRegisterTxtField.frame.size.width = 200
-        passwordRegisterTxtField.frame.size.height = 25
+        passwordRegisterTxtField.foregroundColor = .white
+        passwordRegisterTxtField.backgroundColor = .blue
+        passwordRegisterTxtField.frame.size.width = 250
+        passwordRegisterTxtField.frame.size.height = 35
+        passwordRegisterTxtField.textColor = .white
         self.passwordRegisterTxtField.center = self.view.center
         passwordRegisterTxtField.alpha = 0
-        passwordRegisterTxtField.placeholder = "insira sua senha"
+        passwordRegisterTxtField.placeholder = "crie uma senha"
+        passwordRegisterTxtField.placeholderColor = .blue
         self.registerView.addSubview(passwordRegisterTxtField)
+        passwordRegisterTxtField.isSecureTextEntry = true
         
         emailRegisterTxtField = KaedeTextField()
-        emailRegisterTxtField.frame.size.width = 200
-        emailRegisterTxtField.frame.size.height = 25
+        emailRegisterTxtField.foregroundColor = .white
+        emailRegisterTxtField.backgroundColor = .blue
+        emailRegisterTxtField.frame.size.width = 250
+        emailRegisterTxtField.frame.size.height = 35
+        emailRegisterTxtField.textColor = .white
         emailRegisterTxtField.center.y = passwordRegisterTxtField.center.y - 40
         emailRegisterTxtField.center.x = self.view.center.x
         emailRegisterTxtField.alpha = 0
         emailRegisterTxtField.placeholder = "insira seu email"
+        emailRegisterTxtField.placeholderColor = .blue
         self.registerView.addSubview(emailRegisterTxtField)
         
         nameRegisterTxtField = KaedeTextField()
-        nameRegisterTxtField.frame.size.width = 200
-        nameRegisterTxtField.frame.size.height = 25
+        nameRegisterTxtField.foregroundColor = .white
+        nameRegisterTxtField.backgroundColor = .blue
+        nameRegisterTxtField.frame.size.width = 250
+        nameRegisterTxtField.frame.size.height = 35
+        nameRegisterTxtField.textColor = .white
         nameRegisterTxtField.center.y = emailRegisterTxtField.center.y - 40
         nameRegisterTxtField.center.x = self.view.center.x
         nameRegisterTxtField.alpha = 0
-        nameRegisterTxtField.placeholder = "insira seu nome"
+        nameRegisterTxtField.placeholder = "qual o seu nome?"
+        nameRegisterTxtField.placeholderColor = .blue
         self.registerView.addSubview(nameRegisterTxtField)
         
         registerButton = UIButton()
-        registerButton.frame.size.width = 200
-        registerButton.frame.size.height = 30
+        registerButton.frame.size.width = 250
+        registerButton.frame.size.height = 35
         registerButton.center.x = self.view.center.x
         registerButton.center.y = passwordRegisterTxtField.center.y + 40
         registerButton.alpha = 0
@@ -192,8 +212,9 @@ class LoginViewController: UIViewController {
             self.view.bringSubview(toFront: self.registerView)
             self.registerView.frame.origin.x = 0
             self.registerView.frame.size.width = self.view.frame.width
-            self.registrarLbl.center.x = 40
-            self.registrarLbl.center.y = self.view.center.y
+            //self.registerGradient.frame = self.registerView.frame
+            self.registrarLbl.center.x = self.nameRegisterTxtField.frame.minX
+            self.registrarLbl.frame.origin.y = self.nameRegisterTxtField.frame.minY - self.registrarLbl.frame.height - 15
             
             self.passwordRegisterTxtField.alpha = 1
             self.registerView.layoutSubviews()
@@ -245,7 +266,6 @@ class LoginViewController: UIViewController {
     }
     
 }
-
 extension LoginViewController: FBSDKLoginButtonDelegate {
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error?) {
@@ -269,7 +289,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                 print(error)
                                 return
                             }
-                            //Autenticacao OK
+                                //Autenticacao OK
                             else {
                                 if let resultado = result as? Dictionary<String,AnyObject> {
                                     print(resultado["name"] as! String)
@@ -305,5 +325,3 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         }
     }
 }
-
-
