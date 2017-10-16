@@ -49,7 +49,15 @@ class AddArtWorkTVC: UITableViewController {
         
         //funcao do olenka!
         let id = User.sharedInstance.id + Date().description
-        artWork.id = id
+        
+        self.artWork.id = id
+        
+        if ( (artWork.title == nil || artWork.descricao == nil || artWork.category == nil) || artWork.images.count == 0){
+           print("preencher campos vazios")
+        }
+        else{
+            DatabaseAccess.sharedInstance.databaseAccessWriteCreateArtwork(artwork: self.artWork)
+        }
         
         
     }
