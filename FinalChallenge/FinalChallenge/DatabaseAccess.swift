@@ -121,7 +121,7 @@ class DatabaseAccess {
             }
             else{
                 print(metadata ?? 0)
-                self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).child("pic" + String(pictureNumber)).setValue(metadata?.downloadURL()?.absoluteString)
+                self.artWorksRef?.child(artwork.id!).child("pictures").child("pic" + String(pictureNumber)).setValue(metadata?.downloadURL()?.absoluteString)
                 //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
 //                self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
                 
@@ -162,7 +162,7 @@ class DatabaseAccess {
 
 
         //User node
-        self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id)
+        self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
 
         var i = 1
         for img in artwork.images{
@@ -181,7 +181,7 @@ class DatabaseAccess {
 
         //Arts node
 //        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
-        self.artsRef?.child(artwork.category).childByAutoId().setValue(artwork.id)
+        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
         
         return
     }
@@ -205,7 +205,7 @@ class DatabaseAccess {
             print(userDict)
             for user in userDict {
                 let aux = user.value as! [String: Any]
-//                self.artists.append(User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String))
+                self.artists.append(User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String))
                 print(aux["name"] as! String)
             }
             if userDict.isEmpty || self.artists.isEmpty || self.artists.count == 0 {

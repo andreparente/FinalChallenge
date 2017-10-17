@@ -81,7 +81,8 @@ class AddArtWorkTVC: UITableViewController {
         // Configure the cell...
         cell.txtField.delegate = self
         cell.txtField.tag = indexPath.row
-
+        cell.txtField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        
         switch indexPath.row {
         case 0:
             cell.txtField.placeholder = "Título"
@@ -153,7 +154,43 @@ class AddArtWorkTVC: UITableViewController {
 }
 
 extension AddArtWorkTVC: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        switch textField.tag {
+//        case 0:
+//            artWork.title = textField.text!
+//        case 1:
+//            artWork.descricao = textField.text!
+//        case 2:
+//            artWork.value = Double(textField.text!)
+//        case 3:
+//            artWork.width = Double(textField.text!)
+//        case 4:
+//            artWork.height = Double(textField.text!)
+//        default:
+//            artWork.category = textField.text!
+//        }
+//
+//        return true
+//    }
+//
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        switch textField.tag {
+//        case 0:
+//            artWork.title = textField.text!
+//        case 1:
+//            artWork.descricao = textField.text!
+//        case 2:
+//            artWork.value = Double(textField.text!)
+//        case 3:
+//            artWork.width = Double(textField.text!)
+//        case 4:
+//            artWork.height = Double(textField.text!)
+//        default:
+//            artWork.category = textField.text!
+//        }
+//    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
         switch textField.tag {
         case 0:
             artWork.title = textField.text!

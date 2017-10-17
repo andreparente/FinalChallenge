@@ -12,7 +12,7 @@ class User {
     
     var name: String!
     var email: String!
-   // var obras: [Obra] = []
+    // var obras: [Obra] = []
     var friendsId: [String] = []
     var favoriteArts: [String] = []
     var favoriteArtists: [String] = []
@@ -31,5 +31,9 @@ class User {
         self.email = email
     }
     
-    
+    init (name:String, email: String, picture: String){
+        self.name = name
+        self.email = email
+        self.profilePictureURL = picture
+    }
 }
