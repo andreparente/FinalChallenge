@@ -20,8 +20,8 @@ class CategoriesTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        self.frame.size.height = 150
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 150), collectionViewLayout: layout)
+        self.frame.size.height = 170
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 170), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
@@ -45,18 +45,17 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return DatabaseAccess.sharedInstance.categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
         cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
-        cell.categorieLbl.text = "Tatuagem"
-        cell.categorieLbl.frame.size.height = 140
-        cell.categorieLbl.frame.size.width = 20
-        cell.categorieLbl.numberOfLines = 9
-        cell.categorieLbl.text = "T\na\nt\nu\na\ng\ne\nm"
+        cell.categorieLbl.text = DatabaseAccess.sharedInstance.categories[indexPath.item]
+        cell.categorieLbl.makeHorizontal()
+        cell.categorieLbl.textColor = .white
+        cell.categorieLbl.center = cell.center
         cell.categorieLbl.textColor = .white
         return cell
     }

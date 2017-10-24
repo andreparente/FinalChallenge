@@ -19,6 +19,23 @@ class HomeTVC: UITableViewController {
         self.tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         self.tableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
         
+        DatabaseAccess.sharedInstance.fetchCategories { (success: Bool, response: String) in
+            if success {
+                self.tableView.reloadSections([0], with: .none)
+                print(DatabaseAccess.sharedInstance.categories)
+            } else {
+                
+            }
+        }
+        
+        DatabaseAccess.sharedInstance.fetchArtists { (success: Bool, response: String) in
+            if success {
+                self.tableView.reloadSections([1], with: .none)
+                //    print(DatabaseAccess.sharedInstance.artists)
+            } else {
+                
+            }
+        }
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {
@@ -84,7 +101,7 @@ extension HomeTVC {
         switch indexPath.section {
         case 0:
             print("categorias")
-            return 150
+            return 170
         case 1:
             print("artistas")
             return 207 //altura

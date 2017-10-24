@@ -47,7 +47,7 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayOfNames.count
+        return DatabaseAccess.sharedInstance.artists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,10 +55,12 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         // cell.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "backgroundArtistCell"))
         cell.backgroundColor = .white
         
-        cell.profileImage.layer.cornerRadius = 70;
-        cell.profileImage.layer.masksToBounds = true;
-        cell.profileImage.image = profileImage[0]
-        cell.nameLbl.text = arrayOfNames[indexPath.item]
+        cell.profileImage.layer.cornerRadius = 70
+        cell.profileImage.layer.masksToBounds = true
+        if let picture = DatabaseAccess.sharedInstance.artists[indexPath.item].profilePictureURL {
+            cell.profileImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
+        }
+        cell.nameLbl.text = DatabaseAccess.sharedInstance.artists[indexPath.item].name
         
         return cell
     }
