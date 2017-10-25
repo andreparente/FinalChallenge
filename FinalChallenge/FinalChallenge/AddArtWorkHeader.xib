@@ -11,27 +11,83 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddArtWorkHeader" customModule="FinalChallenge" customModuleProvider="target">
             <connections>
-                <outlet property="addPictureButton" destination="2Dy-hC-5cM" id="rff-RK-3KQ"/>
+                <outlet property="cancelButton" destination="o5I-ht-SH9" id="LCB-8U-DWM"/>
+                <outlet property="categoriesCollectionView" destination="YBR-MJ-mKH" id="qDt-8J-Scd"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="h1P-Qh-uPq"/>
+                <outlet property="picturesCollectionView" destination="XTf-rc-Zbp" id="L26-vy-33d"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Dy-hC-5cM">
-                    <rect key="frame" x="107" y="105" width="107" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Adicionar Fotos"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-ht-SH9">
+                    <rect key="frame" x="16" y="20" width="61" height="30"/>
+                    <state key="normal" title="Cancelar"/>
+                    <connections>
+                        <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="D9y-it-AWf"/>
+                    </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adicionar Obra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPp-bA-q8i">
+                    <rect key="frame" x="103" y="25" width="114" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XTf-rc-Zbp">
+                    <rect key="frame" x="0.0" y="58" width="320" height="110"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="ePE-SW-64j"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RZe-Jd-f00">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categoria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-PR-dzW">
+                    <rect key="frame" x="123" y="178" width="75" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YBR-MJ-mKH">
+                    <rect key="frame" x="0.0" y="207" width="320" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="0Dh-NR-ywj"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="21B-oT-B7y">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="YBR-MJ-mKH" secondAttribute="trailing" id="76g-pk-7GS"/>
+                <constraint firstItem="xPp-bA-q8i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="7Nu-WH-CyZ"/>
+                <constraint firstItem="XTf-rc-Zbp" firstAttribute="top" secondItem="o5I-ht-SH9" secondAttribute="bottom" constant="8" id="AKG-l0-TGa"/>
+                <constraint firstItem="xPp-bA-q8i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HsB-fs-XYb"/>
+                <constraint firstItem="o5I-ht-SH9" firstAttribute="centerY" secondItem="xPp-bA-q8i" secondAttribute="centerY" id="Mw6-Sm-MSX"/>
+                <constraint firstItem="XTf-rc-Zbp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="R0d-XD-Gjy"/>
+                <constraint firstItem="YBR-MJ-mKH" firstAttribute="top" secondItem="iIb-PR-dzW" secondAttribute="bottom" constant="8" id="U5y-tw-1J0"/>
+                <constraint firstItem="iIb-PR-dzW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eZv-Py-MrL"/>
+                <constraint firstItem="o5I-ht-SH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="geK-dG-JBW"/>
+                <constraint firstAttribute="trailing" secondItem="XTf-rc-Zbp" secondAttribute="trailing" id="h5r-kL-fha"/>
+                <constraint firstItem="YBR-MJ-mKH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h81-F6-eoe"/>
+                <constraint firstItem="iIb-PR-dzW" firstAttribute="top" secondItem="XTf-rc-Zbp" secondAttribute="bottom" constant="10" id="uyj-va-WMk"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="22" y="-171"/>
+            <point key="canvasLocation" x="22" y="-209"/>
         </view>
     </objects>
 </document>

@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>iCarousel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -51,52 +56,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>005CD1D982816D20EBF0E0D9D48B7AFD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0BB3A7E97748117F86995C85C05AB8BB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>266AE1506DAD13D34C0725E909C0C476</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5E707FF8CB3D090CCB960ECC250DC20F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB772E2B3182FEC798F9C5B520DED258</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EE1DB1BD3817A69CF2337C912E0C4BDD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

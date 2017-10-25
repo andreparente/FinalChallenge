@@ -10,10 +10,17 @@ import UIKit
 
 class AddArtWorkTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var txtField: UITextField!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var txtView: UITextView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.txtView.text = "Observação"
+        self.txtView.textColor = UIColor.lightGray
+        self.txtView.delegate = self
+        self.txtView.layer.borderColor = UIColor.customLightBlue.cgColor
+        self.txtView.layer.cornerRadius = 10
+        self.txtView.layer.borderWidth = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,4 +29,21 @@ class AddArtWorkTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+}
+
+extension AddArtWorkTableViewCell: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty || textView.text == "" {
+            textView.text = ""
+            textView.textColor = UIColor.lightGray
+        } else {
+        }
+    }
 }

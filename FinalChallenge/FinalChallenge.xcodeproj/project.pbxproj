@@ -11,6 +11,10 @@
 		0B227DA9B7468AEB3F7ADD9E /* Pods_FinalChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */; };
 		26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */; };
 		44D9554716FE6DDBAB41328E /* Pods_FinalChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */; };
+		8A0465961FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0465941FA10CED00516AD8 /* AddArtWorkCategoriesCVC.swift */; };
+		8A0465971FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0465951FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib */; };
+		8A04659B1FA10EFB00516AD8 /* PictureCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0465991FA10EFB00516AD8 /* PictureCVC.swift */; };
+		8A04659C1FA10EFB00516AD8 /* PictureCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A04659A1FA10EFB00516AD8 /* PictureCVC.xib */; };
 		8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */; };
 		8A3DF37F1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */; };
 		8A3DF3831F7C112E00A59A05 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3821F7C112E00A59A05 /* ProfileTableViewCell.swift */; };
@@ -97,6 +101,10 @@
 		4DD4258FC2A67A37B02384E6 /* Pods_FinalChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A0465941FA10CED00516AD8 /* AddArtWorkCategoriesCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArtWorkCategoriesCVC.swift; sourceTree = "<group>"; };
+		8A0465951FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddArtWorkCategoriesCVC.xib; sourceTree = "<group>"; };
+		8A0465991FA10EFB00516AD8 /* PictureCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCVC.swift; sourceTree = "<group>"; };
+		8A04659A1FA10EFB00516AD8 /* PictureCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureCVC.xib; sourceTree = "<group>"; };
 		8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorkCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtWorkCollectionViewCell.xib; sourceTree = "<group>"; };
 		8A3DF3821F7C112E00A59A05 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -230,6 +238,22 @@
 			name = DAO;
 			sourceTree = "<group>";
 		};
+		8A0465981FA10EC000516AD8 /* AddArtWork */ = {
+			isa = PBXGroup;
+			children = (
+				8A3DF3901F87C77C00A59A05 /* AddArtWorkTVC.swift */,
+				8AA615931F8BD46600E54815 /* AddArtWorkTableViewCell.swift */,
+				8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */,
+				8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */,
+				8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */,
+				8A0465941FA10CED00516AD8 /* AddArtWorkCategoriesCVC.swift */,
+				8A0465951FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib */,
+				8A0465991FA10EFB00516AD8 /* PictureCVC.swift */,
+				8A04659A1FA10EFB00516AD8 /* PictureCVC.xib */,
+			);
+			name = AddArtWork;
+			sourceTree = "<group>";
+		};
 		8A3DF3801F7C0DE200A59A05 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,16 +379,12 @@
 		8AA615A61F8BF12500E54815 /* Profile2(AddArtWork) */ = {
 			isa = PBXGroup;
 			children = (
+				8A0465981FA10EC000516AD8 /* AddArtWork */,
 				8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */,
 				8A3DF3861F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift */,
 				8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */,
 				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
 				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
-				8A3DF3901F87C77C00A59A05 /* AddArtWorkTVC.swift */,
-				8AA615931F8BD46600E54815 /* AddArtWorkTableViewCell.swift */,
-				8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */,
-				8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */,
-				8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */,
 			);
 			name = "Profile2(AddArtWork)";
 			sourceTree = "<group>";
@@ -575,6 +595,8 @@
 				8A3DF3891F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib in Resources */,
 				8ACFD6791F44B72E008DF502 /* LaunchScreen.storyboard in Resources */,
 				8AD744F11F682F8B00DC0F75 /* Info.plist in Resources */,
+				8A04659C1FA10EFB00516AD8 /* PictureCVC.xib in Resources */,
+				8A0465971FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib in Resources */,
 				8A40BC7D1F55BB8C00A12EBA /* HeaderProfile.xib in Resources */,
 				8A9548FA1F56DF5F00FDA06A /* ArtistCollectionViewCell.xib in Resources */,
 				8ACFD6761F44B72E008DF502 /* Assets.xcassets in Resources */,
@@ -711,6 +733,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SJSegmentedScrollView/SJSegmentedScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -720,6 +743,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJSegmentedScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -779,6 +803,7 @@
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,
 				8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */,
 				8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */,
+				8A04659B1FA10EFB00516AD8 /* PictureCVC.swift in Sources */,
 				8AD744F91F682F8B00DC0F75 /* YoshikoTextField.swift in Sources */,
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8AD744F81F682F8B00DC0F75 /* YokoTextField.swift in Sources */,
@@ -805,6 +830,7 @@
 				8A9548F11F560FA400FDA06A /* Extensions.swift in Sources */,
 				8ACD5B891F601E760063162A /* ArtWorksViewController.swift in Sources */,
 				8AD744F01F682F8B00DC0F75 /* HoshiTextField.swift in Sources */,
+				8A0465961FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.swift in Sources */,
 				8AA615951F8BD46600E54815 /* AddArtWorkTableViewCell.swift in Sources */,
 				8AD744F61F682F8B00DC0F75 /* MinoruTextField.swift in Sources */,
 			);

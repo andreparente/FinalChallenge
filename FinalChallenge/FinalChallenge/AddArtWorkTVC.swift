@@ -25,24 +25,30 @@ class AddArtWorkTVC: UITableViewController {
         self.setTableHeader()
         self.setFooterView()
         self.tableView.register(UINib(nibName: "AddArtWorkTableViewCell", bundle: nil), forCellReuseIdentifier: "AddArtWorkCell")
-        self.tableView.tableHeaderView = tableHeader
-        self.tableView.tableFooterView = tableFooter
         self.artWork = ArtWork()
     }
     
     func setFooterView() {
-        tableFooter = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 40, height: 40))
+        tableFooter = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         tableFooter.addSubview(button)
         button.center = tableFooter.center
+        button.titleLabel?.textAlignment  = .center
         button.setTitle("Salvar Obra!", for: .normal)
         button.backgroundColor = UIColor.customLightBlue
         button.addTarget(self, action: #selector(AddArtWorkTVC.saveArtWork), for: .touchUpInside)
+        
+        self.tableView.tableFooterView = tableFooter
+
     }
     
     func setTableHeader() {
-        tableHeader = AddArtWorkHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 240))
-        self.tableHeader.addPictureButton.addTarget(self, action: #selector(AddArtWorkTVC.pickImg), for: .touchUpInside)
+        tableHeader = AddArtWorkHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 260))
+        
+        
+        self.tableView.tableHeaderView = tableHeader
+
+//        self.tableHeader.addPictureButton.addTarget(self, action: #selector(AddArtWorkTVC.pickImg), for: .touchUpInside)
     }
 
     @objc private func saveArtWork() {
@@ -79,32 +85,52 @@ class AddArtWorkTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddArtWorkCell", for: indexPath) as! AddArtWorkTableViewCell
 
         // Configure the cell...
-        cell.txtField.delegate = self
-        cell.txtField.tag = indexPath.row
-        cell.txtField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        cell.txtView.delegate = self
         
         switch indexPath.row {
         case 0:
-            cell.txtField.placeholder = "Título"
+            cell.title.text = "Título"
             
         case 1:
-            cell.txtField.placeholder = "Descrição"
+            cell.title.text = "Descrição"
         case 2:
-            cell.txtField.placeholder = "Valor"
-            cell.txtField.keyboardType = .decimalPad
+            cell.title.text = "Altura"
+            cell.txtView.keyboardType = .decimalPad
         case 3:
-            cell.txtField.placeholder = "Largura (em cm)"
-            cell.txtField.keyboardType = .decimalPad
+            cell.title.text = "Largura"
+            cell.txtView.keyboardType = .decimalPad
         case 4:
-            cell.txtField.placeholder = "Altura (em cm)"
-            cell.txtField.keyboardType = .decimalPad
+            cell.title.text = "Comprimento"
+            cell.txtView.keyboardType = .decimalPad
         default:
-            cell.txtField.placeholder = "Categoria"
-            
+            cell.title.text = "Valor"
+            cell.txtView.keyboardType = .decimalPad
         }
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 70
+            
+        case 1:
+            return 140
+            
+        case 2:
+            return 70
+
+        case 3:
+            return 70
+
+        case 4:
+            return 70
+
+        default:
+            return 70
+
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -153,57 +179,24 @@ class AddArtWorkTVC: UITableViewController {
 
 }
 
-extension AddArtWorkTVC: UITextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        switch textField.tag {
-//        case 0:
-//            artWork.title = textField.text!
-//        case 1:
-//            artWork.descricao = textField.text!
-//        case 2:
-//            artWork.value = Double(textField.text!)
-//        case 3:
-//            artWork.width = Double(textField.text!)
-//        case 4:
-//            artWork.height = Double(textField.text!)
-//        default:
-//            artWork.category = textField.text!
-//        }
-//
-//        return true
-//    }
-//
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        switch textField.tag {
-//        case 0:
-//            artWork.title = textField.text!
-//        case 1:
-//            artWork.descricao = textField.text!
-//        case 2:
-//            artWork.value = Double(textField.text!)
-//        case 3:
-//            artWork.width = Double(textField.text!)
-//        case 4:
-//            artWork.height = Double(textField.text!)
-//        default:
-//            artWork.category = textField.text!
-//        }
-//    }
+extension AddArtWorkTVC: UITextViewDelegate {
+
     
-    func textFieldDidChange(_ textField: UITextField) {
-        switch textField.tag {
+    func textViewDidChange(_ textView: UITextView) {
+        switch textView.tag {
         case 0:
-            artWork.title = textField.text!
+            artWork.title = textView.text!
         case 1:
-            artWork.descricao = textField.text!
+            artWork.descricao = textView.text!
         case 2:
-            artWork.value = Double(textField.text!)
+            artWork.height = Double(textView.text!)
         case 3:
-            artWork.width = Double(textField.text!)
+            artWork.width = Double(textView.text!)
         case 4:
-            artWork.height = Double(textField.text!)
+            print("Comprimento", Double(textView.text!))
         default:
-            artWork.category = textField.text!
+            artWork.value = Double(textView.text!)
+
         }
     }
 }
