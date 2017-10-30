@@ -14,6 +14,9 @@ class AddArtWorkHeader: UIView {
     @IBOutlet weak var picturesCollectionView: UICollectionView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    weak var delegate: AddArtWorkHeaderDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -34,8 +37,10 @@ class AddArtWorkHeader: UIView {
         
         categoriesCollectionView.delegate = self
         categoriesCollectionView.dataSource = self
+        categoriesCollectionView.allowsMultipleSelection = false
         categoriesCollectionView.register(UINib(nibName: "AddArtWorkCategoriesCVC", bundle: nil), forCellWithReuseIdentifier: "AddArtWorkCategoriesCVC")
         picturesCollectionView.register(UINib(nibName: "PictureCVC", bundle: nil), forCellWithReuseIdentifier: "PictureCell")
+        
         
     }
     
@@ -74,11 +79,34 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
             cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.customLightBlue.cgColor
+            
+            if cell.isSelected {
+                cell.backgroundColor = UIColor.customLightBlue
+                cell.title.textColor = .white
+            } else {
+                cell.backgroundColor = .white
+                cell.title.textColor = .black
+            }
             return cell
         }
         
        
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if collectionView.isEqual(categoriesCollectionView) {
+            let cell = cell as! AddArtWorkCategoriesCVC
+            if cell.isSelected {
+                cell.backgroundColor = UIColor.customLightBlue
+                cell.title.textColor = .white
+            } else {
+                cell.backgroundColor = .white
+                cell.title.textColor = .black
+            }
+
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -97,9 +125,30 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //ir para a tela de videos da modalidade x
-        //
-        
+        if collectionView.isEqual(picturesCollectionView) {
+            //fetch pictures
+        } else {
+            let cell = collectionView.cellForItem(at: indexPath) as! AddArtWorkCategoriesCVC
+            cell.backgroundColor = UIColor.customLightBlue
+            cell.title.textColor = .white
+            delegate?.didSelectCategory(category: cell.title.text!)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.isEqual(picturesCollectionView) {
+            //fetch pictures
+        } else {
+            if let cell = collectionView.cellForItem(at: indexPath) as? AddArtWorkCategoriesCVC {
+                cell.backgroundColor = .white
+                cell.title.textColor = .black
+            }
+        }
     }
 
+}
+
+
+protocol AddArtWorkHeaderDelegate: class {
+    func didSelectCategory(category: String)
 }

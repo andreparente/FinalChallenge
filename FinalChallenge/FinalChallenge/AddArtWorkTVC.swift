@@ -44,9 +44,8 @@ class AddArtWorkTVC: UITableViewController {
     
     func setTableHeader() {
         tableHeader = AddArtWorkHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 260))
-        
-        
         self.tableView.tableHeaderView = tableHeader
+        self.tableHeader.delegate = self
 
 //        self.tableHeader.addPictureButton.addTarget(self, action: #selector(AddArtWorkTVC.pickImg), for: .touchUpInside)
     }
@@ -193,7 +192,7 @@ extension AddArtWorkTVC: UITextViewDelegate {
         case 3:
             artWork.width = Double(textView.text!)
         case 4:
-            print("Comprimento", Double(textView.text!))
+            print("Comprimento", Double(textView.text!) ?? 0)
         default:
             artWork.value = Double(textView.text!)
 
@@ -216,11 +215,11 @@ extension AddArtWorkTVC: UIImagePickerControllerDelegate, UINavigationController
         
         if let originalImage = info["UIImagePickerControllerOriginalImage"] {
             print((originalImage as! UIImage).size)
-            selectedImageFromPicker = originalImage as! UIImage
+            selectedImageFromPicker = originalImage as? UIImage
         }
         else if let croppedImage = info["UIImagePickerControllerEditedImage"]{
             print((croppedImage as! UIImage).size)
-            selectedImageFromPicker = croppedImage as! UIImage
+            selectedImageFromPicker = croppedImage as? UIImage
         }
         
         //aqui adiciono no vetor de imagens
@@ -231,5 +230,11 @@ extension AddArtWorkTVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("picking image cancelled")
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension AddArtWorkTVC: AddArtWorkHeaderDelegate {
+    func didSelectCategory(category: String) {
+        artWork.category = category
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import iCarousel
 
 class User {
     
@@ -20,6 +21,8 @@ class User {
     var profilePictureURL: String!
     //Singleton!
     static let sharedInstance = User()
+    var artWorks: [ArtWork] = []
+    var typeOfGallery: String!
     
     private init() {
         self.name = ""
@@ -35,5 +38,32 @@ class User {
         self.name = name
         self.email = email
         self.profilePictureURL = picture
+    }
+    
+    func getGalleryStyle() -> iCarouselType {
+        switch typeOfGallery {
+        case "Linear":
+            return iCarouselType.linear
+        case "Rotary":
+            return iCarouselType.rotary
+        case "InvertedRotary":
+            return iCarouselType.invertedRotary
+        case "Cylinder":
+            return iCarouselType.cylinder
+        case "InvertedCylinder":
+            return iCarouselType.invertedCylinder
+        case "Wheel":
+            return iCarouselType.wheel
+        case "InvertedWheel":
+            return iCarouselType.invertedWheel
+        case "CoverFlow":
+            return iCarouselType.coverFlow
+        case "CoverFlow2":
+            return iCarouselType.coverFlow2
+        case "TimeMachine":
+            return iCarouselType.timeMachine
+        default:
+            return iCarouselType.invertedTimeMachine
+        }
     }
 }

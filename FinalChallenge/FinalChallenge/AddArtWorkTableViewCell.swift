@@ -15,7 +15,7 @@ class AddArtWorkTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.txtView.text = "Observação"
+        self.txtView.text = ""
         self.txtView.textColor = UIColor.lightGray
         self.txtView.delegate = self
         self.txtView.layer.borderColor = UIColor.customLightBlue.cgColor

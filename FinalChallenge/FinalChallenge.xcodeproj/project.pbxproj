@@ -52,6 +52,10 @@
 		8AA615961F8BD46600E54815 /* AddArtWorkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */; };
 		8AA615981F8BDA7900E54815 /* AddArtWorkHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */; };
 		8AA6159A1F8BDADA00E54815 /* AddArtWorkHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */; };
+		8AB032821FA266BB000CCBC0 /* ArtistsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB032811FA266BB000CCBC0 /* ArtistsTVC.swift */; };
+		8AB032861FA26737000CCBC0 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB032841FA26737000CCBC0 /* ArtistTableViewCell.swift */; };
+		8AB032871FA26737000CCBC0 /* ArtistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AB032851FA26737000CCBC0 /* ArtistTableViewCell.xib */; };
+		8AB0328A1FA3B82A000CCBC0 /* ArtistProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB032891FA3B82A000CCBC0 /* ArtistProfileViewController.swift */; };
 		8ACD5B861F601D850063162A /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B841F601D850063162A /* LikesViewController.swift */; };
 		8ACD5B871F601D850063162A /* FollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B851F601D850063162A /* FollowingViewController.swift */; };
 		8ACD5B891F601E760063162A /* ArtWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACD5B881F601E760063162A /* ArtWorksViewController.swift */; };
@@ -142,6 +146,10 @@
 		8AA615941F8BD46600E54815 /* AddArtWorkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddArtWorkTableViewCell.xib; sourceTree = "<group>"; };
 		8AA615971F8BDA7900E54815 /* AddArtWorkHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddArtWorkHeader.xib; sourceTree = "<group>"; };
 		8AA615991F8BDADA00E54815 /* AddArtWorkHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArtWorkHeader.swift; sourceTree = "<group>"; };
+		8AB032811FA266BB000CCBC0 /* ArtistsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsTVC.swift; sourceTree = "<group>"; };
+		8AB032841FA26737000CCBC0 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
+		8AB032851FA26737000CCBC0 /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
+		8AB032891FA3B82A000CCBC0 /* ArtistProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistProfileViewController.swift; sourceTree = "<group>"; };
 		8ACD5B841F601D850063162A /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		8ACD5B851F601D850063162A /* FollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingViewController.swift; sourceTree = "<group>"; };
 		8ACD5B881F601E760063162A /* ArtWorksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorksViewController.swift; sourceTree = "<group>"; };
@@ -323,7 +331,9 @@
 		8A70BA1A1F704F3200BE9BE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8AA615A61F8BF12500E54815 /* Profile2(AddArtWork) */,
+				8AB032881FA3B804000CCBC0 /* ArtistProfile */,
+				8AB032831FA26719000CCBC0 /* Artists */,
+				8AA615A61F8BF12500E54815 /* Profile(AddArtWork) */,
 				8A3DF3811F7C0F7500A59A05 /* Cells */,
 				8A40BC661F55945700A12EBA /* LoginViewController.swift */,
 				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
@@ -376,7 +386,7 @@
 			name = Artists;
 			sourceTree = "<group>";
 		};
-		8AA615A61F8BF12500E54815 /* Profile2(AddArtWork) */ = {
+		8AA615A61F8BF12500E54815 /* Profile(AddArtWork) */ = {
 			isa = PBXGroup;
 			children = (
 				8A0465981FA10EC000516AD8 /* AddArtWork */,
@@ -386,7 +396,25 @@
 				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
 				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
 			);
-			name = "Profile2(AddArtWork)";
+			name = "Profile(AddArtWork)";
+			sourceTree = "<group>";
+		};
+		8AB032831FA26719000CCBC0 /* Artists */ = {
+			isa = PBXGroup;
+			children = (
+				8AB032811FA266BB000CCBC0 /* ArtistsTVC.swift */,
+				8AB032841FA26737000CCBC0 /* ArtistTableViewCell.swift */,
+				8AB032851FA26737000CCBC0 /* ArtistTableViewCell.xib */,
+			);
+			name = Artists;
+			sourceTree = "<group>";
+		};
+		8AB032881FA3B804000CCBC0 /* ArtistProfile */ = {
+			isa = PBXGroup;
+			children = (
+				8AB032891FA3B82A000CCBC0 /* ArtistProfileViewController.swift */,
+			);
+			name = ArtistProfile;
 			sourceTree = "<group>";
 		};
 		8ACFD6621F44B72E008DF502 = {
@@ -546,7 +574,7 @@
 				TargetAttributes = {
 					8ACFD66A1F44B72E008DF502 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = A2ZTH56XFL;
+						DevelopmentTeam = C5676RKFWG;
 						ProvisioningStyle = Automatic;
 					};
 					8ACFD67E1F44B72E008DF502 = {
@@ -594,6 +622,7 @@
 				8A3DF38D1F7E682200A59A05 /* ProfileCollectionViewCell.xib in Resources */,
 				8A3DF3891F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib in Resources */,
 				8ACFD6791F44B72E008DF502 /* LaunchScreen.storyboard in Resources */,
+				8AB032871FA26737000CCBC0 /* ArtistTableViewCell.xib in Resources */,
 				8AD744F11F682F8B00DC0F75 /* Info.plist in Resources */,
 				8A04659C1FA10EFB00516AD8 /* PictureCVC.xib in Resources */,
 				8A0465971FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib in Resources */,
@@ -802,12 +831,15 @@
 				8A40BC741F55B96D00A12EBA /* HomeTVC.swift in Sources */,
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,
 				8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */,
+				8AB032861FA26737000CCBC0 /* ArtistTableViewCell.swift in Sources */,
 				8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */,
 				8A04659B1FA10EFB00516AD8 /* PictureCVC.swift in Sources */,
+				8AB0328A1FA3B82A000CCBC0 /* ArtistProfileViewController.swift in Sources */,
 				8AD744F91F682F8B00DC0F75 /* YoshikoTextField.swift in Sources */,
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8AD744F81F682F8B00DC0F75 /* YokoTextField.swift in Sources */,
 				8A3DF3881F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift in Sources */,
+				8AB032821FA266BB000CCBC0 /* ArtistsTVC.swift in Sources */,
 				8AD744EF1F682F8B00DC0F75 /* AkiraTextField.swift in Sources */,
 				8A3DF38C1F7E682200A59A05 /* ProfileCollectionViewCell.swift in Sources */,
 				8AD744F51F682F8B00DC0F75 /* MadokaTextField.swift in Sources */,
@@ -985,7 +1017,7 @@
 			baseConfigurationReference = 2FDDDB4C3A8ECC249F9178A1 /* Pods-FinalChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A2ZTH56XFL;
+				DEVELOPMENT_TEAM = C5676RKFWG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",
@@ -1004,7 +1036,7 @@
 			baseConfigurationReference = FCD705B0A55EB2839B95FFF5 /* Pods-FinalChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A2ZTH56XFL;
+				DEVELOPMENT_TEAM = C5676RKFWG;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",

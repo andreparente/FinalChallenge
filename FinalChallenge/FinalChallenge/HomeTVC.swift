@@ -77,20 +77,30 @@ extension HomeTVC {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 30))
+        let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: 2*view.frame.width/3, height: 35))
+        label.textColor = .black
+        let button = UIButton(frame: CGRect(x: label.frame.maxX, y: 0, width: view.frame.width/3, height: 35))
+        button.setTitle("See All", for: .normal)
+        button.titleLabel?.textAlignment = .right
+        button.addTarget(self, action: #selector(HomeTVC.goToArtists), for: .touchUpInside)
+        view.addSubview(label)
+        view.addSubview(button)
         switch section {
         case 0:
             print("categorias")
             label.text = "Categorias"
+            return label
         case 1:
             print("artistas")
             label.text = "Artistas"
+            return view
+
         default:
-            print("eventos")
-            label.text = "Eventos"
+            print("populares")
+            label.text = "Populares"
+            return label
         }
-        label.textColor = .black
-        return label
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -111,4 +121,15 @@ extension HomeTVC {
         }
     }
     
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(HomeTVC.goToArtists))
+//        view.addGestureRecognizer(gesture)
+//    }
+    
+
+    
+    func goToArtists() {
+        print("goToArtists")
+        self.performSegue(withIdentifier: "HomeToArtists", sender: self)
+    }
 }
