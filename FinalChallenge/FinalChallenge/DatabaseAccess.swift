@@ -20,6 +20,9 @@ class DatabaseAccess {
     var artWorksRef: DatabaseReference?
     var artsRef: DatabaseReference?
     var storageRef: StorageReference?
+    var followedByRef: DatabaseReference?
+    var likedByRef: DatabaseReference?
+
 
     //Singleton!
     static let sharedInstance = DatabaseAccess()
@@ -34,9 +37,17 @@ class DatabaseAccess {
         artsRef = Database.database().reference()
         artsRef = Database.database().reference().child("Arte")
         
+        followedByRef = Database.database().reference()
+        followedByRef = Database.database().reference().child("FollowedBy")
+        
+        likedByRef = Database.database().reference()
+        likedByRef = Database.database().reference().child("LikedBy")
+        
         let storage = Storage.storage()
         self.storageRef = storage.reference()
     }
+    
+
     
     func databaseAccessWriteCreateUser(user:User) {
         //verificacao com do profile picture URL para caso de login com facebook
@@ -205,8 +216,16 @@ class DatabaseAccess {
             print(userDict)
             for user in userDict {
                 let aux = user.value as! [String: Any]
-                self.artists.append(User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String))
-                print(aux["name"] as! String)
+                let userAux = User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String)
+                userAux.typeOfGallery = aux["typeOfGallery"] as? String
+                
+                for art in (aux["artsId"] as? [String: String])! {
+                    let artWork = ArtWork()
+                    artWork.id = art.key
+                    userAux.artWorks.append(artWork)
+                }
+                
+                self.artists.append(userAux)
             }
             if userDict.isEmpty || self.artists.isEmpty || self.artists.count == 0 {
                 callback(false, "")
@@ -218,4 +237,33 @@ class DatabaseAccess {
         })
     }
     
+    func databaseAccessWriteFollowArtist(user:User, artist:User){
+        //Adicionar no Node do usuario, o artista que ele segue
+        self.usersRef?.child(user.id).child("favoriteArtists").child(artist.id).setValue(artist.id)
+        
+        //Adicionar no Node Followed by o usuario que segue o artista
+        self.followedByRef?.child(artist.id).child(user.id).setValue(user.id)
+        
+        return
+    }
+    
+    func databaseAccessWriteLikeArtWork(user:User, artwork:ArtWork){
+        
+        //Adiciona no Node do usuario que ele deu like em uma obra
+        usersRef?.child(user.id).child("favoriteArts").child(artwork.id).setValue(artwork.id)
+        //Adiciona no Node Artworks, o usuario que deu like
+        artWorksRef?.child(artwork.id).child("likedBy").child(user.id).setValue(user.id)
+        
+        return
+    }
+    
+    //olenka
+    func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {
+        
+        for arts in artist.artWorks {
+            
+        }
+    }
+    
+
 }
