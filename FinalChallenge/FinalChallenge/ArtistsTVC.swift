@@ -56,7 +56,7 @@ class ArtistsTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistsTVC") as! ArtistProfileViewController
+        let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
         modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
         DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: DatabaseAccess.sharedInstance.artists[indexPath.row]) { (success: Bool, response: String) in
             if success {

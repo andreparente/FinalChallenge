@@ -102,6 +102,13 @@ extension UIImageView: URLSessionDelegate {
     func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         contentMode = mode
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
+        let loading = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        loading.center = self.center
+        loading.color = UIColor.blue
+        loading.hidesWhenStopped = true
+        loading.activityIndicatorViewStyle = .gray
+        loading.startAnimating()
+        self.addSubview(loading)
         
         session.dataTask(with: url) { (data, response, error) in
             guard
@@ -109,8 +116,10 @@ extension UIImageView: URLSessionDelegate {
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
                 let image = UIImage(data: data)
+                
                 else { return }
             DispatchQueue.main.async() { () -> Void in
+                loading.stopAnimating()
                 self.image = image
             }
             }.resume()

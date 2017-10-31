@@ -13,6 +13,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
 
     var artist: User!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var artWorkCarousel: iCarousel!
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
@@ -30,7 +31,11 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
 
         
         //aqui preencher de acordo com a escolha do cara
-        artWorkCarousel.type = artist.getGalleryStyle()
+        if let estilo = artist.getGalleryStyle() {
+            artWorkCarousel.type = estilo
+        } else {
+            artWorkCarousel.type = .linear
+        }
         nameLbl.text = artist.name
 
         //chamar fetch para pegar as artes a partir de um user/ir no nó do user, pegar as ids das artes, ir no nó das artes, e recuperar as infos. [OLENKA]
@@ -66,9 +71,23 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
       //  label.text = "\(items[index])"
         
         //setar a view de acordo com a obra (será a foto inteira?) Esther
-        var view = UIView()
-        
-        return view
+        let cellView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.headerView.frame.maxX))
+        let artWorkImage = UIImageView(frame: CGRect(x: 15, y: 20, width: self.view.frame.width - 30, height: cellView.frame.height - 40))
+        artWorkImage.downloadedFrom(link: artist.artWorks[index].urlPhotos[0], contentMode: .scaleAspectFill)
+        artWorkImage.layer.masksToBounds = true
+        let artWorkTitle = UILabel(frame: CGRect(x: 15, y: artWorkImage.frame.maxY + 5, width: artWorkImage.frame.width, height: 30))
+        artWorkTitle.textColor = .black
+        artWorkTitle.textAlignment = .right
+        artWorkTitle.text = artist.artWorks[index].title
+        cellView.addSubview(artWorkImage)
+        cellView.addSubview(artWorkTitle)
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap2.numberOfTapsRequired = 2
+        cellView.addGestureRecognizer(tap2)
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(singleTapped))
+        tap1.numberOfTapsRequired = 1
+        cellView.addGestureRecognizer(tap1)
+        return cellView
     }
     
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
@@ -76,6 +95,14 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
             return value * 1.1
         }
         return value
+    }
+    
+    func doubleTapped() {
+        
+    }
+    
+    func singleTapped() {
+        
     }
 
 }

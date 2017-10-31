@@ -40,30 +40,45 @@ class User {
         self.profilePictureURL = picture
     }
     
-    func getGalleryStyle() -> iCarouselType {
-        switch typeOfGallery {
-        case "Linear":
-            return iCarouselType.linear
-        case "Rotary":
-            return iCarouselType.rotary
-        case "InvertedRotary":
-            return iCarouselType.invertedRotary
-        case "Cylinder":
-            return iCarouselType.cylinder
-        case "InvertedCylinder":
-            return iCarouselType.invertedCylinder
-        case "Wheel":
-            return iCarouselType.wheel
-        case "InvertedWheel":
-            return iCarouselType.invertedWheel
-        case "CoverFlow":
-            return iCarouselType.coverFlow
-        case "CoverFlow2":
-            return iCarouselType.coverFlow2
-        case "TimeMachine":
-            return iCarouselType.timeMachine
-        default:
-            return iCarouselType.invertedTimeMachine
+    func getGalleryStyle() -> iCarouselType? {
+        
+        if typeOfGallery != nil {
+            switch typeOfGallery {
+            case "Linear":
+                return iCarouselType.linear
+            case "Rotary":
+                return iCarouselType.rotary
+            case "InvertedRotary":
+                return iCarouselType.invertedRotary
+            case "Cylinder":
+                return iCarouselType.cylinder
+            case "InvertedCylinder":
+                return iCarouselType.invertedCylinder
+            case "Wheel":
+                return iCarouselType.wheel
+            case "InvertedWheel":
+                return iCarouselType.invertedWheel
+            case "CoverFlow":
+                return iCarouselType.coverFlow
+            case "CoverFlow2":
+                return iCarouselType.coverFlow2
+            case "TimeMachine":
+                return iCarouselType.timeMachine
+            default:
+                return iCarouselType.invertedTimeMachine
+            }
+        } else {
+            return nil
         }
+        
+    }
+    
+    func findArtWorkById(id: String) -> ArtWork? {
+        for art in self.artWorks {
+            if art.id == id {
+                return art
+            }
+        }
+        return nil
     }
 }

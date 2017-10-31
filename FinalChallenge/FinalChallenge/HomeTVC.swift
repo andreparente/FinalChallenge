@@ -121,13 +121,6 @@ extension HomeTVC {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        let gesture = UITapGestureRecognizer(target: self, action: #selector(HomeTVC.goToArtists))
-//        view.addGestureRecognizer(gesture)
-//    }
-    
-
-    
     func goToArtists() {
         print("goToArtists")
         self.performSegue(withIdentifier: "HomeToArtists", sender: self)

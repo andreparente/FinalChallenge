@@ -218,6 +218,7 @@ class DatabaseAccess {
                 let aux = user.value as! [String: Any]
                 let userAux = User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String)
                 userAux.typeOfGallery = aux["typeOfGallery"] as? String
+                userAux.id = user.key
                 
                 for art in (aux["artsId"] as? [String: String])! {
                     let artWork = ArtWork()
@@ -259,9 +260,31 @@ class DatabaseAccess {
     
     //olenka
     func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {
+        var count = 0
         
-        for arts in artist.artWorks {
-            
+        for art in artist.artWorks {
+            artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+                print(snapshot.description)
+                let artDict = snapshot.value as! [String: Any]
+
+                artist.findArtWorkById(id: art.id!)?.category = artDict["category"] as? String
+                artist.findArtWorkById(id: art.id!)?.descricao = artDict["description"] as? String
+                artist.findArtWorkById(id: art.id!)?.title = artDict["title"] as? String
+                
+                //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
+                let pictDict = artDict["pictures"] as! [String:String]
+                print(pictDict)
+                artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                
+                if (art.id == artist.artWorks.last?.id) {
+                    print("entrou no call back success")
+                    callback(true,"Deu certo")
+                }
+
+            }, withCancel: { (error: Error) in
+                print(error.localizedDescription)
+                callback(false, error.localizedDescription)
+            })
         }
     }
     

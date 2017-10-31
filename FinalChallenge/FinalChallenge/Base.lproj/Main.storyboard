@@ -156,7 +156,7 @@
         <!--Data Source-->
         <scene sceneID="ign-d5-VUK">
             <objects>
-                <viewController id="71P-7i-IVr" customClass="ArtistProfileViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArtistTVC" title="ArtistTVC" id="71P-7i-IVr" customClass="ArtistProfileViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OoP-tg-Pvv"/>
                         <viewControllerLayoutGuide type="bottom" id="ZMK-L5-c0r"/>
@@ -234,6 +234,7 @@
                         <outlet property="artWorkCarousel" destination="j5B-3N-g1p" id="hTe-uZ-nJV"/>
                         <outlet property="emailButton" destination="EMe-jt-5KQ" id="AeU-wq-EnW"/>
                         <outlet property="followButton" destination="0pl-Za-pVD" id="tyL-gj-rwh"/>
+                        <outlet property="headerView" destination="Kbp-WX-hX4" id="smp-X1-jXg"/>
                         <outlet property="nameLbl" destination="v10-TR-t5N" id="eJj-0Z-LyY"/>
                     </connections>
                 </viewController>
