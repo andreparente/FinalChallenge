@@ -258,6 +258,57 @@ class DatabaseAccess {
         return
     }
     
+    func fetchFollowedArtistsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
+        usersRef?.child(user.id!).child("favoriteArtists").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            
+            let artistDict = snapshot.value as! [String: String]
+            let artistsArray = Array(artistDict.keys)
+            print(artistsArray)
+            user.favoriteArtists = artistsArray
+            
+            //todo fetch the artistsArray keys igual a funcao fetchartworksforartis            //            for artistId in artistsArray {
+            //                self.userRef?.child(artistId).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            //
+            //
+            //
+            //
+            //                }, withCancel: { (error: Error) in
+            //                    print(error.localizedDescription)
+            //                    callback(false, error.localizedDescription)
+            //                })
+            //            }
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            callback(false, error.localizedDescription)
+        })
+    }
+    
+    func fetchLikedArtWorksFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
+        usersRef?.child(user.id!).child("favoriteArts").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+
+            let artDict = snapshot.value as! [String: String]
+            let artArray = Array(artDict.keys)
+            print(artArray)
+            user.favoriteArts = artArray
+            
+            //todo fetch the artArray keys
+//            for artId in artArray {
+//                self.artWorksRef?.child(artId).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+//
+//
+//
+//
+//                }, withCancel: { (error: Error) in
+//                    print(error.localizedDescription)
+//                    callback(false, error.localizedDescription)
+//                })
+//            }
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            callback(false, error.localizedDescription)
+        })
+    }
+    
     //olenka
     func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {
         var count = 0
@@ -266,7 +317,8 @@ class DatabaseAccess {
             artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                 print(snapshot.description)
                 let artDict = snapshot.value as! [String: Any]
-
+                
+                //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
                 artist.findArtWorkById(id: art.id!)?.category = artDict["category"] as? String
                 artist.findArtWorkById(id: art.id!)?.descricao = artDict["description"] as? String
                 artist.findArtWorkById(id: art.id!)?.title = artDict["title"] as? String

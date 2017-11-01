@@ -36,8 +36,27 @@ class HomeTVC: UITableViewController {
                 
             }
         }
+        
+        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance){ (success: Bool, response: String) in
+            if success {
+            
+            //    print(DatabaseAccess.sharedInstance.artists)
+            } else {
+            print("deu erro")
+            }
+        }
+    
+        DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance) { (success: Bool, response: String) in
+            if success {
+                
+                //    print(DatabaseAccess.sharedInstance.artists)
+            } else {
+                print("deu erro")
+            }
+        }
         // Do any additional setup after loading the view.
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
