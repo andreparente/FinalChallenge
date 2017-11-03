@@ -37,16 +37,15 @@ class HomeTVC: UITableViewController {
             }
         }
         
-        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance){ (success: Bool, response: String) in
+        DatabaseAccess.sharedInstance.fetchFollowedArtistsIdsFor(user: User.sharedInstance){ (success: Bool, response: String) in
             if success {
-            
-            //    print(DatabaseAccess.sharedInstance.artists)
+                print(User.sharedInstance.favoriteArtistsIds)
             } else {
             print("deu erro")
             }
         }
     
-        DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance) { (success: Bool, response: String) in
+        DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
             if success {
                 
                 //    print(DatabaseAccess.sharedInstance.artists)

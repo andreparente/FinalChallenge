@@ -15,6 +15,29 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         print("----------- ENTROU AQUI -----------")
+        
+        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+            if success{
+                for artist in User.sharedInstance.favoriteArtists{
+                    print(artist.name)
+                }
+            }
+            else{
+                print("deu erro")
+            }
+        })
+        
+        DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback:   { ( success: Bool, response: String) in
+            if success{
+                for arts in User.sharedInstance.favoriteArts{
+                    print(arts.title)
+                }
+            }
+            else{
+                print("deu erro")
+            }
+        })
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

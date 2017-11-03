@@ -258,56 +258,99 @@ class DatabaseAccess {
         return
     }
     
-    func fetchFollowedArtistsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
+    func fetchFollowedArtistsIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
         usersRef?.child(user.id!).child("favoriteArtists").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             
             let artistDict = snapshot.value as! [String: String]
             let artistsArray = Array(artistDict.keys)
             print(artistsArray)
-            user.favoriteArtists = artistsArray
+            user.favoriteArtistsIds = artistsArray
+            callback(true, "funcionou")
             
-            //todo fetch the artistsArray keys igual a funcao fetchartworksforartis            //            for artistId in artistsArray {
-            //                self.userRef?.child(artistId).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-            //
-            //
-            //
-            //
-            //                }, withCancel: { (error: Error) in
-            //                    print(error.localizedDescription)
-            //                    callback(false, error.localizedDescription)
-            //                })
-            //            }
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
             callback(false, error.localizedDescription)
         })
     }
     
-    func fetchLikedArtWorksFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
+    func fetchFollowedArtistsFor(user:User, callback: @escaping((_ success: Bool, _ response: String)->())){
+        
+        for artistId in user.favoriteArtistsIds{  
+            self.usersRef?.child(artistId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
+                
+                let artistDict = snapshot.value as! [String:Any]
+                
+                // possible to add other attributes from dictionary
+                let artist = Artist()
+                artist.name = artistDict["name"] as! String
+                artist.profilePictureURL = artistDict["email"] as! String
+                artist.id = artistId
+                
+                user.favoriteArtists.append(artist)
+                
+                if(artistId == user.favoriteArtistsIds.last){
+                    callback(true, "funcionou")
+                }
+                
+            }, withCancel: { (error:Error) in
+                print(error.localizedDescription)
+                callback(false, error.localizedDescription)
+            })
+        }
+    }
+    
+    func fetchLikedArtWorksIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
         usersRef?.child(user.id!).child("favoriteArts").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
 
             let artDict = snapshot.value as! [String: String]
             let artArray = Array(artDict.keys)
             print(artArray)
-            user.favoriteArts = artArray
-            
-            //todo fetch the artArray keys
-//            for artId in artArray {
-//                self.artWorksRef?.child(artId).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-//
-//
-//
-//
-//                }, withCancel: { (error: Error) in
-//                    print(error.localizedDescription)
-//                    callback(false, error.localizedDescription)
-//                })
-//            }
+            user.favoriteArtsIds = artArray
+            callback(true, "funcionou")
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
             callback(false, error.localizedDescription)
         })
     }
+    
+    func fetchLikedArtWorksFor(user:User, callback: @escaping((_ success: Bool, _ response: String)->())){
+        
+        for artId in user.favoriteArtsIds{
+            self.artWorksRef?.child(artId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
+              
+                let artDict = snapshot.value as! [String:Any]
+                
+                // possible to add other attributes from dictionary
+                let artWork = ArtWork()
+                artWork.title = artDict["title"] as! String
+                artWork.id = artId
+                
+                let pictDict = artDict["pictures"] as! [String:String]
+                print(pictDict)
+                
+                var picNum = 1
+                for _ in pictDict{
+                    let picURL = pictDict["pic" + String(picNum)] as! String
+                    artWork.urlPhotos.append(picURL)
+                }
+                
+                user.favoriteArts.append(artWork)
+                print(artWork)
+                
+                if(artId == user.favoriteArtsIds.last){
+                    callback(true, "funcionou")
+                }
+            }, withCancel: { (error:Error) in
+                print(error.localizedDescription)
+                callback(false, error.localizedDescription)
+            })
+        }
+    
+    }
+    
+
+    
+    
     
     //olenka
     func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {

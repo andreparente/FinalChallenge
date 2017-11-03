@@ -9,7 +9,7 @@
 import Foundation
 import iCarousel
 
-class User {
+class Artist {
     
     var name: String!
     var email: String!
@@ -18,17 +18,15 @@ class User {
     var favoriteArtsIds: [String] = []
     var favoriteArtistsIds: [String] = []
     var favoriteArts: [ArtWork] = []
-    var favoriteArtists: [Artist] = []
+    var favoriteArtists: [User] = []
     var id: String!
     var profilePictureURL: String!
     //Singleton!
-    static let sharedInstance = User()
     var artWorks: [ArtWork] = []
     var typeOfGallery: String!
     
-    private init() {
-        self.name = ""
-        self.email = ""
+    init() {
+        
     }
     
     init (name:String, email: String){
@@ -84,3 +82,4 @@ class User {
         return nil
     }
 }
+

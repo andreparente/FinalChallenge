@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0957F9E0242A2DB53493AB05 /* Pods_FinalChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD4258FC2A67A37B02384E6 /* Pods_FinalChallenge.framework */; };
 		0B227DA9B7468AEB3F7ADD9E /* Pods_FinalChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8800A8A3FAAB580FC797E426 /* Pods_FinalChallengeUITests.framework */; };
+		267FF3D21FABD4A800C625CC /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267FF3D11FABD4A800C625CC /* Artist.swift */; };
 		26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */; };
 		44D9554716FE6DDBAB41328E /* Pods_FinalChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1E00F2C5A0FB1B01A3A7DC /* Pods_FinalChallengeTests.framework */; };
 		8A0465961FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0465941FA10CED00516AD8 /* AddArtWorkCategoriesCVC.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		267FF3D11FABD4A800C625CC /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		26C2B9691F5CD1AB00666E8D /* DatabaseAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
 		2FDDDB4C3A8ECC249F9178A1 /* Pods-FinalChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		3C5BE2810165BEA7BFFBF385 /* Pods-FinalChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalChallengeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FinalChallengeUITests/Pods-FinalChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				8A40BC711F55A26100A12EBA /* User.swift */,
 				8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */,
+				267FF3D11FABD4A800C625CC /* Artist.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -574,7 +577,7 @@
 				TargetAttributes = {
 					8ACFD66A1F44B72E008DF502 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = C5676RKFWG;
+						DevelopmentTeam = A2ZTH56XFL;
 						ProvisioningStyle = Automatic;
 					};
 					8ACFD67E1F44B72E008DF502 = {
@@ -824,6 +827,7 @@
 				8A40BC761F55B98A00A12EBA /* ProfileViewController.swift in Sources */,
 				8A40BC7F1F55BD3400A12EBA /* HeaderProfile.swift in Sources */,
 				8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */,
+				267FF3D21FABD4A800C625CC /* Artist.swift in Sources */,
 				8AD744F21F682F8B00DC0F75 /* IsaoTextField.swift in Sources */,
 				8A3DF3911F87C77C00A59A05 /* AddArtWorkTVC.swift in Sources */,
 				8A40BC781F55B9C700A12EBA /* SearchViewController.swift in Sources */,
@@ -1017,7 +1021,7 @@
 			baseConfigurationReference = 2FDDDB4C3A8ECC249F9178A1 /* Pods-FinalChallenge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5676RKFWG;
+				DEVELOPMENT_TEAM = A2ZTH56XFL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",
@@ -1036,7 +1040,7 @@
 			baseConfigurationReference = FCD705B0A55EB2839B95FFF5 /* Pods-FinalChallenge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C5676RKFWG;
+				DEVELOPMENT_TEAM = A2ZTH56XFL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FinalChallenge",
