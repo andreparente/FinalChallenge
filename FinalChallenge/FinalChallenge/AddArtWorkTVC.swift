@@ -46,8 +46,8 @@ class AddArtWorkTVC: UITableViewController {
         tableHeader = AddArtWorkHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 260))
         self.tableView.tableHeaderView = tableHeader
         self.tableHeader.delegate = self
+        self.tableHeader.parent = self
 
-//        self.tableHeader.addPictureButton.addTarget(self, action: #selector(AddArtWorkTVC.pickImg), for: .touchUpInside)
     }
 
     @objc private func saveArtWork() {
@@ -236,5 +236,9 @@ extension AddArtWorkTVC: UIImagePickerControllerDelegate, UINavigationController
 extension AddArtWorkTVC: AddArtWorkHeaderDelegate {
     func didSelectCategory(category: String) {
         artWork.category = category
+    }
+    
+    func didSelectAddPicture(vc: UIAlertController, index: Int) {
+        self.present(vc, animated: true, completion: nil)
     }
 }

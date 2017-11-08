@@ -14,7 +14,7 @@ class ArtWork: NSObject {
     var title: String!
     var descricao: String!
     var urlPhotos: [String] = []
-    var images: [UIImage] = []
+    var images: [UIImage?] = [nil,nil,nil]
     var value: Double!
     var height: Double!
     var width: Double!

@@ -52,7 +52,6 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! ArtistCollectionViewCell
-        // cell.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "backgroundArtistCell"))
         cell.backgroundColor = .white
         
         cell.profileImage.layer.cornerRadius = 70
@@ -81,7 +80,16 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x
-        self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
+        modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: DatabaseAccess.sharedInstance.artists[indexPath.row]) { (success: Bool, response: String) in
+            if success {
+                self.fatherController.present(modalVC, animated: true, completion: nil)
+            } else {
+                print("erro no fetchArtworks for artist")
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -9,6 +9,8 @@
 import UIKit
 
 class PictureCVC: UICollectionViewCell {
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var artWorkImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

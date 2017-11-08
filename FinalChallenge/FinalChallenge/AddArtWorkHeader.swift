@@ -16,6 +16,10 @@ class AddArtWorkHeader: UIView {
     @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: AddArtWorkHeaderDelegate?
+    var imagePicker: UIImagePickerController!
+    var parent: AddArtWorkTVC!
+    var pictureIndexSelected: Int!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +51,43 @@ class AddArtWorkHeader: UIView {
     @IBAction func cancelAction(_ sender: Any) {
         
     }
+    
+    func buttonClicked(sender:UIButton)
+    {
+        //chamar funcão para carregar imagem
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: "Choose an option", preferredStyle: .actionSheet)
+        
+        // 2
+        let newPictureAction = UIAlertAction(title: "Take new Picture", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.allowsEditing = true
+            self.parent.present(self.imagePicker, animated: true, completion: nil)
+            
+        })
+        
+        let choosePictureAction = UIAlertAction(title: "Choose image from album", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.allowsEditing = true
+            self.parent.present(self.imagePicker, animated: true, completion: nil)
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+        })
+        
+        
+        // 4
+        optionMenu.addAction(newPictureAction)
+        optionMenu.addAction(choosePictureAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.delegate?.didSelectAddPicture(vc: optionMenu, index: sender.tag)
+    }
 }
 
 
@@ -73,6 +114,20 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
         
         if collectionView.isEqual(picturesCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PictureCell", for: indexPath) as! PictureCVC
+            if self.parent.artWork.images[indexPath.item] == nil {
+                cell.artWorkImage.isHidden = true
+                cell.addButton.isHidden = false
+                cell.addButton.tag = indexPath.item
+                cell.addButton.addTarget(self, action: Selector(("buttonClicked:")),
+                                         for: UIControlEvents.touchUpInside)
+            } else {
+                cell.addButton.isHidden = true
+                cell.artWorkImage.isHidden = false
+                cell.artWorkImage.layer.masksToBounds = true
+                cell.artWorkImage.contentMode = .scaleAspectFill
+                cell.artWorkImage.image = self.parent.artWork.images[indexPath.row]
+            }
+            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
@@ -126,7 +181,53 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(picturesCollectionView) {
+            self.pictureIndexSelected = indexPath.row
             //fetch pictures
+            let cell = collectionView.cellForItem(at: indexPath) as! PictureCVC
+            if (imagePicker) != nil {
+                
+            } else {
+                imagePicker =  UIImagePickerController()
+                imagePicker.delegate = self
+            }
+
+            if cell.artWorkImage.isHidden {
+                //chamar funcão para carregar imagem
+                // 1
+                let optionMenu = UIAlertController(title: nil, message: "Choose an option", preferredStyle: .actionSheet)
+                
+                // 2
+                let newPictureAction = UIAlertAction(title: "Take new Picture", style: .default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    self.imagePicker.sourceType = .camera
+                    self.imagePicker.allowsEditing = true
+                    self.parent.present(self.imagePicker, animated: true, completion: nil)
+                    
+                })
+                
+                let choosePictureAction = UIAlertAction(title: "Choose image from album", style: .default, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.imagePicker.allowsEditing = true
+                    self.parent.present(self.imagePicker, animated: true, completion: nil)
+                })
+                
+                //
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+                    (alert: UIAlertAction!) -> Void in
+                })
+                
+                
+                // 4
+                optionMenu.addAction(newPictureAction)
+                optionMenu.addAction(choosePictureAction)
+                optionMenu.addAction(cancelAction)
+                
+                // 5
+                self.delegate?.didSelectAddPicture(vc: optionMenu, index: indexPath.item)
+            } else {
+                //chamar alert para perguntar se quer alterar a foto
+            }
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! AddArtWorkCategoriesCVC
             cell.backgroundColor = UIColor.customLightBlue
@@ -137,7 +238,6 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(picturesCollectionView) {
-            //fetch pictures
         } else {
             if let cell = collectionView.cellForItem(at: indexPath) as? AddArtWorkCategoriesCVC {
                 cell.backgroundColor = .white
@@ -151,4 +251,24 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
 
 protocol AddArtWorkHeaderDelegate: class {
     func didSelectCategory(category: String)
+    func didSelectAddPicture(vc: UIAlertController, index: Int)
+}
+
+extension AddArtWorkHeader: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    //MARK: - Done image capture here
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+        if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            for i in 0 ..< self.parent.artWork.images.count {
+                if self.parent.artWork.images[i] == nil {
+                    if i == self.pictureIndexSelected {
+                        self.parent.artWork.images[i] = picture
+                        self.picturesCollectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 }

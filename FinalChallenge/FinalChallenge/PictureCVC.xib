@@ -24,13 +24,24 @@
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" title="+"/>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cyo-Cg-tpa">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="110"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="bih-2s-PL8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="BN2-Eo-7lu"/>
+                <constraint firstAttribute="bottom" secondItem="cyo-Cg-tpa" secondAttribute="bottom" id="XZ8-pQ-H57"/>
+                <constraint firstItem="cyo-Cg-tpa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="b75-fg-F0P"/>
                 <constraint firstItem="bih-2s-PL8" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dU4-mP-NRd"/>
+                <constraint firstAttribute="trailing" secondItem="cyo-Cg-tpa" secondAttribute="trailing" id="hBb-rC-67b"/>
+                <constraint firstItem="cyo-Cg-tpa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vhR-f1-PCk"/>
             </constraints>
             <size key="customSize" width="132" height="84"/>
+            <connections>
+                <outlet property="addButton" destination="bih-2s-PL8" id="dVU-hu-T06"/>
+                <outlet property="artWorkImage" destination="cyo-Cg-tpa" id="lNd-DD-Dtx"/>
+            </connections>
             <point key="canvasLocation" x="-333" y="-138"/>
         </collectionViewCell>
     </objects>
