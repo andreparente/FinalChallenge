@@ -177,7 +177,7 @@ class DatabaseAccess {
 
         var i = 1
         for img in artwork.images{
-            uploadArtworkImage(image: img, artwork: artwork, pictureNumber: i, callback: {(success: Bool, response: String) in
+            uploadArtworkImage(image: img!, artwork: artwork, pictureNumber: i, callback: {(success: Bool, response: String) in
                 if success{
 
                 }
