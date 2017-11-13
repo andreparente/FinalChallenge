@@ -51,12 +51,25 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
         
-        cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
-        cell.categorieLbl.text = DatabaseAccess.sharedInstance.categories[indexPath.item]
-        cell.categorieLbl.makeHorizontal()
-        cell.categorieLbl.textColor = .white
-        cell.categorieLbl.center = cell.center
-        cell.categorieLbl.textColor = .white
+        
+        if cell.categorieLbl.text == nil || cell.categorieLbl.text == "" {
+            cell.categorieLbl.text = DatabaseAccess.sharedInstance.categories[indexPath.item]
+            cell.categorieLbl.makeHorizontal()
+            cell.categorieLbl.textColor = .white
+            cell.categorieLbl.center = cell.center
+            cell.categorieLbl.textColor = .white
+        }
+        
+        if let layers = cell.layer.sublayers {
+            if layers.count > 1 {
+                
+            } else {
+                cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
+            }
+        } else {
+            cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
+        }
+        
         return cell
     }
 
@@ -79,6 +92,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x
+        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
         self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
     }
 }

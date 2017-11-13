@@ -14,29 +14,34 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("----------- ENTROU AQUI -----------")
         
-        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
-            if success{
-                for artist in User.sharedInstance.favoriteArtists{
-                    print(artist.name)
+        if User.sharedInstance.favoriteArtists.isEmpty ||  User.sharedInstance.favoriteArtists.count == 0 {
+            DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                if success{
+                    for artist in User.sharedInstance.favoriteArtists{
+                        print(artist.name)
+                    }
                 }
-            }
-            else{
-                print("deu erro")
-            }
-        })
+                else{
+                    print("deu erro")
+                }
+            })
+        }
+
         
-        DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback:   { ( success: Bool, response: String) in
-            if success{
-                for arts in User.sharedInstance.favoriteArts{
-                    print(arts.title)
+        if User.sharedInstance.favoriteArts.isEmpty ||  User.sharedInstance.favoriteArts.count == 0 {
+            DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback:   { ( success: Bool, response: String) in
+                if success{
+                    for arts in User.sharedInstance.favoriteArts{
+                        print(arts.title)
+                    }
                 }
-            }
-            else{
-                print("deu erro")
-            }
-        })
+                else{
+                    print("deu erro")
+                }
+            })
+        }
+       
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -78,9 +83,9 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         case 0:
             return 3
         case 1:
-            return 4
+            return User.sharedInstance.favoriteArts.count
         default:
-            return 5
+            return User.sharedInstance.favoriteArtists.count
         }
     }
     
@@ -98,15 +103,15 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
-            cell.backgroundColor = .blue
+            cell.backgroundColor = .red
             cell.artWorkImage.layer.masksToBounds = true
+            cell.artWorkImage.downloadedFrom(link: User.sharedInstance.favoriteArts[indexPath.item].urlPhotos.first!, contentMode: .scaleAspectFill)
         default:
             cell.artWorkImage.isHidden = true
             cell.artistImage.isHidden = false
             cell.artistNameLbl.isHidden = false
-            cell.artistNameLbl.text = "André Parente"
-            cell.artistImage.image = UIImage(named: "profileImage1")
-            cell.artistImage.contentMode = .scaleAspectFit
+            cell.artistNameLbl.text = User.sharedInstance.favoriteArtists[indexPath.item].name
+            cell.artistImage.downloadedFrom(link: User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL, contentMode: .scaleAspectFill)
             cell.artistImage.layer.masksToBounds = true
             cell.backgroundColor = .green
         }

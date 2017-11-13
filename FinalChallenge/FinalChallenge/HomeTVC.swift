@@ -12,17 +12,22 @@ class HomeTVC: UITableViewController {
 
     var reuseIdentifier = "CategoriesTableViewCell"
     var artistsReuseIdentifier = "ArtistsTableViewCell"
+    var favoriteArtsReuseIdentifier = "FavoriteArtsTableViewCell"
+    var categorySelected = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.backgroundColor = .white
+        self.view.backgroundColor = .white
+        
         self.tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         self.tableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
-        
+        self.tableView.register(FavoriteArtsTableViewCell.self, forCellReuseIdentifier: favoriteArtsReuseIdentifier)
+
         DatabaseAccess.sharedInstance.fetchCategories { (success: Bool, response: String) in
             if success {
-                self.tableView.reloadSections([0], with: .none)
-                print(DatabaseAccess.sharedInstance.categories)
+                self.tableView.reloadSections([0], with: .fade)
             } else {
                 
             }
@@ -30,8 +35,7 @@ class HomeTVC: UITableViewController {
         
         DatabaseAccess.sharedInstance.fetchArtists { (success: Bool, response: String) in
             if success {
-                self.tableView.reloadSections([1], with: .none)
-                //    print(DatabaseAccess.sharedInstance.artists)
+                self.tableView.reloadSections([1], with: .fade)
             } else {
                 
             }
@@ -47,8 +51,13 @@ class HomeTVC: UITableViewController {
     
         DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
             if success {
-                
-                //    print(DatabaseAccess.sharedInstance.artists)
+                DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                    if success {
+                        self.tableView.reloadSections([2], with: .fade)
+                    } else {
+                        print("error:   ", response)
+                    }
+                })
             } else {
                 print("deu erro")
             }
@@ -87,36 +96,36 @@ extension HomeTVC {
             cell.fatherController = self
             return cell
         default:
-            print("eventos")
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CategoriesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: favoriteArtsReuseIdentifier, for: indexPath) as! FavoriteArtsTableViewCell
             cell.fatherController = self
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: 2*view.frame.width/3, height: 35))
         label.textColor = .black
-        let button = UIButton(frame: CGRect(x: label.frame.maxX, y: 0, width: view.frame.width/3, height: 35))
-        button.setTitle("See All", for: .normal)
-        button.titleLabel?.textAlignment = .right
-        button.addTarget(self, action: #selector(HomeTVC.goToArtists), for: .touchUpInside)
-        view.addSubview(label)
-        view.addSubview(button)
+        label.font = UIFont(name: "Lato-Semibold", size: 12)
         switch section {
         case 0:
             print("categorias")
             label.text = "Categorias"
             return label
         case 1:
+            let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
+            let button = UIButton(frame: CGRect(x: label.frame.maxX, y: 0, width: view.frame.width/3, height: 35))
+            button.setTitle("See All", for: .normal)
+            button.titleLabel?.textAlignment = .right
+            button.setTitleColor(.black, for: .normal)
+            button.addTarget(self, action: #selector(HomeTVC.goToArtists), for: .touchUpInside)
+            view.addSubview(label)
+            view.addSubview(button)
             print("artistas")
             label.text = "Artistas"
             return view
-
         default:
-            print("populares")
-            label.text = "Populares"
+            print("favoritos")
+            label.text = "Obras curtidas"
             return label
         }
     }
@@ -134,13 +143,20 @@ extension HomeTVC {
             print("artistas")
             return 207 //altura
         default:
-            print("eventos")
-            return 150
+            print("favoritos")
+            return 180
         }
     }
     
     func goToArtists() {
         print("goToArtists")
         self.performSegue(withIdentifier: "HomeToArtists", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "HomeToCategory" {
+            let vc = segue.destination as! CategoryCollectionViewController
+            vc.categoryName = self.categorySelected
+        }
     }
 }

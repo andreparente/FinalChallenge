@@ -260,12 +260,16 @@ class DatabaseAccess {
     
     func fetchFollowedArtistsIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
         usersRef?.child(user.id!).child("favoriteArtists").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            if let artistDict = snapshot.value as? [String: String] {
+                let artistsArray = Array(artistDict.keys)
+                print(artistsArray)
+                user.favoriteArtistsIds = artistsArray
+                callback(true, "funcionou")
+            } else {
+                user.favoriteArtistsIds = []
+                callback(true,"")
+            }
             
-            let artistDict = snapshot.value as! [String: String]
-            let artistsArray = Array(artistDict.keys)
-            print(artistsArray)
-            user.favoriteArtistsIds = artistsArray
-            callback(true, "funcionou")
             
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
@@ -302,11 +306,16 @@ class DatabaseAccess {
     func fetchLikedArtWorksIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
         usersRef?.child(user.id!).child("favoriteArts").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
 
-            let artDict = snapshot.value as! [String: String]
-            let artArray = Array(artDict.keys)
-            print(artArray)
-            user.favoriteArtsIds = artArray
-            callback(true, "funcionou")
+            if let artDict = snapshot.value as? [String: String] {
+                let artArray = Array(artDict.keys)
+                print(artArray)
+                user.favoriteArtsIds = artArray
+                callback(true, "funcionou")
+            } else {
+                user.favoriteArtsIds = []
+                callback(true,"")
+            }
+            
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
             callback(false, error.localizedDescription)
@@ -328,9 +337,9 @@ class DatabaseAccess {
                 let pictDict = artDict["pictures"] as! [String:String]
                 print(pictDict)
                 
-                var picNum = 1
+                let picNum = 1
                 for _ in pictDict{
-                    let picURL = pictDict["pic" + String(picNum)] as! String
+                    let picURL = pictDict["pic" + String(picNum)]!
                     artWork.urlPhotos.append(picURL)
                 }
                 
@@ -354,7 +363,6 @@ class DatabaseAccess {
     
     //olenka
     func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {
-        var count = 0
         
         for art in artist.artWorks {
             artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
@@ -381,6 +389,58 @@ class DatabaseAccess {
                 callback(false, error.localizedDescription)
             })
         }
+    }
+    
+    
+    func fetchArtWorksFor(category: String, callback: @escaping((_ success: Bool, _ response: String, _ artWorks: [ArtWork])->())) {
+        var returnedArtWorks: [ArtWork] = []
+        var ids: [String] = []
+        //fetch nos IDS
+        artsRef?.child(category).queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
+            
+            if snapshot != nil {
+                let dict = snapshot.value as! [String: String]
+                for each in dict {
+                    ids.append(each.key)
+                }
+                
+                let totalArts = ids.count
+                var count = 0
+                for id in ids {
+                    let artAux = ArtWork()
+                    self.artWorksRef?.child(id).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+                        print(snapshot.description)
+                        let artDict = snapshot.value as! [String: Any]
+                        
+                        //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
+                        artAux.category = artDict["category"] as? String
+                        artAux.descricao = artDict["description"] as? String
+                        artAux.title = artDict["title"] as? String
+                        
+                        //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
+                        let pictDict = artDict["pictures"] as! [String:String]
+                        print(pictDict)
+                        artAux.urlPhotos.append(pictDict.values.first!)
+                        artAux.id = id
+                        returnedArtWorks.append(artAux)
+                        count += 1
+
+                        if count == totalArts {
+                            callback(true, "", returnedArtWorks)
+                        } else {
+                        }
+                        
+                    }, withCancel: { (error: Error) in
+                        print(error.localizedDescription)
+                        callback(false, error.localizedDescription, returnedArtWorks)
+                    })
+
+                }
+            }
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            callback(false, error.localizedDescription, returnedArtWorks)
+        })
     }
     
 

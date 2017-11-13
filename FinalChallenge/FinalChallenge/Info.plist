@@ -2,26 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb1967981800104677</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>1967981800104677</string>
-    <key>FacebookDisplayName</key>
-    <string>FinalChallenge</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1967981800104677</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1967981800104677</string>
+	<key>FacebookDisplayName</key>
+	<string>FinalChallenge</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -54,9 +54,30 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSPhotoLibraryUsageDescription</key>
-        <string>$(PRODUCT_NAME) uses photos</string>
-    <key>NSCameraUsageDescription</key>
-        <string>$(PRODUCT_NAME) camera use</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses photos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) camera use</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-Black</string>
+		<string>Lato-BlackItalic</string>
+		<string>Lato-Bold</string>
+		<string>Lato-BoldItalic</string>
+		<string>Lato-Hairline</string>
+		<string>Lato-HairlineItalic</string>
+		<string>Lato-Heavy</string>
+		<string>Lato-HeavyItalic</string>
+		<string>Lato-Italic</string>
+		<string>Lato-Light</string>
+		<string>Lato-LightItalic</string>
+		<string>Lato-Medium</string>
+		<string>Lato-MediumItalic</string>
+		<string>Lato-Regular</string>
+		<string>Lato-Semibold</string>
+		<string>Lato-SemiboldItalic</string>
+		<string>Lato-Thin</string>
+		<string>Lato-ThinItalic</string>
+	</array>
 </dict>
 </plist>

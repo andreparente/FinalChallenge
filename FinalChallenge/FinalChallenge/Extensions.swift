@@ -38,6 +38,15 @@ extension UIColor {
     class var customLightPink: UIColor {
         return UIColor(red: 246.0 / 255.0, green: 164.0 / 255.0, blue: 193.0 / 255, alpha: 1.0)
     }
+    
+    class var vitrineDarkBlue: UIColor {
+        return UIColor(red:0.00, green:0.26, blue:0.96, alpha:1.0)
+    }
+    
+    class var vitrineLightBlue: UIColor {
+        return UIColor(red:0.47, green:0.58, blue:0.94, alpha:1.0)
+    }
+    
 }
 
 
