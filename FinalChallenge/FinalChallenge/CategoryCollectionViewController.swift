@@ -26,13 +26,18 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
         self.collectionView!.register(UINib(nibName: "ArtWorkCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ArtWorkCollectionViewCell")
         self.collectionView!.register(UINib(nibName: "CategoryHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: "CategoryHeader")
         
+        self.collectionView!.register(UINib(nibName: "FooterCategoryCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionFooter", withReuseIdentifier: "FooterCategory")
 
         self.navigationController?.navigationBar.isHidden = true
         
         DatabaseAccess.sharedInstance.fetchArtWorksFor(category: categoryName) { (success: Bool, response: String, auxArtWorks: [ArtWork]) in
             if success {
                 self.categoryArtWorks = auxArtWorks
-                self.collectionView?.reloadSections([0])
+                if self.collectionView?.numberOfSections == 0 {
+                    self.collectionView?.reloadData()
+                } else {
+                    self.collectionView?.reloadSections([0,auxArtWorks.count])
+                }
             } else {
                 print(response)
             }
@@ -59,20 +64,20 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return categoryArtWorks.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return categoryArtWorks.count
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtWorkCollectionViewCell", for: indexPath) as! ArtWorkCollectionViewCell
     
         // Configure the cell
-        if let picture = categoryArtWorks[indexPath.item].urlPhotos.first {
+        if let picture = categoryArtWorks[indexPath.section].urlPhotos.first {
             cell.artWorkImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
             cell.artWorkImage.layer.masksToBounds = true
 
@@ -80,24 +85,43 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
         
         return cell
     }
-
+    
+    
+    //footer with title and artist name
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
             
         case UICollectionElementKindSectionHeader:
-            
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CategoryHeader", for: indexPath as IndexPath) as! CategoryHeaderCollectionReusableView
-            headerView.categoryLbl.text = self.categoryName
-            headerView.delegate = self
-            headerView.backgroundColor = .white
-            return headerView
-            
+            if indexPath.section == 0 {
+                
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CategoryHeader", for: indexPath as IndexPath) as! CategoryHeaderCollectionReusableView
+                headerView.categoryLbl.text = self.categoryName
+                headerView.delegate = self
+                headerView.backgroundColor = .white
+                if isList {
+                    headerView.listButton.isSelected = true
+                    headerView.squareButton.isSelected = false
+                } else {
+                    headerView.listButton.isSelected = false
+                    headerView.squareButton.isSelected = true
+                }
+                return headerView
+            } else {
+                return UIView() as! UICollectionReusableView
+            }
         case UICollectionElementKindSectionFooter:
-            return UIView() as! UICollectionReusableView
+            if isList {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterCategory", for: indexPath as IndexPath) as! FooterCategoryCollectionReusableView
+                footerView.artistName.text = "Ian Raposo"
+                footerView.artWorkTitle.text = categoryArtWorks[indexPath.section].title
+                return footerView
+            } else {
+                return UIView() as! UICollectionReusableView
+            }
             
         default:
-            
+            return UIView() as! UICollectionReusableView
             assert(false, "Unexpected element kind")
         }
     }
@@ -117,6 +141,14 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
         return  CGSize(width: self.view.frame.width, height: 180)
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if isList {
+            return CGSize(width: self.view.frame.width, height: 65)
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
+    }
+    
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
@@ -157,12 +189,12 @@ extension CategoryCollectionViewController: CategoryHeaderDelegate {
     func didTapListVisualization() {
         //setar para visualização do tipo lista (aumentar o tamanho da celula praticamente)
         self.isList = true
-        self.collectionView?.reloadSections([0])
+        self.collectionView?.reloadData()
     }
     
     func didTapSquareVisualization() {
         //setar para 3 quadrados por linha, diminuir tamanho da celula
         self.isList = false
-        self.collectionView?.reloadSections([0])
+        self.collectionView?.reloadData()
     }
 }

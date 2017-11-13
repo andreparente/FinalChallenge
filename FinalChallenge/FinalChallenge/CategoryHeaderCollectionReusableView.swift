@@ -25,11 +25,17 @@ class CategoryHeaderCollectionReusableView: UICollectionReusableView {
     @IBAction func didTapSquare(_ sender: UIButton) {
         //fazer as mudanças dos botoes aqui dentro
         self.delegate?.didTapSquareVisualization()
+        self.listButton.isSelected = false
+        self.squareButton.isSelected = true
+
     }
     
     @IBAction func didTapList(_ sender: UIButton) {
         //fazer as mudancas dos botoes aqui dentro
         self.delegate?.didTapListVisualization()
+        self.squareButton.isSelected = false
+        self.listButton.isSelected = true
+
     }
     
     func didTapReturnView() {

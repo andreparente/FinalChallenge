@@ -35,7 +35,7 @@
             </objects>
             <point key="canvasLocation" x="-23.199999999999999" y="138.98050974512745"/>
         </scene>
-        <!--Explore-->
+        <!--Search View Controller-->
         <scene sceneID="5fO-zJ-PmP">
             <objects>
                 <viewController id="hNd-dR-rPB" customClass="SearchViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,7 +48,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Explore" id="vTr-fK-Qx4"/>
+                    <tabBarItem key="tabBarItem" title="" image="UnselectedSearchIcon" selectedImage="SelectedSearchIcon" id="vTr-fK-Qx4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdG-np-9My" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,7 +77,7 @@
         <scene sceneID="nt0-P0-Le8">
             <objects>
                 <collectionViewController id="HMZ-JP-TMt" customClass="ProfileCollectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qZL-Fl-FHy">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="qZL-Fl-FHy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -143,7 +143,7 @@
         <scene sceneID="cgE-dt-xkC">
             <objects>
                 <collectionViewController id="gcO-GA-WeC" customClass="CategoryCollectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DIt-AW-xcd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="DIt-AW-xcd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,13 +315,15 @@
             </objects>
             <point key="canvasLocation" x="3903" y="597"/>
         </scene>
-        <!--Collection-->
+        <!--Navigation Controller-->
         <scene sceneID="4md-Pa-NFo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="obe-me-Yck" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="aYu-LU-NU1"/>
+                    <tabBarItem key="tabBarItem" title="" image="UnselectedProfileIcon" selectedImage="SelectedProfileIcon" id="aYu-LU-NU1">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sww-xp-0Be">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Sww-xp-0Be">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -334,13 +336,15 @@
             </objects>
             <point key="canvasLocation" x="2752.8000000000002" y="-1074.5127436281859"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="CyO-JY-Z8X">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="67C-7Q-pyO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="NSd-Dk-utI"/>
+                    <tabBarItem key="tabBarItem" title="" image="UnselectedHomeIcon" selectedImage="SelectedHomeIcon" id="NSd-Dk-utI">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MbD-39-Ud0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MbD-39-Ud0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -354,4 +358,12 @@
             <point key="canvasLocation" x="2760.8000000000002" y="-285.60719640179911"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SelectedHomeIcon" width="23" height="23"/>
+        <image name="SelectedProfileIcon" width="23" height="28"/>
+        <image name="SelectedSearchIcon" width="26" height="27"/>
+        <image name="UnselectedHomeIcon" width="30" height="24"/>
+        <image name="UnselectedProfileIcon" width="23" height="28"/>
+        <image name="UnselectedSearchIcon" width="26" height="27"/>
+    </resources>
 </document>

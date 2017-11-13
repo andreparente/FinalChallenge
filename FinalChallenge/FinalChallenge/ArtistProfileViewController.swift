@@ -18,6 +18,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var nameLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,11 +48,15 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func didTapFollowArtist(_ sender: UIButton) {
+        
     }
 
     @IBAction func didTapSendEmail(_ sender: UIButton) {
+        
     }
+    
     @IBAction func didTapDismiss(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

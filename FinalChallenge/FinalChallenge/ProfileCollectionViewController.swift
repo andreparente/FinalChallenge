@@ -12,6 +12,8 @@ private let reuseIdentifier = "ProfileCollectionViewCell"
 
 class ProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var hasChanged = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,7 +83,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // #warning Incomplete implementation, return the number of items
         switch indexSelected {
         case 0:
-            return 3
+            return User.sharedInstance.artWorks.count
         case 1:
             return User.sharedInstance.favoriteArts.count
         default:
@@ -92,18 +94,21 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCollectionViewCell
 
+        if hasChanged {
+            cell.artWorkImage.image = nil
+            cell.artistImage.image = nil
+        }
+        
         switch indexSelected {
         case 0:
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
-            cell.backgroundColor = .blue
             cell.artWorkImage.layer.masksToBounds = true
         case 1:
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
-            cell.backgroundColor = .red
             cell.artWorkImage.layer.masksToBounds = true
             cell.artWorkImage.downloadedFrom(link: User.sharedInstance.favoriteArts[indexPath.item].urlPhotos.first!, contentMode: .scaleAspectFill)
         default:
@@ -113,7 +118,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artistNameLbl.text = User.sharedInstance.favoriteArtists[indexPath.item].name
             cell.artistImage.downloadedFrom(link: User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL, contentMode: .scaleAspectFill)
             cell.artistImage.layer.masksToBounds = true
-            cell.backgroundColor = .green
         }
         
         return cell
@@ -154,10 +158,18 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath as IndexPath) as! CustomProfileHeaderCollectionReusableView
             
             headerView.middleProfile.delegate = self
+            headerView.middleProfile.numberOfArtWorksLbl.text = "\(User.sharedInstance.artWorks.count)"
+            headerView.middleProfile.numberOfLikesLbl.text = "\(User.sharedInstance.favoriteArtsIds.count)"
+            headerView.middleProfile.numberOfFavArtistsLbl.text = "\(User.sharedInstance.favoriteArtistsIds.count)"
+
             headerView.backgroundColor = .white
             return headerView
             
         case UICollectionElementKindSectionFooter:
+            
+            if indexSelected == 0 {
+                
+            }
             return UIView() as! UICollectionReusableView
             
         default:
@@ -165,6 +177,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             assert(false, "Unexpected element kind")
         }
     }
+    
+    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexSelected {
@@ -215,18 +229,21 @@ extension ProfileCollectionViewController: MiddleProfileDelegate {
     
     func artWorksSelected() {
         //  carregar as artes do proprio usuário, se ele tiver.
+        self.hasChanged = true
         self.collectionView?.reloadData()
         
     }
     
     func favArtistsSelected() {
         //   mostrar os artistas que ele segue/favoritou
+        self.hasChanged = true
         self.collectionView?.reloadData()
         
     }
     
     func favArtWorksSelected() {
         //  mostrar as obras que ele curtiu!
+        self.hasChanged = true
         self.collectionView?.reloadData()
         
     }
