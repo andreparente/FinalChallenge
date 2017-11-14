@@ -11,7 +11,7 @@ import iCarousel
 
 class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
 
-    var artist: User!
+    var artist: Artist!
     
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var artWorkCarousel: iCarousel!
@@ -50,7 +50,13 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     }
     
     @IBAction func didTapFollowArtist(_ sender: UIButton) {
-        
+        DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
+            if success {
+                print(response)
+            } else {
+                print(response)
+            }
+        })
     }
 
     @IBAction func didTapSendEmail(_ sender: UIButton) {

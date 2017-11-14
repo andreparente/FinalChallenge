@@ -256,11 +256,20 @@ class LoginViewController: UIViewController {
             }
             if user != nil {
                 //adiciona email e nome ao path do Uid (ok)
+                
                 let user = User(name: self.nameRegisterTxtField.text!, email: Auth.auth().currentUser!.email!)
+                user.id = Auth.auth().currentUser?.providerID
+                
                 
                 DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
-                self.performSegue(withIdentifier: "LoginToMain", sender: self)
                 
+                DatabaseAccess.sharedInstance.fetchUserInfo(email: Auth.auth().currentUser!.email!, callback: { (success: Bool) in
+                    if success {
+                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                    } else {
+                        
+                    }
+                })
             }
         }
     }

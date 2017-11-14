@@ -20,7 +20,8 @@ class ArtWork: NSObject {
     var width: Double!
     var category: String!
     var id: String!
-    
+    var totalLikes: Int!
+    var creatorName: String!
     
    // var
     override init() {

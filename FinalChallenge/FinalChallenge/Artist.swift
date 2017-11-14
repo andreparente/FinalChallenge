@@ -21,6 +21,7 @@ class Artist {
     var favoriteArtists: [User] = []
     var id: String!
     var profilePictureURL: String!
+    var totalFollowers: Int!
     //Singleton!
     var artWorks: [ArtWork] = []
     var typeOfGallery: String!

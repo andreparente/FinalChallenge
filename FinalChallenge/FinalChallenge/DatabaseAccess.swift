@@ -14,7 +14,7 @@ class DatabaseAccess {
     
     //local variables
     var categories: [String] = []
-    var artists: [User] = []
+    var artists: [Artist] = []
     
     var usersRef: DatabaseReference?
     var artWorksRef: DatabaseReference?
@@ -63,8 +63,11 @@ class DatabaseAccess {
         
         User.sharedInstance.name = user.name
         User.sharedInstance.email = user.email
+        User.sharedInstance.id = Auth.auth().currentUser?.uid
+        
         return
     }
+    
     
     func fetchUserInfo(email: String, callback: @escaping((_ success: Bool)->())) {
         usersRef?.queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { snapshot in
@@ -78,7 +81,7 @@ class DatabaseAccess {
                 User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
                 User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
-                //TODO FETCH friendsID/favoriteArts/favoriteArtists
+                //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
 
                 callback(true)
             } else {
@@ -150,7 +153,8 @@ class DatabaseAccess {
         artWorksRef?.child(artwork.id).child("title").setValue(artwork.title)
         artWorksRef?.child(artwork.id).child("description").setValue(artwork.descricao)
         artWorksRef?.child(artwork.id).child("category").setValue(artwork.category)
-
+        
+        
         if(artwork.value == nil){
             artWorksRef?.child(artwork.id).child("value").setValue(0)
         }
@@ -169,11 +173,14 @@ class DatabaseAccess {
         else{
             artWorksRef?.child(artwork.id).child("width").setValue(artwork.width)
         }
+        
         artWorksRef?.child(artwork.id).child("creator").setValue((Auth.auth().currentUser?.uid)!)
-
+        artWorksRef?.child(artwork.id).child("creatorName").setValue(User.sharedInstance.name)
+        artWorksRef?.child(artwork.id).child("likes").setValue(0)
+        
 
         //User node
-        self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
+    self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
 
         var i = 1
         for img in artwork.images{
@@ -214,19 +221,29 @@ class DatabaseAccess {
         query?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             let userDict = snapshot.value as? [String: Any] ?? [:]
             print(userDict)
-            for user in userDict {
-                let aux = user.value as! [String: Any]
-                let userAux = User(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String)
-                userAux.typeOfGallery = aux["typeOfGallery"] as? String
-                userAux.id = user.key
+            for artist in userDict {
+                let aux = artist.value as! [String: Any]
+                let artistAux = Artist(name: aux["name"] as! String, email: aux["email"] as! String, picture: aux["profilePictureURL"] as! String)
+                
+                //TEST HERE
+                if(aux["followers"] != nil){
+                    artistAux.totalFollowers = aux["followers"] as! Int
+                }
+                else{
+                    self.usersRef?.child(artist.key).child("followers").setValue(0)
+                }
+                //TEST END HERE
+                
+                artistAux.typeOfGallery = aux["typeOfGallery"] as? String
+                artistAux.id = artist.key
                 
                 for art in (aux["artsId"] as? [String: String])! {
                     let artWork = ArtWork()
                     artWork.id = art.key
-                    userAux.artWorks.append(artWork)
+                    artistAux.artWorks.append(artWork)
                 }
                 
-                self.artists.append(userAux)
+                self.artists.append(artistAux)
             }
             if userDict.isEmpty || self.artists.isEmpty || self.artists.count == 0 {
                 callback(false, "")
@@ -238,22 +255,77 @@ class DatabaseAccess {
         })
     }
     
-    func databaseAccessWriteFollowArtist(user:User, artist:User){
-        //Adicionar no Node do usuario, o artista que ele segue
-        self.usersRef?.child(user.id).child("favoriteArtists").child(artist.id).setValue(artist.id)
+    func databaseAccessWriteFollowArtist(user:User, artist:Artist, callback: @escaping((_ success: Bool, _ response: String)->())){
         
-        //Adicionar no Node Followed by o usuario que segue o artista
-        self.followedByRef?.child(artist.id).child(user.id).setValue(user.id)
+        self.usersRef?.child(artist.id).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
+            
+            print(snapshot.value)
+            print(snapshot.description)
+            let artistDict = snapshot.value as! [String:Any]
+            print(artistDict)
+            //TEST HERE
+            if(artistDict["followers"] != nil){
+                artist.totalFollowers = artistDict["followers"] as! Int
+                artist.totalFollowers = artist.totalFollowers + 1
+            }
+            else{
+                self.usersRef?.child(artist.id).child("followers").setValue(0)
+            }
+            //TEST END HERE
+            
+            //Adicionar no Node do usuario, o artista que ele segue
+            self.usersRef?.child(user.id).child("favoriteArtists").child(artist.id).setValue(artist.id)
+            
+            //Adicionar no Node Followed by o usuario que segue o artista
+            self.followedByRef?.child(artist.id).child(user.id).setValue(user.id)
+            
+            //Incrementar o contador de followers do artist(dentro do caminho dos usuarios)
+            self.usersRef?.child(artist.id).child("followers").setValue(artist.totalFollowers)
+            
+            callback(true, "funcionou")
+            
+        }, withCancel: { (error:Error) in
+            print(error.localizedDescription)
+            callback(false, error.localizedDescription)
+        })
+        
+       
         
         return
     }
     
-    func databaseAccessWriteLikeArtWork(user:User, artwork:ArtWork){
+    func databaseAccessWriteLikeArtWork(user:User, artwork:ArtWork, callback: @escaping((_ success: Bool, _ response: String)->())){
         
-        //Adiciona no Node do usuario que ele deu like em uma obra
-        usersRef?.child(user.id).child("favoriteArts").child(artwork.id).setValue(artwork.id)
-        //Adiciona no Node Artworks, o usuario que deu like
-        artWorksRef?.child(artwork.id).child("likedBy").child(user.id).setValue(user.id)
+        self.artWorksRef?.child(artwork.id).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
+            
+            let artDict = snapshot.value as! [String:Any]
+ 
+            //TEST HERE
+            if(artDict["totalLikes"] != nil){
+                artwork.totalLikes = artDict["totalLikes"] as! Int
+                artwork.totalLikes = artwork.totalLikes + 1
+            }
+            else{
+                self.artsRef?.child(artwork.id).child("totalLikes").setValue(0)
+            }
+            //TEST END HERE
+            
+            //Adiciona no Node do usuario que ele deu like em uma obra
+            self.usersRef?.child(user.id).child("favoriteArts").child(artwork.id).setValue(artwork.id)
+            
+            //Adiciona no Node Artworks, o usuario que deu like
+            self.artWorksRef?.child(artwork.id).child("likedBy").child(user.id).setValue(user.id)
+            
+            //Incrementar o contador de likes do artwork(dentro do caminho das arts)
+            self.artWorksRef?.child(artwork.id).child("totalLikes").setValue(artwork.totalLikes)
+            
+            callback(true, "funcionou")
+
+        }, withCancel: { (error:Error) in
+            print(error.localizedDescription)
+            callback(false, error.localizedDescription)
+        })
+ 
         
         return
     }
@@ -289,6 +361,15 @@ class DatabaseAccess {
                 artist.name = artistDict["name"] as! String
                 artist.profilePictureURL = artistDict["email"] as! String
                 artist.id = artistId
+                
+                //TEST HERE
+                if(artistDict["followers"] != nil){
+                    artist.totalFollowers = artistDict["followers"] as! Int
+                }
+                else{
+                    self.usersRef?.child(artist.id).child("followers").setValue(0)
+                }
+                //TEST END HERE
                 
                 user.favoriteArtists.append(artist)
                 
@@ -334,6 +415,22 @@ class DatabaseAccess {
                 artWork.title = artDict["title"] as! String
                 artWork.id = artId
                 
+                //TEST
+                if(artDict["totalLikes"] != nil){
+                    artWork.totalLikes = artDict["totalLikes"] as! Int
+                }
+                else{
+                    self.artsRef?.child(artWork.id).child("totalLikes").setValue(0)
+                }
+                if(artDict["creatorName"] != nil){
+                    artWork.creatorName = artDict["creatorName"] as! String
+                }
+                else{
+                    //tratar pegando snapshot com id do artista dentro de userref
+//                    self.artsRef?.child(artWork.id).child("totalLikes").setValue(0)
+                }
+                //END TEST
+                
                 let pictDict = artDict["pictures"] as! [String:String]
                 print(pictDict)
                 
@@ -362,7 +459,7 @@ class DatabaseAccess {
     
     
     //olenka
-    func fetchArtWorksFor(artist: User, callback: @escaping((_ success: Bool, _ response: String)->())) {
+    func fetchArtWorksFor(artist: Artist, callback: @escaping((_ success: Bool, _ response: String)->())) {
         
         for art in artist.artWorks {
             artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
