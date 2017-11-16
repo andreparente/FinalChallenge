@@ -51,6 +51,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // Register cell classes
         self.collectionView!.register(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib(nibName: "CustomProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: "Header")
+        self.collectionView?.register(UINib(nibName: "ProfileFooterCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionFooter", withReuseIdentifier: "ProfileFooter")
+
         self.collectionView?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
@@ -150,6 +152,18 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         return CGSize(width: self.view.frame.width, height: 300)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if indexSelected == 0 {
+            if User.sharedInstance.artWorks.count < 3 {
+                return CGSize(width: self.view.frame.width, height: 55)
+            } else {
+                return CGSize(width: 0, height: 0)
+            }
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
             
@@ -166,9 +180,17 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             return headerView
             
         case UICollectionElementKindSectionFooter:
-            
+            print(indexSelected)
             if indexSelected == 0 {
-                
+                if User.sharedInstance.artWorks.count < 3 {
+                    let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ProfileFooter", for: indexPath as IndexPath) as! ProfileFooterCollectionReusableView
+                    footerView.button.addTarget(self, action: #selector(addArtWork), for: .touchUpInside)
+                    footerView.button.setTitleColor(UIColor.vitrineDarkBlue, for: .normal)
+                    footerView.button.layer.cornerRadius = 10
+                    footerView.button.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
+                    footerView.button.layer.borderWidth = 1
+                    return footerView
+                }
             }
             return UIView() as! UICollectionReusableView
             
@@ -181,16 +203,13 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexSelected {
-        case 0:
-            self.performSegue(withIdentifier: "ProfileToAddArtWork", sender: self)
-        case 1:
-            return
-        default:
-            return
-        }
+    }
+    
+    func addArtWork() {
+        self.performSegue(withIdentifier: "ProfileToAddArtWork", sender: self)
     }
 }
+
 
 
 
@@ -265,11 +284,11 @@ extension ProfileCollectionViewController: UIImagePickerControllerDelegate, UINa
         
         if let originalImage = info["UIImagePickerControllerOriginalImage"] {
             print((originalImage as! UIImage).size)
-            selectedImageFromPicker = originalImage as! UIImage
+            selectedImageFromPicker = originalImage as? UIImage
         }
         else if let croppedImage = info["UIImagePickerControllerEditedImage"]{
             print((croppedImage as! UIImage).size)
-            selectedImageFromPicker = croppedImage as! UIImage
+            selectedImageFromPicker = croppedImage as? UIImage
         }
         
         if let selectedImage = selectedImageFromPicker {

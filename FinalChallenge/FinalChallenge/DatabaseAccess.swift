@@ -51,13 +51,14 @@ class DatabaseAccess {
     
     func databaseAccessWriteCreateUser(user:User) {
         //verificacao com do profile picture URL para caso de login com facebook
-//        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userInfo)
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("email").setValue(user.email as String)
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("name").setValue(user.name)
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("profilePictureURL").setValue("")
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("friendsId").setValue("")
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("favoriteArts").setValue("")
-        usersRef?.child((Auth.auth().currentUser?.uid)!).child("favoriteArtists").setValue("")
+        let userDict: [String : String] = ["email":user.email as String, "name" : user.name, "profilePictureURL":"", "friendsId" : "", "favoriteArts" : "", "favoriteArtists" : ""]
+        usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userDict, withCompletionBlock: { (error: Error?, reference: DatabaseReference) in
+            if error == nil {
+                
+            } else {
+                print(error?.localizedDescription ?? 0)
+            }
+        })
 
 
         
@@ -108,11 +109,7 @@ class DatabaseAccess {
             else{
                 print(metadata ?? 0)
                 User.sharedInstance.profilePictureURL = metadata?.downloadURL()?.absoluteString
-              //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
                 self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
-                
-                
-                
                 callback(true,"True")
             }
         })
@@ -259,7 +256,7 @@ class DatabaseAccess {
         
         self.usersRef?.child(artist.id).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
             
-            print(snapshot.value)
+            print(snapshot.value ?? 0)
             print(snapshot.description)
             let artistDict = snapshot.value as! [String:Any]
             print(artistDict)

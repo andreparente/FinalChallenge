@@ -65,6 +65,8 @@
 		8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */; };
 		8A76590E1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A76590C1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.swift */; };
 		8A76590F1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A76590D1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.xib */; };
+		8A7659121FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7659101FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.swift */; };
+		8A7659131FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7659111FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.xib */; };
 		8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */; };
 		8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */; };
 		8A9548EC1F55EB7500FDA06A /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */; };
@@ -183,6 +185,8 @@
 		8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWork.swift; sourceTree = "<group>"; };
 		8A76590C1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterCategoryCollectionReusableView.swift; sourceTree = "<group>"; };
 		8A76590D1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterCategoryCollectionReusableView.xib; sourceTree = "<group>"; };
+		8A7659101FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFooterCollectionReusableView.swift; sourceTree = "<group>"; };
+		8A7659111FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileFooterCollectionReusableView.xib; sourceTree = "<group>"; };
 		8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -499,6 +503,8 @@
 				8A3DF3871F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.xib */,
 				8A3DF38A1F7E682200A59A05 /* ProfileCollectionViewCell.swift */,
 				8A3DF38B1F7E682200A59A05 /* ProfileCollectionViewCell.xib */,
+				8A7659111FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.xib */,
+				8A7659101FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.swift */,
 			);
 			name = "Profile(AddArtWork)";
 			sourceTree = "<group>";
@@ -748,6 +754,7 @@
 				8A1DA3F71FB5D93700989BAF /* Lato-BoldItalic.ttf in Resources */,
 				8A1DA3F41FB5D93100989BAF /* Lato-Black.ttf in Resources */,
 				8A40BC7D1F55BB8C00A12EBA /* HeaderProfile.xib in Resources */,
+				8A7659131FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.xib in Resources */,
 				8A9548FA1F56DF5F00FDA06A /* ArtistCollectionViewCell.xib in Resources */,
 				8ACFD6761F44B72E008DF502 /* Assets.xcassets in Resources */,
 				8A1DA4021FB5D93700989BAF /* Lato-Semibold.ttf in Resources */,
@@ -945,6 +952,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7659121FBDCCE600C9BA4A /* ProfileFooterCollectionReusableView.swift in Sources */,
 				8A40BC761F55B98A00A12EBA /* ProfileViewController.swift in Sources */,
 				8A40BC7F1F55BD3400A12EBA /* HeaderProfile.swift in Sources */,
 				8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */,

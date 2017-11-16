@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G1036" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileFooter" id="U6b-Vx-4bR" customClass="ProfileFooterCollectionReusableView" customModule="FinalChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n14-pa-QbJ">
+                    <rect key="frame" x="16" y="10" width="288" height="30"/>
+                    <state key="normal" title="Adicionar Obra"/>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="n14-pa-QbJ" secondAttribute="trailing" constant="16" id="2c6-Hm-noy"/>
+                <constraint firstItem="n14-pa-QbJ" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="cyT-ng-e3l"/>
+                <constraint firstItem="n14-pa-QbJ" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="16" id="hsg-kf-mXc"/>
+                <constraint firstItem="n14-pa-QbJ" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="jtI-M1-UAJ"/>
+            </constraints>
+            <connections>
+                <outlet property="button" destination="n14-pa-QbJ" id="cU7-aE-1qF"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>

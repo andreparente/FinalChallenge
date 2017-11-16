@@ -106,11 +106,11 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         if let originalImage = info["UIImagePickerControllerOriginalImage"] {
             print((originalImage as! UIImage).size)
-            selectedImageFromPicker = originalImage as! UIImage
+            selectedImageFromPicker = originalImage as? UIImage
         }
         else if let croppedImage = info["UIImagePickerControllerEditedImage"]{
             print((croppedImage as! UIImage).size)
-            selectedImageFromPicker = croppedImage as! UIImage
+            selectedImageFromPicker = croppedImage as? UIImage
         }
         
         if let selectedImage = selectedImageFromPicker {

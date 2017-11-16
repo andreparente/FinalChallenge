@@ -19,7 +19,7 @@ class AddArtWorkHeader: UIView {
     var imagePicker: UIImagePickerController!
     var parent: AddArtWorkTVC!
     var pictureIndexSelected: Int!
-    
+    var indexPathSelected: IndexPath!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,9 +52,17 @@ class AddArtWorkHeader: UIView {
         
     }
     
-    func buttonClicked(sender:UIButton)
-    {
+    func buttonClicked(sender:UIButton) {
         //chamar funcão para carregar imagem
+        self.indexPathSelected = IndexPath(item: sender.tag, section: 0)
+        self.pictureIndexSelected = sender.tag
+        if (imagePicker) != nil {
+            
+        } else {
+            imagePicker =  UIImagePickerController()
+            imagePicker.delegate = self
+        }
+
         // 1
         let optionMenu = UIAlertController(title: nil, message: "Choose an option", preferredStyle: .actionSheet)
         
@@ -118,7 +126,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
                 cell.artWorkImage.isHidden = true
                 cell.addButton.isHidden = false
                 cell.addButton.tag = indexPath.item
-                cell.addButton.addTarget(self, action: Selector(("buttonClicked:")),
+                cell.addButton.addTarget(self, action: #selector(self.buttonClicked(sender:)),
                                          for: UIControlEvents.touchUpInside)
             } else {
                 cell.addButton.isHidden = true
@@ -181,7 +189,8 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(picturesCollectionView) {
-            self.pictureIndexSelected = indexPath.row
+            self.pictureIndexSelected = indexPath.item
+            self.indexPathSelected = indexPath
             //fetch pictures
             let cell = collectionView.cellForItem(at: indexPath) as! PictureCVC
             if (imagePicker) != nil {
@@ -265,7 +274,8 @@ extension AddArtWorkHeader: UINavigationControllerDelegate, UIImagePickerControl
                 if self.parent.artWork.images[i] == nil {
                     if i == self.pictureIndexSelected {
                         self.parent.artWork.images[i] = picture
-                        self.picturesCollectionView.reloadData()
+                       // self.picturesCollectionView.reloadData()
+                        self.picturesCollectionView.reloadItems(at: [self.indexPathSelected])
                     }
                 }
             }
