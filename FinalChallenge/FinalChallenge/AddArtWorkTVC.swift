@@ -35,7 +35,7 @@ class AddArtWorkTVC: UITableViewController {
         button.center = tableFooter.center
         button.titleLabel?.textAlignment  = .center
         button.setTitle("Salvar Obra!", for: .normal)
-        button.backgroundColor = UIColor.customLightBlue
+        button.backgroundColor = UIColor.vitrineDarkBlue
         button.addTarget(self, action: #selector(AddArtWorkTVC.saveArtWork), for: .touchUpInside)
         
         self.tableView.tableFooterView = tableFooter
@@ -58,10 +58,31 @@ class AddArtWorkTVC: UITableViewController {
         self.artWork.id = id
         
         if ( (artWork.title == nil || artWork.descricao == nil || artWork.category == nil) || artWork.images.count == 0){
+            print(artWork.title)
+            print(artWork.descricao)
+            print(artWork.category)
+            print(artWork.images.count)
+
            print("preencher campos vazios")
         }
-        else{
-            DatabaseAccess.sharedInstance.databaseAccessWriteCreateArtwork(artwork: self.artWork)
+        else {
+            DatabaseAccess.sharedInstance.databaseAccessWriteCreateArtwork(artwork: self.artWork, callback: { (success: Bool, response: String) in
+                if success {
+                    // 1
+                    let optionMenu = UIAlertController(title: "Obra salva com sucesso!", message: "", preferredStyle: .alert)
+                    
+                    // 2
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+                        (alert: UIAlertAction!) -> Void in
+                        self.dismiss(animated: true, completion: nil)
+                        
+                    })
+                    // 3
+                    optionMenu.addAction(okAction)
+                    self.present(optionMenu, animated: true, completion: nil)
+
+                }
+            })
         }
         
         
@@ -85,11 +106,10 @@ class AddArtWorkTVC: UITableViewController {
 
         // Configure the cell...
         cell.txtView.delegate = self
-        
+        cell.txtView.tag = indexPath.row
         switch indexPath.row {
         case 0:
             cell.title.text = "Título"
-            
         case 1:
             cell.title.text = "Descrição"
         case 2:
@@ -235,7 +255,9 @@ extension AddArtWorkTVC: UIImagePickerControllerDelegate, UINavigationController
 
 extension AddArtWorkTVC: AddArtWorkHeaderDelegate {
     func didSelectCategory(category: String) {
+        print(category)
         artWork.category = category
+        print(artWork.category)
     }
     
     func didSelectAddPicture(vc: UIAlertController, index: Int) {

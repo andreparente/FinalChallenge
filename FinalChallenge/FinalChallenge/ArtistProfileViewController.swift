@@ -94,6 +94,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         cellView.addSubview(artWorkTitle)
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
         tap2.numberOfTapsRequired = 2
+
         cellView.addGestureRecognizer(tap2)
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(singleTapped))
         tap1.numberOfTapsRequired = 1
@@ -109,7 +110,13 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     }
     
     func doubleTapped() {
-        
+        DatabaseAccess.sharedInstance.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
+            if success {
+                print("DEU CERTO PORRA")
+            } else {
+                print(response)
+            }
+        }
     }
     
     func singleTapped() {

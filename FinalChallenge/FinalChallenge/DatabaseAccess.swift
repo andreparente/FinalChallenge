@@ -22,8 +22,8 @@ class DatabaseAccess {
     var storageRef: StorageReference?
     var followedByRef: DatabaseReference?
     var likedByRef: DatabaseReference?
-
-
+    
+    
     //Singleton!
     static let sharedInstance = DatabaseAccess()
     
@@ -47,7 +47,7 @@ class DatabaseAccess {
         self.storageRef = storage.reference()
     }
     
-
+    
     
     func databaseAccessWriteCreateUser(user:User) {
         //verificacao com do profile picture URL para caso de login com facebook
@@ -55,16 +55,15 @@ class DatabaseAccess {
         usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userDict, withCompletionBlock: { (error: Error?, reference: DatabaseReference) in
             if error == nil {
                 
+                //callback
+                User.sharedInstance.name = user.name
+                User.sharedInstance.email = user.email
+                User.sharedInstance.id = Auth.auth().currentUser?.uid
             } else {
                 print(error?.localizedDescription ?? 0)
             }
         })
-
-
         
-        User.sharedInstance.name = user.name
-        User.sharedInstance.email = user.email
-        User.sharedInstance.id = Auth.auth().currentUser?.uid
         
         return
     }
@@ -83,7 +82,17 @@ class DatabaseAccess {
                 User.sharedInstance.email = userDict2["email"] as! String
                 User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
+                
+                if userDict2["isArtist"] != nil {
+                    for art in (userDict2["artsId"] as? [String: String])! {
+                        let artWork = ArtWork()
+                        artWork.id = art.key
+                        User.sharedInstance.artWorks.append(artWork)
+                    }
 
+                } else {
+                    //
+                }
                 callback(true)
             } else {
                 callback(false)
@@ -134,7 +143,7 @@ class DatabaseAccess {
                 print(metadata ?? 0)
                 self.artWorksRef?.child(artwork.id!).child("pictures").child("pic" + String(pictureNumber)).setValue(metadata?.downloadURL()?.absoluteString)
                 //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
-//                self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
+                //                self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
                 
                 
                 
@@ -143,62 +152,95 @@ class DatabaseAccess {
         })
     }
     
-    func databaseAccessWriteCreateArtwork(artwork:ArtWork) {
+    func databaseAccessWriteCreateArtwork(artwork:ArtWork,  callback: @escaping((_ success: Bool, _ response: String)->())) {
         
-        
-        //ArtWork node
-        artWorksRef?.child(artwork.id).child("title").setValue(artwork.title)
-        artWorksRef?.child(artwork.id).child("description").setValue(artwork.descricao)
-        artWorksRef?.child(artwork.id).child("category").setValue(artwork.category)
-        
-        
-        if(artwork.value == nil){
-            artWorksRef?.child(artwork.id).child("value").setValue(0)
-        }
-        else{
-            artWorksRef?.child(artwork.id).child("value").setValue(artwork.value)
-        }
-        if(artwork.height == nil){
-            artWorksRef?.child(artwork.id).child("height").setValue(0)
-        }
-        else{
-            artWorksRef?.child(artwork.id).child("height").setValue(artwork.height)
-        }
-        if(artwork.width == nil){
-            artWorksRef?.child(artwork.id).child("width").setValue(0)
-        }
-        else{
-            artWorksRef?.child(artwork.id).child("width").setValue(artwork.width)
+        var totalCount = 0
+        for image in artwork.images {
+            if image != nil {
+                totalCount += 1
+            }
         }
         
-        artWorksRef?.child(artwork.id).child("creator").setValue((Auth.auth().currentUser?.uid)!)
-        artWorksRef?.child(artwork.id).child("creatorName").setValue(User.sharedInstance.name)
-        artWorksRef?.child(artwork.id).child("likes").setValue(0)
+        let artDict =
+            [
+                "title" : artwork.title,
+                "description" : artwork.descricao,
+                "category" : artwork.category,
+                "value" : artwork.value,
+                "height" : artwork.height,
+                "width" : artwork.width,
+                "creator" : (Auth.auth().currentUser?.uid)!,
+                "creatorName" : User.sharedInstance.name,
+                "likes" : 0
+                ] as [String : Any]
+        //
+        //        //ArtWork node
+        //        artWorksRef?.child(artwork.id).child("title").setValue(artwork.title)
+        //        artWorksRef?.child(artwork.id).child("description").setValue(artwork.descricao)
+        //        artWorksRef?.child(artwork.id).child("category").setValue(artwork.category)
+        //
+        //
+        //        if(artwork.value == nil){
+        //            artWorksRef?.child(artwork.id).child("value").setValue(0)
+        //        }
+        //        else{
+        //            artWorksRef?.child(artwork.id).child("value").setValue(artwork.value)
+        //        }
+        //        if(artwork.height == nil){
+        //            artWorksRef?.child(artwork.id).child("height").setValue(0)
+        //        }
+        //        else{
+        //            artWorksRef?.child(artwork.id).child("height").setValue(artwork.height)
+        //        }
+        //        if(artwork.width == nil){
+        //            artWorksRef?.child(artwork.id).child("width").setValue(0)
+        //        }
+        //        else{
+        //            artWorksRef?.child(artwork.id).child("width").setValue(artwork.width)
+        //        }
+        //
+        //        artWorksRef?.child(artwork.id).child("creator").setValue((Auth.auth().currentUser?.uid)!)
+        //        artWorksRef?.child(artwork.id).child("creatorName").setValue(User.sharedInstance.name)
+        //        artWorksRef?.child(artwork.id).child("likes").setValue(0)
         
+        artWorksRef?.child(artwork.id).setValue(artDict, withCompletionBlock: { (error: Error?, reference: DatabaseReference) in
+            if error == nil {
+                //success
+                print("sucesso na gravação da artwork")
+                //User node
+                self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
+                self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("isArtist").setValue(true)
+                
+                //Arts node
+                //        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
+                self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
+                
+                var i = 1
+                for img in artwork.images{
+                    
+                    if let image = img {
+                        self.uploadArtworkImage(image: image, artwork: artwork, pictureNumber: i, callback: {(success: Bool, response: String) in
+                            if success{
+                                if i == totalCount {
+                                    callback(true,"DEU CERTO")
+                                }
+                            }
+                            else {
+                                print("erro")
+                                callback(false,(error?.localizedDescription)!)
 
-        //User node
-    self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
-
-        var i = 1
-        for img in artwork.images{
-            uploadArtworkImage(image: img!, artwork: artwork, pictureNumber: i, callback: {(success: Bool, response: String) in
-                if success{
-
+                            }
+                        })
+                        i = i+1
+                    }
                 }
-                else{
-                    print("erro")
-                }
-            })
-            i = i+1
-        }
+                
+            } else {
+                print(error?.localizedDescription ?? 0)
+                callback(false,(error?.localizedDescription)!)
 
-        self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("isArtist").setValue(true)
-
-        //Arts node
-//        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
-        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
-        
-        return
+            }
+        })
     }
     
     func fetchCategories(callback: @escaping((_ success: Bool, _ response: String)->())) {
@@ -286,43 +328,43 @@ class DatabaseAccess {
             callback(false, error.localizedDescription)
         })
         
-       
+        
         
         return
     }
     
-    func databaseAccessWriteLikeArtWork(user:User, artwork:ArtWork, callback: @escaping((_ success: Bool, _ response: String)->())){
+    func databaseAccessWriteLikeArtWork(artwork: ArtWork, callback: @escaping((_ success: Bool, _ response: String)->())){
         
         self.artWorksRef?.child(artwork.id).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
             
             let artDict = snapshot.value as! [String:Any]
- 
+            
             //TEST HERE
-            if(artDict["totalLikes"] != nil){
-                artwork.totalLikes = artDict["totalLikes"] as! Int
+            if(artDict["likes"] != nil){
+                artwork.totalLikes = artDict["likes"] as! Int
                 artwork.totalLikes = artwork.totalLikes + 1
             }
             else{
-                self.artsRef?.child(artwork.id).child("totalLikes").setValue(0)
+                self.artWorksRef?.child(artwork.id).child("likes").setValue(0)
             }
             //TEST END HERE
             
             //Adiciona no Node do usuario que ele deu like em uma obra
-            self.usersRef?.child(user.id).child("favoriteArts").child(artwork.id).setValue(artwork.id)
+            self.usersRef?.child(User.sharedInstance.id).child("favoriteArts").child(artwork.id).setValue(artwork.id)
             
             //Adiciona no Node Artworks, o usuario que deu like
-            self.artWorksRef?.child(artwork.id).child("likedBy").child(user.id).setValue(user.id)
+            self.artWorksRef?.child(artwork.id).child("likedBy").child(User.sharedInstance.id).setValue(User.sharedInstance.id)
             
             //Incrementar o contador de likes do artwork(dentro do caminho das arts)
-            self.artWorksRef?.child(artwork.id).child("totalLikes").setValue(artwork.totalLikes)
+            self.artWorksRef?.child(artwork.id).child("lLikes").setValue(artwork.totalLikes)
             
             callback(true, "funcionou")
-
+            
         }, withCancel: { (error:Error) in
             print(error.localizedDescription)
             callback(false, error.localizedDescription)
         })
- 
+        
         
         return
     }
@@ -348,7 +390,7 @@ class DatabaseAccess {
     
     func fetchFollowedArtistsFor(user:User, callback: @escaping((_ success: Bool, _ response: String)->())){
         
-        for artistId in user.favoriteArtistsIds{  
+        for artistId in user.favoriteArtistsIds{
             self.usersRef?.child(artistId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
                 
                 let artistDict = snapshot.value as! [String:Any]
@@ -383,7 +425,7 @@ class DatabaseAccess {
     
     func fetchLikedArtWorksIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
         usersRef?.child(user.id!).child("favoriteArts").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-
+            
             if let artDict = snapshot.value as? [String: String] {
                 let artArray = Array(artDict.keys)
                 print(artArray)
@@ -404,7 +446,7 @@ class DatabaseAccess {
         
         for artId in user.favoriteArtsIds{
             self.artWorksRef?.child(artId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
-              
+                
                 let artDict = snapshot.value as! [String:Any]
                 
                 // possible to add other attributes from dictionary
@@ -417,14 +459,14 @@ class DatabaseAccess {
                     artWork.totalLikes = artDict["totalLikes"] as! Int
                 }
                 else{
-                    self.artsRef?.child(artWork.id).child("totalLikes").setValue(0)
+                    self.artWorksRef?.child(artWork.id).child("totalLikes").setValue(0)
                 }
                 if(artDict["creatorName"] != nil){
                     artWork.creatorName = artDict["creatorName"] as! String
                 }
                 else{
                     //tratar pegando snapshot com id do artista dentro de userref
-//                    self.artsRef?.child(artWork.id).child("totalLikes").setValue(0)
+                    //                    self.artsRef?.child(artWork.id).child("totalLikes").setValue(0)
                 }
                 //END TEST
                 
@@ -448,17 +490,15 @@ class DatabaseAccess {
                 callback(false, error.localizedDescription)
             })
         }
-    
+        
     }
     
-
     
     
-    
-    //olenka
     func fetchArtWorksFor(artist: Artist, callback: @escaping((_ success: Bool, _ response: String)->())) {
         
         for art in artist.artWorks {
+            
             artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                 print(snapshot.description)
                 let artDict = snapshot.value as! [String: Any]
@@ -469,15 +509,16 @@ class DatabaseAccess {
                 artist.findArtWorkById(id: art.id!)?.title = artDict["title"] as? String
                 
                 //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
-                let pictDict = artDict["pictures"] as! [String:String]
-                print(pictDict)
-                artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                if let pictDict = artDict["pictures"] as? [String:String] {
+                    print(pictDict)
+                    artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                }
                 
                 if (art.id == artist.artWorks.last?.id) {
                     print("entrou no call back success")
                     callback(true,"Deu certo")
                 }
-
+                
             }, withCancel: { (error: Error) in
                 print(error.localizedDescription)
                 callback(false, error.localizedDescription)
@@ -518,7 +559,7 @@ class DatabaseAccess {
                         artAux.id = id
                         returnedArtWorks.append(artAux)
                         count += 1
-
+                        
                         if count == totalArts {
                             callback(true, "", returnedArtWorks)
                         } else {
@@ -528,7 +569,7 @@ class DatabaseAccess {
                         print(error.localizedDescription)
                         callback(false, error.localizedDescription, returnedArtWorks)
                     })
-
+                    
                 }
             }
         }, withCancel: { (error: Error) in
@@ -537,5 +578,5 @@ class DatabaseAccess {
         })
     }
     
-
+    
 }

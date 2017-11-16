@@ -13,7 +13,7 @@ private let reuseIdentifier = "ProfileCollectionViewCell"
 class ProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var hasChanged = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +29,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 }
             })
         }
-
+        
         
         if User.sharedInstance.favoriteArts.isEmpty ||  User.sharedInstance.favoriteArts.count == 0 {
             DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback:   { ( success: Bool, response: String) in
@@ -43,7 +43,22 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 }
             })
         }
-       
+        
+        if User.sharedInstance.artWorks.isEmpty || User.sharedInstance.artWorks.count == 0 {
+            let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
+            artist.id = User.sharedInstance.id
+            artist.artWorks = User.sharedInstance.artWorks
+            DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
+                if success {
+                    
+                } else {
+                    print("erro no fetchArtworks for artist")
+                }
+            }
+        }
+        
+        
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,7 +67,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         self.collectionView!.register(UINib(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib(nibName: "CustomProfileHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: "Header")
         self.collectionView?.register(UINib(nibName: "ProfileFooterCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionFooter", withReuseIdentifier: "ProfileFooter")
-
+        
         self.collectionView?.delegate = self
         self.navigationController?.isNavigationBarHidden = true
         // Do any additional setup after loading the view.
@@ -95,7 +110,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCollectionViewCell
-
+        
         if hasChanged {
             cell.artWorkImage.image = nil
             cell.artistImage.image = nil
@@ -175,7 +190,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             headerView.middleProfile.numberOfArtWorksLbl.text = "\(User.sharedInstance.artWorks.count)"
             headerView.middleProfile.numberOfLikesLbl.text = "\(User.sharedInstance.favoriteArtsIds.count)"
             headerView.middleProfile.numberOfFavArtistsLbl.text = "\(User.sharedInstance.favoriteArtistsIds.count)"
-
+            
             headerView.backgroundColor = .white
             return headerView
             

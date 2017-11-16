@@ -18,7 +18,7 @@ class AddArtWorkTableViewCell: UITableViewCell {
         self.txtView.text = ""
         self.txtView.textColor = UIColor.lightGray
         self.txtView.delegate = self
-        self.txtView.layer.borderColor = UIColor.customLightBlue.cgColor
+        self.txtView.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
         self.txtView.layer.cornerRadius = 10
         self.txtView.layer.borderWidth = 1
     }

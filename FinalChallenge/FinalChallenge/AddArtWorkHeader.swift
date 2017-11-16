@@ -141,10 +141,10 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
             cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
             cell.layer.borderWidth = 1
-            cell.layer.borderColor = UIColor.customLightBlue.cgColor
+            cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
             
             if cell.isSelected {
-                cell.backgroundColor = UIColor.customLightBlue
+                cell.backgroundColor = UIColor.vitrineDarkBlue
                 cell.title.textColor = .white
             } else {
                 cell.backgroundColor = .white
@@ -162,7 +162,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
         if collectionView.isEqual(categoriesCollectionView) {
             let cell = cell as! AddArtWorkCategoriesCVC
             if cell.isSelected {
-                cell.backgroundColor = UIColor.customLightBlue
+                cell.backgroundColor = UIColor.vitrineDarkBlue
                 cell.title.textColor = .white
             } else {
                 cell.backgroundColor = .white
@@ -239,7 +239,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
             }
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! AddArtWorkCategoriesCVC
-            cell.backgroundColor = UIColor.customLightBlue
+            cell.backgroundColor = UIColor.vitrineDarkBlue
             cell.title.textColor = .white
             delegate?.didSelectCategory(category: cell.title.text!)
         }
@@ -251,6 +251,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
             if let cell = collectionView.cellForItem(at: indexPath) as? AddArtWorkCategoriesCVC {
                 cell.backgroundColor = .white
                 cell.title.textColor = .black
+                delegate?.didSelectCategory(category: cell.title.text!)
             }
         }
     }
