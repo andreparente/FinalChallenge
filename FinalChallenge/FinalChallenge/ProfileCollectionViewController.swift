@@ -17,25 +17,25 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
+            if success {
+                DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                    if success {
+                        self.collectionView?.reloadSections([0])
+                    } else {
+                        print("error:   ", response)
+                    }
+                })
+            } else {
+                print("deu erro")
+            }
+        }
+        
         if User.sharedInstance.favoriteArtists.isEmpty ||  User.sharedInstance.favoriteArtists.count == 0 {
             DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
                 if success{
                     for artist in User.sharedInstance.favoriteArtists{
                         print(artist.name)
-                    }
-                }
-                else{
-                    print("deu erro")
-                }
-            })
-        }
-        
-        
-        if User.sharedInstance.favoriteArts.isEmpty ||  User.sharedInstance.favoriteArts.count == 0 {
-            DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback:   { ( success: Bool, response: String) in
-                if success{
-                    for arts in User.sharedInstance.favoriteArts{
-                        print(arts.title)
                     }
                 }
                 else{
@@ -50,7 +50,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             artist.artWorks = User.sharedInstance.artWorks
             DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
                 if success {
-                    
+                    self.collectionView?.reloadSections([0])
                 } else {
                     print("erro no fetchArtworks for artist")
                 }
@@ -76,6 +76,23 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        switch indexSelected {
+        case 0:
+            if (self.collectionView?.numberOfItems(inSection: 0))! < User.sharedInstance.artWorks.count {
+                self.collectionView?.reloadData()
+            }
+        case 1:
+            if (self.collectionView?.numberOfItems(inSection: 0))! < User.sharedInstance.favoriteArts.count {
+                self.collectionView?.reloadData()
+            }
+        default:
+            if (self.collectionView?.numberOfItems(inSection: 0))! < User.sharedInstance.favoriteArtists.count {
+                self.collectionView?.reloadData()
+            }
+        }
     }
     
     /*
@@ -122,6 +139,9 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artistImage.isHidden = true
             cell.artistNameLbl.isHidden = true
             cell.artWorkImage.layer.masksToBounds = true
+            if User.sharedInstance.artWorks[indexPath.item].urlPhotos.first != nil {
+                cell.artWorkImage.downloadedFrom(link: User.sharedInstance.artWorks[indexPath.item].urlPhotos.first!, contentMode: .scaleAspectFill)
+            }
         case 1:
             cell.artWorkImage.isHidden = false
             cell.artistImage.isHidden = true

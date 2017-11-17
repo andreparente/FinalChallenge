@@ -44,13 +44,13 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return User.sharedInstance.favoriteArts.count
+        return DatabaseAccess.sharedInstance.newestArts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtWorkCollectionViewCell", for: indexPath) as! ArtWorkCollectionViewCell
         
-        cell.artWorkImage.downloadedFrom(link: User.sharedInstance.favoriteArts[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
+        cell.artWorkImage.downloadedFrom(link: DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
         
         cell.artWorkImage.layer.masksToBounds = true
         

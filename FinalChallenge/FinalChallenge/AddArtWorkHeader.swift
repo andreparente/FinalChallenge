@@ -175,7 +175,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView.isEqual(picturesCollectionView) {
-            return CGSize(width: 90, height: 110)
+            return CGSize(width: 100, height: 100)
         } else {
             return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.row].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.row].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
         }

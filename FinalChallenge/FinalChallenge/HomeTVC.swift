@@ -49,17 +49,13 @@ class HomeTVC: UITableViewController {
             }
         }
     
-        DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
+ 
+        
+        DatabaseAccess.sharedInstance.fetchNewestArtWorks { (success: Bool, response: String) in
             if success {
-                DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
-                    if success {
-                        self.tableView.reloadSections([2], with: .fade)
-                    } else {
-                        print("error:   ", response)
-                    }
-                })
+                self.tableView.reloadSections([2], with: .fade)
             } else {
-                print("deu erro")
+                
             }
         }
         // Do any additional setup after loading the view.
@@ -95,6 +91,7 @@ extension HomeTVC {
             let cell = tableView.dequeueReusableCell(withIdentifier: artistsReuseIdentifier, for: indexPath) as! ArtistsTableViewCell
             cell.fatherController = self
             return cell
+            
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: favoriteArtsReuseIdentifier, for: indexPath) as! FavoriteArtsTableViewCell
             cell.fatherController = self
@@ -103,30 +100,29 @@ extension HomeTVC {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: 2*view.frame.width/3, height: 35))
         label.textColor = .black
-        label.font = UIFont(name: "Lato-Semibold", size: 12)
+        label.font = UIFont(name: "Lato-Semibold", size: 16)
+        view.addSubview(label)
+
         switch section {
         case 0:
-            print("categorias")
             label.text = "Categorias"
-            return label
+            return view
         case 1:
-            let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
             let button = UIButton(frame: CGRect(x: label.frame.maxX, y: 0, width: view.frame.width/3, height: 35))
             button.setTitle("See All", for: .normal)
             button.titleLabel?.textAlignment = .right
+            button.titleLabel?.font = UIFont(name: "Lato-Regular", size: 14)
             button.setTitleColor(.black, for: .normal)
             button.addTarget(self, action: #selector(HomeTVC.goToArtists), for: .touchUpInside)
-            view.addSubview(label)
             view.addSubview(button)
-            print("artistas")
             label.text = "Artistas"
             return view
         default:
-            print("favoritos")
-            label.text = "Obras curtidas"
-            return label
+            label.text = "Novas Obras"
+            return view
         }
     }
     
@@ -137,13 +133,11 @@ extension HomeTVC {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            print("categorias")
-            return 170
+            return 100
         case 1:
-            print("artistas")
-            return 207 //altura
+            return 210 //altura
         default:
-            print("favoritos")
+            //novas obras
             return 180
         }
     }

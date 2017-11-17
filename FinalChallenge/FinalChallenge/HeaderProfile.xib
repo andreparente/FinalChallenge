@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G1036" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Rjw-6W-Bwg"/>
                 <outlet property="editProfileButton" destination="usA-ew-qlO" id="kkM-lx-zEl"/>
-                <outlet property="inboxButton" destination="Ahx-vI-vW3" id="BRv-BY-XRr"/>
                 <outlet property="profileImage" destination="bGo-rb-aYv" id="L8m-Jf-1m2"/>
                 <outlet property="profileNameLbl" destination="pGl-Do-7up" id="00t-Gy-NVU"/>
             </connections>
@@ -25,7 +24,6 @@
             <subviews>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bGo-rb-aYv">
                     <rect key="frame" x="120" y="85" width="80" height="80"/>
-                    <color key="backgroundColor" red="0.0063441186212003231" green="1" blue="0.15596431493759155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="LER-Mt-SwC"/>
                         <constraint firstAttribute="width" constant="80" id="al4-Nj-WH0"/>
@@ -41,10 +39,6 @@
                     <rect key="frame" x="120" y="170" width="79" height="30"/>
                     <state key="normal" title="editar perfil"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ahx-vI-vW3">
-                    <rect key="frame" x="280" y="25" width="30" height="30"/>
-                    <state key="normal" title="box"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -52,9 +46,7 @@
                 <constraint firstItem="bGo-rb-aYv" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HK8-8Q-2OC"/>
                 <constraint firstItem="usA-ew-qlO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NmN-HU-3ao"/>
                 <constraint firstItem="usA-ew-qlO" firstAttribute="top" secondItem="bGo-rb-aYv" secondAttribute="bottom" constant="5" id="Z27-is-oe6"/>
-                <constraint firstItem="Ahx-vI-vW3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="aCh-wA-Y4X"/>
                 <constraint firstItem="bGo-rb-aYv" firstAttribute="top" secondItem="pGl-Do-7up" secondAttribute="bottom" constant="10" id="ht4-s2-9Y8"/>
-                <constraint firstAttribute="trailing" secondItem="Ahx-vI-vW3" secondAttribute="trailing" constant="10" id="mSI-41-dQb"/>
                 <constraint firstItem="bGo-rb-aYv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ymF-mL-CWn"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

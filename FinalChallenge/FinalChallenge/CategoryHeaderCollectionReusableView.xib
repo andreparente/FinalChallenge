@@ -9,8 +9,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Lato-Regular.ttf">
-            <string>Lato-Regular</string>
+        <array key="Lato-Medium.ttf">
+            <string>Lato-Medium</string>
         </array>
     </customFonts>
     <objects>
@@ -21,12 +21,21 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoR-FZ-uYQ">
-                    <rect key="frame" x="0.0" y="48" width="47" height="84"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="0.0" y="48" width="33" height="75"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackLeftArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Pl5-y2-ygt">
+                            <rect key="frame" x="9" y="24" width="15" height="26"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.36017765410958902" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Pl5-y2-ygt" firstAttribute="centerX" secondItem="qoR-FZ-uYQ" secondAttribute="centerX" id="OV9-mJ-9WU"/>
+                        <constraint firstItem="Pl5-y2-ygt" firstAttribute="centerY" secondItem="qoR-FZ-uYQ" secondAttribute="centerY" id="uJS-HU-k6L"/>
+                    </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thE-XW-reM">
                     <rect key="frame" x="47" y="48" width="257" height="42"/>
-                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="35"/>
+                    <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="35"/>
                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -49,14 +58,14 @@
             </subviews>
             <constraints>
                 <constraint firstItem="qoR-FZ-uYQ" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="48" id="3yM-WG-mLT"/>
-                <constraint firstItem="thE-XW-reM" firstAttribute="leading" secondItem="qoR-FZ-uYQ" secondAttribute="trailing" id="BzQ-to-Rjp"/>
-                <constraint firstItem="qoR-FZ-uYQ" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="CV4-S9-W5A"/>
+                <constraint firstItem="thE-XW-reM" firstAttribute="leading" secondItem="qoR-FZ-uYQ" secondAttribute="trailing" constant="14" id="BzQ-to-Rjp"/>
+                <constraint firstItem="qoR-FZ-uYQ" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" constant="-4.5" id="CV4-S9-W5A"/>
                 <constraint firstAttribute="trailing" secondItem="xqS-cM-fYB" secondAttribute="trailing" constant="16" id="EdP-EU-Z5A"/>
-                <constraint firstItem="thE-XW-reM" firstAttribute="leading" secondItem="qoR-FZ-uYQ" secondAttribute="trailing" id="GmT-01-cQv"/>
+                <constraint firstItem="thE-XW-reM" firstAttribute="leading" secondItem="qoR-FZ-uYQ" secondAttribute="trailing" constant="14" id="GmT-01-cQv"/>
                 <constraint firstItem="xqS-cM-fYB" firstAttribute="centerY" secondItem="yd0-H9-Fua" secondAttribute="centerY" id="Zun-5W-Aig"/>
                 <constraint firstItem="yd0-H9-Fua" firstAttribute="top" secondItem="thE-XW-reM" secondAttribute="bottom" constant="8" id="dMJ-so-4ft"/>
                 <constraint firstItem="thE-XW-reM" firstAttribute="top" secondItem="qoR-FZ-uYQ" secondAttribute="top" id="h2i-xp-P4U"/>
-                <constraint firstAttribute="bottom" secondItem="qoR-FZ-uYQ" secondAttribute="bottom" constant="48" id="lDo-FY-n1H"/>
+                <constraint firstAttribute="bottom" secondItem="qoR-FZ-uYQ" secondAttribute="bottom" constant="57" id="lDo-FY-n1H"/>
                 <constraint firstAttribute="trailing" secondItem="thE-XW-reM" secondAttribute="trailing" constant="16" id="lw6-QA-p6B"/>
                 <constraint firstItem="qoR-FZ-uYQ" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="pqq-4o-Iqz"/>
                 <constraint firstItem="thE-XW-reM" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="47" id="uWt-TZ-ih2"/>
@@ -72,6 +81,7 @@
         </collectionReusableView>
     </objects>
     <resources>
+        <image name="BackLeftArrow" width="15" height="26"/>
         <image name="GridViewIcon" width="25" height="25"/>
         <image name="ListViewIcon" width="28" height="15"/>
         <image name="UnselectedGridIcon" width="25" height="25"/>

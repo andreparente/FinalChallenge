@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G1036" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+        <array key="Lato-Semibold.ttf">
+            <string>Lato-Semibold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddArtWorkHeader" customModule="FinalChallenge" customModuleProvider="target">
             <connections>
@@ -22,24 +31,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-ht-SH9">
-                    <rect key="frame" x="16" y="20" width="61" height="30"/>
-                    <state key="normal" title="Cancelar"/>
-                    <connections>
-                        <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="D9y-it-AWf"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adicionar Obra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPp-bA-q8i">
-                    <rect key="frame" x="103" y="25" width="114" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="103.5" y="25" width="113.5" height="20.5"/>
+                    <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.2627450980392157" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XTf-rc-Zbp">
-                    <rect key="frame" x="0.0" y="58" width="320" height="110"/>
+                    <rect key="frame" x="0.0" y="57.5" width="320" height="100"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="110" id="ePE-SW-64j"/>
+                        <constraint firstAttribute="height" constant="100" id="TB8-Gz-8d4"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RZe-Jd-f00">
                         <size key="itemSize" width="50" height="50"/>
@@ -49,13 +51,13 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categoria" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-PR-dzW">
-                    <rect key="frame" x="123" y="178" width="75" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="124.5" y="167.5" width="72" height="20"/>
+                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.26274509800000001" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YBR-MJ-mKH">
-                    <rect key="frame" x="0.0" y="207" width="320" height="40"/>
+                    <rect key="frame" x="0.0" y="195.5" width="320" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="0Dh-NR-ywj"/>
@@ -67,20 +69,30 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-ht-SH9">
+                    <rect key="frame" x="277" y="22" width="27" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="o5I-ht-SH9" secondAttribute="height" multiplier="21:22" id="lOM-jD-Fwe"/>
+                    </constraints>
+                    <state key="normal" image="BackDownArrow"/>
+                    <connections>
+                        <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="D9y-it-AWf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YBR-MJ-mKH" secondAttribute="trailing" id="76g-pk-7GS"/>
                 <constraint firstItem="xPp-bA-q8i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="7Nu-WH-CyZ"/>
-                <constraint firstItem="XTf-rc-Zbp" firstAttribute="top" secondItem="o5I-ht-SH9" secondAttribute="bottom" constant="8" id="AKG-l0-TGa"/>
                 <constraint firstItem="xPp-bA-q8i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HsB-fs-XYb"/>
-                <constraint firstItem="o5I-ht-SH9" firstAttribute="centerY" secondItem="xPp-bA-q8i" secondAttribute="centerY" id="Mw6-Sm-MSX"/>
                 <constraint firstItem="XTf-rc-Zbp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="R0d-XD-Gjy"/>
                 <constraint firstItem="YBR-MJ-mKH" firstAttribute="top" secondItem="iIb-PR-dzW" secondAttribute="bottom" constant="8" id="U5y-tw-1J0"/>
+                <constraint firstItem="o5I-ht-SH9" firstAttribute="centerY" secondItem="xPp-bA-q8i" secondAttribute="centerY" id="VpG-6x-8YK"/>
+                <constraint firstAttribute="trailing" secondItem="o5I-ht-SH9" secondAttribute="trailing" constant="16" id="eVp-vi-Rih"/>
                 <constraint firstItem="iIb-PR-dzW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eZv-Py-MrL"/>
-                <constraint firstItem="o5I-ht-SH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="geK-dG-JBW"/>
                 <constraint firstAttribute="trailing" secondItem="XTf-rc-Zbp" secondAttribute="trailing" id="h5r-kL-fha"/>
                 <constraint firstItem="YBR-MJ-mKH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h81-F6-eoe"/>
+                <constraint firstItem="XTf-rc-Zbp" firstAttribute="top" secondItem="o5I-ht-SH9" secondAttribute="bottom" constant="8" id="hq2-Hr-Hcs"/>
                 <constraint firstItem="iIb-PR-dzW" firstAttribute="top" secondItem="XTf-rc-Zbp" secondAttribute="bottom" constant="10" id="uyj-va-WMk"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -90,4 +102,7 @@
             <point key="canvasLocation" x="22" y="-209"/>
         </view>
     </objects>
+    <resources>
+        <image name="BackDownArrow" width="27" height="16"/>
+    </resources>
 </document>

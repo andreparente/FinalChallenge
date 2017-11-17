@@ -113,7 +113,7 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
         case UICollectionElementKindSectionFooter:
             if isList {
                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterCategory", for: indexPath as IndexPath) as! FooterCategoryCollectionReusableView
-                footerView.artistName.text = "Ian Raposo"
+                footerView.artistName.text = categoryArtWorks[indexPath.section].creatorName
                 footerView.artWorkTitle.text = categoryArtWorks[indexPath.section].title
                 return footerView
             } else {

@@ -20,13 +20,13 @@ class CategoriesTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        self.frame.size.height = 170
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 170), collectionViewLayout: layout)
+        self.frame.size.height = 100
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 100), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
-        let nib = UINib(nibName: "CategoryCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: collectionReuseIdentifier)
+        collectionView.register(UINib(nibName: "AddArtWorkCategoriesCVC", bundle: nil), forCellWithReuseIdentifier: "AddArtWorkCategoriesCVC")
+
         self.addSubview(collectionView)
     }
     
@@ -49,46 +49,44 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
         
         
-        if cell.categorieLbl.text == nil || cell.categorieLbl.text == "" {
-            cell.categorieLbl.text = DatabaseAccess.sharedInstance.categories[indexPath.item]
-            cell.categorieLbl.makeHorizontal()
-            cell.categorieLbl.textColor = .white
-            cell.categorieLbl.center = cell.center
-            cell.categorieLbl.textColor = .white
-        }
-        
-        if let layers = cell.layer.sublayers {
-            if layers.count > 1 {
-                
-            } else {
-                cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
-            }
-        } else {
-            cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
-        }
+        cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
+        cell.layer.borderWidth = 2
+        cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
+        cell.layer.cornerRadius = 15
+        cell.title.textColor = UIColor.vitrineDarkBlue
+//        
+//        if let layers = cell.layer.sublayers {
+//            if layers.count > 1 {
+//                
+//            } else {
+//                cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
+//            }
+//        } else {
+//            cell.layer.insertSublayer(Gradient.sharedInstance.bluePinkGradient(view: cell, horizontal: true), at: 0)
+//        }
         
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(80), height: CGFloat(150))
+        return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: CGFloat(0), height: CGFloat(0))
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x

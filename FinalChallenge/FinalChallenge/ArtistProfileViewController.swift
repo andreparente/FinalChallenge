@@ -29,6 +29,11 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         followButton.layer.shadowColor = UIColor.black.cgColor
         followButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         followButton.layer.shadowRadius = 3
+        
+        
+        if User.sharedInstance.favoriteArtistsIds.contains(artist.id) {
+            followButton.setTitle("Unfollow", for: .normal)
+        }
 
         
         //aqui preencher de acordo com a escolha do cara

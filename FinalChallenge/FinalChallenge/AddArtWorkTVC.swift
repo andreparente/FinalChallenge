@@ -34,7 +34,7 @@ class AddArtWorkTVC: UITableViewController {
         tableFooter.addSubview(button)
         button.center = tableFooter.center
         button.titleLabel?.textAlignment  = .center
-        button.setTitle("Salvar Obra!", for: .normal)
+        button.setTitle("Salvar Obra", for: .normal)
         button.backgroundColor = UIColor.vitrineDarkBlue
         button.addTarget(self, action: #selector(AddArtWorkTVC.saveArtWork), for: .touchUpInside)
         
@@ -107,6 +107,7 @@ class AddArtWorkTVC: UITableViewController {
         // Configure the cell...
         cell.txtView.delegate = self
         cell.txtView.tag = indexPath.row
+        cell.txtView.textAlignment = .center
         switch indexPath.row {
         case 0:
             cell.title.text = "Título"
