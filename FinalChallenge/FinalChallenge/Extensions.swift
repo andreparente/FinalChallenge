@@ -126,7 +126,12 @@ extension UIImageView: URLSessionDelegate {
                 let data = data, error == nil,
                 let image = UIImage(data: data)
                 
-                else { return }
+                else {
+                    DispatchQueue.main.async() { () -> Void in
+                        loading.stopAnimating()
+                    }
+                    return
+                }
             DispatchQueue.main.async() { () -> Void in
                 loading.stopAnimating()
                 self.image = image

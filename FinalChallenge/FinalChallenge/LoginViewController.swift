@@ -32,6 +32,7 @@ class LoginViewController: UIViewController {
     
     var entrarLbl: UILabel!
     var registrarLbl: UILabel!
+    var registrarlateralLbl: UILabel!
     // var registerGradient: CAGradientLayer!
     
     
@@ -114,13 +115,23 @@ class LoginViewController: UIViewController {
     }
     
     func loginSelected(){
+        self.registerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.nameFunction)))
+        self.view.bringSubview(toFront: registerView)
         UIView.animate(withDuration: 0.5) {
-            self.view.bringSubview(toFront: self.loginView)
+            // self.view.bringSubview(toFront: self.loginView)
+            self.registerView.alpha = 1
+            self.registerView.frame.size.height = 200
+            self.registerView.frame.size.width = 60
+            self.registerView.frame.origin.x = self.view.frame.size.width - self.registerView.frame.size.width
+            self.registerView.frame.origin.y = 0 //+ self.registerView.frame.size.height
             self.loginView.frame.size.width = self.view.frame.width
             self.loginGradient.frame = self.loginView.frame
             
             self.entrarLbl.center.x = self.emailTxtField.frame.minX
             self.entrarLbl.frame.origin.y = self.emailTxtField.frame.minY - self.entrarLbl.frame.height - 15
+            self.registrarLbl.alpha = 1
+            self.registrarLbl.frame.origin.y = 0 + 30
+            self.registrarLbl.frame.origin.x = 0 + 20
             
             self.fbLoginButton.alpha = 1
             self.emailTxtField.alpha = 1
@@ -144,6 +155,15 @@ class LoginViewController: UIViewController {
         registrarLbl.makeHorizontal()
         self.registerView.addSubview(registrarLbl)
         registrarLbl.center.x = registerView.frame.width/2
+        registrarlateralLbl = UILabel(frame: CGRect(x: 15, y: 350, width: 2.5*self.registerView.frame.width/3, height: 50))
+        registrarlateralLbl.center = registerView.center
+        registrarlateralLbl.text = "R E G I S T R A R"
+        self.registerView.addSubview(registrarlateralLbl)
+        registrarlateralLbl.alpha = 0
+        
+        
+        
+        
         
         passwordRegisterTxtField = KaedeTextField()
         passwordRegisterTxtField.foregroundColor = .white
@@ -224,6 +244,10 @@ class LoginViewController: UIViewController {
             self.emailRegisterTxtField.alpha = 1
             self.nameRegisterTxtField.alpha = 1
         }
+    }
+    
+    func nameFunction() {
+        
     }
     
     func login() {

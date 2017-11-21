@@ -18,10 +18,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" reuseIdentifier="ArtistCollectionViewCell" id="gTV-IL-0wX" customClass="ArtistCollectionViewCell" customModule="FinalChallenge" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="207"/>
+            <rect key="frame" x="0.0" y="0.0" width="140" height="195"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="140" height="207"/>
+                <rect key="frame" x="0.0" y="0.0" width="140" height="195"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WoN-9Q-odl">
@@ -31,29 +31,30 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLX-B9-Pqb">
-                        <rect key="frame" x="-10" y="164" width="160" height="18"/>
-                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.26274509800000001" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="0.0" y="148" width="140" height="22"/>
+                        <fontDescription key="fontDescription" name="Lato-Medium" family="Lato" pointSize="15"/>
+                        <color key="textColor" red="0.64614399884310381" green="0.65502925058306771" blue="0.64717571787663175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.99195677042007446" green="0.99622899293899536" blue="0.99192315340042114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="CLX-B9-Pqb" firstAttribute="top" secondItem="WoN-9Q-odl" secondAttribute="bottom" constant="24" id="0HA-1R-84a"/>
-                <constraint firstItem="CLX-B9-Pqb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="-10" id="4u0-rM-f4Z"/>
+                <constraint firstItem="CLX-B9-Pqb" firstAttribute="top" secondItem="WoN-9Q-odl" secondAttribute="bottom" constant="8" id="0HA-1R-84a"/>
                 <constraint firstItem="CLX-B9-Pqb" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="9X3-OG-vbx"/>
                 <constraint firstAttribute="bottom" secondItem="CLX-B9-Pqb" secondAttribute="bottom" constant="25" id="BBF-H0-6VC"/>
+                <constraint firstAttribute="trailing" secondItem="CLX-B9-Pqb" secondAttribute="trailing" id="C4O-qD-3S4"/>
                 <constraint firstItem="WoN-9Q-odl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GFl-nC-olJ"/>
                 <constraint firstItem="WoN-9Q-odl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Glj-N8-FuU"/>
                 <constraint firstItem="CLX-B9-Pqb" firstAttribute="centerX" secondItem="WoN-9Q-odl" secondAttribute="centerX" id="KFH-nC-Dmm"/>
+                <constraint firstItem="CLX-B9-Pqb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZaB-Re-z80"/>
             </constraints>
-            <size key="customSize" width="253" height="199"/>
+            <size key="customSize" width="253" height="187"/>
             <connections>
                 <outlet property="nameLbl" destination="CLX-B9-Pqb" id="eF1-4L-6I0"/>
                 <outlet property="profileImage" destination="WoN-9Q-odl" id="pa1-am-9ot"/>
             </connections>
-            <point key="canvasLocation" x="-3990" y="-11.5"/>
+            <point key="canvasLocation" x="-3990" y="-17.5"/>
         </collectionViewCell>
     </objects>
 </document>

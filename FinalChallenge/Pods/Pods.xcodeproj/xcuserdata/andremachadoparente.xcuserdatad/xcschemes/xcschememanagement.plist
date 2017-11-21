@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YNSearch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>iCarousel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,17 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0276E3F8C41D9396C307215807860BF5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>266AE1506DAD13D34C0725E909C0C476</key>
+		<key>2C27450E583C67289D5FFE18B204CE8B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>31285244C94929247067180011D4B38E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B08C49A396BAA0D9DCAD4460CC52F95</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81F664ABFC51E9C6C5AF7F959D537B6F</key>
+		<key>9C8A892262C4092A919EEF8279925FDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

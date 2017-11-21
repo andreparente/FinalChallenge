@@ -38,6 +38,11 @@
 		8A1DA4081FB5DDB700989BAF /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DA4071FB5DDB700989BAF /* CategoryCollectionViewController.swift */; };
 		8A1DA40B1FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DA4091FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.swift */; };
 		8A1DA40C1FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DA40A1FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.xib */; };
+		8A328F8F1FC49186006CE275 /* ResultsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A328F8E1FC49186006CE275 /* ResultsTVC.swift */; };
+		8A328F921FC499C7006CE275 /* ResultedArtWorkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A328F901FC499C7006CE275 /* ResultedArtWorkTableViewCell.swift */; };
+		8A328F931FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A328F911FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib */; };
+		8A328F951FC4AF5D006CE275 /* ArtistsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A328F941FC4AF5D006CE275 /* ArtistsHeader.xib */; };
+		8A328F991FC4B01A006CE275 /* ArtistsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A328F981FC4B01A006CE275 /* ArtistsHeader.swift */; };
 		8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */; };
 		8A3DF37F1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */; };
 		8A3DF3851F7E5A1F00A59A05 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */; };
@@ -153,6 +158,11 @@
 		8A1DA4071FB5DDB700989BAF /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
 		8A1DA4091FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		8A1DA40A1FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		8A328F8E1FC49186006CE275 /* ResultsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTVC.swift; sourceTree = "<group>"; };
+		8A328F901FC499C7006CE275 /* ResultedArtWorkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultedArtWorkTableViewCell.swift; sourceTree = "<group>"; };
+		8A328F911FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultedArtWorkTableViewCell.xib; sourceTree = "<group>"; };
+		8A328F941FC4AF5D006CE275 /* ArtistsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistsHeader.xib; sourceTree = "<group>"; };
+		8A328F981FC4B01A006CE275 /* ArtistsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsHeader.swift; sourceTree = "<group>"; };
 		8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorkCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtWorkCollectionViewCell.xib; sourceTree = "<group>"; };
 		8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
@@ -357,6 +367,17 @@
 			name = ArtWorkDetail;
 			sourceTree = "<group>";
 		};
+		8A328F8D1FC49166006CE275 /* SearchTab */ = {
+			isa = PBXGroup;
+			children = (
+				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
+				8A328F8E1FC49186006CE275 /* ResultsTVC.swift */,
+				8A328F901FC499C7006CE275 /* ResultedArtWorkTableViewCell.swift */,
+				8A328F911FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib */,
+			);
+			name = SearchTab;
+			sourceTree = "<group>";
+		};
 		8A3DF3801F7C0DE200A59A05 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +442,7 @@
 		8A70BA1A1F704F3200BE9BE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8A328F8D1FC49166006CE275 /* SearchTab */,
 				8A9548E81F55EA9600FDA06A /* Home */,
 				8A1DA40D1FB5E28400989BAF /* ArtWorkDetail */,
 				8A1DA4061FB5DD8A00989BAF /* CategorySelected */,
@@ -429,7 +451,6 @@
 				8AA615A61F8BF12500E54815 /* Profile(AddArtWork) */,
 				8A3DF3811F7C0F7500A59A05 /* Cells */,
 				8A40BC661F55945700A12EBA /* LoginViewController.swift */,
-				8A40BC771F55B9C700A12EBA /* SearchViewController.swift */,
 				8A40BC791F55BA4200A12EBA /* InboxViewController.swift */,
 			);
 			name = Controller;
@@ -500,6 +521,8 @@
 				8AB032811FA266BB000CCBC0 /* ArtistsTVC.swift */,
 				8AB032841FA26737000CCBC0 /* ArtistTableViewCell.swift */,
 				8AB032851FA26737000CCBC0 /* ArtistTableViewCell.xib */,
+				8A328F941FC4AF5D006CE275 /* ArtistsHeader.xib */,
+				8A328F981FC4B01A006CE275 /* ArtistsHeader.swift */,
 			);
 			name = Artists;
 			sourceTree = "<group>";
@@ -735,6 +758,7 @@
 				8A0465971FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.xib in Resources */,
 				8A1DA3F61FB5D93700989BAF /* Lato-Bold.ttf in Resources */,
 				8A1DA3FB1FB5D93700989BAF /* Lato-HeavyItalic.ttf in Resources */,
+				8A328F931FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib in Resources */,
 				8A1DA4051FB5D93700989BAF /* Lato-ThinItalic.ttf in Resources */,
 				8A1DA3F71FB5D93700989BAF /* Lato-BoldItalic.ttf in Resources */,
 				8A1DA3F41FB5D93100989BAF /* Lato-Black.ttf in Resources */,
@@ -747,6 +771,7 @@
 				8ACFD6741F44B72E008DF502 /* Main.storyboard in Resources */,
 				8A1DA3FF1FB5D93700989BAF /* Lato-Medium.ttf in Resources */,
 				8AA615961F8BD46600E54815 /* AddArtWorkTableViewCell.xib in Resources */,
+				8A328F951FC4AF5D006CE275 /* ArtistsHeader.xib in Resources */,
 				8ACFD69D1F44E561008DF502 /* GoogleService-Info.plist in Resources */,
 				8A1DA3FE1FB5D93700989BAF /* Lato-LightItalic.ttf in Resources */,
 			);
@@ -878,6 +903,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/SJSegmentedScrollView/SJSegmentedScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/YNSearch/YNSearch.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -888,6 +914,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJSegmentedScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNSearch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -956,6 +983,7 @@
 				8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */,
 				8AD744F81F682F8B00DC0F75 /* YokoTextField.swift in Sources */,
 				8A3DF3881F7E5D3400A59A05 /* CustomProfileHeaderCollectionReusableView.swift in Sources */,
+				8A328F8F1FC49186006CE275 /* ResultsTVC.swift in Sources */,
 				8A1DA40B1FB5DDD900989BAF /* CategoryHeaderCollectionReusableView.swift in Sources */,
 				8AB032821FA266BB000CCBC0 /* ArtistsTVC.swift in Sources */,
 				8AD744EF1F682F8B00DC0F75 /* AkiraTextField.swift in Sources */,
@@ -967,9 +995,11 @@
 				8A76590E1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.swift in Sources */,
 				8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */,
 				8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */,
+				8A328F991FC4B01A006CE275 /* ArtistsHeader.swift in Sources */,
 				26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */,
 				8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */,
 				8AA6159A1F8BDADA00E54815 /* AddArtWorkHeader.swift in Sources */,
+				8A328F921FC499C7006CE275 /* ResultedArtWorkTableViewCell.swift in Sources */,
 				8A1DA4081FB5DDB700989BAF /* CategoryCollectionViewController.swift in Sources */,
 				8AD744F71F682F8B00DC0F75 /* TextFieldEffects.swift in Sources */,
 				8AD744F41F682F8B00DC0F75 /* KaedeTextField.swift in Sources */,

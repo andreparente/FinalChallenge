@@ -26,7 +26,7 @@ class CategoriesTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(UINib(nibName: "AddArtWorkCategoriesCVC", bundle: nil), forCellWithReuseIdentifier: "AddArtWorkCategoriesCVC")
-
+     //   collectionView.isPagingEnabled =
         self.addSubview(collectionView)
     }
     
@@ -53,10 +53,11 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         
         
         cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
-        cell.layer.borderWidth = 2
+        cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
         cell.layer.cornerRadius = 15
         cell.title.textColor = UIColor.vitrineDarkBlue
+        
 //        
 //        if let layers = cell.layer.sublayers {
 //            if layers.count > 1 {

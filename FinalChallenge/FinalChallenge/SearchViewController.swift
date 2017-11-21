@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import YNSearch
 
-class SearchViewController: UIViewController {
 
-    var tableView: UITableView!
-    var arrayOfNames: [String] = ["Letícia Parente","Belchior","Eu","Belchior","Teste Parente","Bruno Parente","Valdo Parente","Gabriela Parente","Lia Parente","Letícia Parente","Letícia Parente","Belchior","Eu","Belchior","Teste Parente","Bruno Parente","Valdo Parente","Gabriela Parente","Lia Parente","Letícia Parente"]
-    var abc = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","x","z"]
-    var profileImage = [UIImage(named: "profileImage1.jpg")]
-    
+class SearchViewController: YNSearchViewController, YNSearchDelegate {
+
+    var searchText: String!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setTableView()
+        let ynSearch = YNSearch()
+        ynSearch.setCategories(value: DatabaseAccess.sharedInstance.categories)
+        
+        self.ynSearchinit()
+
+        self.delegate = self
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.setYNCategoryButtonType(type: .border)
+
         // Do any additional setup after loading the view.
     }
 
@@ -26,23 +34,67 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func setTableView() {
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), style: .grouped)
-//        tableView.delegate = self
-//        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        self.view.addSubview(tableView)
+    func ynSearchListViewDidScroll() {
+        self.ynSearchTextfieldView.ynSearchTextField.endEditing(true)
+    }
+    
+    
+    func ynSearchHistoryButtonClicked(text: String) {
+        self.pushViewController(text: text)
+        print(text)
+    }
+    
+    func ynCategoryButtonClicked(text: String) {
+        self.pushViewController(text: text)
+        print(text)
+    }
+    
+    func ynSearchListViewClicked(key: String) {
+        self.pushViewController(text: key)
+        print(key)
+    }
+    
+    func ynSearchListViewClicked(object: Any) {
+        print(object)
+    }
+    
+    func ynSearchListView(_ ynSearchListView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.ynSearchView.ynSearchListView.dequeueReusableCell(withIdentifier: YNSearchListViewCell.ID)!
+        cell.textLabel?.text = "teste"
+        
+        return cell
+    }
+    
+    func ynSearchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let ynmodel = self.ynSearchView.ynSearchListView.searchResultDatabase[indexPath.row] as? YNSearchModel, let key = ynmodel.key {
+            self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(key: key)
+            self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(object: self.ynSearchView.ynSearchListView.database[indexPath.row])
+            self.ynSearchView.ynSearchListView.ynSearch.appendSearchHistories(value: key)
+        }
+    }
+    
+    func pushViewController(text:String) {
+        
+        self.searchText = text
+        self.performSegue(withIdentifier: "SearchToResults", sender: self)
     }
 
-    /*
+    func ynSearchButtonClicked(text: String) {
+        print("entrou aqui no delegate")
+        pushViewController(text: text)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "SearchToResults" {
+            let vc = segue.destination as! ResultsTVC
+            vc.word = searchText
+        }
     }
-    */
+    
 
 }
 //

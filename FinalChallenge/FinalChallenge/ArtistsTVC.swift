@@ -10,6 +10,8 @@ import UIKit
 
 class ArtistsTVC: UITableViewController {
 
+    var header: ArtistsHeader!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +21,21 @@ class ArtistsTVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.setHeader()
+    }
+    
+    func setHeader() {
+        self.header = ArtistsHeader(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 110))
+        self.header.delegate = self
+        self.tableView.tableHeaderView = header
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,4 +131,11 @@ class ArtistsTVC: UITableViewController {
     
     
 
+}
+
+extension ArtistsTVC: ArtistsHeaderDelegate {
+    
+    func didTapReturnView() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
