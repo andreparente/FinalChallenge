@@ -73,6 +73,12 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // Do any additional setup after loading the view.
     }
     
+    func goToSettings() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsTesteViewController
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -212,6 +218,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             headerView.middleProfile.numberOfFavArtistsLbl.text = "\(User.sharedInstance.favoriteArtistsIds.count)"
             
             headerView.backgroundColor = .white
+            
+            headerView.headerProfile.editProfileButton.addTarget(self, action: #selector(goToSettings), for: .touchUpInside)
             return headerView
             
         case UICollectionElementKindSectionFooter:

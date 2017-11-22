@@ -121,8 +121,8 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
             }
             
         default:
-            return UIView() as! UICollectionReusableView
             assert(false, "Unexpected element kind")
+            return UIView() as! UICollectionReusableView
         }
     }
     
