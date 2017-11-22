@@ -86,10 +86,13 @@ class SettingsTesteViewController: UIViewController {
 
     }
     
+    //OLENKA
     @IBAction func salvarInfos(_ sender: Any) {
+        
     }
     
     @IBAction func dismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -101,6 +104,7 @@ extension SettingsTesteViewController: UINavigationControllerDelegate, UIImagePi
         
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //fazer algo OLENKA
+            
         }
     }
 }

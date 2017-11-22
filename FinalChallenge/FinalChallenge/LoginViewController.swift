@@ -264,7 +264,8 @@ class LoginViewController: UIViewController {
                     if success {
                         self.performSegue(withIdentifier: "LoginToMain", sender: self)
                     } else {
-                        
+                        self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
+
                     }
                 })
                 
@@ -291,7 +292,8 @@ class LoginViewController: UIViewController {
                     if success {
                         self.performSegue(withIdentifier: "LoginToMain", sender: self)
                     } else {
-                        
+                        self.showAlert(title: "Erro", message: "Não foi possível registrar seu usuário, tente novamente mais tarde")
+
                     }
                 })
             }

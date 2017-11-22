@@ -175,7 +175,8 @@ class DatabaseAccess {
                 "width" : artwork.width,
                 "creator" : (Auth.auth().currentUser?.uid)!,
                 "creatorName" : User.sharedInstance.name,
-                "likes" : 0
+                "likes" : 0,
+                "dateAdded" : NSDate().description
                 ] as [String : Any]
         //
         //        //ArtWork node
@@ -428,6 +429,8 @@ class DatabaseAccess {
     }
     
     func fetchNewestArtWorks(callback: @escaping((_ success: Bool, _ response: String)->())) {
+        
+        
         artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
             if let arts = snapshot.value as? [String: Any]{
                 for art in arts {

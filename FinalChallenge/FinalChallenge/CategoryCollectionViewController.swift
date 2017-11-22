@@ -40,6 +40,8 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
                 }
             } else {
                 print(response)
+                self.showAlert(title: "Erro", message: "Não foi possível carregar as obras de \(self.categoryName), tente novamente mais tarde")
+
             }
         }
         // Do any additional setup after loading the view.

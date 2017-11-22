@@ -80,6 +80,7 @@ class ArtistsTVC: UITableViewController {
                 self.present(modalVC, animated: true, completion: nil)
             } else {
                 print("erro no fetchArtworks for artist")
+                self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do artista, tente novamente mais tarde")
             }
         }
     }

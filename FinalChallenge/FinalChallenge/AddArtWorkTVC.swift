@@ -81,6 +81,8 @@ class AddArtWorkTVC: UITableViewController {
                     optionMenu.addAction(okAction)
                     self.present(optionMenu, animated: true, completion: nil)
 
+                } else {
+                    self.showAlert(title: "Erro", message: "Não foi possível salvar sua obra no momento, tente de novo por favor")
                 }
             })
         }

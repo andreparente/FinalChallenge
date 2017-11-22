@@ -13,8 +13,6 @@ class ArtistsTableViewCell: UITableViewCell {
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "ArtistCollectionViewCell"
     var fatherController: HomeTVC!
-    var arrayOfNames: [String] = ["Letícia Parente","Belchior","Eu","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente","Letícia Parente"]
-    var profileImage = [UIImage(named: "profileImage1.jpg")]
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,7 +52,7 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionReuseIdentifier, for: indexPath) as! ArtistCollectionViewCell
         cell.backgroundColor = .white
         
-        cell.profileImage.layer.cornerRadius = 70
+        cell.profileImage.layer.cornerRadius = cell.profileImage.frame.width/2
         cell.profileImage.layer.masksToBounds = true
         if let picture = DatabaseAccess.sharedInstance.artists[indexPath.item].profilePictureURL {
             cell.profileImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
@@ -88,6 +86,8 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
                 self.fatherController.present(modalVC, animated: true, completion: nil)
             } else {
                 print("erro no fetchArtworks for artist")
+                //self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do criador, tente novamente mais tarde")
+
             }
         }
     }

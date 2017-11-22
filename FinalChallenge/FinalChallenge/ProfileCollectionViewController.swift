@@ -24,6 +24,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                         self.collectionView?.reloadSections([0])
                     } else {
                         print("error:   ", response)
+                        self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
                     }
                 })
             } else {
@@ -40,6 +41,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 }
                 else{
                     print("deu erro")
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+
                 }
             })
         }
@@ -53,6 +56,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                     self.collectionView?.reloadSections([0])
                 } else {
                     print("erro no fetchArtworks for artist")
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
                 }
             }
         }
@@ -341,6 +345,7 @@ extension ProfileCollectionViewController: UIImagePickerControllerDelegate, UINa
                     
                 } else {
                     //deu ruim pra guardar imagem
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar sua imagem, tente novamente mais tarde")
                     
                 }
             })

@@ -26,7 +26,7 @@ class CategoriesTableViewCell: UITableViewCell {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
         collectionView.register(UINib(nibName: "AddArtWorkCategoriesCVC", bundle: nil), forCellWithReuseIdentifier: "AddArtWorkCategoriesCVC")
-     //   collectionView.isPagingEnabled =
+        collectionView.isPagingEnabled = true
         self.addSubview(collectionView)
     }
     
@@ -55,7 +55,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
-        cell.layer.cornerRadius = 15
+        cell.layer.cornerRadius = 7
         cell.title.textColor = UIColor.vitrineDarkBlue
         
 //        
@@ -73,7 +73,8 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
+        return CGSize(width: self.fatherController.view.frame.width/2 - 10, height: 90)
+     //   return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
     }
     
     

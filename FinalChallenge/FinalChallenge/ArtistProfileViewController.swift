@@ -55,6 +55,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     }
     
     @IBAction func didTapFollowArtist(_ sender: UIButton) {
+        //fazer animação
         DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
             if success {
                 print(response)
@@ -115,6 +116,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     }
     
     func doubleTapped() {
+        //fazer Animação
         DatabaseAccess.sharedInstance.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
             if success {
                 print("DEU CERTO PORRA")

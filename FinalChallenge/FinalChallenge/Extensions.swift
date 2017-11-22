@@ -170,3 +170,21 @@ extension UIImage {
         return newImage!
     }
 }
+
+
+extension UIViewController {
+    
+    func showAlert(title: String, message: String) {
+//        let attributedString = NSAttributedString(string: title, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 17, weight: UIFontWeightSemibold),NSForegroundColorAttributeName : UIColor])
+//        let attributedMessage = NSAttributedString(string: message, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName : UIColor().lightBlue])
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+//        alert.setValue(attributedString, forKey: "attributedTitle")
+//        alert.setValue(attributedMessage, forKey: "attributedMessage")
+//        alert.view.tintColor = UIColor().lightBlue
+        let alertAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil)
+        alert.addAction(alertAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+}

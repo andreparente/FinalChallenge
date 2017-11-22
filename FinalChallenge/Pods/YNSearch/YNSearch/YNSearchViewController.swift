@@ -85,12 +85,12 @@ open class YNSearchViewController: UIViewController, UITextFieldDelegate {
     
     open func textFieldDidBeginEditing(_ textField: UITextField) {
         UIView.animate(withDuration: 0.3, animations: {
-            self.ynSearchView.ynSearchMainView.alpha = 0
+         //   self.ynSearchView.ynSearchMainView.alpha = 0
             self.ynSearchTextfieldView.cancelButton.alpha = 1
-            self.ynSearchView.ynSearchListView.alpha = 1
+         //   self.ynSearchView.ynSearchListView.alpha = 1
         }) { (true) in
-            self.ynSearchView.ynSearchMainView.isHidden = true
-            self.ynSearchView.ynSearchListView.isHidden = false
+        //    self.ynSearchView.ynSearchMainView.isHidden = true
+       //     self.ynSearchView.ynSearchListView.isHidden = false
             self.ynSearchTextfieldView.cancelButton.isHidden = false
 
         }
