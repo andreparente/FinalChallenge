@@ -42,7 +42,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 else{
                     print("deu erro")
                     self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
-
+                    
                 }
             })
         }
@@ -82,6 +82,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         self.present(vc, animated: true, completion: nil)
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -102,6 +103,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 self.collectionView?.reloadData()
             }
         }
+        
+        
     }
     
     /*

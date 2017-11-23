@@ -248,14 +248,18 @@ class DatabaseAccess {
                                 
                                 if i == totalCount { //acabaram as imagens
                                     artDict["pictures"] = artwork.urlPhotos
-                                    self.defaultStore.collection("artWorks").document(artwork.id).setData(artDict, completion: { (error: Error?) in
-                                        if error != nil {
-                                            print(error?.localizedDescription ?? 0)
-                                        } else {
-                                            print("DEU CERTO O FIRESTORE")
-                                            callback(true,"DEU CERTO")
-                                        }
-                                    })
+//                                    self.defaultStore.collection("artWorks").document(artwork.id).setData(artDict, completion: { (error: Error?) in
+//                                        if error != nil {
+//                                            print(error?.localizedDescription ?? 0)
+//                                        } else {
+//                                            print("DEU CERTO O FIRESTORE")
+//                                            callback(true,"DEU CERTO")
+//                                        }
+//                                    })
+                                    User.sharedInstance.artWorks.append(artwork)
+                                    
+                                    callback(true,"DEU CERTO")
+
                                 }
                             }
                             else {
@@ -373,6 +377,8 @@ class DatabaseAccess {
             //Incrementar o contador de followers do artist(dentro do caminho dos usuarios)
             self.usersRef?.child(artist.id).child("followers").setValue(artist.totalFollowers)
             
+            User.sharedInstance.favoriteArtists.append(artist)
+            
             callback(true, "funcionou")
             
         }, withCancel: { (error:Error) in
@@ -409,6 +415,8 @@ class DatabaseAccess {
             
             //Incrementar o contador de likes do artwork(dentro do caminho das arts)
             self.artWorksRef?.child(artwork.id).child("likes").setValue(artwork.totalLikes)
+            
+            User.sharedInstance.favoriteArts.append(artwork)
             
             callback(true, "funcionou")
             
@@ -537,11 +545,11 @@ class DatabaseAccess {
                 artWork.id = artId
                 
                 //TEST
-                if(artDict["totalLikes"] != nil){
-                    artWork.totalLikes = artDict["totalLikes"] as! Int
+                if(artDict["likes"] != nil){
+                    artWork.totalLikes = artDict["likes"] as! Int
                 }
                 else{
-                    self.artWorksRef?.child(artWork.id).child("totalLikes").setValue(0)
+                    self.artWorksRef?.child(artWork.id).child("likes").setValue(0)
                 }
                 if(artDict["creatorName"] != nil){
                     artWork.creatorName = artDict["creatorName"] as! String
@@ -593,7 +601,9 @@ class DatabaseAccess {
                 //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
                 if let pictDict = artDict["pictures"] as? [String:String] {
                     print(pictDict)
-                    artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                        for pic in pictDict{
+                            artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                        }
                 }
                 
                 if (art.id == artist.artWorks.last?.id) {
@@ -635,9 +645,12 @@ class DatabaseAccess {
                             artAux.title = artDict["title"] as? String
                             
                             //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
-                            let pictDict = artDict["pictures"] as! [String:String]
-                            print(pictDict)
-                            artAux.urlPhotos.append(pictDict.values.first!)
+                            if let pictDict = artDict["pictures"] as? [String:String] {
+                                print(pictDict)
+                                for pic in pictDict {
+                                    artAux.urlPhotos.append(pic.value)
+                                }
+                            }
                             artAux.id = id
                             returnedArtWorks.append(artAux)
                             count += 1
@@ -666,18 +679,51 @@ class DatabaseAccess {
     //OLENKA
     func fetchArtWorksBy(description: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
         var resultedArtWorks: [ArtWork] = []
-        //query by description
-        artWorksRefFireStore.whereField("description", isLessThanOrEqualTo: description).addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
-            if error != nil {
-                print(error?.localizedDescription ?? 0)
-            } else {
-                for result in (snapshot?.documents)! {
-//                    print(result.data())
-                    resultedArtWorks.append(ArtWork(dict: result.data()))
+        
+        artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            let artWorksDict = snapshot.value as! [String: Any]
+            var artWorksDictKeys = Array(artWorksDict.keys)
+            
+            for key in artWorksDictKeys {
+                let artDict = artWorksDict[key] as! [String:Any]
+                let artWork = ArtWork()
+                artWork.descricao = artDict["description"] as! String
+
+                //verify strings
+                let stringToLocate = description.uppercased()
+                let stringToCheck = artWork.descricao.uppercased()
+                
+                
+                if(stringToCheck.range(of: stringToLocate) != nil){
+                    artWork.creatorName = artDict["creatorName"] as! String
+                    artWork.category = artDict["category"] as! String
+                    artWork.height = artDict["height"] as! Double
+                    artWork.id = key
+                    artWork.title =  artDict["title"] as! String
+                    artWork.totalLikes = artDict["likes"] as! Int
+                    artWork.value = artDict["value"] as! Double
+                    artWork.width = artDict["width"] as! Double
+                    
+                    
+                    if let picDict = artDict["pictures"] as? [String:String]{
+                        for pic in picDict{
+                            artWork.urlPhotos.append(pic.value)
+                        }
+                    }
+                    
+                    resultedArtWorks.append(artWork)
                 }
-                callback(true, resultedArtWorks)
+                
             }
-        }
+            
+            callback(true, resultedArtWorks)
+
+            
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            var emptyArray = [ArtWork] ()
+            callback(false, emptyArray)
+        })
         
     }
     
