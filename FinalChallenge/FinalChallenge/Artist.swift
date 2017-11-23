@@ -24,6 +24,7 @@ class Artist {
     var totalFollowers: Int!
     //Singleton!
     var artWorks: [ArtWork] = []
+    var artWorksIds: [String] = []
     var typeOfGallery: String!
     
     init() {

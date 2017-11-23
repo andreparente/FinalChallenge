@@ -684,7 +684,7 @@ class DatabaseAccess {
     
     //mudar essas funcoes
     //OLENKA
-    func fetchArtWorksBy(description: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+    func fetchArtWorksBy(text: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
         var resultedArtWorks: [ArtWork] = []
         
         artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
@@ -695,13 +695,15 @@ class DatabaseAccess {
                 let artDict = artWorksDict[key] as! [String:Any]
                 let artWork = ArtWork()
                 artWork.descricao = artDict["description"] as! String
+                artWork.title =  artDict["title"] as! String
 
                 //verify strings
-                let stringToLocate = description.uppercased()
+                let stringToLocate = text.uppercased()
                 let stringToCheck = artWork.descricao.uppercased()
+                let stringToCheck2 = artWork.title.uppercased()
                 
                 
-                if(stringToCheck.range(of: stringToLocate) != nil){
+                if(stringToCheck.range(of: stringToLocate) != nil || stringToCheck2.range(of: stringToLocate) != nil){
                     artWork.creatorName = artDict["creatorName"] as! String
                     artWork.category = artDict["category"] as! String
                     artWork.height = artDict["height"] as! Double
@@ -737,54 +739,54 @@ class DatabaseAccess {
     
     //mudar essas funcoes
     //OLENKA
-    func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
-        var resultedArtWorks: [ArtWork] = []
-        
-        artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-            let artWorksDict = snapshot.value as! [String: Any]
-            var artWorksDictKeys = Array(artWorksDict.keys)
-            
-            for key in artWorksDictKeys {
-                let artDict = artWorksDict[key] as! [String:Any]
-                let artWork = ArtWork()
-                artWork.title =  artDict["title"] as! String
-
-                //verify strings
-                let stringToLocate = title.uppercased()
-                let stringToCheck = artWork.descricao.uppercased()
-                
-                
-                if(stringToCheck.range(of: stringToLocate) != nil){
-                    artWork.descricao = artDict["description"] as! String
-                    artWork.creatorName = artDict["creatorName"] as! String
-                    artWork.category = artDict["category"] as! String
-                    artWork.height = artDict["height"] as! Double
-                    artWork.id = key
-                    artWork.totalLikes = artDict["likes"] as! Int
-                    artWork.value = artDict["value"] as! Double
-                    artWork.width = artDict["width"] as! Double
-                    
-                    
-                    if let picDict = artDict["pictures"] as? [String:String]{
-                        for pic in picDict{
-                            artWork.urlPhotos.append(pic.value)
-                        }
-                    }
-                    
-                    resultedArtWorks.append(artWork)
-                }
-                
-            }
-            
-            callback(true, resultedArtWorks)
-            
-            
-        }, withCancel: { (error: Error) in
-            print(error.localizedDescription)
-            var emptyArray = [ArtWork] ()
-            callback(false, emptyArray)
-        })
-    }
+//    func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+//        var resultedArtWorks: [ArtWork] = []
+//
+//        artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+//            let artWorksDict = snapshot.value as! [String: Any]
+//            var artWorksDictKeys = Array(artWorksDict.keys)
+//
+//            for key in artWorksDictKeys {
+//                let artDict = artWorksDict[key] as! [String:Any]
+//                let artWork = ArtWork()
+//                artWork.title =  artDict["title"] as! String
+//
+//                //verify strings
+//                let stringToLocate = title.uppercased()
+//                let stringToCheck = artWork.descricao.uppercased()
+//
+//
+//                if(stringToCheck.range(of: stringToLocate) != nil){
+//                    artWork.descricao = artDict["description"] as! String
+//                    artWork.creatorName = artDict["creatorName"] as! String
+//                    artWork.category = artDict["category"] as! String
+//                    artWork.height = artDict["height"] as! Double
+//                    artWork.id = key
+//                    artWork.totalLikes = artDict["likes"] as! Int
+//                    artWork.value = artDict["value"] as! Double
+//                    artWork.width = artDict["width"] as! Double
+//
+//
+//                    if let picDict = artDict["pictures"] as? [String:String]{
+//                        for pic in picDict{
+//                            artWork.urlPhotos.append(pic.value)
+//                        }
+//                    }
+//
+//                    resultedArtWorks.append(artWork)
+//                }
+//
+//            }
+//
+//            callback(true, resultedArtWorks)
+//
+//
+//        }, withCancel: { (error: Error) in
+//            print(error.localizedDescription)
+//            var emptyArray = [ArtWork] ()
+//            callback(false, emptyArray)
+//        })
+//    }
     
 
 
@@ -794,15 +796,44 @@ class DatabaseAccess {
     //OLENKA
     func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
         var resultedArtists: [Artist] = []
+        
+        usersRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            let usersDict = snapshot.value as! [String: Any]
+            var usersDictKeys = Array(usersDict.keys)
+            
+            for key in usersDictKeys {
+                let artistDict = usersDict[key] as! [String:Any]
+                let artist = Artist()
+                
+                if let isArtist = artistDict["isArtist"] as? Bool{
+                    artist.name = artistDict["name"] as! String
 
-        //query by name
-        artistsRefFireStore.whereField("name", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
-            if error != nil {
-                print(error?.localizedDescription ?? "erro")
-            } else {
-                print(snapshot?.documents ?? 0)
+                    let stringToLocate = name.uppercased()
+                    let stringToCheck = artist.name.uppercased()
+                    
+                    if(stringToCheck.range(of: stringToLocate) != nil) {
+                        artist.email = artistDict["email"] as! String
+                        artist.id = key
+                        artist.profilePictureURL = artistDict["profilePictureURL"] as! String
+                        artist.totalFollowers = artistDict["followers"] as! Int
+                        
+                        if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
+                            for id in artWorksIdDic{
+                                artist.artWorksIds.append(id.value)
+                            }
+                        }
+                        
+                        resultedArtists.append(artist)
+                    }
+                }
             }
-        }
+            callback(true, resultedArtists)
+            
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            var emptyArray = [Artist] ()
+            callback(false, emptyArray)
+        })
     }
     
 

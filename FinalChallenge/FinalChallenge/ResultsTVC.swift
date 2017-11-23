@@ -32,7 +32,7 @@ class ResultsTVC: UITableViewController {
         print("PALAVRA A PROCURAR:: ", word)
 
         
-        DatabaseAccess.sharedInstance.fetchArtWorksBy(description: word) { (success: Bool, artWorks: [ArtWork]) in
+        DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
             if success {
                 print("entrou no callback")
                 print(artWorks)
@@ -50,7 +50,7 @@ class ResultsTVC: UITableViewController {
                 self.artistsResult = artists
                 self.tableView.reloadSections([0], with: .fade)
             } else {
-                
+
             }
         }
         
