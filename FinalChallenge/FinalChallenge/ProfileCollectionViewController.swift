@@ -47,7 +47,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             })
         }
         
-        if User.sharedInstance.artWorks.isEmpty || User.sharedInstance.artWorks.count == 0 {
+        if User.sharedInstance.isArtist {
             let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
             artist.id = User.sharedInstance.id
             artist.artWorks = User.sharedInstance.artWorks
@@ -60,7 +60,6 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
                 }
             }
         }
-        
         
         
         
@@ -165,6 +164,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artistNameLbl.text = User.sharedInstance.favoriteArtists[indexPath.item].name
             cell.artistImage.downloadedFrom(link: User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL, contentMode: .scaleAspectFill)
             cell.artistImage.layer.masksToBounds = true
+            cell.artistImage.layer.cornerRadius = cell.artistImage.frame.width/2
         }
         
         return cell

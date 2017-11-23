@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 
 class DatabaseAccess {
     
@@ -28,6 +29,16 @@ class DatabaseAccess {
     //Singleton!
     static let sharedInstance = DatabaseAccess()
     
+    
+    
+    //FireStore for queries
+    let defaultStore = Firestore.firestore()
+    var artWorksRefFireStore: CollectionReference!
+    var artistsRefFireStore: CollectionReference!
+    
+    var categoriesImages: [UIImage] = []
+
+    
     private init(){
         usersRef = Database.database().reference()
         usersRef = usersRef?.child("users")
@@ -46,6 +57,12 @@ class DatabaseAccess {
         
         let storage = Storage.storage()
         self.storageRef = storage.reference()
+        
+        
+        artWorksRefFireStore = defaultStore.collection("artWorks")
+        artistsRefFireStore = defaultStore.collection("users")
+
+
     }
     
     
@@ -85,6 +102,7 @@ class DatabaseAccess {
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
                 
                 if userDict2["isArtist"] != nil {
+                    User.sharedInstance.isArtist = userDict2["isArtist"] as! Bool
                     if let ids = userDict2["artsId"] as? [String: String] {
                         for art in ids {
                             let artWork = ArtWork()
@@ -93,7 +111,6 @@ class DatabaseAccess {
                         }
                     }
                     
-
                 } else {
                     //
                 }
@@ -146,6 +163,7 @@ class DatabaseAccess {
             else{
                 print(metadata ?? 0)
                 self.artWorksRef?.child(artwork.id!).child("pictures").child("pic" + String(pictureNumber)).setValue(metadata?.downloadURL()?.absoluteString)
+                artwork.urlPhotos.append((metadata?.downloadURL()?.absoluteString)!)
                 //  self.usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(User.sharedInstance.profilePictureURL, forKey: "profilePictureURL")
                 //                self.usersRef?.child(User.sharedInstance.id).child("profilePictureURL").setValue(User.sharedInstance.profilePictureURL)
                 
@@ -165,7 +183,7 @@ class DatabaseAccess {
             }
         }
         
-        let artDict =
+        var artDict =
             [
                 "title" : artwork.title,
                 "description" : artwork.descricao,
@@ -211,7 +229,7 @@ class DatabaseAccess {
         artWorksRef?.child(artwork.id).setValue(artDict, withCompletionBlock: { (error: Error?, reference: DatabaseReference) in
             if error == nil {
                 //success
-                print("sucesso na gravação da artwork")
+                print("sucesso na gravação dos metadados da artwork")
                 //User node
                 self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("artsId").child(artwork.id).setValue(artwork.id)
                 self.usersRef?.child((Auth.auth().currentUser?.uid)!).child("isArtist").setValue(true)
@@ -220,20 +238,29 @@ class DatabaseAccess {
                 //        self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
                 self.artsRef?.child(artwork.category).child(artwork.id).setValue(artwork.id)
                 
-                var i = 1
-                for img in artwork.images{
+                
+                var i = 0
+                for img in artwork.images {
                     
                     if let image = img {
                         self.uploadArtworkImage(image: image, artwork: artwork, pictureNumber: i, callback: {(success: Bool, response: String) in
-                            if success{
-                                if i == totalCount {
-                                    callback(true,"DEU CERTO")
+                            if success {
+                                
+                                if i == totalCount { //acabaram as imagens
+                                    artDict["pictures"] = artwork.urlPhotos
+                                    self.defaultStore.collection("artWorks").document(artwork.id).setData(artDict, completion: { (error: Error?) in
+                                        if error != nil {
+                                            print(error?.localizedDescription ?? 0)
+                                        } else {
+                                            print("DEU CERTO O FIRESTORE")
+                                            callback(true,"DEU CERTO")
+                                        }
+                                    })
                                 }
                             }
                             else {
                                 print("erro")
                                 callback(false,(error?.localizedDescription)!)
-
                             }
                         })
                         i = i+1
@@ -251,9 +278,18 @@ class DatabaseAccess {
     func fetchCategories(callback: @escaping((_ success: Bool, _ response: String)->())) {
         artsRef?.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             let arts = snapshot.value as! [String:Any]
-            print(arts)
             for art in arts {
                 self.categories.append(art.key)
+                print(art.key)
+                if art.key == "Vestuário" {
+                    self.categoriesImages.append(UIImage(named: "Vestuario")!)
+                } else if art.key == "Mobiliário" {
+                    self.categoriesImages.append(UIImage(named: "Mobiliario")!)
+                } else if art.key == "Cerâmica" {
+                    self.categoriesImages.append(UIImage(named: "Ceramica")!)
+                } else {
+                    self.categoriesImages.append(UIImage(named: art.key)!)
+                }
             }
             callback(true, "")
         })
@@ -296,6 +332,17 @@ class DatabaseAccess {
             }
         }, withCancel: { (error: Error) in
             callback(true, error.localizedDescription)
+        })
+    }
+    
+    func fetchArtWorksFor(text: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+        
+        self.artWorksRef?.queryOrdered(byChild: "description").queryStarting(atValue: text).queryEnding(atValue: text+"\\uf8ff")
+        
+        self.artWorksRef?.queryOrdered(byChild: "description").queryStarting(atValue: "[a-zA-Z0-9]*", childKey: "description").queryEnding(atValue: text).observe(.value, with: { (snapshot: DataSnapshot) in
+            print(snapshot.value ?? 0)
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
         })
     }
     
@@ -403,8 +450,9 @@ class DatabaseAccess {
                 // possible to add other attributes from dictionary
                 let artist = Artist()
                 artist.name = artistDict["name"] as! String
-                artist.profilePictureURL = artistDict["email"] as! String
+                artist.email = artistDict["email"] as! String
                 artist.id = artistId
+                artist.profilePictureURL = artistDict["profilePictureURL"] as? String
                 
                 //TEST HERE
                 if(artistDict["followers"] != nil){
@@ -431,30 +479,30 @@ class DatabaseAccess {
     func fetchNewestArtWorks(callback: @escaping((_ success: Bool, _ response: String)->())) {
         
         
-        artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
-            if let arts = snapshot.value as? [String: Any]{
-                for art in arts {
-                    let artWorkAux: ArtWork = ArtWork()
-                    let artAux = art.value as! [String : Any]
-                    artWorkAux.category = artAux["category"] as! String
-                    artWorkAux.creatorName = artAux["creatorName"] as? String
-                    artWorkAux.descricao = artAux["description"] as! String
-                    artWorkAux.id = art.key
-                    artWorkAux.title = artAux["title"] as! String
-                    artWorkAux.totalLikes = artAux["likes"] as? Int ?? 0
-                    artWorkAux.height = artAux["height"] as? Double
-                    artWorkAux.value = artAux["value"] as? Double
-                    artWorkAux.width = artAux["width"] as? Double
-                    
-//                    var index = 0
-                    for pic in artAux["pictures"] as! [String: String] {
-                        artWorkAux.urlPhotos.append(pic.key)
-                       // index += 1
-                    }
-                    self.newestArts.append(artWorkAux)
-                }
-            }
-        })
+//        artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
+//            if let arts = snapshot.value as? [String: Any]{
+//                for art in arts {
+//                    let artWorkAux: ArtWork = ArtWork()
+//                    let artAux = art.value as! [String : Any]
+//                    artWorkAux.category = artAux["category"] as! String
+//                    artWorkAux.creatorName = artAux["creatorName"] as? String
+//                    artWorkAux.descricao = artAux["description"] as! String
+//                    artWorkAux.id = art.key
+//                    artWorkAux.title = artAux["title"] as! String
+//                    artWorkAux.totalLikes = artAux["likes"] as? Int ?? 0
+//                    artWorkAux.height = artAux["height"] as? Double
+//                    artWorkAux.value = artAux["value"] as? Double
+//                    artWorkAux.width = artAux["width"] as? Double
+//                    
+////                    var index = 0
+//                    for pic in artAux["pictures"] as! [String: String] {
+//                        artWorkAux.urlPhotos.append(pic.key)
+//                       // index += 1
+//                    }
+//                    self.newestArts.append(artWorkAux)
+//                }
+//            }
+//        })
     }
     
     func fetchLikedArtWorksIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){
@@ -612,5 +660,45 @@ class DatabaseAccess {
         })
     }
     
+    
+    
+    func fetchArtWorksBy(description: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+        var resultedArtWorks: [ArtWork] = []
+        //query by description
+        artWorksRefFireStore.whereField("description", isLessThanOrEqualTo: description).addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
+            if error != nil {
+                print(error?.localizedDescription ?? 0)
+            } else {
+                for result in (snapshot?.documents)! {
+//                    print(result.data())
+                    resultedArtWorks.append(ArtWork(dict: result.data()))
+                }
+                callback(true, resultedArtWorks)
+            }
+        }
+        
+    }
+    
+    func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+        //query by title
+        artWorksRefFireStore.whereField("title", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
+            if error != nil {
+                print(error?.localizedDescription ?? 0)
+            } else {
+                print(snapshot?.documents ?? 0)
+            }
+        }
+    }
+
+    func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
+        //query by name
+        artistsRefFireStore.whereField("name", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
+            if error != nil {
+                print(error?.localizedDescription ?? "erro")
+            } else {
+                print(snapshot?.documents ?? 0)
+            }
+        }
+    }
     
 }

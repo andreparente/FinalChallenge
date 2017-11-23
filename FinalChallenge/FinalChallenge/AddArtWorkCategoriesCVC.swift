@@ -11,6 +11,8 @@ import UIKit
 class AddArtWorkCategoriesCVC: UICollectionViewCell {
 
     @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

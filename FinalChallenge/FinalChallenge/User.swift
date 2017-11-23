@@ -26,6 +26,7 @@ class User {
     static let sharedInstance = User()
     var artWorks: [ArtWork] = []
     var typeOfGallery: String!
+    var isArtist: Bool!
     
     private init() {
         self.name = ""

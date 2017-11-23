@@ -74,7 +74,7 @@ class AddArtWorkTVC: UITableViewController {
                     // 2
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
                         (alert: UIAlertAction!) -> Void in
-                        self.dismiss(animated: true, completion: nil)
+                        self.navigationController?.popViewController(animated: true)
                         
                     })
                     // 3

@@ -73,7 +73,6 @@
 		8A7C8C9B1FC5A06F0060A50A /* SettingsTesteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7C8C9A1FC5A06F0060A50A /* SettingsTesteViewController.swift */; };
 		8A9548E71F55E64800FDA06A /* CategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */; };
 		8A9548EB1F55EB7500FDA06A /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */; };
-		8A9548EC1F55EB7500FDA06A /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */; };
 		8A9548F11F560FA400FDA06A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548F01F560FA400FDA06A /* Extensions.swift */; };
 		8A9548F41F56DECC00FDA06A /* ArtistsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548F31F56DECC00FDA06A /* ArtistsTableViewCell.swift */; };
 		8A9548F91F56DF5F00FDA06A /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */; };
@@ -194,7 +193,6 @@
 		8A7C8C9A1FC5A06F0060A50A /* SettingsTesteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTesteViewController.swift; sourceTree = "<group>"; };
 		8A9548E61F55E64800FDA06A /* CategoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		8A9548E91F55EB7500FDA06A /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		8A9548F01F560FA400FDA06A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8A9548F31F56DECC00FDA06A /* ArtistsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsTableViewCell.swift; sourceTree = "<group>"; };
 		8A9548F71F56DF5F00FDA06A /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -383,7 +381,6 @@
 		8A3DF3801F7C0DE200A59A05 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				8A9548EA1F55EB7500FDA06A /* CategoryCollectionViewCell.xib */,
 				8A9548F81F56DF5F00FDA06A /* ArtistCollectionViewCell.xib */,
 				8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */,
 			);
@@ -770,7 +767,6 @@
 				8A9548FA1F56DF5F00FDA06A /* ArtistCollectionViewCell.xib in Resources */,
 				8ACFD6761F44B72E008DF502 /* Assets.xcassets in Resources */,
 				8A1DA4021FB5D93700989BAF /* Lato-Semibold.ttf in Resources */,
-				8A9548EC1F55EB7500FDA06A /* CategoryCollectionViewCell.xib in Resources */,
 				8ACFD6741F44B72E008DF502 /* Main.storyboard in Resources */,
 				8A1DA3FF1FB5D93700989BAF /* Lato-Medium.ttf in Resources */,
 				8AA615961F8BD46600E54815 /* AddArtWorkTableViewCell.xib in Resources */,
@@ -902,22 +898,30 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FinalChallenge/Pods-FinalChallenge-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/SJSegmentedScrollView/SJSegmentedScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/YNSearch/YNSearch.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJSegmentedScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNSearch.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",

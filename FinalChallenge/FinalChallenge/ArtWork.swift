@@ -27,4 +27,21 @@ class ArtWork: NSObject {
     override init() {
         
     }
+    
+    
+    init(dict: [String: Any]) {
+        print(dict)
+        self.title = dict["title"] as! String
+        self.descricao = dict["description"] as! String
+        if let pictures = dict["pictures"] as? [String] {
+            self.urlPhotos =  pictures
+        }
+        
+        if let value = dict["value"] as? Double {
+            self.value = Double(value)
+        }
+        let value = dict["value"] as? NSNumber
+  //      let height = dict["height"] as? NSNumber
+     //   self.height = Double(height)
+    }
 }

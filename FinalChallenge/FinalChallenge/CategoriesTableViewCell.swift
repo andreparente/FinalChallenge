@@ -53,10 +53,18 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         
         
         cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
         cell.layer.cornerRadius = 7
-        cell.title.textColor = UIColor.vitrineDarkBlue
+        
+        
+        // ESTHER, mudar a cor para branco
+        cell.title.textColor = UIColor.white
+        cell.title.font = UIFont(name: "Lato-Medium", size: 18)
+        
+        
+        // ESTHER, adicionar a imagem aqui
+        cell.backgroundImage.image = DatabaseAccess.sharedInstance.categoriesImages[indexPath.row]
+        cell.backgroundImage.layer.masksToBounds = true
+        cell.backgroundImage.contentMode = .scaleAspectFill
         
 //        
 //        if let layers = cell.layer.sublayers {
@@ -85,10 +93,6 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: CGFloat(0), height: CGFloat(0))
     }
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x
