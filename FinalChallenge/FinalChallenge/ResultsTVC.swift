@@ -28,21 +28,9 @@ class ResultsTVC: UITableViewController {
         self.tableView.register(UINib(nibName: "ArtistTableViewCell", bundle: nil), forCellReuseIdentifier: "ArtistCell")
         
         //fazer funcao de query by string artists and artworks  OLENKA
-        
-        //query pra nome artista
-        // ---------------------------------------------------------------------------
-       // CHAMAR NO CALLBACK:::: self.tableView.reloadSections([0], with: .none)
+
         print("PALAVRA A PROCURAR:: ", word)
-//        DatabaseAccess.sharedInstance.fetchArtWorksBy(title: word) { (success: Bool, artWorks: [ArtWork]) in
-//            if success {
-//                print("entrou no callback")
-//                print(artWorks)
-//                self.artWorksResult = artWorks
-//                self.tableView.reloadSections([1], with: .fade)
-//            } else {
-//                
-//            }
-//        }
+
         
         DatabaseAccess.sharedInstance.fetchArtWorksBy(description: word) { (success: Bool, artWorks: [ArtWork]) in
             if success {
@@ -63,29 +51,7 @@ class ResultsTVC: UITableViewController {
 //            }
 //        }
         
-        
-//        var ref: DocumentReference? = nil
-//        ref = defaultStore.collection("artWorks").addDocument(data: [
-//            "title": "ArteTeste",
-//            "description": "Description teste vai que da",
-//            "category": "Adorno"
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-        
-        
-                
-//        artWorksRef.whereField("description", isGreaterThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
-//            if error != nil {
-//                print(error?.localizedDescription)
-//            } else {
-//                print(snapshot?.documents)
-//            }
-//        }
+    
         //query pra titulo de obra de arte
         // ---------------------------------------------------------------------------
         // CHAMAR NO CALLBACK:::: self.tableView.reloadSections([1], with: .none)

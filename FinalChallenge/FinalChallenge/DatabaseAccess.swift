@@ -662,6 +662,8 @@ class DatabaseAccess {
     
     
     
+    //mudar essas funcoes
+    //OLENKA
     func fetchArtWorksBy(description: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
         var resultedArtWorks: [ArtWork] = []
         //query by description
@@ -679,7 +681,12 @@ class DatabaseAccess {
         
     }
     
+    
+    //mudar essas funcoes
+    //OLENKA
     func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
+        var resultedArtWorks: [ArtWork] = []
+
         //query by title
         artWorksRefFireStore.whereField("title", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
             if error != nil {
@@ -690,7 +697,13 @@ class DatabaseAccess {
         }
     }
 
+    
+    
+    //mudar essas funcoes
+    //OLENKA
     func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
+        var resultedArtists: [Artist] = []
+
         //query by name
         artistsRefFireStore.whereField("name", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
             if error != nil {
