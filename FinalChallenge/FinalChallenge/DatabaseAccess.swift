@@ -69,7 +69,7 @@ class DatabaseAccess {
     
     func databaseAccessWriteCreateUser(user:User) {
         //verificacao com do profile picture URL para caso de login com facebook
-        let userDict: [String : String] = ["email":user.email as String, "name" : user.name, "profilePictureURL":"", "friendsId" : "", "favoriteArts" : "", "favoriteArtists" : ""]
+        let userDict: [String : Any] = ["email":user.email as String, "name" : user.name, "profilePictureURL":"", "friendsId" : "", "favoriteArts" : "", "favoriteArtists" : "", "isArtist": false]
         usersRef?.child((Auth.auth().currentUser?.uid)!).setValue(userDict, withCompletionBlock: { (error: Error?, reference: DatabaseReference) in
             if error == nil {
                 
@@ -194,7 +194,7 @@ class DatabaseAccess {
                 "creator" : (Auth.auth().currentUser?.uid)!,
                 "creatorName" : User.sharedInstance.name,
                 "likes" : 0,
-                "dateAdded" : NSDate().description
+                "dateAdded" : Date().ticks
                 ] as [String : Any]
         //
         //        //ArtWork node
@@ -487,30 +487,37 @@ class DatabaseAccess {
     func fetchNewestArtWorks(callback: @escaping((_ success: Bool, _ response: String)->())) {
         
         
-//        artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
-//            if let arts = snapshot.value as? [String: Any]{
-//                for art in arts {
-//                    let artWorkAux: ArtWork = ArtWork()
-//                    let artAux = art.value as! [String : Any]
-//                    artWorkAux.category = artAux["category"] as! String
-//                    artWorkAux.creatorName = artAux["creatorName"] as? String
-//                    artWorkAux.descricao = artAux["description"] as! String
-//                    artWorkAux.id = art.key
-//                    artWorkAux.title = artAux["title"] as! String
-//                    artWorkAux.totalLikes = artAux["likes"] as? Int ?? 0
-//                    artWorkAux.height = artAux["height"] as? Double
-//                    artWorkAux.value = artAux["value"] as? Double
-//                    artWorkAux.width = artAux["width"] as? Double
-//                    
-////                    var index = 0
-//                    for pic in artAux["pictures"] as! [String: String] {
-//                        artWorkAux.urlPhotos.append(pic.key)
-//                       // index += 1
-//                    }
-//                    self.newestArts.append(artWorkAux)
-//                }
-//            }
-//        })
+        artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            
+            if let FirebaseArts = snapshot.value as? [String : Any] {
+                for art in FirebaseArts {
+                    
+                    let artWorkAux: ArtWork = ArtWork()
+                    let artAux = art.value as! [String : Any]
+                    print(artAux["title"] as! String)
+                    artWorkAux.category = artAux["category"] as! String
+                    artWorkAux.creatorName = artAux["creatorName"] as? String
+                    artWorkAux.descricao = artAux["description"] as! String
+                    artWorkAux.id = art.key
+                    artWorkAux.title = artAux["title"] as! String
+                    artWorkAux.totalLikes = artAux["likes"] as? Int ?? 0
+                    artWorkAux.height = artAux["height"] as? Double
+                    artWorkAux.value = artAux["value"] as? Double
+                    artWorkAux.width = artAux["width"] as? Double
+                    
+                    //                    var index = 0
+                    for pic in artAux["pictures"] as! [String: String] {
+                        artWorkAux.urlPhotos.append(pic.value)
+                        // index += 1
+                    }
+                    
+                    self.newestArts.append(artWorkAux)
+                }
+                callback(true, "deu Certo")
+            }
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+        })
     }
     
     func fetchLikedArtWorksIdsFor(user: User, callback: @escaping((_ success: Bool, _ response: String)->())){

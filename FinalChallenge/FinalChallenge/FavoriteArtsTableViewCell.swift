@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteArtsTableViewCell: UITableViewCell {
-
+    
     var collectionView: UICollectionView!
     var fatherController: HomeTVC!
     
@@ -32,7 +32,7 @@ class FavoriteArtsTableViewCell: UITableViewCell {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-
+    
     
 }
 
@@ -44,17 +44,23 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("number of item in section to newestArts::::::: ", DatabaseAccess.sharedInstance.newestArts.count)
         return DatabaseAccess.sharedInstance.newestArts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtWorkCollectionViewCell", for: indexPath) as! ArtWorkCollectionViewCell
         
-        cell.artWorkImage.downloadedFrom(link: DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
-        
-        cell.artWorkImage.layer.masksToBounds = true
-        
-        
+        print(DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!)
+        cell.artWorkImage.isHidden = false
+        if cell.artWorkImage.image != nil {
+            
+        } else {
+            cell.artWorkImage.downloadedFrom(link: DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
+            
+            cell.artWorkImage.layer.masksToBounds = true
+            cell.artWorkImage.layer.cornerRadius = 7
+        }
         
         return cell
     }

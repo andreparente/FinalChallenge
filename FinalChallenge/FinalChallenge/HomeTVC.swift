@@ -43,7 +43,7 @@ class HomeTVC: UITableViewController {
         
         DatabaseAccess.sharedInstance.fetchFollowedArtistsIdsFor(user: User.sharedInstance){ (success: Bool, response: String) in
             if success {
-                print(User.sharedInstance.favoriteArtistsIds)
+//                print(User.sharedInstance.favoriteArtistsIds)
             } else {
             print("deu erro")
             }
@@ -135,7 +135,7 @@ extension HomeTVC {
         case 0:
             return 100
         case 1:
-            return 210 //altura
+            return 170 //altura
         default:
             //novas obras
             return 180
