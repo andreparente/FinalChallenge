@@ -739,16 +739,54 @@ class DatabaseAccess {
     //OLENKA
     func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
         var resultedArtWorks: [ArtWork] = []
+        
+        artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            let artWorksDict = snapshot.value as! [String: Any]
+            var artWorksDictKeys = Array(artWorksDict.keys)
+            
+            for key in artWorksDictKeys {
+                let artDict = artWorksDict[key] as! [String:Any]
+                let artWork = ArtWork()
+                artWork.title =  artDict["title"] as! String
 
-        //query by title
-        artWorksRefFireStore.whereField("title", isLessThanOrEqualTo: "teste").addSnapshotListener { (snapshot: QuerySnapshot?, error: Error?) in
-            if error != nil {
-                print(error?.localizedDescription ?? 0)
-            } else {
-                print(snapshot?.documents ?? 0)
+                //verify strings
+                let stringToLocate = title.uppercased()
+                let stringToCheck = artWork.descricao.uppercased()
+                
+                
+                if(stringToCheck.range(of: stringToLocate) != nil){
+                    artWork.descricao = artDict["description"] as! String
+                    artWork.creatorName = artDict["creatorName"] as! String
+                    artWork.category = artDict["category"] as! String
+                    artWork.height = artDict["height"] as! Double
+                    artWork.id = key
+                    artWork.totalLikes = artDict["likes"] as! Int
+                    artWork.value = artDict["value"] as! Double
+                    artWork.width = artDict["width"] as! Double
+                    
+                    
+                    if let picDict = artDict["pictures"] as? [String:String]{
+                        for pic in picDict{
+                            artWork.urlPhotos.append(pic.value)
+                        }
+                    }
+                    
+                    resultedArtWorks.append(artWork)
+                }
+                
             }
-        }
+            
+            callback(true, resultedArtWorks)
+            
+            
+        }, withCancel: { (error: Error) in
+            print(error.localizedDescription)
+            var emptyArray = [ArtWork] ()
+            callback(false, emptyArray)
+        })
     }
+    
+
 
     
     
@@ -767,4 +805,5 @@ class DatabaseAccess {
         }
     }
     
+
 }

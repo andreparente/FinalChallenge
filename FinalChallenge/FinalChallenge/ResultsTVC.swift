@@ -43,13 +43,16 @@ class ResultsTVC: UITableViewController {
             }
         }
         
-//        DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
-//            if success {
-//                self.tableView.reloadSections([0], with: .fade)
-//            } else {
-//                
-//            }
-//        }
+        DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
+            if success {
+                print("entrou no callback")
+                print(artists)
+                self.artistsResult = artists
+                self.tableView.reloadSections([0], with: .fade)
+            } else {
+                
+            }
+        }
         
     
         //query pra titulo de obra de arte
