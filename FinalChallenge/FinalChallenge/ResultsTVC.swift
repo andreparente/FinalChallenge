@@ -133,6 +133,20 @@ class ResultsTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
+            modal.artist = self.artistsResult[indexPath.row]
+            self.present(modal, animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+            modal.art = self.artWorksResult[indexPath.row]
+            self.present(modal, animated: true, completion: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation

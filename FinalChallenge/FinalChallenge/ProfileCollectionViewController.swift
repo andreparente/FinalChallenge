@@ -252,6 +252,25 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        switch indexSelected {
+        case 0:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+            modal.art = User.sharedInstance.artWorks[indexPath.item]
+            self.present(modal, animated: true, completion: nil)
+        case 1:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+            modal.art = User.sharedInstance.favoriteArts[indexPath.item]
+            self.present(modal, animated: true, completion: nil)
+
+        default:
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
+            modal.artist = User.sharedInstance.favoriteArtists[indexPath.item]
+            self.present(modal, animated: true, completion: nil)            
+        }
     }
     
     func addArtWork() {

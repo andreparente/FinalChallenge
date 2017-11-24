@@ -56,7 +56,7 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
         if cell.artWorkImage.image != nil {
             
         } else {
-            cell.artWorkImage.downloadedFrom(link: DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
+            cell.artWorkImage.downloadedFrom(link: DatabaseAccess.sharedInstance.newestArts[indexPath.item].urlPhotos.first!, contentMode: .scaleAspectFill)
             
             cell.artWorkImage.layer.masksToBounds = true
             cell.artWorkImage.layer.cornerRadius = 7
@@ -80,7 +80,10 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+        modal.art = DatabaseAccess.sharedInstance.newestArts[indexPath.item]
+        self.fatherController.present(modal, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

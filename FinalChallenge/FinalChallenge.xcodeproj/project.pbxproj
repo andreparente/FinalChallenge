@@ -43,6 +43,7 @@
 		8A328F931FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A328F911FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib */; };
 		8A328F951FC4AF5D006CE275 /* ArtistsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A328F941FC4AF5D006CE275 /* ArtistsHeader.xib */; };
 		8A328F991FC4B01A006CE275 /* ArtistsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A328F981FC4B01A006CE275 /* ArtistsHeader.swift */; };
+		8A331D471FC899AF006B0436 /* ArtWorkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A331D461FC899AF006B0436 /* ArtWorkDetailViewController.swift */; };
 		8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */; };
 		8A3DF37F1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */; };
 		8A3DF3851F7E5A1F00A59A05 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */; };
@@ -163,6 +164,7 @@
 		8A328F911FC499C7006CE275 /* ResultedArtWorkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultedArtWorkTableViewCell.xib; sourceTree = "<group>"; };
 		8A328F941FC4AF5D006CE275 /* ArtistsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistsHeader.xib; sourceTree = "<group>"; };
 		8A328F981FC4B01A006CE275 /* ArtistsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsHeader.swift; sourceTree = "<group>"; };
+		8A331D461FC899AF006B0436 /* ArtWorkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorkDetailViewController.swift; sourceTree = "<group>"; };
 		8A3DF37C1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWorkCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A3DF37D1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtWorkCollectionViewCell.xib; sourceTree = "<group>"; };
 		8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		8A1DA40D1FB5E28400989BAF /* ArtWorkDetail */ = {
 			isa = PBXGroup;
 			children = (
+				8A331D461FC899AF006B0436 /* ArtWorkDetailViewController.swift */,
 			);
 			name = ArtWorkDetail;
 			sourceTree = "<group>";
@@ -978,6 +981,7 @@
 				8AD744F21F682F8B00DC0F75 /* IsaoTextField.swift in Sources */,
 				8A3DF3911F87C77C00A59A05 /* AddArtWorkTVC.swift in Sources */,
 				8A40BC781F55B9C700A12EBA /* SearchViewController.swift in Sources */,
+				8A331D471FC899AF006B0436 /* ArtWorkDetailViewController.swift in Sources */,
 				8A3DF3851F7E5A1F00A59A05 /* ProfileCollectionViewController.swift in Sources */,
 				8A40BC741F55B96D00A12EBA /* HomeTVC.swift in Sources */,
 				8A40BC7A1F55BA4200A12EBA /* InboxViewController.swift in Sources */,

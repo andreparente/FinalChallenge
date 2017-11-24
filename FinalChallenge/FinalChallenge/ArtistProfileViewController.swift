@@ -127,7 +127,10 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     }
     
     func singleTapped() {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+        modal.art = artist.artWorks[self.artWorkCarousel.currentItemIndex]
+        self.present(modal, animated: true, completion: nil)
     }
 
 }
