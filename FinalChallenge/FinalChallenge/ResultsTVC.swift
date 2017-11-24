@@ -58,6 +58,10 @@ class ResultsTVC: UITableViewController {
         // CHAMAR NO CALLBACK:::: self.tableView.reloadSections([1], with: .none)
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -139,5 +143,8 @@ class ResultsTVC: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func dismissView(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 
 }

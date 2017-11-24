@@ -39,7 +39,9 @@ class HeaderProfile: UIView {
             if imageString == "" {
                 
             } else {
-                self.profileImage.downloadedFrom(url: URL(string: imageString)!)
+                self.profileImage.downloadedFrom(link: imageString, contentMode: .scaleAspectFill)
+                self.profileImage.layer.masksToBounds = true
+                self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
             }
         }
     }

@@ -104,9 +104,12 @@ class SettingsTesteViewController: UIViewController {
         DatabaseAccess.sharedInstance.updateUserProfile(dict: dict) { (success:Bool) in
             if success{
                 print("update successful")
+                self.showAlert(title: "Sucesso", message: "Seus dados foram atualizados com sucesso!")
             }
-            else{
+            else {
                 print("update failed")
+                self.showAlert(title: "Erro", message: "Não foi possível atualizar agora, tente novamente mais tarde")
+
             }
         }
     }

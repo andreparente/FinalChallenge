@@ -827,13 +827,19 @@ class DatabaseAccess {
             
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
-            var emptyArray = [Artist] ()
-            callback(false, emptyArray)
+            callback(false, resultedArtists)
         })
     }
     
     func updateUserProfile(dict: [String:Any], callback: @escaping((_ success: Bool)->())){
-        usersRef!.child(User.sharedInstance.id).updateChildValues(dict)
+        
+        usersRef!.child(User.sharedInstance.id).updateChildValues(dict, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                callback(true)
+            }
+        })
         
         
         
