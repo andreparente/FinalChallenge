@@ -27,19 +27,24 @@ class LoginViewController: UIViewController {
     var registerButton: UIButton!
     
     var loginView: UIView!
-    var loginGradient: CAGradientLayer!
     var registerView: UIView!
     
     var entrarLbl: UILabel!
     var registrarLbl: UILabel!
     var registrarlateralLbl: UILabel!
-    // var registerGradient: CAGradientLayer!
+    
+    var loginRecognizer: UITapGestureRecognizer!
+    var registerRecognizer: UITapGestureRecognizer!
+    
+    var logoImage: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLoginView()
         setRegisterView()
+        
+        setLogo()
         
         // Do  any additional setup after loading the view.
     }
@@ -50,13 +55,20 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    func setLogo() {
+        self.logoImage = UIImageView(frame: CGRect(x: 0, y: 40, width: 300, height: 172))
+        self.logoImage.contentMode = .center
+        self.logoImage.center.x = self.view.center.x
+        self.logoImage.image = UIImage(named: "Logo")
+        self.view.addSubview(logoImage)
+    }
     
     func setLoginView() {
         loginView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
-        loginGradient = Gradient.sharedInstance.entrarGradient(view: loginView, vertical: true)
-        loginView.layer.insertSublayer(loginGradient, at: 0)
-        self.loginView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.loginSelected)))
+
+        self.loginRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.loginSelected))
+        self.loginView.addGestureRecognizer(self.loginRecognizer)
+        self.loginView.backgroundColor = UIColor.vitrineDarkBlue
         self.view.addSubview(loginView)
         entrarLbl = UILabel(frame: CGRect(x: 15, y: 30, width: 2.5*self.loginView.frame.width/3, height: 50))
         entrarLbl.text = "Entrar"
@@ -115,28 +127,32 @@ class LoginViewController: UIViewController {
     }
     
     func loginSelected(){
-        self.registerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.nameFunction)))
         self.view.bringSubview(toFront: registerView)
         UIView.animate(withDuration: 0.5) {
             // self.view.bringSubview(toFront: self.loginView)
             self.registerView.alpha = 1
             self.registerView.frame.size.height = 200
             self.registerView.frame.size.width = 60
-            self.registerView.frame.origin.x = self.view.frame.size.width - self.registerView.frame.size.width
+            self.registerView.frame.origin.x = self.view.frame.width - self.registerView.frame.width
             self.registerView.frame.origin.y = 0 //+ self.registerView.frame.size.height
             self.loginView.frame.size.width = self.view.frame.width
-            self.loginGradient.frame = self.loginView.frame
             
             self.entrarLbl.center.x = self.emailTxtField.frame.minX
             self.entrarLbl.frame.origin.y = self.emailTxtField.frame.minY - self.entrarLbl.frame.height - 15
             self.registrarLbl.alpha = 1
             self.registrarLbl.frame.origin.y = 0 + 30
             self.registrarLbl.frame.origin.x = 0 + 20
+//            self.registrarLbl.center = self.registerView.center
+            self.registrarLbl.clipsToBounds = true
+            print(self.registrarLbl.center)
             
             self.fbLoginButton.alpha = 1
             self.emailTxtField.alpha = 1
             self.passwordTxtField.alpha = 1
             self.loginButton.alpha = 1
+            
+            self.registerRecognizer.addTarget(self, action: #selector(self.loginToRegisterTapped))
+            self.view.bringSubview(toFront: self.logoImage)
             
         }
     }
@@ -144,9 +160,8 @@ class LoginViewController: UIViewController {
     func setRegisterView() {
         registerView = UIView(frame: CGRect(x: self.view.frame.width/2, y: 0, width: self.view.frame.width/2, height: self.view.frame.height))
         registerView.backgroundColor = .white
-        //registerGradient = Gradient.sharedInstance.registrarGradient(view: registerView, vertical: true)
-        //registerView.layer.insertSublayer(registerGradient, at: 0)
-        self.registerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginViewController.registerSelected)))
+        self.registerRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.registerSelected))
+        self.registerView.addGestureRecognizer(self.registerRecognizer)
         self.view.addSubview(registerView)
         registrarLbl = UILabel(frame: CGRect(x: 15, y: 350, width: 2.5*self.registerView.frame.width/3, height: 50))
         registrarLbl.text = "Registrar"
@@ -243,11 +258,82 @@ class LoginViewController: UIViewController {
             
             self.emailRegisterTxtField.alpha = 1
             self.nameRegisterTxtField.alpha = 1
+            self.view.bringSubview(toFront: self.logoImage)
+
         }
     }
     
-    func nameFunction() {
+//    func nameFunction() {
+//        
+//    }
+    
+    func loginToRegisterTapped() {
         
+        UIView.animate(withDuration: 0.3, animations: { 
+            //animacoes
+          //  self.registerView.frame.origin = CGPoint(x: 0, y: 0)
+            self.registerView.frame = self.view.frame
+            self.loginView.alpha = 1
+            self.loginView.frame.size.height = 200
+            self.loginView.frame.size.width = 60
+            self.loginView.frame.origin.x = 0
+            self.loginView.frame.origin.y = self.view.frame.height - self.loginView.frame.height //+ self.registerView.frame.size.height
+            self.entrarLbl.frame.origin.y = 30
+            self.entrarLbl.frame.origin.x = 20
+        }) { (success: Bool) in
+            if success {
+                self.view.bringSubview(toFront: self.loginView)
+                self.loginRecognizer.addTarget(self, action: #selector(self.registerToLoginTapped))
+                self.view.bringSubview(toFront: self.logoImage)
+
+            } else {
+                
+            }
+        }
+    }
+    
+    func registerToLoginTapped() {
+        UIView.animate(withDuration: 0.3, animations: {
+            //animacoes
+            self.registerView.alpha = 1
+            self.registerView.frame.size.height = 200
+            self.registerView.frame.size.width = 60
+            self.registerView.frame.origin.x = self.view.frame.width - self.registerView.frame.width
+            self.registerView.frame.origin.y = 0 //+ self.registerView.frame.size.height
+
+            self.loginView.frame = self.view.frame
+            
+            self.entrarLbl.center.x = self.emailTxtField.frame.minX
+            self.entrarLbl.frame.origin.y = self.emailTxtField.frame.minY - self.entrarLbl.frame.height - 15
+            
+            self.registrarLbl.alpha = 1
+            self.registrarLbl.frame.origin.y = 30
+            self.registrarLbl.frame.origin.x = 20
+            self.registrarLbl.clipsToBounds = true
+            print(self.registrarLbl.center)
+            
+            self.fbLoginButton.alpha = 1
+            self.emailTxtField.alpha = 1
+            self.passwordTxtField.alpha = 1
+            self.loginButton.alpha = 1
+
+            self.nameRegisterTxtField.alpha = 0
+            self.emailRegisterTxtField.alpha = 0
+            self.passwordRegisterTxtField.alpha = 0
+            self.fbRegisterButton.alpha = 0
+            self.registerButton.alpha = 0
+            
+            self.registerRecognizer.addTarget(self, action: #selector(self.loginToRegisterTapped))
+            
+        }) { (success: Bool) in
+            if success {
+                self.view.bringSubview(toFront: self.registerView)
+                self.view.bringSubview(toFront: self.logoImage)
+
+            } else {
+                
+            }
+        }
     }
     
     func login() {
