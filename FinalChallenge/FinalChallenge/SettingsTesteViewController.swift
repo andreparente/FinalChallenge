@@ -24,6 +24,8 @@ class SettingsTesteViewController: UIViewController {
         self.perfilImageView.downloadedFrom(link: User.sharedInstance.profilePictureURL, contentMode: .scaleAspectFill)
         self.perfilImageView.layer.masksToBounds = true
         
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -88,7 +90,25 @@ class SettingsTesteViewController: UIViewController {
     
     //OLENKA
     @IBAction func salvarInfos(_ sender: Any) {
+        var dict = [:] as! [String:Any]
+        if nomeTxtField.text != nil{
+            dict["name"] = nomeTxtField.text
+        }
+        if tel1TxtField.text != nil{
+            dict["tel1"] = tel1TxtField.text
+        }
+        if tel2TxtField.text != nil{
+            dict["tel2"] = tel2TxtField.text
+        }
         
+        DatabaseAccess.sharedInstance.updateUserProfile(dict: dict) { (success:Bool) in
+            if success{
+                print("update successful")
+            }
+            else{
+                print("update failed")
+            }
+        }
     }
     
     @IBAction func dismiss(_ sender: Any) {
@@ -104,7 +124,17 @@ extension SettingsTesteViewController: UINavigationControllerDelegate, UIImagePi
         
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
             //fazer algo OLENKA
-            
+            DatabaseAccess.sharedInstance.uploadProfileImage(image: picture, callback: { (success: Bool, response: String) in
+                if success {
+                    //deu certo pra guardar imagem
+                    ("img updated")
+                    self.perfilImageView.downloadedFrom(link: User.sharedInstance.profilePictureURL)
+                } else {
+                    //deu ruim pra guardar imagem
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar sua imagem, tente novamente mais tarde")
+                    
+                }
+            })
         }
     }
 }

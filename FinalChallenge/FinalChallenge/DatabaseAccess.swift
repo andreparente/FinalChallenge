@@ -570,9 +570,8 @@ class DatabaseAccess {
                 let pictDict = artDict["pictures"] as! [String:String]
                 print(pictDict)
                 
-                let picNum = 1
-                for _ in pictDict{
-                    let picURL = pictDict["pic" + String(picNum)]!
+                for picUrl in pictDict{
+                    let picURL = picUrl.value
                     artWork.urlPhotos.append(picURL)
                 }
                 
@@ -683,7 +682,6 @@ class DatabaseAccess {
     
     
     //mudar essas funcoes
-    //OLENKA
     func fetchArtWorksBy(text: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
         var resultedArtWorks: [ArtWork] = []
         
@@ -738,7 +736,6 @@ class DatabaseAccess {
     
     
     //mudar essas funcoes
-    //OLENKA
 //    func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
 //        var resultedArtWorks: [ArtWork] = []
 //
@@ -793,7 +790,6 @@ class DatabaseAccess {
     
     
     //mudar essas funcoes
-    //OLENKA
     func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
         var resultedArtists: [Artist] = []
         
@@ -836,5 +832,11 @@ class DatabaseAccess {
         })
     }
     
+    func updateUserProfile(dict: [String:Any], callback: @escaping((_ success: Bool)->())){
+        usersRef!.child(User.sharedInstance.id).updateChildValues(dict)
+        
+        
+        
+    }
 
 }

@@ -27,8 +27,6 @@ class ResultsTVC: UITableViewController {
         self.tableView.register(UINib(nibName: "ResultedArtWorkTableViewCell", bundle: nil), forCellReuseIdentifier: "ResultedArtWorkCell")
         self.tableView.register(UINib(nibName: "ArtistTableViewCell", bundle: nil), forCellReuseIdentifier: "ArtistCell")
         
-        //fazer funcao de query by string artists and artworks  OLENKA
-
         print("PALAVRA A PROCURAR:: ", word)
 
         
