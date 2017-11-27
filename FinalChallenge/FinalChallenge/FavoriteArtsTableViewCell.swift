@@ -81,7 +81,7 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+        let modal = storyboard.instantiateViewController(withIdentifier: "PageViewController") as! PageViewController
         modal.art = DatabaseAccess.sharedInstance.newestArts[indexPath.item]
         self.fatherController.present(modal, animated: true, completion: nil)
     }

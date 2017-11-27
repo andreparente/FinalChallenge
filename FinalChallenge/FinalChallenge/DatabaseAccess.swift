@@ -88,6 +88,7 @@ class DatabaseAccess {
     
     
     func fetchUserInfo(email: String, callback: @escaping((_ success: Bool)->())) {
+        
         usersRef?.queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { snapshot in
             let userDict = snapshot.value as? [String: Any] ?? [:]
             
@@ -120,6 +121,42 @@ class DatabaseAccess {
             }
         })
     }
+    
+    func fetchUserInfoBy(id: String, callback: @escaping((_ success: Bool)->())) {
+        
+        usersRef?.queryOrderedByKey().queryEqual(toValue: id).observeSingleEvent(of: .value, with: { snapshot in
+            let userDict = snapshot.value as? [String: Any] ?? [:]
+            
+            if !userDict.isEmpty {
+                print(userDict)
+                //preencher as infos no user local
+                User.sharedInstance.id = Auth.auth().currentUser?.uid
+                let userDict2 = userDict[(Auth.auth().currentUser?.uid)!] as! [String: Any]
+                User.sharedInstance.name = userDict2["name"] as! String
+                User.sharedInstance.email = userDict2["email"] as! String
+                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
+                
+                if userDict2["isArtist"] != nil {
+                    User.sharedInstance.isArtist = userDict2["isArtist"] as! Bool
+                    if let ids = userDict2["artsId"] as? [String: String] {
+                        for art in ids {
+                            let artWork = ArtWork()
+                            artWork.id = art.key
+                            User.sharedInstance.artWorks.append(artWork)
+                        }
+                    }
+                    
+                } else {
+                    //
+                }
+                callback(true)
+            } else {
+                callback(false)
+            }
+        })
+    }
+
     
     func uploadProfileImage(image: UIImage, callback: @escaping((_ success: Bool, _ response: String)->())) {
         
@@ -604,6 +641,12 @@ class DatabaseAccess {
                 artist.findArtWorkById(id: art.id!)?.descricao = artDict["description"] as? String
                 artist.findArtWorkById(id: art.id!)?.title = artDict["title"] as? String
                 
+                artist.findArtWorkById(id: art.id!)?.creatorName = artDict["creatorName"] as? String
+                artist.findArtWorkById(id: art.id!)?.totalLikes = artDict["likes"] as? Int ?? 0
+                artist.findArtWorkById(id: art.id!)?.height = artDict["height"] as? Double
+                artist.findArtWorkById(id: art.id!)?.value = artDict["value"] as? Double
+                artist.findArtWorkById(id: art.id!)?.width = artDict["width"] as? Double
+                
                 //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
                 if let pictDict = artDict["pictures"] as? [String:String] {
                     print(pictDict)
@@ -650,6 +693,14 @@ class DatabaseAccess {
                             artAux.descricao = artDict["description"] as? String
                             artAux.title = artDict["title"] as? String
                             
+                            artAux.creatorName = artDict["creatorName"] as? String
+                            artAux.id = id
+                            artAux.totalLikes = artDict["likes"] as? Int ?? 0
+                            artAux.height = artDict["height"] as? Double
+                            artAux.value = artDict["value"] as? Double
+                            artAux.width = artDict["width"] as? Double
+
+                            
                             //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
                             if let pictDict = artDict["pictures"] as? [String:String] {
                                 print(pictDict)
@@ -657,6 +708,7 @@ class DatabaseAccess {
                                     artAux.urlPhotos.append(pic.value)
                                 }
                             }
+                            
                             artAux.id = id
                             returnedArtWorks.append(artAux)
                             count += 1
@@ -702,14 +754,14 @@ class DatabaseAccess {
                 
                 
                 if(stringToCheck.range(of: stringToLocate) != nil || stringToCheck2.range(of: stringToLocate) != nil){
-                    artWork.creatorName = artDict["creatorName"] as! String
-                    artWork.category = artDict["category"] as! String
-                    artWork.height = artDict["height"] as! Double
+                    artWork.creatorName = artDict["creatorName"] as? String
+                    artWork.category = artDict["category"] as? String
+                    artWork.height = artDict["height"] as? Double
                     artWork.id = key
-                    artWork.title =  artDict["title"] as! String
-                    artWork.totalLikes = artDict["likes"] as! Int
-                    artWork.value = artDict["value"] as! Double
-                    artWork.width = artDict["width"] as! Double
+                    artWork.title =  artDict["title"] as? String
+                    artWork.totalLikes = artDict["likes"] as? Int
+                    artWork.value = artDict["value"] as? Double
+                    artWork.width = artDict["width"] as? Double
                     
                     
                     if let picDict = artDict["pictures"] as? [String:String]{
@@ -733,62 +785,7 @@ class DatabaseAccess {
         })
         
     }
-    
-    
-    //mudar essas funcoes
-//    func fetchArtWorksBy(title: String, callback: @escaping((_ success: Bool, _ artWorks: [ArtWork])->())) {
-//        var resultedArtWorks: [ArtWork] = []
-//
-//        artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-//            let artWorksDict = snapshot.value as! [String: Any]
-//            var artWorksDictKeys = Array(artWorksDict.keys)
-//
-//            for key in artWorksDictKeys {
-//                let artDict = artWorksDict[key] as! [String:Any]
-//                let artWork = ArtWork()
-//                artWork.title =  artDict["title"] as! String
-//
-//                //verify strings
-//                let stringToLocate = title.uppercased()
-//                let stringToCheck = artWork.descricao.uppercased()
-//
-//
-//                if(stringToCheck.range(of: stringToLocate) != nil){
-//                    artWork.descricao = artDict["description"] as! String
-//                    artWork.creatorName = artDict["creatorName"] as! String
-//                    artWork.category = artDict["category"] as! String
-//                    artWork.height = artDict["height"] as! Double
-//                    artWork.id = key
-//                    artWork.totalLikes = artDict["likes"] as! Int
-//                    artWork.value = artDict["value"] as! Double
-//                    artWork.width = artDict["width"] as! Double
-//
-//
-//                    if let picDict = artDict["pictures"] as? [String:String]{
-//                        for pic in picDict{
-//                            artWork.urlPhotos.append(pic.value)
-//                        }
-//                    }
-//
-//                    resultedArtWorks.append(artWork)
-//                }
-//
-//            }
-//
-//            callback(true, resultedArtWorks)
-//
-//
-//        }, withCancel: { (error: Error) in
-//            print(error.localizedDescription)
-//            var emptyArray = [ArtWork] ()
-//            callback(false, emptyArray)
-//        })
-//    }
-    
 
-
-    
-    
     //mudar essas funcoes
     func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
         var resultedArtists: [Artist] = []

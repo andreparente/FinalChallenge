@@ -17,6 +17,8 @@ class ArtWorkDetailViewController: UIViewController {
 
     var art: ArtWork!
     
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var informationView: UIView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var creatorNameLbl: UILabel!
@@ -29,11 +31,19 @@ class ArtWorkDetailViewController: UIViewController {
         self.collectionView.dataSource = self
         self.titleLbl.text = art.title
         self.creatorNameLbl.text = art.creatorName
-        self.likesLbl.text = String(art.totalLikes) + " likes"
+        if let likes = art.totalLikes {
+            self.likesLbl.text = String(likes) + " likes"
+        } else {
+            self.likesLbl.text = ""
+        }
         self.descriptionLbl.text = art.descricao
         self.view.bringSubview(toFront: informationView)
+        self.view.bringSubview(toFront: pageControl)
+
         self.informationView.alpha = 0
+        self.pageControl.numberOfPages = self.art.urlPhotos.count
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +67,7 @@ class ArtWorkDetailViewController: UIViewController {
     }
 }
 
-extension ArtWorkDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ArtWorkDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -89,6 +99,14 @@ extension ArtWorkDetailViewController: UICollectionViewDelegate, UICollectionVie
             //tudo certo
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width, height: self.view.frame.height - self.backButton.frame.maxY - 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.pageControl.currentPage = indexPath.section
     }
     
 }

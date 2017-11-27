@@ -46,6 +46,9 @@
                     <state key="normal" title="Log out">
                         <color key="titleColor" red="0.9466831161" green="0.96743434709999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="didTapLogOut:" destination="-1" eventType="touchUpInside" id="0DA-xW-UXb"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.26274509800000001" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

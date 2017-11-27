@@ -41,18 +41,37 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLoginView()
-        setRegisterView()
         
-        setLogo()
+        
+        
         
         // Do  any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if let user = Auth.auth().currentUser {
+            DatabaseAccess.sharedInstance.fetchUserInfoBy(id: user.uid, callback: { (success: Bool) in
+                if success {
+                    self.performSegue(withIdentifier: "LoginToMain", sender: self)
+                } else {
+                    self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
+                }
+            })
+            
+        } else {
+            setLoginView()
+            setRegisterView()
+            
+            setLogo()
+        }
     }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
     func setLogo() {

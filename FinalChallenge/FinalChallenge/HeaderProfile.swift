@@ -16,6 +16,8 @@ class HeaderProfile: UIView {
     @IBOutlet weak var profileNameLbl: UILabel!
     @IBOutlet weak var editProfileButton: UIButton!
  
+    weak var delegate: HeaderProfileDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -45,6 +47,14 @@ class HeaderProfile: UIView {
             }
         }
     }
+    
+    @IBAction func didTapLogOut(_ sender: Any) {
+        delegate?.didTapLogOut()
+    }
+}
+
+protocol HeaderProfileDelegate: class {
+    func didTapLogOut()
 }
 
 

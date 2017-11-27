@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 private let reuseIdentifier = "ProfileCollectionViewCell"
 
@@ -218,6 +220,8 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath as IndexPath) as! CustomProfileHeaderCollectionReusableView
             
+            headerView.headerProfile.delegate = self
+            
             headerView.middleProfile.delegate = self
             headerView.middleProfile.numberOfArtWorksLbl.text = "\(User.sharedInstance.artWorks.count)"
             headerView.middleProfile.numberOfLikesLbl.text = "\(User.sharedInstance.favoriteArtsIds.count)"
@@ -333,6 +337,16 @@ extension ProfileCollectionViewController: MiddleProfileDelegate {
         self.hasChanged = true
         self.collectionView?.reloadData()
         
+    }
+    
+}
+
+extension ProfileCollectionViewController: HeaderProfileDelegate {
+    
+    func didTapLogOut() {
+        
+        try! Auth.auth().signOut()
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
