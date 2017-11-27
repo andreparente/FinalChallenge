@@ -17,6 +17,38 @@
             endingLineNumber = "271"
             landmarkName = "databaseAccessWriteCreateArtwork(artwork:callback:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;, __ObjC.DatabaseReference) -&gt; () in FinalChallenge.DatabaseAccess.databaseAccessWriteCreateArtwork(artwork: FinalChallenge.ArtWork, callback: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
+                  timestampString = "533508720.594804"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "471">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;, __ObjC.DatabaseReference) -&gt; () in FinalChallenge.DatabaseAccess.databaseAccessWriteCreateArtwork(artwork: FinalChallenge.ArtWork, callback: (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
+                  timestampString = "533508720.597907"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "6144">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,7 +122,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/SettingsTesteViewController.swift"
-                  timestampString = "533250803.440989"
+                  timestampString = "533508720.627521"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "104"
@@ -105,7 +137,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/SettingsTesteViewController.swift"
-                  timestampString = "533250803.444028"
+                  timestampString = "533508720.63071"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
@@ -113,6 +145,22 @@
                   offsetFromSymbolStart = "26">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/ProfileCollectionViewController.swift"
+            timestampString = "533508730.568748"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "didTapLogOut()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
 
 private let reuseIdentifier = "ProfileCollectionViewCell"
 
@@ -347,6 +348,9 @@ extension ProfileCollectionViewController: HeaderProfileDelegate {
         
         try! Auth.auth().signOut()
         self.dismiss(animated: true, completion: nil)
+        FBSDKLoginManager().logOut()
+        FBSDKAccessToken.setCurrent(nil)
+        
     }
     
 }
