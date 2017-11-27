@@ -244,7 +244,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             return UIView() as! UICollectionReusableView
             
         default:
-            
+            return UIView() as! UICollectionReusableView
             assert(false, "Unexpected element kind")
         }
     }
