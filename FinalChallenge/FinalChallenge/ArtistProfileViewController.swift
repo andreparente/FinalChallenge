@@ -25,10 +25,13 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         emailButton.layer.shadowColor = UIColor.black.cgColor
         emailButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         emailButton.layer.shadowRadius = 3
+        emailButton.isHidden = true
         
         followButton.layer.shadowColor = UIColor.black.cgColor
         followButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         followButton.layer.shadowRadius = 3
+        self.followButton.setTitle("Follow", for: .normal)
+
         
         
         if User.sharedInstance.favoriteArtistsIds.contains(artist.id) {
@@ -56,10 +59,12 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     
     @IBAction func didTapFollowArtist(_ sender: UIButton) {
         //fazer animação
+        followButton.setTitle("Unfollow", for: .normal)
         DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
             if success {
                 print(response)
             } else {
+                self.followButton.setTitle("Follow", for: .normal)
                 print(response)
             }
         })

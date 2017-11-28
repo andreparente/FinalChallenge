@@ -481,8 +481,8 @@
 		8A9548E81F55EA9600FDA06A /* HomeTab */ = {
 			isa = PBXGroup;
 			children = (
-				8AB032831FA26719000CCBC0 /* Artists */,
 				8A40BC731F55B96D00A12EBA /* HomeTVC.swift */,
+				8AB032831FA26719000CCBC0 /* Artists */,
 				8A1DA3DC1FB5D0D400989BAF /* FavoriteArts */,
 				8A9548F21F56DE9F00FDA06A /* Artists */,
 				8A9548ED1F55F51500FDA06A /* Categories */,

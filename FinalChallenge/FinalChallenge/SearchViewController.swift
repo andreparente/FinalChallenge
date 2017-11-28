@@ -14,6 +14,7 @@ class SearchViewController: YNSearchViewController, YNSearchDelegate {
 
     var searchText: String!
 
+    var categoryButtonClicked: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         let ynSearch = YNSearch()
@@ -22,11 +23,15 @@ class SearchViewController: YNSearchViewController, YNSearchDelegate {
         self.ynSearchinit()
 
         self.delegate = self
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         self.setYNCategoryButtonType(type: .border)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.categoryButtonClicked = false
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +50,7 @@ class SearchViewController: YNSearchViewController, YNSearchDelegate {
     }
     
     func ynCategoryButtonClicked(text: String) {
+        self.categoryButtonClicked = true
         self.pushViewController(text: text)
         print(text)
     }
@@ -91,6 +97,7 @@ class SearchViewController: YNSearchViewController, YNSearchDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "SearchToResults" {
             let vc = segue.destination as! ResultsTVC
+            vc.isCategory = categoryButtonClicked
             vc.word = searchText
         }
     }

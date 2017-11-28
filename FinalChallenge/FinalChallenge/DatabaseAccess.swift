@@ -486,7 +486,7 @@ class DatabaseAccess {
     }
     
     func fetchFollowedArtistsFor(user:User, callback: @escaping((_ success: Bool, _ response: String)->())){
-        
+        var auxArtists: [Artist] = []
         for artistId in user.favoriteArtistsIds{
             self.usersRef?.child(artistId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
                 
@@ -508,9 +508,9 @@ class DatabaseAccess {
                 }
                 //TEST END HERE
                 
-                user.favoriteArtists.append(artist)
-                
+                auxArtists.append(artist)
                 if(artistId == user.favoriteArtistsIds.last){
+                    user.favoriteArtists = auxArtists
                     callback(true, "funcionou")
                 }
                 
@@ -577,7 +577,7 @@ class DatabaseAccess {
     }
     
     func fetchLikedArtWorksFor(user:User, callback: @escaping((_ success: Bool, _ response: String)->())){
-        
+        var auxArtWorks: [ArtWork] = []
         for artId in user.favoriteArtsIds {
             self.artWorksRef?.child(artId).observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
                 
@@ -611,11 +611,11 @@ class DatabaseAccess {
                     let picURL = picUrl.value
                     artWork.urlPhotos.append(picURL)
                 }
-                
-                user.favoriteArts.append(artWork)
+                auxArtWorks.append(artWork)
                 print(artWork)
                 
                 if(artId == user.favoriteArtsIds.last){
+                    user.favoriteArts = auxArtWorks
                     callback(true, "funcionou")
                 }
             }, withCancel: { (error:Error) in

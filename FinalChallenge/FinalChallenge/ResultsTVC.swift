@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class ResultsTVC: UITableViewController {
 
+    var isCategory: Bool!
+    
     var word: String!
     
     var artistsResult: [Artist] = []
@@ -30,29 +32,42 @@ class ResultsTVC: UITableViewController {
         print("PALAVRA A PROCURAR:: ", word)
 
         
-        DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
-            if success {
-                print("entrou no callback")
-                print(artWorks)
-                self.artWorksResult = artWorks
-                self.tableView.reloadSections([1], with: .fade)
-            } else {
-                
+        if isCategory {
+            
+            DatabaseAccess.sharedInstance.fetchArtWorksFor(category: word, callback: { (success: Bool, response: String, artWorks: [ArtWork]) in
+                if success {
+                    print("entrou no callback")
+                    print(artWorks)
+                    self.artWorksResult = artWorks
+                    self.tableView.reloadSections([0], with: .fade)
+                } else {
+                    
+                }
+            })            
+        } else {
+            DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
+                if success {
+                    print("entrou no callback")
+                    print(artWorks)
+                    self.artWorksResult = artWorks
+                    self.tableView.reloadSections([1], with: .fade)
+                } else {
+                    
+                }
+            }
+            
+            DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
+                if success {
+                    print("entrou no callback")
+                    print(artists)
+                    self.artistsResult = artists
+                    self.tableView.reloadSections([0], with: .fade)
+                } else {
+                    
+                }
             }
         }
-        
-        DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
-            if success {
-                print("entrou no callback")
-                print(artists)
-                self.artistsResult = artists
-                self.tableView.reloadSections([0], with: .fade)
-            } else {
 
-            }
-        }
-        
-    
         //query pra titulo de obra de arte
         // ---------------------------------------------------------------------------
         // CHAMAR NO CALLBACK:::: self.tableView.reloadSections([1], with: .none)
@@ -72,62 +87,97 @@ class ResultsTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        if isCategory {
+            return 1
+        } else {
+            return 2
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            return artistsResult.count
-        } else {
+        if isCategory {
             return artWorksResult.count
+        } else {
+            if section == 0 {
+                return artistsResult.count
+            } else {
+                return artWorksResult.count
+            }
         }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 1 {
-             let cell = tableView.dequeueReusableCell(withIdentifier: "ResultedArtWorkCell", for: indexPath) as! ResultedArtWorkTableViewCell
+        if isCategory {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ResultedArtWorkCell", for: indexPath) as! ResultedArtWorkTableViewCell
             cell.title.text = artWorksResult[indexPath.row].title
             cell.creatorName.text = artWorksResult[indexPath.row].creatorName
             cell.artWorkImage.downloadedFrom(link: artWorksResult[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
             cell.artWorkImage.layer.masksToBounds = true
             return cell
-        } else {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistTableViewCell
-            cell.name.text = artistsResult[indexPath.row].name
-            cell.picture?.downloadedFrom(link: artistsResult[indexPath.row].profilePictureURL, contentMode: .scaleAspectFill)
-            cell.picture.layer.masksToBounds = true
-            cell.picture.layer.cornerRadius = cell.picture.frame.width/2
 
-            return cell
+        } else {
+            if indexPath.section == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ResultedArtWorkCell", for: indexPath) as! ResultedArtWorkTableViewCell
+                cell.title.text = artWorksResult[indexPath.row].title
+                cell.creatorName.text = artWorksResult[indexPath.row].creatorName
+                cell.artWorkImage.downloadedFrom(link: artWorksResult[indexPath.row].urlPhotos.first!, contentMode: .scaleAspectFill)
+                cell.artWorkImage.layer.masksToBounds = true
+                return cell
+            } else {
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistTableViewCell
+                cell.name.text = artistsResult[indexPath.row].name
+                cell.picture?.downloadedFrom(link: artistsResult[indexPath.row].profilePictureURL, contentMode: .scaleAspectFill)
+                cell.picture.layer.masksToBounds = true
+                cell.picture.layer.cornerRadius = cell.picture.frame.width/2
+                
+                return cell
+            }
         }
     }
     
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 110
-        } else {
+        
+        if isCategory {
             return 200
+        } else {
+            if indexPath.section == 0 {
+                return 110
+            } else {
+                return 200
+            }
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
-        let title = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width - 30, height: 30))
-        view.addSubview(title)
-        title.textColor = UIColor.vitrineDarkBlue
-        if section == 0 {
-            title.text = "Criadores"
-        } else {
-            title.text = "Obras"
-        }
-        title.font = UIFont(name: "Lato-Regular", size: 14)
         
-        return view
+        if isCategory {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
+            let title = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width - 30, height: 30))
+            view.addSubview(title)
+            title.textColor = UIColor.vitrineDarkBlue
+            title.text = "Obras"
+            title.font = UIFont(name: "Lato-Regular", size: 14)
+            return view
+        } else {
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
+            let title = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width - 30, height: 30))
+            view.addSubview(title)
+            title.textColor = UIColor.vitrineDarkBlue
+            if section == 0 {
+                title.text = "Criadores"
+            } else {
+                title.text = "Obras"
+            }
+            title.font = UIFont(name: "Lato-Regular", size: 14)
+            
+            return view
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

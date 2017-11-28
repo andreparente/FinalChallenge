@@ -28,10 +28,16 @@ class User {
     var typeOfGallery: String!
     var isArtist: Bool!
     
+    var didAddArtWork: Bool = false
+    var didLikeArtWork: Bool = false
+    var didFavoriteArtist: Bool = false
+    
     private init() {
         self.name = ""
         self.email = ""
     }
+    
+    
     
     init (name:String, email: String){
         self.name = name
