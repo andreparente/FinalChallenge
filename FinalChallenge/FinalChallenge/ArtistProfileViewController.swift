@@ -50,8 +50,12 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         }
         nameLbl.text = artist.name
         emailLbl.text = artist.email
-        //setar telefone
         
+        //setar telefone OLENKA
+//        if let telefone = artist.tel1 {
+//            self.telefoneLbl.text = telefone
+//        }
+//        
         if let picture = artist.profilePictureURL {
             if picture != "" {
                 if self.artist.cachedImage != nil {

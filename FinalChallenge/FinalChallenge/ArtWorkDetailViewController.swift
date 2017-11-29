@@ -36,6 +36,14 @@ class ArtWorkDetailViewController: UIViewController {
         } else {
             self.likesLbl.text = ""
         }
+        
+        if let value = art.value {
+            if value != 0 {
+                self.likesLbl.text = "R$ \(value)"
+            }
+        }
+        
+        
         self.descriptionLbl.text = art.descricao
         self.view.bringSubview(toFront: informationView)
         self.view.bringSubview(toFront: pageControl)

@@ -211,7 +211,18 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             cell.artistImage.isHidden = false
             cell.artistNameLbl.isHidden = false
             cell.artistNameLbl.text = User.sharedInstance.favoriteArtists[indexPath.item].name
-            cell.artistImage.downloadedFrom(link: User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL, contentMode: .scaleAspectFill)
+            if User.sharedInstance.favoriteArtists[indexPath.item].cachedImage == nil {
+                if User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL == "" {
+                    cell.artistImage.image = UIImage(named: "DefaultProfile")
+                    User.sharedInstance.favoriteArtists[indexPath.item].cachedImage = UIImage(named: "DefaultProfile")
+                } else {
+                    cell.artistImage.downloadedFrom(url: URL(string: User.sharedInstance.favoriteArtists[indexPath.item].profilePictureURL)!, contentMode: .scaleAspectFill, callback: { (img: UIImage?) in
+                        User.sharedInstance.favoriteArtists[indexPath.item].cachedImage = img
+                    })
+                }
+            } else {
+                cell.artistImage.image = User.sharedInstance.favoriteArtists[indexPath.item].cachedImage
+            }
             cell.artistImage.layer.masksToBounds = true
             cell.artistImage.layer.cornerRadius = cell.artistImage.frame.width/2
         }
