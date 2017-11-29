@@ -60,7 +60,17 @@ class ArtistsTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistTableViewCell
         let artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
         // Configure the cell...
-        cell.picture.downloadedFrom(link: artist.profilePictureURL, contentMode: .scaleAspectFill)
+        
+        if let picture = artist.profilePictureURL {
+            if artist.cachedImage != nil {
+                cell.picture.image = artist.cachedImage
+                cell.picture.contentMode = .scaleAspectFill
+            } else {
+                cell.picture.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                    artist.cachedImage = image
+                }
+            }
+        }
         cell.picture.layer.masksToBounds = true
         cell.picture.layer.cornerRadius = cell.picture.frame.width/2
         cell.name.text = artist.name

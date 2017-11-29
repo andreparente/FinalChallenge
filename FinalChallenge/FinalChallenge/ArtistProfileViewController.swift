@@ -54,7 +54,15 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         
         if let picture = artist.profilePictureURL {
             if picture != "" {
-                profileImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
+                if self.artist.cachedImage != nil {
+                    profileImage.image = self.artist.cachedImage
+                } else {
+                    profileImage.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill, callback: { (image: UIImage?) in
+                        if image != nil {
+                            self.artist.cachedImage = image
+                        }
+                    })
+                }
             }
         }
         

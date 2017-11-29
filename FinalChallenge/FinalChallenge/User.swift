@@ -21,6 +21,7 @@ class User {
     var favoriteArtists: [Artist] = []
     var id: String!
     var profilePictureURL: String!
+    var cachedImage: UIImage?
     var totalFollowers: Int!
     //Singleton!
     static let sharedInstance = User()

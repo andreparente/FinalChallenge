@@ -55,8 +55,16 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         cell.profileImage.layer.cornerRadius = cell.profileImage.frame.width/2
         cell.profileImage.layer.masksToBounds = true
         if let picture = DatabaseAccess.sharedInstance.artists[indexPath.item].profilePictureURL {
-            cell.profileImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
+            if DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage != nil {
+                cell.profileImage.image = DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage
+            } else {
+                cell.profileImage.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                    DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = image
+                }
+            }
         }
+        
+        
         cell.nameLbl.text = DatabaseAccess.sharedInstance.artists[indexPath.item].name
         
         return cell

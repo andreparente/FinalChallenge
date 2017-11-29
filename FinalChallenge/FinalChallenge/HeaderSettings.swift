@@ -37,7 +37,14 @@ class HeaderSettings: UIView {
             if imageString == "" {
                 
             } else {
-                self.profileImageView.downloadedFrom(link: imageString, contentMode: .scaleAspectFill)
+                if User.sharedInstance.cachedImage != nil {
+                    self.profileImageView.image = User.sharedInstance.cachedImage
+                } else {
+                    self.profileImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                        User.sharedInstance.cachedImage = image
+                    }
+                }
+
                 self.profileImageView.layer.masksToBounds = true
                 self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width/2
             }

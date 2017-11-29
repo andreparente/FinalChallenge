@@ -108,7 +108,7 @@ extension UILabel {
 }
 
 extension UIImageView: URLSessionDelegate {
-    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit) {
+    func downloadedFrom(url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, callback: @escaping((_ image: UIImage?)->())) {
         contentMode = mode
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
         let loading = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -135,6 +135,7 @@ extension UIImageView: URLSessionDelegate {
             DispatchQueue.main.async() { () -> Void in
                 loading.stopAnimating()
                 self.image = image
+                callback(image)
             }
             }.resume()
     }

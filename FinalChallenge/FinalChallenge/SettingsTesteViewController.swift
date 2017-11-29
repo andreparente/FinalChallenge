@@ -21,8 +21,17 @@ class SettingsTesteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.perfilImageView.downloadedFrom(link: User.sharedInstance.profilePictureURL, contentMode: .scaleAspectFill)
         self.perfilImageView.layer.masksToBounds = true
+        
+        if User.sharedInstance.cachedImage != nil {
+            self.perfilImageView.image = User.sharedInstance.cachedImage
+            self.perfilImageView.contentMode = .scaleAspectFill
+        } else {
+            self.perfilImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                User.sharedInstance.cachedImage = image
+            }
+        }
+        
         
         
         
@@ -126,12 +135,20 @@ extension SettingsTesteViewController: UINavigationControllerDelegate, UIImagePi
         imagePicker.dismiss(animated: true, completion: nil)
         
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            //fazer algo OLENKA
+            
             DatabaseAccess.sharedInstance.uploadProfileImage(image: picture, callback: { (success: Bool, response: String) in
                 if success {
                     //deu certo pra guardar imagem
                     ("img updated")
-                    self.perfilImageView.downloadedFrom(link: User.sharedInstance.profilePictureURL)
+                    User.sharedInstance.cachedImage = picture
+                    if User.sharedInstance.cachedImage != nil {
+                        self.perfilImageView.image = User.sharedInstance.cachedImage
+                        self.perfilImageView.contentMode = .scaleAspectFill
+                    } else {
+                        self.perfilImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                            User.sharedInstance.cachedImage = image
+                        }
+                    }
                 } else {
                     //deu ruim pra guardar imagem
                     self.showAlert(title: "Erro", message: "Não foi possível carregar sua imagem, tente novamente mais tarde")

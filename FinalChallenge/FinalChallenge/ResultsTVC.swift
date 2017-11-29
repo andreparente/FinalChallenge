@@ -130,7 +130,17 @@ class ResultsTVC: UITableViewController {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistTableViewCell
                 cell.name.text = artistsResult[indexPath.row].name
-                cell.picture?.downloadedFrom(link: artistsResult[indexPath.row].profilePictureURL, contentMode: .scaleAspectFill)
+                
+                if let picture = artistsResult[indexPath.row].profilePictureURL {
+                    if artistsResult[indexPath.row].cachedImage != nil {
+                        cell.picture.image = artistsResult[indexPath.row].cachedImage
+                        cell.picture.contentMode = .scaleAspectFill
+                    } else {
+                        cell.picture.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                            self.artistsResult[indexPath.row].cachedImage = image
+                        }
+                    }
+                }
                 cell.picture.layer.masksToBounds = true
                 cell.picture.layer.cornerRadius = cell.picture.frame.width/2
                 
