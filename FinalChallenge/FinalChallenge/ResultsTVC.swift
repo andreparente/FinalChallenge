@@ -43,7 +43,9 @@ class ResultsTVC: UITableViewController {
                 } else {
                     
                 }
-            })            
+            })
+            
+            
         } else {
             DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
                 if success {
@@ -195,17 +197,27 @@ class ResultsTVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
-            modal.artist = self.artistsResult[indexPath.row]
-            self.present(modal, animated: true, completion: nil)
-        } else {
+        if isCategory{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
             modal.art = self.artWorksResult[indexPath.row]
             self.present(modal, animated: true, completion: nil)
         }
+            
+        else{
+            if indexPath.section == 0 {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
+                modal.artist = self.artistsResult[indexPath.row]
+                self.present(modal, animated: true, completion: nil)
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
+                modal.art = self.artWorksResult[indexPath.row]
+                self.present(modal, animated: true, completion: nil)
+            }
+        }
+        
     }
 
     /*

@@ -76,7 +76,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     
     func goToSettings() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsTesteViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsTVC
         self.present(vc, animated: true, completion: nil)
     }
     
