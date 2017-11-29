@@ -75,7 +75,8 @@ class AddArtWorkTVC: UITableViewController {
                     let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
                         (alert: UIAlertAction!) -> Void in
                         self.navigationController?.popViewController(animated: true)
-                        
+                        User.sharedInstance.didAddArtWork = true
+ 
                     })
                     // 3
                     optionMenu.addAction(okAction)

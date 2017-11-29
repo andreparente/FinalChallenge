@@ -66,6 +66,9 @@
 		8A40BC7F1F55BD3400A12EBA /* HeaderProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC7E1F55BD3400A12EBA /* HeaderProfile.swift */; };
 		8A40BC811F55C4D000A12EBA /* MiddleProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */; };
 		8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A40BC821F55C76D00A12EBA /* MiddleProfile.swift */; };
+		8A4293DB1FCE3C4500284704 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4293DA1FCE3C4500284704 /* SettingsTVC.swift */; };
+		8A4293DE1FCE42C600284704 /* HeaderSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A4293DD1FCE42C600284704 /* HeaderSettings.xib */; };
+		8A4293E01FCE456F00284704 /* HeaderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4293DF1FCE456F00284704 /* HeaderSettings.swift */; };
 		8A604BEA1FCC87CA00566694 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A604BE91FCC87CA00566694 /* PageViewController.swift */; };
 		8A604BEC1FCC896F00566694 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A604BEB1FCC896F00566694 /* DetailPictureViewController.swift */; };
 		8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */; };
@@ -189,6 +192,9 @@
 		8A40BC7E1F55BD3400A12EBA /* HeaderProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderProfile.swift; sourceTree = "<group>"; };
 		8A40BC801F55C4D000A12EBA /* MiddleProfile.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleProfile.xib; sourceTree = "<group>"; };
 		8A40BC821F55C76D00A12EBA /* MiddleProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleProfile.swift; sourceTree = "<group>"; };
+		8A4293DA1FCE3C4500284704 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
+		8A4293DD1FCE42C600284704 /* HeaderSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderSettings.xib; sourceTree = "<group>"; };
+		8A4293DF1FCE456F00284704 /* HeaderSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderSettings.swift; sourceTree = "<group>"; };
 		8A604BE91FCC87CA00566694 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		8A604BEB1FCC896F00566694 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
 		8A70BA141F6BF21C00BE9BE7 /* ArtWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtWork.swift; sourceTree = "<group>"; };
@@ -426,6 +432,16 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		8A4293DC1FCE42B600284704 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8A4293DA1FCE3C4500284704 /* SettingsTVC.swift */,
+				8A4293DD1FCE42C600284704 /* HeaderSettings.xib */,
+				8A4293DF1FCE456F00284704 /* HeaderSettings.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		8A70BA181F704F2500BE9BE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +525,7 @@
 		8AA615A61F8BF12500E54815 /* ProfileTab */ = {
 			isa = PBXGroup;
 			children = (
+				8A4293DC1FCE42B600284704 /* Settings */,
 				8A40BC7B1F55BAE900A12EBA /* Profile */,
 				8A0465981FA10EC000516AD8 /* AddArtWork */,
 				8A3DF3841F7E5A1F00A59A05 /* ProfileCollectionViewController.swift */,
@@ -780,6 +797,7 @@
 				8A1DA3FF1FB5D93700989BAF /* Lato-Medium.ttf in Resources */,
 				8AA615961F8BD46600E54815 /* AddArtWorkTableViewCell.xib in Resources */,
 				8A328F951FC4AF5D006CE275 /* ArtistsHeader.xib in Resources */,
+				8A4293DE1FCE42C600284704 /* HeaderSettings.xib in Resources */,
 				8ACFD69D1F44E561008DF502 /* GoogleService-Info.plist in Resources */,
 				8A1DA3FE1FB5D93700989BAF /* Lato-LightItalic.ttf in Resources */,
 			);
@@ -1014,6 +1032,7 @@
 				8A76590E1FBA0E7700C9BA4A /* FooterCategoryCollectionReusableView.swift in Sources */,
 				8A70BA151F6BF21D00BE9BE7 /* ArtWork.swift in Sources */,
 				8A3DF37E1F7C0DD500A59A05 /* ArtWorkCollectionViewCell.swift in Sources */,
+				8A4293DB1FCE3C4500284704 /* SettingsTVC.swift in Sources */,
 				8A328F991FC4B01A006CE275 /* ArtistsHeader.swift in Sources */,
 				26C2B96A1F5CD1AB00666E8D /* DatabaseAccess.swift in Sources */,
 				8A40BC831F55C76D00A12EBA /* MiddleProfile.swift in Sources */,
@@ -1028,6 +1047,7 @@
 				8AD744F01F682F8B00DC0F75 /* HoshiTextField.swift in Sources */,
 				8A0465961FA10CEE00516AD8 /* AddArtWorkCategoriesCVC.swift in Sources */,
 				8AA615951F8BD46600E54815 /* AddArtWorkTableViewCell.swift in Sources */,
+				8A4293E01FCE456F00284704 /* HeaderSettings.swift in Sources */,
 				8AD744F61F682F8B00DC0F75 /* MinoruTextField.swift in Sources */,
 				8A1DA3DF1FB5D1F600989BAF /* FavoriteArtsTableViewCell.swift in Sources */,
 				8A604BEC1FCC896F00566694 /* DetailPictureViewController.swift in Sources */,

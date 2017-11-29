@@ -13,6 +13,9 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
 
     var artist: Artist!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var telefoneLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var artWorkCarousel: iCarousel!
     @IBOutlet weak var emailButton: UIButton!
@@ -46,8 +49,17 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
             artWorkCarousel.type = .linear
         }
         nameLbl.text = artist.name
-
-        //chamar fetch para pegar as artes a partir de um user/ir no nó do user, pegar as ids das artes, ir no nó das artes, e recuperar as infos. [OLENKA]
+        emailLbl.text = artist.email
+        //setar telefone
+        
+        if let picture = artist.profilePictureURL {
+            if picture != "" {
+                profileImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
+            }
+        }
+        
+        profileImage.layer.cornerRadius = profileImage.frame.width/2
+        profileImage.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
     }
@@ -63,6 +75,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
             if success {
                 print(response)
+                User.sharedInstance.didFavoriteArtist = true
             } else {
                 self.followButton.setTitle("Follow", for: .normal)
                 print(response)
@@ -125,6 +138,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         DatabaseAccess.sharedInstance.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
             if success {
                 print("DEU CERTO PORRA")
+                User.sharedInstance.didLikeArtWork = true
             } else {
                 print(response)
             }

@@ -46,14 +46,13 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             }
         })
         
-        if User.sharedInstance.isArtist{
+        if User.sharedInstance.isArtist {
             let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
             artist.id = User.sharedInstance.id
             artist.artWorks = User.sharedInstance.artWorks
             DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
                 if success {
                     self.collectionView?.reloadSections([0])
-                    User.sharedInstance.didAddArtWork = true
                 } else {
                     print("erro no fetchArtworks for artist")
                     self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
@@ -88,13 +87,14 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if User.sharedInstance.didFavoriteArtist{
+        
+        if User.sharedInstance.didLikeArtWork {
             DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
                 if success {
                     DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
                         if success {
                             self.collectionView?.reloadSections([0])
-                            User.sharedInstance.didFavoriteArtist = false
+                            User.sharedInstance.didLikeArtWork = false
                         } else {
                             print("error:   ", response)
                             self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
@@ -106,7 +106,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             }
         }
         
-        if User.sharedInstance.didFavoriteArtist{
+        if User.sharedInstance.didFavoriteArtist {
             DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
                 if success{
                     self.collectionView?.reloadSections([0])
@@ -120,7 +120,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             })
         }
         
-        if User.sharedInstance.isArtist && User.sharedInstance.didLikeArtWork{
+        if User.sharedInstance.isArtist && User.sharedInstance.didAddArtWork {
             let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
             artist.id = User.sharedInstance.id
             artist.artWorks = User.sharedInstance.artWorks
@@ -318,7 +318,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
             modal.artist = User.sharedInstance.favoriteArtists[indexPath.item]
-            self.present(modal, animated: true, completion: nil)            
+            self.present(modal, animated: true, completion: nil)
         }
     }
     

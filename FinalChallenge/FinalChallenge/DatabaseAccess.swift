@@ -512,7 +512,6 @@ class DatabaseAccess {
                 if(artistId == user.favoriteArtistsIds.last){
                     user.favoriteArtists = auxArtists
                     callback(true, "funcionou")
-                    User.sharedInstance.didFavoriteArtist = true
                 }
                 
             }, withCancel: { (error:Error) in
@@ -569,7 +568,6 @@ class DatabaseAccess {
             } else {
                 user.favoriteArtsIds = []
                 callback(true,"")
-                User.sharedInstance.didLikeArtWork = true
             }
             
         }, withCancel: { (error: Error) in
