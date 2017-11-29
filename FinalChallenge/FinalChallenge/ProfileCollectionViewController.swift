@@ -20,8 +20,46 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
+            if success {
+                DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                    if success {
+                        self.collectionView?.reloadSections([0])
+                    } else {
+                        print("error:   ", response)
+                        self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+                    }
+                })
+            } else {
+                print("deu erro")
+            }
+        }
         
+        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+            if success{
+                self.collectionView?.reloadSections([0])
+            }
+            else{
+                print("deu erro")
+                self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+                
+            }
+        })
         
+        if User.sharedInstance.isArtist{
+            let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
+            artist.id = User.sharedInstance.id
+            artist.artWorks = User.sharedInstance.artWorks
+            DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
+                if success {
+                    self.collectionView?.reloadSections([0])
+                    User.sharedInstance.didAddArtWork = true
+                } else {
+                    print("erro no fetchArtworks for artist")
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+                }
+            }
+        }
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -50,40 +88,46 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
-            if success {
-                DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
-                    if success {
-                        self.collectionView?.reloadSections([0])
-                    } else {
-                        print("error:   ", response)
-                        self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
-                    }
-                })
-            } else {
-                print("deu erro")
+        if User.sharedInstance.didFavoriteArtist{
+            DatabaseAccess.sharedInstance.fetchLikedArtWorksIdsFor(user: User.sharedInstance) { (success: Bool, response: String) in
+                if success {
+                    DatabaseAccess.sharedInstance.fetchLikedArtWorksFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                        if success {
+                            self.collectionView?.reloadSections([0])
+                            User.sharedInstance.didFavoriteArtist = false
+                        } else {
+                            print("error:   ", response)
+                            self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+                        }
+                    })
+                } else {
+                    print("deu erro")
+                }
             }
         }
         
-        DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
-            if success{
-                self.collectionView?.reloadSections([0])
-            }
-            else{
-                print("deu erro")
-                self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
-                
-            }
-        })
+        if User.sharedInstance.didFavoriteArtist{
+            DatabaseAccess.sharedInstance.fetchFollowedArtistsFor(user: User.sharedInstance, callback: { (success: Bool, response: String) in
+                if success{
+                    self.collectionView?.reloadSections([0])
+                    User.sharedInstance.didFavoriteArtist = false
+                }
+                else{
+                    print("deu erro")
+                    self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")
+                    
+                }
+            })
+        }
         
-        if User.sharedInstance.isArtist {
+        if User.sharedInstance.isArtist && User.sharedInstance.didLikeArtWork{
             let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
             artist.id = User.sharedInstance.id
             artist.artWorks = User.sharedInstance.artWorks
             DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
                 if success {
                     self.collectionView?.reloadSections([0])
+                    User.sharedInstance.didAddArtWork = false
                 } else {
                     print("erro no fetchArtworks for artist")
                     self.showAlert(title: "Erro", message: "Não foi possível carregar todas as informações, tente novamente mais tarde")

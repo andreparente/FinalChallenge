@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/DatabaseAccess.swift"
-            timestampString = "533190113.53825"
+            timestampString = "533615787.160957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "271"
@@ -26,7 +26,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
-                  timestampString = "533508720.594804"
+                  timestampString = "533615787.194061"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "271"
@@ -41,7 +41,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/DatabaseAccess.swift"
-                  timestampString = "533508720.597907"
+                  timestampString = "533615787.197566"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "271"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/DatabaseAccess.swift"
-            timestampString = "533190113.538424"
+            timestampString = "533615787.161021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "273"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/DatabaseAccess.swift"
-            timestampString = "533190113.538581"
+            timestampString = "533615787.161067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "276"
@@ -122,7 +122,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/SettingsTesteViewController.swift"
-                  timestampString = "533508720.627521"
+                  timestampString = "533615787.231021"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "104"
@@ -137,7 +137,7 @@
                   moduleName = "FinalChallenge"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/SettingsTesteViewController.swift"
-                  timestampString = "533508720.63071"
+                  timestampString = "533615787.234633"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
@@ -154,13 +154,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FinalChallenge/ProfileCollectionViewController.swift"
-            timestampString = "533508730.568748"
+            timestampString = "533615787.161142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
-            landmarkName = "didTapLogOut()"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/ProfileCollectionViewController.swift"
+            timestampString = "533615787.161476"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/ProfileCollectionViewController.swift"
+            timestampString = "533615787.161717"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "viewDidAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FinalChallenge/ProfileCollectionViewController.swift"
+            timestampString = "533615787.161948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FinalChallenge.ProfileCollectionViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/ProfileCollectionViewController.swift"
+                  timestampString = "533615787.2615"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "90">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.String) -&gt; () in FinalChallenge.ProfileCollectionViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "FinalChallenge"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MicroSSD/FinalChallenge/FinalChallenge/FinalChallenge/ProfileCollectionViewController.swift"
+                  timestampString = "533615787.264982"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
