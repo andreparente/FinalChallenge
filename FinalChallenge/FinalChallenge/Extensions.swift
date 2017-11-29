@@ -129,6 +129,7 @@ extension UIImageView: URLSessionDelegate {
                 else {
                     DispatchQueue.main.async() { () -> Void in
                         loading.stopAnimating()
+                        self.image = UIImage(named: "DefaultProfile")
                     }
                     return
                 }
@@ -142,7 +143,8 @@ extension UIImageView: URLSessionDelegate {
     
     func downloadedFrom(link: String, contentMode mode: UIViewContentMode = .scaleAspectFit) {
         guard let url = URL(string: link) else { return }
-        downloadedFrom(url: url, contentMode: mode)
+        downloadedFrom(url: url, contentMode: mode) { (image: UIImage?) in
+        }
     }
     
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {

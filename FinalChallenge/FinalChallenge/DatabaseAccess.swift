@@ -675,54 +675,55 @@ class DatabaseAccess {
         artsRef?.child(category).queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
             
             if snapshot != nil {
-                let dict = snapshot.value as! [String: String]
-                for each in dict {
-                    ids.append(each.key)
-                }
-                
-                let totalArts = ids.count
-                var count = 0
-                for id in ids {
-                    let artAux = ArtWork()
-                    self.artWorksRef?.child(id).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-                        print(snapshot.description)
-                        
-                        if let artDict = snapshot.value as? [String: Any] {
-                            //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
-                            artAux.category = artDict["category"] as? String
-                            artAux.descricao = artDict["description"] as? String
-                            artAux.title = artDict["title"] as? String
+                if let dict = snapshot.value as? [String: String] {
+                    for each in dict {
+                        ids.append(each.key)
+                    }
+                    
+                    let totalArts = ids.count
+                    var count = 0
+                    for id in ids {
+                        let artAux = ArtWork()
+                        self.artWorksRef?.child(id).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+                            print(snapshot.description)
                             
-                            artAux.creatorName = artDict["creatorName"] as? String
-                            artAux.id = id
-                            artAux.totalLikes = artDict["likes"] as? Int ?? 0
-                            artAux.height = artDict["height"] as? Double
-                            artAux.value = artDict["value"] as? Double
-                            artAux.width = artDict["width"] as? Double
-
-                            
-                            //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
-                            if let pictDict = artDict["pictures"] as? [String:String] {
-                                print(pictDict)
-                                for pic in pictDict {
-                                    artAux.urlPhotos.append(pic.value)
+                            if let artDict = snapshot.value as? [String: Any] {
+                                //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
+                                artAux.category = artDict["category"] as? String
+                                artAux.descricao = artDict["description"] as? String
+                                artAux.title = artDict["title"] as? String
+                                
+                                artAux.creatorName = artDict["creatorName"] as? String
+                                artAux.id = id
+                                artAux.totalLikes = artDict["likes"] as? Int ?? 0
+                                artAux.height = artDict["height"] as? Double
+                                artAux.value = artDict["value"] as? Double
+                                artAux.width = artDict["width"] as? Double
+                                
+                                
+                                //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
+                                if let pictDict = artDict["pictures"] as? [String:String] {
+                                    print(pictDict)
+                                    for pic in pictDict {
+                                        artAux.urlPhotos.append(pic.value)
+                                    }
+                                }
+                                
+                                artAux.id = id
+                                returnedArtWorks.append(artAux)
+                                count += 1
+                                
+                                if count == totalArts {
+                                    callback(true, "", returnedArtWorks)
+                                } else {
                                 }
                             }
-                            
-                            artAux.id = id
-                            returnedArtWorks.append(artAux)
-                            count += 1
-                            
-                            if count == totalArts {
-                                callback(true, "", returnedArtWorks)
-                            } else {
-                            }
-                        } 
-                    }, withCancel: { (error: Error) in
-                        print(error.localizedDescription)
-                        callback(false, error.localizedDescription, returnedArtWorks)
-                    })
-                    
+                        }, withCancel: { (error: Error) in
+                            print(error.localizedDescription)
+                            callback(false, error.localizedDescription, returnedArtWorks)
+                        })
+                        
+                    }
                 }
             }
         }, withCancel: { (error: Error) in

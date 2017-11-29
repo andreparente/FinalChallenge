@@ -58,9 +58,16 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
             if DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage != nil {
                 cell.profileImage.image = DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage
             } else {
-                cell.profileImage.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
-                    DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = image
+                
+                if let url = URL(string: picture) {
+                    cell.profileImage.downloadedFrom(url: url, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                        DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = image
+                    }
+                } else {
+                    cell.profileImage.image = UIImage(named: "DefaultProfile")
+                    DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = UIImage(named: "DefaultProfile")
                 }
+                
             }
         }
         

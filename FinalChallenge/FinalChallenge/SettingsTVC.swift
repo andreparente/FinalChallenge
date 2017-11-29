@@ -12,13 +12,37 @@ class SettingsCell: UITableViewCell {
     @IBOutlet weak var txtField: UITextField!
     @IBOutlet weak var label: UILabel!
     
+    var textFieldEndEditingAction: ((String)->Void)?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+
+        self.txtField.delegate = self
+
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+}
+
+extension SettingsCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textFieldEndEditingAction?(textField.text!)
+    }
 }
 
 class SettingsTVC: UITableViewController {
 
     var headerView: HeaderSettings!
     var imagePicker: UIImagePickerController!
-
+    var tel1: String!
+    var tel2: String!
+    var newName: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,13 +85,37 @@ class SettingsTVC: UITableViewController {
         case 0:
             cell.label.text = "Nome: "
             cell.txtField.placeholder = User.sharedInstance.name
+            cell.textFieldEndEditingAction = {
+                (text) in
+                if text == "" {
+                    
+                } else {
+                    self.newName = text
+                }
+            }
         case 1:
             cell.label.text = "Telefone 1: "
             cell.txtField.placeholder = "tel teste"
-            
+            cell.textFieldEndEditingAction = {
+                (text) in
+                if text == "" {
+                    
+                } else {
+                    self.tel1 = text
+                }
+            }
         default:
             cell.label.text = "Telefone 2: "
             cell.txtField.placeholder = "tel teste"
+            
+            cell.textFieldEndEditingAction = {
+                (text) in
+                if text == "" {
+                    
+                } else {
+                    self.tel2 = text
+                }
+            }
         }
 
         // Configure the cell...
@@ -127,6 +175,9 @@ extension SettingsTVC: HeaderSettingsDelegate {
     
     func didTapSaveSettings() {
         var dict = [:] as! [String:Any]
+        dict["name"] = newName
+        dict["tel1"] = tel1
+        dict["tel2"] = tel2
         
         DatabaseAccess.sharedInstance.updateUserProfile(dict: dict) { (success:Bool) in
             if success{
