@@ -74,10 +74,11 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
     func goToSettings() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsTVC
-        self.present(vc, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "ProfileToSettings", sender: self)
     }
     
     

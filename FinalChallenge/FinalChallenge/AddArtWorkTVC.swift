@@ -117,16 +117,16 @@ class AddArtWorkTVC: UITableViewController {
         case 1:
             cell.title.text = "Descrição"
         case 2:
-            cell.title.text = "Altura"
+            cell.title.text = "Altura (cm)"
             cell.txtView.keyboardType = .decimalPad
         case 3:
-            cell.title.text = "Largura"
+            cell.title.text = "Largura (cm)"
             cell.txtView.keyboardType = .decimalPad
         case 4:
-            cell.title.text = "Comprimento"
+            cell.title.text = "Comprimento (cm)"
             cell.txtView.keyboardType = .decimalPad
         default:
-            cell.title.text = "Valor"
+            cell.title.text = "Valor (Opcional)"
             cell.txtView.keyboardType = .decimalPad
         }
         return cell
