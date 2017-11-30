@@ -85,14 +85,7 @@ class ArtistsTVC: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
         modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
-        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: DatabaseAccess.sharedInstance.artists[indexPath.row]) { (success: Bool, response: String) in
-            if success {
-                self.present(modalVC, animated: true, completion: nil)
-            } else {
-                print("erro no fetchArtworks for artist")
-                self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do artista, tente novamente mais tarde")
-            }
-        }
+        self.present(modalVC, animated: true, completion: nil)
     }
 
     /*

@@ -25,6 +25,16 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(artist.artWorks)
+        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
+            if success {
+                self.artWorkCarousel.reloadData()
+            } else {
+                print("erro no fetchArtworks for artist")
+                //self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do criador, tente novamente mais tarde")
+                
+            }
+        }
         emailButton.layer.shadowColor = UIColor.black.cgColor
         emailButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         emailButton.layer.shadowRadius = 3
@@ -52,9 +62,12 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         emailLbl.text = artist.email
         
         //setar telefone OLENKA
+        print(artist.tel1)
         if let telefone = artist.tel1 {
             self.telefoneLbl.text = telefone
             self.telefoneLbl.isHidden = false
+        } else {
+            self.telefoneLbl.isHidden = true
         }
         
         if let picture = artist.profilePictureURL {
@@ -121,21 +134,31 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         //setar a view de acordo com a obra (será a foto inteira?) Esther
         let cellView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - self.headerView.frame.maxX))
         let artWorkImage = UIImageView(frame: CGRect(x: 15, y: 20, width: self.view.frame.width - 30, height: cellView.frame.height - 40))
-        artWorkImage.downloadedFrom(link: artist.artWorks[index].urlPhotos[0], contentMode: .scaleAspectFill)
-        artWorkImage.layer.masksToBounds = true
-        let artWorkTitle = UILabel(frame: CGRect(x: 15, y: artWorkImage.frame.maxY + 5, width: artWorkImage.frame.width, height: 30))
-        artWorkTitle.textColor = .black
-        artWorkTitle.textAlignment = .right
-        artWorkTitle.text = artist.artWorks[index].title
-        cellView.addSubview(artWorkImage)
-        cellView.addSubview(artWorkTitle)
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
-        tap2.numberOfTapsRequired = 2
+        
+            if artist.artWorks[index].urlPhotos.count > 0 {
+                artWorkImage.downloadedFrom(link: artist.artWorks[index].urlPhotos[0], contentMode: .scaleAspectFill)
+                artWorkImage.layer.masksToBounds = true
 
-        cellView.addGestureRecognizer(tap2)
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(singleTapped))
-        tap1.numberOfTapsRequired = 1
-        cellView.addGestureRecognizer(tap1)
+            }
+        
+        if let title = artist.artWorks[index].title {
+            let artWorkTitle = UILabel(frame: CGRect(x: 15, y: artWorkImage.frame.maxY + 5, width: artWorkImage.frame.width, height: 30))
+            artWorkTitle.textColor = .black
+            artWorkTitle.textAlignment = .right
+            artWorkTitle.text = title
+            cellView.addSubview(artWorkImage)
+            cellView.addSubview(artWorkTitle)
+            let tap2 = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+            tap2.numberOfTapsRequired = 2
+            
+            cellView.addGestureRecognizer(tap2)
+            let tap1 = UITapGestureRecognizer(target: self, action: #selector(singleTapped))
+            tap1.numberOfTapsRequired = 1
+            cellView.addGestureRecognizer(tap1)
+        }
+            
+        
+        
         return cellView
     }
     

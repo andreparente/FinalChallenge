@@ -30,12 +30,6 @@ class DatabaseAccess {
     static let sharedInstance = DatabaseAccess()
     
     
-    
-    //FireStore for queries
-    let defaultStore = Firestore.firestore()
-    var artWorksRefFireStore: CollectionReference!
-    var artistsRefFireStore: CollectionReference!
-    
     var categoriesImages: [UIImage] = []
     
     
@@ -57,10 +51,6 @@ class DatabaseAccess {
         
         let storage = Storage.storage()
         self.storageRef = storage.reference()
-        
-        
-        artWorksRefFireStore = defaultStore.collection("artWorks")
-        artistsRefFireStore = defaultStore.collection("users")
         
         
     }
@@ -105,13 +95,13 @@ class DatabaseAccess {
                 let userDict2 = userDict[(Auth.auth().currentUser?.uid)!] as! [String: Any]
                 User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
-                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as? String
                 if userDict2["tel1"] != nil{
-                    User.sharedInstance.tel1 = userDict2["tel1"] as! String
+                    User.sharedInstance.tel1 = userDict2["tel1"] as? String
                 }
                 
                 if userDict2["tel2"] != nil{
-                    User.sharedInstance.tel2 = userDict2["tel2"] as! String
+                    User.sharedInstance.tel2 = userDict2["tel2"] as? String
                 }
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
                 
@@ -147,14 +137,14 @@ class DatabaseAccess {
                 let userDict2 = userDict[(Auth.auth().currentUser?.uid)!] as! [String: Any]
                 User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
-                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as? String
                 
                 if userDict2["tel1"] != nil{
-                    User.sharedInstance.tel1 = userDict2["tel1"] as! String
+                    User.sharedInstance.tel1 = userDict2["tel1"] as? String
                 }
                 
                 if userDict2["tel2"] != nil{
-                    User.sharedInstance.tel2 = userDict2["tel2"] as! String
+                    User.sharedInstance.tel2 = userDict2["tel2"] as? String
                 }
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
                 
@@ -373,11 +363,11 @@ class DatabaseAccess {
                 }
                 
                 if aux["tel1"] != nil{
-                    User.sharedInstance.tel1 = aux["tel1"] as! String
+                    User.sharedInstance.tel1 = aux["tel1"] as? String
                 }
                 
                 if aux["tel2"] != nil{
-                    User.sharedInstance.tel2 = aux["tel2"] as! String
+                    User.sharedInstance.tel2 = aux["tel2"] as? String
                 }
                     
                 else{
@@ -539,12 +529,19 @@ class DatabaseAccess {
                 //TEST END HERE
                 
                 if artistDict["tel1"] != nil{
-                    User.sharedInstance.tel1 = artistDict["tel1"] as! String
+                    User.sharedInstance.tel1 = artistDict["tel1"] as? String
                 }
                 
                 if artistDict["tel2"] != nil{
-                    User.sharedInstance.tel2 = artistDict["tel2"] as! String
+                    User.sharedInstance.tel2 = artistDict["tel2"] as? String
                 }
+                
+                for art in (artistDict["artsId"] as? [String: String])! {
+                    let artWork = ArtWork()
+                    artWork.id = art.key
+                    artist.artWorks.append(artWork)
+                }
+
                 
                 auxArtists.append(artist)
                 if(artistId == user.favoriteArtistsIds.last){
@@ -689,7 +686,7 @@ class DatabaseAccess {
                 if let pictDict = artDict["pictures"] as? [String:String] {
                     print(pictDict)
                     for pic in pictDict{
-                        artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                        artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pic.value)
                     }
                 }
                 
@@ -712,56 +709,54 @@ class DatabaseAccess {
         //fetch nos IDS
         artsRef?.child(category).queryLimited(toFirst: 10).observe(.value, with: { (snapshot: DataSnapshot) in
             
-            if snapshot != nil {
-                if let dict = snapshot.value as? [String: String] {
-                    for each in dict {
-                        ids.append(each.key)
-                    }
-                    
-                    let totalArts = ids.count
-                    var count = 0
-                    for id in ids {
-                        let artAux = ArtWork()
-                        self.artWorksRef?.child(id).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
-                            print(snapshot.description)
+            if let dict = snapshot.value as? [String: String] {
+                for each in dict {
+                    ids.append(each.key)
+                }
+                
+                let totalArts = ids.count
+                var count = 0
+                for id in ids {
+                    let artAux = ArtWork()
+                    self.artWorksRef?.child(id).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+                        print(snapshot.description)
+                        
+                        if let artDict = snapshot.value as? [String: Any] {
+                            //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
+                            artAux.category = artDict["category"] as? String
+                            artAux.descricao = artDict["description"] as? String
+                            artAux.title = artDict["title"] as? String
                             
-                            if let artDict = snapshot.value as? [String: Any] {
-                                //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
-                                artAux.category = artDict["category"] as? String
-                                artAux.descricao = artDict["description"] as? String
-                                artAux.title = artDict["title"] as? String
-                                
-                                artAux.creatorName = artDict["creatorName"] as? String
-                                artAux.id = id
-                                artAux.totalLikes = artDict["likes"] as? Int ?? 0
-                                artAux.height = artDict["height"] as? Double
-                                artAux.value = artDict["value"] as? Double
-                                artAux.width = artDict["width"] as? Double
-                                
-                                
-                                //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
-                                if let pictDict = artDict["pictures"] as? [String:String] {
-                                    print(pictDict)
-                                    for pic in pictDict {
-                                        artAux.urlPhotos.append(pic.value)
-                                    }
-                                }
-                                
-                                artAux.id = id
-                                returnedArtWorks.append(artAux)
-                                count += 1
-                                
-                                if count == totalArts {
-                                    callback(true, "", returnedArtWorks)
-                                } else {
+                            artAux.creatorName = artDict["creatorName"] as? String
+                            artAux.id = id
+                            artAux.totalLikes = artDict["likes"] as? Int ?? 0
+                            artAux.height = artDict["height"] as? Double
+                            artAux.value = artDict["value"] as? Double
+                            artAux.width = artDict["width"] as? Double
+                            
+                            
+                            //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
+                            if let pictDict = artDict["pictures"] as? [String:String] {
+                                print(pictDict)
+                                for pic in pictDict {
+                                    artAux.urlPhotos.append(pic.value)
                                 }
                             }
-                        }, withCancel: { (error: Error) in
-                            print(error.localizedDescription)
-                            callback(false, error.localizedDescription, returnedArtWorks)
-                        })
-                        
-                    }
+                            
+                            artAux.id = id
+                            returnedArtWorks.append(artAux)
+                            count += 1
+                            
+                            if count == totalArts {
+                                callback(true, "", returnedArtWorks)
+                            } else {
+                            }
+                        }
+                    }, withCancel: { (error: Error) in
+                        print(error.localizedDescription)
+                        callback(false, error.localizedDescription, returnedArtWorks)
+                    })
+                    
                 }
             }
         }, withCancel: { (error: Error) in
@@ -778,7 +773,7 @@ class DatabaseAccess {
         
         artWorksRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             let artWorksDict = snapshot.value as! [String: Any]
-            var artWorksDictKeys = Array(artWorksDict.keys)
+            let artWorksDictKeys = Array(artWorksDict.keys)
             
             for key in artWorksDictKeys {
                 let artDict = artWorksDict[key] as! [String:Any]
@@ -819,7 +814,7 @@ class DatabaseAccess {
             
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
-            var emptyArray = [ArtWork] ()
+            let emptyArray = [ArtWork] ()
             callback(false, emptyArray)
         })
         
@@ -831,7 +826,7 @@ class DatabaseAccess {
         
         usersRef?.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             let usersDict = snapshot.value as! [String: Any]
-            var usersDictKeys = Array(usersDict.keys)
+            let usersDictKeys = Array(usersDict.keys)
             
             for key in usersDictKeys {
                 let artistDict = usersDict[key] as! [String:Any]
@@ -852,18 +847,26 @@ class DatabaseAccess {
                             artist.totalFollowers = artistDict["followers"] as! Int
                             
                             if artistDict["tel1"] != nil{
-                                User.sharedInstance.tel1 = artistDict["tel1"] as! String
+                                User.sharedInstance.tel1 = artistDict["tel1"] as? String
                             }
                             
                             if artistDict["tel2"] != nil{
-                                User.sharedInstance.tel2 = artistDict["tel2"] as! String
+                                User.sharedInstance.tel2 = artistDict["tel2"] as? String
                             }
                             
                             
-                            if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
-                                for id in artWorksIdDic{
-                                    artist.artWorksIds.append(id.value)
-                                }
+//                            if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
+//                                for id in artWorksIdDic{
+//                                    let artWork = ArtWork()
+//                                    artWork.id = id.key
+//                                    artist.artWorks.append(artWork)
+//                                }
+//                            }
+                            
+                            for art in (artistDict["artsId"] as? [String: String])! {
+                                let artWork = ArtWork()
+                                artWork.id = art.key
+                                artist.artWorks.append(artWork)
                             }
                             
                             resultedArtists.append(artist)
@@ -884,7 +887,7 @@ class DatabaseAccess {
         
         usersRef!.child(User.sharedInstance.id).updateChildValues(dict, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? 0)
             } else {
                 callback(true)
             }

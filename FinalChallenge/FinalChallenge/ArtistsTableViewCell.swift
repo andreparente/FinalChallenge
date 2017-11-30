@@ -96,15 +96,7 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
         modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
-        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: DatabaseAccess.sharedInstance.artists[indexPath.row]) { (success: Bool, response: String) in
-            if success {
-                self.fatherController.present(modalVC, animated: true, completion: nil)
-            } else {
-                print("erro no fetchArtworks for artist")
-                //self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do criador, tente novamente mais tarde")
-
-            }
-        }
+        self.fatherController.present(modalVC, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -212,9 +212,10 @@ class ResultsTVC: UITableViewController {
         else{
             if indexPath.section == 0 {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
-                modal.artist = self.artistsResult[indexPath.row]
-                self.present(modal, animated: true, completion: nil)
+                let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
+                modalVC.artist = self.artistsResult[indexPath.row]
+                self.present(modalVC, animated: true, completion: nil)
+                
             } else {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
