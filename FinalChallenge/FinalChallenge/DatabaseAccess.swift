@@ -37,7 +37,7 @@ class DatabaseAccess {
     var artistsRefFireStore: CollectionReference!
     
     var categoriesImages: [UIImage] = []
-
+    
     
     private init(){
         usersRef = Database.database().reference()
@@ -61,8 +61,8 @@ class DatabaseAccess {
         
         artWorksRefFireStore = defaultStore.collection("artWorks")
         artistsRefFireStore = defaultStore.collection("users")
-
-
+        
+        
     }
     
     func removeValues() {
@@ -177,7 +177,7 @@ class DatabaseAccess {
             }
         })
     }
-
+    
     
     func uploadProfileImage(image: UIImage, callback: @escaping((_ success: Bool, _ response: String)->())) {
         
@@ -306,18 +306,18 @@ class DatabaseAccess {
                                 
                                 if i == totalCount { //acabaram as imagens
                                     artDict["pictures"] = artwork.urlPhotos
-//                                    self.defaultStore.collection("artWorks").document(artwork.id).setData(artDict, completion: { (error: Error?) in
-//                                        if error != nil {
-//                                            print(error?.localizedDescription ?? 0)
-//                                        } else {
-//                                            print("DEU CERTO O FIRESTORE")
-//                                            callback(true,"DEU CERTO")
-//                                        }
-//                                    })
+                                    //                                    self.defaultStore.collection("artWorks").document(artwork.id).setData(artDict, completion: { (error: Error?) in
+                                    //                                        if error != nil {
+                                    //                                            print(error?.localizedDescription ?? 0)
+                                    //                                        } else {
+                                    //                                            print("DEU CERTO O FIRESTORE")
+                                    //                                            callback(true,"DEU CERTO")
+                                    //                                        }
+                                    //                                    })
                                     User.sharedInstance.artWorks.append(artwork)
                                     
                                     callback(true,"DEU CERTO")
-
+                                    
                                 }
                             }
                             else {
@@ -332,7 +332,7 @@ class DatabaseAccess {
             } else {
                 print(error?.localizedDescription ?? 0)
                 callback(false,(error?.localizedDescription)!)
-
+                
             }
         })
     }
@@ -371,7 +371,7 @@ class DatabaseAccess {
                 if(aux["followers"] != nil){
                     artistAux.totalFollowers = aux["followers"] as! Int
                 }
-                    
+                
                 if aux["tel1"] != nil{
                     User.sharedInstance.tel1 = aux["tel1"] as! String
                 }
@@ -688,9 +688,9 @@ class DatabaseAccess {
                 //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
                 if let pictDict = artDict["pictures"] as? [String:String] {
                     print(pictDict)
-                        for pic in pictDict{
-                            artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
-                        }
+                    for pic in pictDict{
+                        artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pictDict.values.first!)
+                    }
                 }
                 
                 if (art.id == artist.artWorks.last?.id) {
@@ -785,7 +785,7 @@ class DatabaseAccess {
                 let artWork = ArtWork()
                 artWork.descricao = artDict["description"] as! String
                 artWork.title =  artDict["title"] as! String
-
+                
                 //verify strings
                 let stringToLocate = text.uppercased()
                 let stringToCheck = artWork.descricao.uppercased()
@@ -815,7 +815,7 @@ class DatabaseAccess {
             }
             
             callback(true, resultedArtWorks)
-
+            
             
         }, withCancel: { (error: Error) in
             print(error.localizedDescription)
@@ -824,7 +824,7 @@ class DatabaseAccess {
         })
         
     }
-
+    
     //mudar essas funcoes
     func fetchArtistBy(name: String, callback: @escaping((_ success: Bool, _ artWorks: [Artist])->())) {
         var resultedArtists: [Artist] = []
@@ -838,33 +838,37 @@ class DatabaseAccess {
                 let artist = Artist()
                 
                 if let isArtist = artistDict["isArtist"] as? Bool{
-                    artist.name = artistDict["name"] as! String
-
-                    let stringToLocate = name.uppercased()
-                    let stringToCheck = artist.name.uppercased()
                     
-                    if(stringToCheck.range(of: stringToLocate) != nil) {
-                        artist.email = artistDict["email"] as! String
-                        artist.id = key
-                        artist.profilePictureURL = artistDict["profilePictureURL"] as! String
-                        artist.totalFollowers = artistDict["followers"] as! Int
+                    if isArtist {
+                        artist.name = artistDict["name"] as! String
                         
-                        if artistDict["tel1"] != nil{
-                            User.sharedInstance.tel1 = artistDict["tel1"] as! String
-                        }
+                        let stringToLocate = name.uppercased()
+                        let stringToCheck = artist.name.uppercased()
                         
-                        if artistDict["tel2"] != nil{
-                            User.sharedInstance.tel2 = artistDict["tel2"] as! String
-                        }
-                        
-                        
-                        if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
-                            for id in artWorksIdDic{
-                                artist.artWorksIds.append(id.value)
+                        if(stringToCheck.range(of: stringToLocate) != nil) {
+                            artist.email = artistDict["email"] as! String
+                            artist.id = key
+                            artist.profilePictureURL = artistDict["profilePictureURL"] as! String
+                            artist.totalFollowers = artistDict["followers"] as! Int
+                            
+                            if artistDict["tel1"] != nil{
+                                User.sharedInstance.tel1 = artistDict["tel1"] as! String
                             }
+                            
+                            if artistDict["tel2"] != nil{
+                                User.sharedInstance.tel2 = artistDict["tel2"] as! String
+                            }
+                            
+                            
+                            if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
+                                for id in artWorksIdDic{
+                                    artist.artWorksIds.append(id.value)
+                                }
+                            }
+                            
+                            resultedArtists.append(artist)
                         }
                         
-                        resultedArtists.append(artist)
                     }
                 }
             }
@@ -889,5 +893,5 @@ class DatabaseAccess {
         
         
     }
-
+    
 }

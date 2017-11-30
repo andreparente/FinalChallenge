@@ -138,8 +138,13 @@ class ResultsTVC: UITableViewController {
                         cell.picture.image = artistsResult[indexPath.row].cachedImage
                         cell.picture.contentMode = .scaleAspectFill
                     } else {
-                        cell.picture.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
-                            self.artistsResult[indexPath.row].cachedImage = image
+                        if picture == "" {
+                            cell.picture.image = UIImage(named: "DefaultProfile")
+                            self.artistsResult[indexPath.row].cachedImage = UIImage(named: "DefaultProfile")
+                        } else {
+                            cell.picture.downloadedFrom(url: URL(string: picture)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                                self.artistsResult[indexPath.row].cachedImage = image
+                            }
                         }
                     }
                 }

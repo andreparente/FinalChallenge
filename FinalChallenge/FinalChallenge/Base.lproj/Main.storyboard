@@ -91,7 +91,7 @@
         <scene sceneID="nt0-P0-Le8">
             <objects>
                 <collectionViewController id="HMZ-JP-TMt" customClass="ProfileCollectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="qZL-Fl-FHy">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qZL-Fl-FHy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -158,7 +158,7 @@
         <scene sceneID="cgE-dt-xkC">
             <objects>
                 <collectionViewController id="gcO-GA-WeC" customClass="CategoryCollectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="DIt-AW-xcd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DIt-AW-xcd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -534,7 +534,7 @@
             </objects>
             <point key="canvasLocation" x="4577" y="-1929"/>
         </scene>
-        <!--Results-->
+        <!--Resultado-->
         <scene sceneID="4Rb-3h-Tcf">
             <objects>
                 <tableViewController id="ANh-g5-BMg" customClass="ResultsTVC" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -557,7 +557,7 @@
                             <outlet property="delegate" destination="ANh-g5-BMg" id="5ul-EH-5xZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Results" id="9kn-o8-q6f">
+                    <navigationItem key="navigationItem" title="Resultado" id="9kn-o8-q6f">
                         <barButtonItem key="leftBarButtonItem" image="BackLeftArrow" id="hbg-81-FQB">
                             <connections>
                                 <action selector="dismissView:" destination="ANh-g5-BMg" id="M0a-WC-X0B"/>
@@ -631,15 +631,15 @@
             </objects>
             <point key="canvasLocation" x="4840.8000000000002" y="596.85157421289364"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile-->
         <scene sceneID="4md-Pa-NFo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="obe-me-Yck" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="UnselectedProfileIcon" selectedImage="SelectedProfileIcon" id="aYu-LU-NU1">
+                    <tabBarItem key="tabBarItem" title="Profile" image="UnselectedProfileIcon" selectedImage="SelectedProfileIcon" id="aYu-LU-NU1">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Sww-xp-0Be">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sww-xp-0Be">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -652,15 +652,15 @@
             </objects>
             <point key="canvasLocation" x="2752.8000000000002" y="-1074.5127436281859"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="CyO-JY-Z8X">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="67C-7Q-pyO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="UnselectedHomeIcon" selectedImage="SelectedHomeIcon" id="NSd-Dk-utI">
+                    <tabBarItem key="tabBarItem" title="Home" image="UnselectedHomeIcon" selectedImage="SelectedHomeIcon" id="NSd-Dk-utI">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MbD-39-Ud0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MbD-39-Ud0">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -673,13 +673,13 @@
             </objects>
             <point key="canvasLocation" x="2760.8000000000002" y="-285.60719640179911"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Search-->
         <scene sceneID="EYr-we-ach">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QoS-7j-EgL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="UnselectedSearchIcon" selectedImage="SelectedSearchIcon" id="vTr-fK-Qx4"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="UnselectedSearchIcon" selectedImage="SelectedSearchIcon" id="vTr-fK-Qx4"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qk7-Rf-YiW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qk7-Rf-YiW">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.0" green="0.26274509800000001" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
