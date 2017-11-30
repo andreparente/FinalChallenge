@@ -324,7 +324,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
             modal.art = User.sharedInstance.favoriteArts[indexPath.item]
             self.present(modal, animated: true, completion: nil)
-
+            
         default:
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let modal = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
@@ -402,9 +402,12 @@ extension ProfileCollectionViewController: HeaderProfileDelegate {
     func didTapLogOut() {
         
         try! Auth.auth().signOut()
-        self.dismiss(animated: true, completion: nil)
         FBSDKLoginManager().logOut()
         FBSDKAccessToken.setCurrent(nil)
+        self.dismiss(animated: true) {
+            User.sharedInstance.removeValues()
+            DatabaseAccess.sharedInstance.removeValues()
+        }
         
     }
     
