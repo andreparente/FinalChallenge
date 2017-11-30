@@ -363,14 +363,15 @@ class DatabaseAccess {
                 }
                 
                 if aux["tel1"] != nil{
-                    User.sharedInstance.tel1 = aux["tel1"] as? String
+                    print(aux["tel1"] as? String)
+                    artistAux.tel1 = aux["tel1"] as? String
                 }
                 
                 if aux["tel2"] != nil{
-                    User.sharedInstance.tel2 = aux["tel2"] as? String
+                    artistAux.tel2 = aux["tel2"] as? String
                 }
                     
-                else{
+                else {
                     self.usersRef?.child(artist.key).child("followers").setValue(0)
                 }
                 //TEST END HERE
@@ -529,11 +530,11 @@ class DatabaseAccess {
                 //TEST END HERE
                 
                 if artistDict["tel1"] != nil{
-                    User.sharedInstance.tel1 = artistDict["tel1"] as? String
+                    artist.tel1 = artistDict["tel1"] as? String
                 }
                 
                 if artistDict["tel2"] != nil{
-                    User.sharedInstance.tel2 = artistDict["tel2"] as? String
+                    artist.tel2 = artistDict["tel2"] as? String
                 }
                 
                 for art in (artistDict["artsId"] as? [String: String])! {
@@ -847,11 +848,11 @@ class DatabaseAccess {
                             artist.totalFollowers = artistDict["followers"] as! Int
                             
                             if artistDict["tel1"] != nil{
-                                User.sharedInstance.tel1 = artistDict["tel1"] as? String
+                                artist.tel1 = artistDict["tel1"] as? String
                             }
                             
                             if artistDict["tel2"] != nil{
-                                User.sharedInstance.tel2 = artistDict["tel2"] as? String
+                                artist.tel2 = artistDict["tel2"] as? String
                             }
                             
                             
