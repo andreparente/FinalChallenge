@@ -49,7 +49,7 @@ class AddArtWorkHeader: UIView {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        
+        delegate?.didSelectDismiss()
     }
     
     func buttonClicked(sender:UIButton) {
@@ -262,6 +262,7 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
 protocol AddArtWorkHeaderDelegate: class {
     func didSelectCategory(category: String)
     func didSelectAddPicture(vc: UIAlertController, index: Int)
+    func didSelectDismiss()
 }
 
 extension AddArtWorkHeader: UINavigationControllerDelegate, UIImagePickerControllerDelegate {

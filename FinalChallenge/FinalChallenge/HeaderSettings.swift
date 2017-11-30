@@ -40,7 +40,7 @@ class HeaderSettings: UIView {
                 if User.sharedInstance.cachedImage != nil {
                     self.profileImageView.image = User.sharedInstance.cachedImage
                 } else {
-                    self.profileImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                    self.profileImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL!)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
                         User.sharedInstance.cachedImage = image
                     }
                 }

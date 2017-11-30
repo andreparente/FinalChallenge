@@ -13,16 +13,15 @@ class User {
     
     var name: String!
     var email: String!
-    // var obras: [Obra] = []
-    var friendsId: [String] = []
     var favoriteArtsIds: [String] = []
     var favoriteArtistsIds: [String] = []
     var favoriteArts: [ArtWork] = []
     var favoriteArtists: [Artist] = []
     var id: String!
-    var profilePictureURL: String!
+    var profilePictureURL: String?
     var cachedImage: UIImage?
     var totalFollowers: Int!
+    
     //Singleton!
     static let sharedInstance = User()
     var artWorks: [ArtWork] = []
@@ -82,6 +81,18 @@ class User {
             return nil
         }
         
+    }
+    
+    func removeValues() {
+        self.artWorks = []
+        self.cachedImage = nil
+        self.favoriteArtists = []
+        self.favoriteArts = []
+        self.favoriteArtsIds = []
+        self.favoriteArtistsIds = []
+        self.totalFollowers = 0
+        self.isArtist = false
+        self.profilePictureURL = nil
     }
     
     func findArtWorkById(id: String) -> ArtWork? {

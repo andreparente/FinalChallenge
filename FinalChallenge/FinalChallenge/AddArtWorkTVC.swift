@@ -267,4 +267,8 @@ extension AddArtWorkTVC: AddArtWorkHeaderDelegate {
     func didSelectAddPicture(vc: UIAlertController, index: Int) {
         self.present(vc, animated: true, completion: nil)
     }
+    
+    func didSelectDismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

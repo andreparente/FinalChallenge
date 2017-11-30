@@ -65,6 +65,12 @@ class DatabaseAccess {
 
     }
     
+    func removeValues() {
+        self.categories = []
+        self.newestArts = []
+        self.artists = []
+    }
+    
     
     
     func databaseAccessWriteCreateUser(user:User) {
