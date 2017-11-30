@@ -95,7 +95,9 @@ class SettingsTVC: UITableViewController {
             }
         case 1:
             cell.label.text = "Telefone 1: "
-            cell.txtField.placeholder = "tel teste"
+            if User.sharedInstance.tel1 != nil{
+                cell.txtField.placeholder = User.sharedInstance.tel1
+            }
             cell.textFieldEndEditingAction = {
                 (text) in
                 if text == "" {
@@ -106,7 +108,9 @@ class SettingsTVC: UITableViewController {
             }
         default:
             cell.label.text = "Telefone 2: "
-            cell.txtField.placeholder = "tel teste"
+            if User.sharedInstance.tel2 != nil{
+                cell.txtField.placeholder = User.sharedInstance.tel2
+            }
             
             cell.textFieldEndEditingAction = {
                 (text) in
@@ -243,7 +247,6 @@ extension SettingsTVC: UINavigationControllerDelegate, UIImagePickerControllerDe
         imagePicker.dismiss(animated: true, completion: nil)
         
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            //fazer algo OLENKA
             DatabaseAccess.sharedInstance.uploadProfileImage(image: picture, callback: { (success: Bool, response: String) in
                 if success {
                     //deu certo pra guardar imagem

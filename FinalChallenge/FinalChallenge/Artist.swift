@@ -27,7 +27,9 @@ class Artist {
     var artWorksIds: [String] = []
     var typeOfGallery: String!
     var cachedImage: UIImage?
-
+    var tel1: String?
+    var tel2: String?
+    
     init() {
         
     }

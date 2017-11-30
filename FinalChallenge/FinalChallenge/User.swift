@@ -21,6 +21,8 @@ class User {
     var profilePictureURL: String?
     var cachedImage: UIImage?
     var totalFollowers: Int!
+    var tel1: String?
+    var tel2: String?
     
     //Singleton!
     static let sharedInstance = User()

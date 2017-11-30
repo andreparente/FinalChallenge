@@ -52,10 +52,11 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         emailLbl.text = artist.email
         
         //setar telefone OLENKA
-//        if let telefone = artist.tel1 {
-//            self.telefoneLbl.text = telefone
-//        }
-//        
+        if let telefone = artist.tel1 {
+            self.telefoneLbl.text = telefone
+            self.telefoneLbl.isHidden = false
+        }
+        
         if let picture = artist.profilePictureURL {
             if picture != "" {
                 if self.artist.cachedImage != nil {

@@ -106,6 +106,13 @@ class DatabaseAccess {
                 User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
                 User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                if userDict2["tel1"] != nil{
+                    User.sharedInstance.tel1 = userDict2["tel1"] as! String
+                }
+                
+                if userDict2["tel2"] != nil{
+                    User.sharedInstance.tel2 = userDict2["tel2"] as! String
+                }
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
                 
                 if userDict2["isArtist"] != nil {
@@ -141,6 +148,14 @@ class DatabaseAccess {
                 User.sharedInstance.name = userDict2["name"] as! String
                 User.sharedInstance.email = userDict2["email"] as! String
                 User.sharedInstance.profilePictureURL = userDict2["profilePictureURL"] as! String
+                
+                if userDict2["tel1"] != nil{
+                    User.sharedInstance.tel1 = userDict2["tel1"] as! String
+                }
+                
+                if userDict2["tel2"] != nil{
+                    User.sharedInstance.tel2 = userDict2["tel2"] as! String
+                }
                 //TODO FETCH friendsID/favoriteArts/favoriteArtists/totalFollowers
                 
                 if userDict2["isArtist"] != nil {
@@ -356,6 +371,15 @@ class DatabaseAccess {
                 if(aux["followers"] != nil){
                     artistAux.totalFollowers = aux["followers"] as! Int
                 }
+                    
+                if aux["tel1"] != nil{
+                    User.sharedInstance.tel1 = aux["tel1"] as! String
+                }
+                
+                if aux["tel2"] != nil{
+                    User.sharedInstance.tel2 = aux["tel2"] as! String
+                }
+                    
                 else{
                     self.usersRef?.child(artist.key).child("followers").setValue(0)
                 }
@@ -513,6 +537,14 @@ class DatabaseAccess {
                     self.usersRef?.child(artist.id).child("followers").setValue(0)
                 }
                 //TEST END HERE
+                
+                if artistDict["tel1"] != nil{
+                    User.sharedInstance.tel1 = artistDict["tel1"] as! String
+                }
+                
+                if artistDict["tel2"] != nil{
+                    User.sharedInstance.tel2 = artistDict["tel2"] as! String
+                }
                 
                 auxArtists.append(artist)
                 if(artistId == user.favoriteArtistsIds.last){
@@ -816,6 +848,15 @@ class DatabaseAccess {
                         artist.id = key
                         artist.profilePictureURL = artistDict["profilePictureURL"] as! String
                         artist.totalFollowers = artistDict["followers"] as! Int
+                        
+                        if artistDict["tel1"] != nil{
+                            User.sharedInstance.tel1 = artistDict["tel1"] as! String
+                        }
+                        
+                        if artistDict["tel2"] != nil{
+                            User.sharedInstance.tel2 = artistDict["tel2"] as! String
+                        }
+                        
                         
                         if let artWorksIdDic = artistDict["artsId"] as? [String:String]{
                             for id in artWorksIdDic{
