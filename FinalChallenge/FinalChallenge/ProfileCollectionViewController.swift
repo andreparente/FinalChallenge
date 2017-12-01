@@ -46,7 +46,7 @@ class ProfileCollectionViewController: UICollectionViewController, UICollectionV
             }
         })
         
-        if User.sharedInstance.isArtist {
+        if User.sharedInstance.isArtist! {
             let artist = Artist(name: User.sharedInstance.name, email: User.sharedInstance.email)
             artist.id = User.sharedInstance.id
             artist.artWorks = User.sharedInstance.artWorks

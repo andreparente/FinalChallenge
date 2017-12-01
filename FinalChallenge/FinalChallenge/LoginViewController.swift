@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
         self.loginView.addGestureRecognizer(self.loginRecognizer)
         self.loginView.backgroundColor = UIColor.vitrineDarkBlue
         self.view.addSubview(loginView)
-        entrarLbl = UILabel(frame: CGRect(x: 20, y: 580, width: 2.5*self.loginView.frame.width/3, height: 50))
+        entrarLbl = UILabel(frame: CGRect(x: 20, y: 500, width: 2.5*self.loginView.frame.width/3, height: 50))
         entrarLbl.text = "Entrar"
         entrarLbl.textColor = UIColor.white
         entrarLbl.makeHorizontal()
@@ -187,7 +187,7 @@ class LoginViewController: UIViewController {
         self.registerRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.registerSelected))
         self.registerView.addGestureRecognizer(self.registerRecognizer)
         self.view.addSubview(registerView)
-        registrarLbl = UILabel(frame: CGRect(x: 170, y: 580, width: 2.5*self.registerView.frame.width/3, height: 50))
+        registrarLbl = UILabel(frame: CGRect(x: 160, y: 500, width: 2.5*self.registerView.frame.width/3, height: 50))
         //        registrarLbl = UILabel(frame: CGRect(x: 10, y: 10, width: self.registerView.frame.width, height: 50))
         
         registrarLbl.text = "Registrar"

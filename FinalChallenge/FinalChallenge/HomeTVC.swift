@@ -20,6 +20,7 @@ class HomeTVC: UITableViewController {
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .white
         self.view.backgroundColor = .white
+        tableView.separatorStyle = .none
         
         self.tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         self.tableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
@@ -102,8 +103,8 @@ extension HomeTVC {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 15, y: 0, width: self.view.frame.width, height: 35))
         let label = UILabel(frame: CGRect(x: 15, y: 0, width: 2*view.frame.width/3, height: 35))
-        label.textColor = .black
-        label.font = UIFont(name: "Lato-Semibold", size: 16)
+        label.textColor = .blue
+        label.font = UIFont(name: "Helvetica", size: 16)
         view.addSubview(label)
 
         switch section {

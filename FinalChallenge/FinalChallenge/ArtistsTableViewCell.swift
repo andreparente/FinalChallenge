@@ -76,7 +76,7 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 140, height: 170 ) //altura
     }

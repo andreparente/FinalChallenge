@@ -54,6 +54,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         
         cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
         cell.layer.cornerRadius = 7
+
         
         
         // ESTHER, mudar a cor para branco
@@ -94,9 +95,36 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         return CGSize(width: CGFloat(0), height: CGFloat(0))
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x
-        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
-        self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
+        
+        
+        if let selectedCell = collectionView.cellForItem(at: indexPath) {
+            let bounds = selectedCell.contentView.bounds
+                
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: [.curveEaseIn, .curveEaseOut], animations: {
+                    
+                    selectedCell.bounds = CGRect(x: bounds.origin.x - 5, y: bounds.origin.y, width: bounds.size.width + 5, height: bounds.size.height)
+                    
+                }) { (success: Bool) in
+                    if success {
+                        selectedCell.bounds = bounds
+                        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
+                        self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
+                    }
+                }
+            
+        }
+        
+        
+
+        
+
+        
+        
+
+        
+
     }
 }

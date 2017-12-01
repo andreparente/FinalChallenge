@@ -32,7 +32,7 @@ class ResultsTVC: UITableViewController {
         print("PALAVRA A PROCURAR:: ", word)
 
         
-        if isCategory {
+        if isCategory! {
             
             DatabaseAccess.sharedInstance.fetchArtWorksFor(category: word, callback: { (success: Bool, response: String, artWorks: [ArtWork]) in
                 if success {
@@ -89,7 +89,7 @@ class ResultsTVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if isCategory {
+        if isCategory! {
             return 1
         } else {
             return 2
@@ -98,7 +98,7 @@ class ResultsTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if isCategory {
+        if isCategory! {
             return artWorksResult.count
         } else {
             if section == 0 {
@@ -112,7 +112,7 @@ class ResultsTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if isCategory {
+        if isCategory! {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ResultedArtWorkCell", for: indexPath) as! ResultedArtWorkTableViewCell
             cell.title.text = artWorksResult[indexPath.row].title
             cell.creatorName.text = artWorksResult[indexPath.row].creatorName
@@ -159,7 +159,7 @@ class ResultsTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if isCategory {
+        if isCategory! {
             return 200
         } else {
             if indexPath.section == 0 {
@@ -173,7 +173,7 @@ class ResultsTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if isCategory {
+        if isCategory! {
             let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
             let title = UILabel(frame: CGRect(x: 15, y: 0, width: self.view.frame.width - 30, height: 30))
             view.addSubview(title)
@@ -202,7 +202,7 @@ class ResultsTVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isCategory{
+        if isCategory!{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let modal = storyboard.instantiateViewController(withIdentifier: "ArtWorkDetail") as! ArtWorkDetailViewController
             modal.art = self.artWorksResult[indexPath.row]

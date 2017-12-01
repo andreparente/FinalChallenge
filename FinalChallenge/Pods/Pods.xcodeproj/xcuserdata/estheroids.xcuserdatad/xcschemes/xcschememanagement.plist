@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BoringSSL.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -29,10 +34,50 @@
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>Protobuf.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>SJSegmentedScrollView.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
+		</dict>
+		<key>YNSearch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>gRPC-Core.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>gRPC-ProtoRPC.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>gRPC-RxLibrary.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>gRPC-gRPCCertificates.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
+		<key>gRPC.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>iCarousel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
@@ -62,7 +107,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3B08C49A396BAA0D9DCAD4460CC52F95</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6C1461E86DA9D95C349A60BB1EEC1207</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>71458668730CCDBE12F859E7C30C3CED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>736BD4E6AD0EA441E316CF6288BF758F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8ECD412DAB779B54F64CDDA8AC212DB6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9A7374293FB73EA11CF28A322E7D8493</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A56C63BD79FF5C5A2E7AD98972863B65</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +147,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B8D8C363B343A0778AE6633D70E11749</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C04BB2F65D3F31A4AC3F3CDA47C893C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6C3CDAD44561A5D6BD0EC7B6FDD66D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDE84C6943D211A64B27C123F0AC9A6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E40009C6FF9FB62970543BF99E73D64A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +183,11 @@
 			<true/>
 		</dict>
 		<key>EE1DB1BD3817A69CF2337C912E0C4BDD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F728C8C942A25DF5D57C9F3524F3BB25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
