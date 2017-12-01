@@ -12,7 +12,13 @@ import iCarousel
 class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
 
     var artist: Artist!
+    @IBOutlet weak var telefoneLblConstraint: NSLayoutConstraint!
+    @IBOutlet weak var emailLblConstraint: NSLayoutConstraint!
+    @IBOutlet weak var followButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topNameLblConstraint: NSLayoutConstraint!
+    @IBOutlet weak var returnButtonConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var telefoneLbl: UILabel!
     @IBOutlet weak var emailLbl: UILabel!
@@ -24,6 +30,21 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileImage.isHidden = true
+        
+        telefoneLbl.isHidden = true
+        emailLbl.isHidden = true
+        nameLbl.isHidden = true
+        returnButton.isHidden = true
+        
+        telefoneLblConstraint.constant += view.bounds.width
+        emailLblConstraint.constant += view.bounds.width
+        followButtonConstraint.constant += view.bounds.width
+        topNameLblConstraint.constant -= view.bounds.height
+        returnButtonConstraint.constant -= view.bounds.height
+        
+        self.artWorkCarousel.alpha = 0
         
         print(artist.artWorks)
         DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
@@ -44,13 +65,13 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         followButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         followButton.layer.shadowRadius = 3
         self.followButton.setTitle("Follow", for: .normal)
-
+        
         
         
         if User.sharedInstance.favoriteArtistsIds.contains(artist.id) {
             followButton.setTitle("Unfollow", for: .normal)
         }
-
+        
         
         //aqui preencher de acordo com a escolha do cara
         if let estilo = artist.getGalleryStyle() {
@@ -62,7 +83,6 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         emailLbl.text = artist.email
         
         //setar telefone OLENKA
-        print(artist.tel1)
         if let telefone = artist.tel1 {
             self.telefoneLbl.text = telefone
             self.telefoneLbl.isHidden = false
@@ -88,6 +108,37 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         profileImage.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        telefoneLbl.isHidden = false
+        emailLbl.isHidden = false
+        nameLbl.isHidden = false
+        returnButton.isHidden = false
+        
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+            self.telefoneLblConstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+            self.emailLblConstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+            self.followButtonConstraint.constant -= self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+            self.topNameLblConstraint.constant += self.view.bounds.height
+            self.returnButtonConstraint.constant += self.view.bounds.height
+
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        UIView.animate(withDuration: 1.65, delay: 0, options: .curveEaseIn, animations: {
+            self.artWorkCarousel.alpha = 1
+        }, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
