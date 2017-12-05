@@ -38,11 +38,14 @@ class LoginViewController: UIViewController {
     
     var logoImage: UIImageView!
     var setViewMovedUp: Bool = false
+    var loginViewSelected: Bool = false
+    var registerViewSelected: Bool = false
+    var anyTxtFieldIsActive: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
         
         
         
@@ -124,6 +127,8 @@ class LoginViewController: UIViewController {
         passwordTxtField.placeholderColor = .blue
         self.view.addSubview(passwordTxtField)
         passwordTxtField.isSecureTextEntry = true
+        self.passwordTxtField.delegate = self
+        
         
         emailTxtField = KaedeTextField()
         emailTxtField.foregroundColor = .white
@@ -137,6 +142,7 @@ class LoginViewController: UIViewController {
         emailTxtField.textColor = .white
         emailTxtField.placeholder = "email"
         emailTxtField.placeholderColor = .blue
+        self.emailTxtField.delegate = self
         self.view.addSubview(emailTxtField)
         loginButton = UIButton()
         loginButton.frame.size.width = 250
@@ -194,6 +200,8 @@ class LoginViewController: UIViewController {
             self.view.bringSubview(toFront: self.passwordTxtField)
             self.view.bringSubview(toFront: self.loginButton)
             self.view.bringSubview(toFront: self.fbLoginButton)
+            self.loginViewSelected = true
+            self.registerViewSelected = false
 
             
             
@@ -237,6 +245,7 @@ class LoginViewController: UIViewController {
         passwordRegisterTxtField.placeholderColor = .blue
         self.view.addSubview(passwordRegisterTxtField)
         passwordRegisterTxtField.isSecureTextEntry = true
+        self.passwordRegisterTxtField.delegate = self
         
         emailRegisterTxtField = KaedeTextField()
         emailRegisterTxtField.foregroundColor = .white
@@ -249,6 +258,8 @@ class LoginViewController: UIViewController {
         emailRegisterTxtField.alpha = 0
         emailRegisterTxtField.placeholder = "insira seu email"
         emailRegisterTxtField.placeholderColor = .blue
+        emailRegisterTxtField.autocorrectionType = .no
+        self.emailRegisterTxtField.delegate = self
         self.view.addSubview(emailRegisterTxtField)
         
         nameRegisterTxtField = KaedeTextField()
@@ -262,6 +273,8 @@ class LoginViewController: UIViewController {
         nameRegisterTxtField.alpha = 0
         nameRegisterTxtField.placeholder = "qual o seu nome?"
         nameRegisterTxtField.placeholderColor = .blue
+        nameRegisterTxtField.autocorrectionType = .no
+        self.nameRegisterTxtField.delegate = self
         self.view.addSubview(nameRegisterTxtField)
         
         registerButton = UIButton()
@@ -324,6 +337,9 @@ class LoginViewController: UIViewController {
             self.view.bringSubview(toFront: self.registerButton)
             self.view.bringSubview(toFront: self.fbRegisterButton)
             self.loginRecognizer.addTarget(self, action: #selector(self.registerToLoginTapped))
+            self.loginViewSelected = false
+            self.registerViewSelected = true
+
             
             
         }
@@ -344,6 +360,13 @@ class LoginViewController: UIViewController {
             self.entrarLbl.frame.origin.x = 20
             self.registrarLbl.center.x = self.registerView.frame.width - 20
             self.registrarLbl.center.y = self.registerView.frame.height - 85
+            
+            //esconder os campos do login
+            self.emailTxtField.alpha = 0
+            self.passwordTxtField.alpha = 0
+            self.loginButton.alpha = 0
+            self.fbLoginButton.alpha = 0
+            
         }) { (success: Bool) in
             if success {
                 self.view.bringSubview(toFront: self.loginView)
@@ -354,6 +377,10 @@ class LoginViewController: UIViewController {
                 self.view.bringSubview(toFront: self.passwordRegisterTxtField)
                 self.view.bringSubview(toFront: self.registerButton)
                 self.view.bringSubview(toFront: self.fbRegisterButton)
+                self.loginViewSelected = false
+                self.registerViewSelected = true
+                
+                self.loginView.addGestureRecognizer(self.loginRecognizer)
 
                 
             } else {
@@ -404,6 +431,8 @@ class LoginViewController: UIViewController {
                 self.view.bringSubview(toFront: self.passwordTxtField)
                 self.view.bringSubview(toFront: self.loginButton)
                 self.view.bringSubview(toFront: self.fbLoginButton)
+                self.loginViewSelected = true
+                self.registerViewSelected = false
                 
             } else {
                 
@@ -411,19 +440,60 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func dismissKeyboard() {
+        print("entrou no dismisskeyboard")
+
+        self.view.endEditing(true)
+    }
+    
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+            if view.frame.origin.y == 0 {
+                if self.anyTxtFieldIsActive {
+                    
+                } else {
+                    if loginViewSelected {
+                        self.emailTxtField.frame.origin.y -= keyboardSize.height/2
+                        self.passwordTxtField.frame.origin.y -= keyboardSize.height/2
+                        self.loginButton.frame.origin.y -= keyboardSize.height/2
+                        self.fbLoginButton.frame.origin.y -= keyboardSize.height/2
+                        self.loginRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+                    } else {
+                        self.nameRegisterTxtField.frame.origin.y -= keyboardSize.height/2
+                        self.emailRegisterTxtField.frame.origin.y -= keyboardSize.height/2
+                        self.passwordRegisterTxtField.frame.origin.y -= keyboardSize.height/2
+                        self.registerButton.frame.origin.y -= keyboardSize.height/2
+                        self.fbRegisterButton.frame.origin.y -= keyboardSize.height/2
+                        self.registerRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+                    }
+                    self.anyTxtFieldIsActive = true
+
+                }
             }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height
-            }
+                if loginViewSelected {
+                    self.emailTxtField.frame.origin.y += keyboardSize.height/2
+                    self.passwordTxtField.frame.origin.y += keyboardSize.height/2
+                    self.loginButton.frame.origin.y += keyboardSize.height/2
+                    self.fbLoginButton.frame.origin.y += keyboardSize.height/2
+
+                } else {
+                    self.nameRegisterTxtField.frame.origin.y += keyboardSize.height/2
+                    self.emailRegisterTxtField.frame.origin.y += keyboardSize.height/2
+                    self.passwordRegisterTxtField.frame.origin.y += keyboardSize.height/2
+                    self.registerButton.frame.origin.y += keyboardSize.height/2
+                    self.fbRegisterButton.frame.origin.y += keyboardSize.height/2
+
+                }
+            print("passou pelo keyboardWillHide")
+            self.registerRecognizer.addTarget(self, action: #selector(loginToRegisterTapped))
+            self.loginRecognizer.addTarget(self, action: #selector(registerToLoginTapped))
+
+            self.anyTxtFieldIsActive = false
         }
     }
     
@@ -538,3 +608,14 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     }
 }
 
+
+extension LoginViewController: UITextFieldDelegate {
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        NotificationCenter.default.post(name: .UIKeyboardWillHide, object: nil)
+//        
+//    }
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        NotificationCenter.default.post(name: .UIKeyboardWillShow, object: nil)
+//    }
+}
