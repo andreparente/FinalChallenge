@@ -37,11 +37,12 @@ class LoginViewController: UIViewController {
     var registerRecognizer: UITapGestureRecognizer!
     
     var logoImage: UIImageView!
-    
+    var setViewMovedUp: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillShow:")), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: Selector(("keyboardWillHide:")), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         
         
@@ -121,7 +122,7 @@ class LoginViewController: UIViewController {
         passwordTxtField.textColor = .white
         passwordTxtField.placeholder = "senha"
         passwordTxtField.placeholderColor = .blue
-        self.loginView.addSubview(passwordTxtField)
+        self.view.addSubview(passwordTxtField)
         passwordTxtField.isSecureTextEntry = true
         
         emailTxtField = KaedeTextField()
@@ -136,7 +137,7 @@ class LoginViewController: UIViewController {
         emailTxtField.textColor = .white
         emailTxtField.placeholder = "email"
         emailTxtField.placeholderColor = .blue
-        self.loginView.addSubview(emailTxtField)
+        self.view.addSubview(emailTxtField)
         loginButton = UIButton()
         loginButton.frame.size.width = 250
         loginButton.frame.size.height = 30
@@ -146,7 +147,7 @@ class LoginViewController: UIViewController {
         loginButton.backgroundColor = .gray
         loginButton.setTitle("entrar", for: .normal)
         loginButton.addTarget(self, action: #selector(LoginViewController.login), for: .touchUpInside)
-        self.loginView.addSubview(loginButton)
+        self.view.addSubview(loginButton)
     
         
         
@@ -156,7 +157,7 @@ class LoginViewController: UIViewController {
         fbLoginButton.center.x = loginButton.center.x
         fbLoginButton.center.y = loginButton.center.y + 40
         fbLoginButton.alpha = 0
-        self.loginView.addSubview(fbLoginButton)
+        self.view.addSubview(fbLoginButton)
         
     }
 
@@ -189,7 +190,11 @@ class LoginViewController: UIViewController {
             
             self.registerRecognizer.addTarget(self, action: #selector(self.loginToRegisterTapped))
             self.view.bringSubview(toFront: self.logoImage)
-            
+            self.view.bringSubview(toFront: self.emailTxtField)
+            self.view.bringSubview(toFront: self.passwordTxtField)
+            self.view.bringSubview(toFront: self.loginButton)
+            self.view.bringSubview(toFront: self.fbLoginButton)
+
             
             
         }
@@ -230,7 +235,7 @@ class LoginViewController: UIViewController {
         passwordRegisterTxtField.alpha = 0
         passwordRegisterTxtField.placeholder = "crie uma senha"
         passwordRegisterTxtField.placeholderColor = .blue
-        self.registerView.addSubview(passwordRegisterTxtField)
+        self.view.addSubview(passwordRegisterTxtField)
         passwordRegisterTxtField.isSecureTextEntry = true
         
         emailRegisterTxtField = KaedeTextField()
@@ -244,7 +249,7 @@ class LoginViewController: UIViewController {
         emailRegisterTxtField.alpha = 0
         emailRegisterTxtField.placeholder = "insira seu email"
         emailRegisterTxtField.placeholderColor = .blue
-        self.registerView.addSubview(emailRegisterTxtField)
+        self.view.addSubview(emailRegisterTxtField)
         
         nameRegisterTxtField = KaedeTextField()
         nameRegisterTxtField.foregroundColor = .white
@@ -257,7 +262,7 @@ class LoginViewController: UIViewController {
         nameRegisterTxtField.alpha = 0
         nameRegisterTxtField.placeholder = "qual o seu nome?"
         nameRegisterTxtField.placeholderColor = .blue
-        self.registerView.addSubview(nameRegisterTxtField)
+        self.view.addSubview(nameRegisterTxtField)
         
         registerButton = UIButton()
         registerButton.frame.size.width = 250
@@ -268,7 +273,7 @@ class LoginViewController: UIViewController {
         registerButton.backgroundColor = .gray
         registerButton.setTitle("Registrar", for: .normal)
         registerButton.addTarget(self, action: #selector(LoginViewController.register), for: .touchUpInside)
-        self.registerView.addSubview(registerButton)
+        self.view.addSubview(registerButton)
         
         
         fbRegisterButton = FBSDKLoginButton()
@@ -277,7 +282,7 @@ class LoginViewController: UIViewController {
         fbRegisterButton.center.x = registerButton.center.x
         fbRegisterButton.center.y = registerButton.center.y + 40
         fbRegisterButton.alpha = 0
-        self.registerView.addSubview(fbRegisterButton)
+        self.view.addSubview(fbRegisterButton)
         
     }
 
@@ -313,15 +318,16 @@ class LoginViewController: UIViewController {
             self.emailRegisterTxtField.alpha = 1
             self.nameRegisterTxtField.alpha = 1
             self.view.bringSubview(toFront: self.logoImage)
+            self.view.bringSubview(toFront: self.nameRegisterTxtField)
+            self.view.bringSubview(toFront: self.emailRegisterTxtField)
+            self.view.bringSubview(toFront: self.passwordRegisterTxtField)
+            self.view.bringSubview(toFront: self.registerButton)
+            self.view.bringSubview(toFront: self.fbRegisterButton)
             self.loginRecognizer.addTarget(self, action: #selector(self.registerToLoginTapped))
             
             
         }
     }
-    
-    //    func nameFunction() {
-    //
-    //    }
     
     func loginToRegisterTapped() {
         
@@ -343,6 +349,12 @@ class LoginViewController: UIViewController {
                 self.view.bringSubview(toFront: self.loginView)
                 self.loginRecognizer.addTarget(self, action: #selector(self.registerToLoginTapped))
                 self.view.bringSubview(toFront: self.logoImage)
+                self.view.bringSubview(toFront: self.nameRegisterTxtField)
+                self.view.bringSubview(toFront: self.emailRegisterTxtField)
+                self.view.bringSubview(toFront: self.passwordRegisterTxtField)
+                self.view.bringSubview(toFront: self.registerButton)
+                self.view.bringSubview(toFront: self.fbRegisterButton)
+
                 
             } else {
                 
@@ -386,9 +398,31 @@ class LoginViewController: UIViewController {
             if success {
                 self.view.bringSubview(toFront: self.registerView)
                 self.view.bringSubview(toFront: self.logoImage)
+                self.view.bringSubview(toFront: self.emailRegisterTxtField)
+                self.view.bringSubview(toFront: self.logoImage)
+                self.view.bringSubview(toFront: self.emailTxtField)
+                self.view.bringSubview(toFront: self.passwordTxtField)
+                self.view.bringSubview(toFront: self.loginButton)
+                self.view.bringSubview(toFront: self.fbLoginButton)
                 
             } else {
                 
+            }
+        }
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
             }
         }
     }
