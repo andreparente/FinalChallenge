@@ -80,6 +80,19 @@ class LoginViewController: UIViewController {
         self.logoImage.center.x = self.view.center.x
         self.logoImage.image = UIImage(named: "Logo")
         self.view.addSubview(logoImage)
+        
+        //Contraints
+        logoImage.translatesAutoresizingMaskIntoConstraints = false
+    
+        //left
+        let leftConstraints = NSLayoutConstraint (item: logoImage, attribute: .leftMargin, relatedBy: .equal, toItem: view, attribute: .leftMargin, multiplier: 1.0, constant: 0 )
+        //right
+        let rightConstraints = NSLayoutConstraint (item: logoImage, attribute: .rightMargin, relatedBy: .equal, toItem: view, attribute: .rightMargin, multiplier: 1.0, constant: 0 )
+        //top
+        let topConstraints = NSLayoutConstraint (item: logoImage, attribute: .topMargin, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1.0, constant: 0 )
+        
+        //add constraints
+        view.addConstraints([leftConstraints, rightConstraints, topConstraints])
     }
     
     func setLoginView() {
@@ -89,12 +102,13 @@ class LoginViewController: UIViewController {
         self.loginView.addGestureRecognizer(self.loginRecognizer)
         self.loginView.backgroundColor = UIColor.vitrineDarkBlue
         self.view.addSubview(loginView)
-        entrarLbl = UILabel(frame: CGRect(x: 20, y: 500, width: 2.5*self.loginView.frame.width/3, height: 50))
+        entrarLbl = UILabel(frame: CGRect(x: 20, y: 400, width: 2.5*self.loginView.frame.width/3, height: 50))
         entrarLbl.text = "Entrar"
         entrarLbl.textColor = UIColor.white
         entrarLbl.makeHorizontal()
         //entrarLbl.center.x = loginView.center.x
         self.loginView.addSubview(entrarLbl)
+        
         
         
         passwordTxtField = KaedeTextField()
@@ -131,9 +145,9 @@ class LoginViewController: UIViewController {
         loginButton.alpha = 0
         loginButton.backgroundColor = .gray
         loginButton.setTitle("entrar", for: .normal)
-        
         loginButton.addTarget(self, action: #selector(LoginViewController.login), for: .touchUpInside)
         self.loginView.addSubview(loginButton)
+    
         
         
         fbLoginButton = FBSDKLoginButton()
