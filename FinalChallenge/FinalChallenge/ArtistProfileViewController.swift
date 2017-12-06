@@ -28,8 +28,12 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var nameLbl: UILabel!
     
+    var firstTime: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstTime = true
+
         
         profileImage.isHidden = true
         
@@ -113,32 +117,36 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        telefoneLbl.isHidden = false
-        emailLbl.isHidden = false
-        nameLbl.isHidden = false
-        returnButton.isHidden = false
+        if firstTime {
+            telefoneLbl.isHidden = false
+            emailLbl.isHidden = false
+            nameLbl.isHidden = false
+            returnButton.isHidden = false
+            
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+                self.telefoneLblConstraint.constant -= self.view.bounds.width
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+                self.emailLblConstraint.constant -= self.view.bounds.width
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+                self.followButtonConstraint.constant -= self.view.bounds.width
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
+                self.topNameLblConstraint.constant += self.view.bounds.height
+                self.returnButtonConstraint.constant += self.view.bounds.height
+                
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            UIView.animate(withDuration: 1.65, delay: 0, options: .curveEaseIn, animations: {
+                self.artWorkCarousel.alpha = 1
+            }, completion: nil)
+            firstTime = false
+        }
         
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
-            self.telefoneLblConstraint.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
-            self.emailLblConstraint.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
-            self.followButtonConstraint.constant -= self.view.bounds.width
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
-            self.topNameLblConstraint.constant += self.view.bounds.height
-            self.returnButtonConstraint.constant += self.view.bounds.height
-
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        UIView.animate(withDuration: 1.65, delay: 0, options: .curveEaseIn, animations: {
-            self.artWorkCarousel.alpha = 1
-        }, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

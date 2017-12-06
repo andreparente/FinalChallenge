@@ -21,7 +21,7 @@ class CategoriesTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         
         self.frame.size.height = 100
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 100), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100), collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear

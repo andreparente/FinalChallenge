@@ -16,6 +16,7 @@ class HomeTVC: UITableViewController {
     var categorySelected = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .white
@@ -65,6 +66,10 @@ class HomeTVC: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 
