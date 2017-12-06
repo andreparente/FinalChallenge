@@ -559,7 +559,6 @@ class DatabaseAccess {
     
     func fetchNewestArtWorks(callback: @escaping((_ success: Bool, _ response: String)->())) {
         
-        
         artWorksRef?.queryOrdered(byChild: "dateAdded").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             
             if let FirebaseArts = snapshot.value as? [String : Any] {
@@ -670,21 +669,21 @@ class DatabaseAccess {
             
             artWorksRef?.child(art.id!).observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                 print(snapshot.description)
-                let artDict = snapshot.value as! [String: Any]
+                let artDict = snapshot.value as? [String: Any]
                 
                 //guardar resultado de find artworkbyid para nao fazer a mesma busca varias vzs
-                artist.findArtWorkById(id: art.id!)?.category = artDict["category"] as? String
-                artist.findArtWorkById(id: art.id!)?.descricao = artDict["description"] as? String
-                artist.findArtWorkById(id: art.id!)?.title = artDict["title"] as? String
+                artist.findArtWorkById(id: art.id!)?.category = artDict?["category"] as? String
+                artist.findArtWorkById(id: art.id!)?.descricao = artDict?["description"] as? String
+                artist.findArtWorkById(id: art.id!)?.title = artDict?["title"] as? String
                 
-                artist.findArtWorkById(id: art.id!)?.creatorName = artDict["creatorName"] as? String
-                artist.findArtWorkById(id: art.id!)?.totalLikes = artDict["likes"] as? Int ?? 0
-                artist.findArtWorkById(id: art.id!)?.height = artDict["height"] as? Double
-                artist.findArtWorkById(id: art.id!)?.value = artDict["value"] as? Double
-                artist.findArtWorkById(id: art.id!)?.width = artDict["width"] as? Double
+                artist.findArtWorkById(id: art.id!)?.creatorName = artDict?["creatorName"] as? String
+                artist.findArtWorkById(id: art.id!)?.totalLikes = artDict?["likes"] as? Int ?? 0
+                artist.findArtWorkById(id: art.id!)?.height = artDict?["height"] as? Double
+                artist.findArtWorkById(id: art.id!)?.value = artDict?["value"] as? Double
+                artist.findArtWorkById(id: art.id!)?.width = artDict?["width"] as? Double
                 
                 //ajeitar esse codigo de preencher as imagens, provavelmente um for entre as keys..
-                if let pictDict = artDict["pictures"] as? [String:String] {
+                if let pictDict = artDict?["pictures"] as? [String:String] {
                     print(pictDict)
                     for pic in pictDict{
                         artist.findArtWorkById(id: art.id!)?.urlPhotos.append(pic.value)

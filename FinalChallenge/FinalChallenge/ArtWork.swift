@@ -22,6 +22,8 @@ class ArtWork: NSObject {
     var id: String!
     var totalLikes: Int!
     var creatorName: String!
+    var currentImage: UIImage?
+    
     
    // var
     override init() {

@@ -53,6 +53,7 @@ extension FavoriteArtsTableViewCell: UICollectionViewDataSource, UICollectionVie
         
         print(DatabaseAccess.sharedInstance.newestArts[indexPath.row].urlPhotos.first!)
         cell.artWorkImage.isHidden = false
+        
         if cell.artWorkImage.image != nil {
             
         } else {

@@ -79,12 +79,20 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtWorkCollectionViewCell", for: indexPath) as! ArtWorkCollectionViewCell
     
         // Configure the cell
-        if let picture = categoryArtWorks[indexPath.section].urlPhotos.first {
-            cell.artWorkImage.downloadedFrom(link: picture, contentMode: .scaleAspectFill)
-            cell.artWorkImage.layer.masksToBounds = true
-
+        if cell.artWorkImage.image == nil {
+            if self.categoryArtWorks[indexPath.section].currentImage != nil {
+                cell.artWorkImage.image = self.categoryArtWorks[indexPath.section].currentImage
+                cell.artWorkImage.layer.masksToBounds = true
+            } else {
+                if let picture = categoryArtWorks[indexPath.section].urlPhotos.first {
+                    if let url = URL(string: picture) {
+                        cell.artWorkImage.downloadedFrom(url: url, contentMode: .scaleAspectFill, callback: { (image: UIImage?) in
+                            self.categoryArtWorks[indexPath.section].currentImage = image
+                        })
+                    }
+                }
+            }
         }
-        
         return cell
     }
     
@@ -107,10 +115,11 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
                 } else {
                     headerView.listButton.isSelected = false
                     headerView.squareButton.isSelected = true
+                    
                 }
                 return headerView
             } else {
-                return UIView() as! UICollectionReusableView
+                return UICollectionReusableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             }
         case UICollectionElementKindSectionFooter:
             if isList {
@@ -119,7 +128,7 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
                 footerView.artWorkTitle.text = categoryArtWorks[indexPath.section].title
                 return footerView
             } else {
-                return UIView() as! UICollectionReusableView
+                return UICollectionReusableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             }
             
         default:
@@ -140,7 +149,11 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return  CGSize(width: self.view.frame.width, height: 180)
+        if section == 0 {
+            return  CGSize(width: self.view.frame.width, height: 180)
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
