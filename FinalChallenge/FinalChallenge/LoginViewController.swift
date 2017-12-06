@@ -52,6 +52,12 @@ class LoginViewController: UIViewController {
         // Do  any additional setup after loading the view.
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         if let user = Auth.auth().currentUser {

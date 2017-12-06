@@ -122,7 +122,7 @@ class AddArtWorkTVC: UITableViewController {
             cell.title.text = "Largura (cm)"
             cell.txtView.keyboardType = .decimalPad
         case 4:
-            cell.title.text = "Comprimento (cm)"
+            cell.title.text = "Profundidade (cm)"
             cell.txtView.keyboardType = .decimalPad
         default:
             cell.title.text = "Valor (Opcional)"
@@ -215,7 +215,7 @@ extension AddArtWorkTVC: UITextViewDelegate {
         case 3:
             artWork.width = Double(textView.text!)
         case 4:
-            print("Comprimento", Double(textView.text!) ?? 0)
+            print("Profundidade", Double(textView.text!) ?? 0)
         default:
             artWork.value = Double(textView.text!)
 
