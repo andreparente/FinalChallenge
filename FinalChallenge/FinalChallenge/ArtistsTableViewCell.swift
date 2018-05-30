@@ -10,6 +10,8 @@ import UIKit
 
 class ArtistsTableViewCell: UITableViewCell {
     
+    var modelAccess = ModelAccessFacade.init()
+    
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "ArtistCollectionViewCell"
     var fatherController: HomeTVC!
@@ -45,7 +47,9 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DatabaseAccess.sharedInstance.artists.count
+//        return DatabaseAccess.sharedInstance.artists.count
+//        return modelAccess.databaseReference.artists.count
+        return modelAccess.totalNumberOfArtists()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,25 +58,38 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         
         cell.profileImage.layer.cornerRadius = cell.profileImage.frame.width/2
         cell.profileImage.layer.masksToBounds = true
-        if let picture = DatabaseAccess.sharedInstance.artists[indexPath.item].profilePictureURL {
-            if DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage != nil {
-                cell.profileImage.image = DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage
+//        if let picture = DatabaseAccess.sharedInstance.artists[indexPath.item].profilePictureURL {
+//        if let picture = modelAccess.databaseReference.artists[indexPath.item].profilePictureURL {
+        if let picture = modelAccess.getArtistAt(index: indexPath.item).profilePictureURL {
+            
+//            if DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage != nil {
+            if modelAccess.databaseReference.artists[indexPath.item].cachedImage != nil{
+//                cell.profileImage.image = DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage
+                cell.profileImage.image = modelAccess.getArtistAt(index: indexPath.item).cachedImage
+                
+                
             } else {
                 
                 if let url = URL(string: picture) {
                     cell.profileImage.downloadedFrom(url: url, contentMode: .scaleAspectFill) { (image: UIImage?) in
-                        DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = image
+//                        DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = image
+//                        self.modelAccess.databaseReference.artists[indexPath.item].cachedImage = image
+                        self.modelAccess.getArtistAt(index: indexPath.item).cachedImage = image
                     }
                 } else {
                     cell.profileImage.image = UIImage(named: "DefaultProfile")
-                    DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = UIImage(named: "DefaultProfile")
+//                    DatabaseAccess.sharedInstance.artists[indexPath.item].cachedImage = UIImage(named: "DefaultProfile")
+//                    self.modelAccess.databaseReference.artists[indexPath.item].cachedImage = UIImage(named: "DefaultProfile")
+                    self.modelAccess.getArtistAt(index: indexPath.item).cachedImage = UIImage(named: "DefaultProfile")
                 }
                 
             }
         }
         
         
-        cell.nameLbl.text = DatabaseAccess.sharedInstance.artists[indexPath.item].name
+//        cell.nameLbl.text = DatabaseAccess.sharedInstance.artists[indexPath.item].name
+//        cell.nameLbl.text = self.modelAccess.databaseReference.artists[indexPath.item].name
+        cell.nameLbl.text = self.modelAccess.getArtistAt(index: indexPath.item).name
         
         return cell
     }
@@ -95,7 +112,9 @@ extension ArtistsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
         //ir para a tela de videos da modalidade x
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
-        modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+//        modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+//        modalVC.artist = modelAccess.databaseReference.artists[indexPath.row]
+        modalVC.artist = modelAccess.getArtistAt(index: indexPath.row)
         self.fatherController.present(modalVC, animated: true, completion: nil)
     }
     

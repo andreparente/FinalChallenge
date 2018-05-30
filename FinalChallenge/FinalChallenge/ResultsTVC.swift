@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class ResultsTVC: UITableViewController {
 
+    var modelAccess = ModelAccessFacade.init()
     var isCategory: Bool!
     
     var word: String!
@@ -34,7 +35,18 @@ class ResultsTVC: UITableViewController {
         
         if isCategory! {
             
-            DatabaseAccess.sharedInstance.fetchArtWorksFor(category: word, callback: { (success: Bool, response: String, artWorks: [ArtWork]) in
+//            DatabaseAccess.sharedInstance.fetchArtWorksFor(category: word, callback: { (success: Bool, response: String, artWorks: [ArtWork]) in
+//                if success {
+//                    print("entrou no callback")
+//                    print(artWorks)
+//                    self.artWorksResult = artWorks
+//                    self.tableView.reloadSections([0], with: .fade)
+//                } else {
+//
+//                }
+//            })
+            
+            self.modelAccess.fetchArtWorksFor(category: word, callback: { (success: Bool, response: String, artWorks: [ArtWork]) in
                 if success {
                     print("entrou no callback")
                     print(artWorks)
@@ -46,8 +58,35 @@ class ResultsTVC: UITableViewController {
             })
             
             
+            
+            
         } else {
-            DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
+            
+            
+//            DatabaseAccess.sharedInstance.fetchArtWorksBy(text: word) { (success: Bool, artWorks: [ArtWork]) in
+//                if success {
+//                    print("entrou no callback")
+//                    print(artWorks)
+//                    self.artWorksResult = artWorks
+//                    self.tableView.reloadSections([1], with: .fade)
+//                } else {
+//
+//                }
+//            }
+            
+//            DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
+//                if success {
+//                    print("entrou no callback")
+//                    print(artists)
+//                    self.artistsResult = artists
+//                    self.tableView.reloadSections([0], with: .fade)
+//                } else {
+//
+//                }
+//            }
+
+            
+            modelAccess.fetchArtWorksBy(text: word, callback: { (success: Bool, artWorks: [ArtWork]) in
                 if success {
                     print("entrou no callback")
                     print(artWorks)
@@ -56,9 +95,9 @@ class ResultsTVC: UITableViewController {
                 } else {
                     
                 }
-            }
+            })
             
-            DatabaseAccess.sharedInstance.fetchArtistBy(name: word) { (success: Bool, artists: [Artist]) in
+            modelAccess.fetchArtistBy(name: word, callback: { (success: Bool, artists: [Artist]) in
                 if success {
                     print("entrou no callback")
                     print(artists)
@@ -67,7 +106,7 @@ class ResultsTVC: UITableViewController {
                 } else {
                     
                 }
-            }
+            })
         }
 
         //query pra titulo de obra de arte

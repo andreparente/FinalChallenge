@@ -10,10 +10,13 @@ import UIKit
 
 class HomeTVC: UITableViewController {
 
+    var modelAccess = ModelAccessFacade.init()
+    
     var reuseIdentifier = "CategoriesTableViewCell"
     var artistsReuseIdentifier = "ArtistsTableViewCell"
     var favoriteArtsReuseIdentifier = "FavoriteArtsTableViewCell"
     var categorySelected = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,39 +30,75 @@ class HomeTVC: UITableViewController {
         self.tableView.register(ArtistsTableViewCell.self, forCellReuseIdentifier: artistsReuseIdentifier)
         self.tableView.register(FavoriteArtsTableViewCell.self, forCellReuseIdentifier: favoriteArtsReuseIdentifier)
 
-        DatabaseAccess.sharedInstance.fetchCategories { (success: Bool, response: String) in
+//        DatabaseAccess.sharedInstance.fetchCategories { (success: Bool, response: String) in
+//            if success {
+//                self.tableView.reloadSections([0], with: .fade)
+//            } else {
+//
+//            }
+//        }
+        
+//        DatabaseAccess.sharedInstance.fetchArtists { (success: Bool, response: String) in
+//            if success {
+//                self.tableView.reloadSections([1], with: .fade)
+//            } else {
+//
+//            }
+//        }
+        
+//        DatabaseAccess.sharedInstance.fetchFollowedArtistsIdsFor(user: User.sharedInstance){ (success: Bool, response: String) in
+//            if success {
+////                print(User.sharedInstance.favoriteArtistsIds)
+//            } else {
+//                print("deu erro")
+//            }
+//        }
+
+//        DatabaseAccess.sharedInstance.fetchNewestArtWorks { (success: Bool, response: String) in
+//            if success {
+//                
+//                self.tableView.reloadSections([2], with: .fade)
+//            } else {
+//                
+//            }
+//        }
+        
+        modelAccess.fetchCategories(callback: { (success: Bool, response: String) in
             if success {
                 self.tableView.reloadSections([0], with: .fade)
             } else {
                 
             }
-        }
+        })
         
-        DatabaseAccess.sharedInstance.fetchArtists { (success: Bool, response: String) in
+        modelAccess.fetchArtists(callback: { (success: Bool, response: String) in
             if success {
                 self.tableView.reloadSections([1], with: .fade)
             } else {
                 
             }
-        }
+        })
         
-        DatabaseAccess.sharedInstance.fetchFollowedArtistsIdsFor(user: User.sharedInstance){ (success: Bool, response: String) in
+        modelAccess.fetchFollowedArtistsIdsFor(callback: { (success: Bool, response: String) in
             if success {
-//                print(User.sharedInstance.favoriteArtistsIds)
+                //                print(User.sharedInstance.favoriteArtistsIds)
             } else {
-            print("deu erro")
+                print("deu erro")
             }
-        }
-    
- 
+        })
         
-        DatabaseAccess.sharedInstance.fetchNewestArtWorks { (success: Bool, response: String) in
+        modelAccess.fetchNewestArtWorks(callback: { (success: Bool, response: String) in
             if success {
+                
                 self.tableView.reloadSections([2], with: .fade)
             } else {
                 
             }
-        }
+        })
+    
+ 
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -99,6 +138,7 @@ extension HomeTVC {
             return cell
             
         default:
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: favoriteArtsReuseIdentifier, for: indexPath) as! FavoriteArtsTableViewCell
             cell.fatherController = self
             return cell
@@ -154,6 +194,7 @@ extension HomeTVC {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "HomeToCategory" {
             let vc = segue.destination as! CategoryCollectionViewController
             vc.categoryName = self.categorySelected

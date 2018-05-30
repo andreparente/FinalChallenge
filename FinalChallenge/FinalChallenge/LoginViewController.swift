@@ -13,6 +13,7 @@ import FBSDKLoginKit
 
 
 class LoginViewController: UIViewController {
+    var modelAccess : ModelAccessFacade!
     
     var nameTxtField: KaedeTextField!
     var emailTxtField: KaedeTextField!
@@ -47,7 +48,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
         
-        
+        modelAccess = ModelAccessFacade.init()
         
         // Do  any additional setup after loading the view.
     }
@@ -59,15 +60,26 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        if modelAccess == nil{
+            ModelAccessFacade.init()
+        }
         
         if let user = Auth.auth().currentUser {
-            DatabaseAccess.sharedInstance.fetchUserInfoBy(id: user.uid, callback: { (success: Bool) in
-                if success {
-                    self.performSegue(withIdentifier: "LoginToMain", sender: self)
-                } else {
-                    self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
-                }
-            })
+//            DatabaseAccess.sharedInstance.fetchUserInfoBy(id: user.uid, callback: { (success: Bool) in
+//                if success {
+//                    self.performSegue(withIdentifier: "LoginToMain", sender: self)
+//                } else {
+//                    self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
+//                }
+//            })
+            
+        modelAccess.fetchUserInfoBy(id: user.uid, callback: { (success: Bool) in
+            if success {
+                self.performSegue(withIdentifier: "LoginToMain", sender: self)
+            } else {
+                self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
+            }
+        })
             
         } else {
             setLoginView()
@@ -513,15 +525,21 @@ class LoginViewController: UIViewController {
                 //user logado com sucesso
                 //puxar infos do database do us
                 
-                DatabaseAccess.sharedInstance.fetchUserInfo(email: self.emailTxtField.text!, callback: { (success: Bool) in
+//                DatabaseAccess.sharedInstance.fetchUserInfo(email: self.emailTxtField.text!, callback: { (success: Bool) in
+//                    if success {
+//                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
+//                    } else {
+//                        self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
+//
+//                    }
+//                })
+                self.modelAccess.fetchUserInfo(email: self.emailTxtField.text!, callback: { (success: Bool) in
                     if success {
                         self.performSegue(withIdentifier: "LoginToMain", sender: self)
                     } else {
                         self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
-                        
                     }
                 })
-                
             }
         }
     }
@@ -539,16 +557,26 @@ class LoginViewController: UIViewController {
                 user.id = Auth.auth().currentUser?.providerID
                 
                 
-                DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
+//                DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: user)
+                self.modelAccess.databaseAccessWriteCreateUser(user: user)
                 
-                DatabaseAccess.sharedInstance.fetchUserInfo(email: Auth.auth().currentUser!.email!, callback: { (success: Bool) in
+//                DatabaseAccess.sharedInstance.fetchUserInfo(email: Auth.auth().currentUser!.email!, callback: { (success: Bool) in
+//                    if success {
+//                        self.performSegue(withIdentifier: "LoginToMain", sender: self)
+//                    } else {
+//                        self.showAlert(title: "Erro", message: "Não foi possível registrar seu usuário, tente novamente mais tarde")
+//
+//                    }
+//                })
+                
+                self.modelAccess.fetchUserInfo(email: Auth.auth().currentUser!.email!, callback: { (success: Bool) in
                     if success {
                         self.performSegue(withIdentifier: "LoginToMain", sender: self)
                     } else {
-                        self.showAlert(title: "Erro", message: "Não foi possível registrar seu usuário, tente novamente mais tarde")
-                        
+                        self.showAlert(title: "Erro", message: "Não foi possível fazer login, por favor tente novamente mais tarde!")
                     }
                 })
+                
             }
         }
     }
@@ -585,12 +613,22 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
                                     let userDatabase = User(name: resultado["name"] as! String, email: resultado["email"] as! String)
                                     
                                     // ELE JA EXISTE NO FIREBASE?
-                                    DatabaseAccess.sharedInstance.fetchUserInfo(email: userDatabase.email, callback: { (success: Bool) in
+//                                    DatabaseAccess.sharedInstance.fetchUserInfo(email: userDatabase.email, callback: { (success: Bool) in
+//                                        if success {
+//                                            self.performSegue(withIdentifier: "LoginToMain", sender: self)
+//                                        } else {
+//                                            //SE NAO EXISTIR, CRIA NO FIREBASE
+//                                            DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: userDatabase)
+//                                            self.performSegue(withIdentifier: "LoginToMain", sender: self)
+//                                        }
+//                                    })
+                                    // ELE JA EXISTE NO FIREBASE?
+                                    self.modelAccess.fetchUserInfo(email: userDatabase.email, callback: { (success: Bool) in
                                         if success {
                                             self.performSegue(withIdentifier: "LoginToMain", sender: self)
                                         } else {
                                             //SE NAO EXISTIR, CRIA NO FIREBASE
-                                            DatabaseAccess.sharedInstance.databaseAccessWriteCreateUser(user: userDatabase)
+                                            self.modelAccess.databaseAccessWriteCreateUser(user: userDatabase)
                                             self.performSegue(withIdentifier: "LoginToMain", sender: self)
                                         }
                                     })

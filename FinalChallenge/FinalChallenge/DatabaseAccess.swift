@@ -888,6 +888,7 @@ class DatabaseAccess {
         usersRef!.child(User.sharedInstance.id).updateChildValues(dict, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
             if error != nil {
                 print(error?.localizedDescription ?? 0)
+                callback(false)
             } else {
                 callback(true)
             }

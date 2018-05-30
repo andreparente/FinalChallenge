@@ -9,7 +9,8 @@
 import UIKit
 
 class HeaderSettings: UIView {
-
+    var modelAccess = ModelAccessFacade.init()
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
 
@@ -32,17 +33,23 @@ class HeaderSettings: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
-        if let imageString = User.sharedInstance.profilePictureURL {
-            
+        if let imageString = self.modelAccess.getUserProfilePictureUrl(){
+//        if let imageString = User.sharedInstance.profilePictureURL {
             if imageString == "" {
                 
             } else {
-                if User.sharedInstance.cachedImage != nil {
-                    self.profileImageView.image = User.sharedInstance.cachedImage
+                if modelAccess.getUserCachedImage() != nil{
+//                if User.sharedInstance.cachedImage != nil {
+                    self.profileImageView.image = modelAccess.getUserCachedImage()
+//                    self.profileImageView.image = User.sharedInstance.cachedImage
                 } else {
-                    self.profileImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL!)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
-                        User.sharedInstance.cachedImage = image
+                    self.profileImageView.downloadedFrom(url: URL(string: self.modelAccess.getUserProfilePictureUrl()!)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+                        self.modelAccess.setUserCachedImage(image: image!)
                     }
+                    
+//                    self.profileImageView.downloadedFrom(url: URL(string: User.sharedInstance.profilePictureURL!)!, contentMode: .scaleAspectFill) { (image: UIImage?) in
+//                        User.sharedInstance.cachedImage = image
+//                    }
                 }
 
                 self.profileImageView.layer.masksToBounds = true

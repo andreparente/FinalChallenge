@@ -10,6 +10,9 @@ import UIKit
 
 class AddArtWorkHeader: UIView {
 
+    var modelAccess = ModelAccessFacade.init()
+
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var picturesCollectionView: UICollectionView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
@@ -105,7 +108,8 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
         if collectionView.isEqual(picturesCollectionView) {
             return 3
         } else {
-            return DatabaseAccess.sharedInstance.categories.count
+            return modelAccess.totalNumberOfCategories()
+//            return DatabaseAccess.sharedInstance.categories.count
         }
     }
     
@@ -139,7 +143,8 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
-            cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
+            cell.title.text = modelAccess.getCategoryAt(index: indexPath.row)
+//            cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
             cell.layer.borderWidth = 1
             cell.layer.borderColor = UIColor.vitrineDarkBlue.cgColor
             
@@ -177,7 +182,8 @@ extension AddArtWorkHeader: UICollectionViewDelegate, UICollectionViewDataSource
         if collectionView.isEqual(picturesCollectionView) {
             return CGSize(width: 100, height: 100)
         } else {
-            return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.row].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.row].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
+            return CGSize(width: self.modelAccess.getCategoryAt(index: indexPath.row).width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: self.modelAccess.getCategoryAt(index: indexPath.row).height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
+//            return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.row].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.row].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
         }
         
     }

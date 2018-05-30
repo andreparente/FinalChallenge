@@ -9,6 +9,8 @@
 import UIKit
 
 class CategoriesTableViewCell: UITableViewCell {
+    
+    var modelAccess = ModelAccessFacade.init()
 
     var collectionView: UICollectionView!
     var collectionReuseIdentifier = "CategoryCollectionViewCell"
@@ -45,14 +47,18 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DatabaseAccess.sharedInstance.categories.count
+//        return DatabaseAccess.sharedInstance.categories.count
+//        return modelAccess.databaseReference.categories.count
+        return modelAccess.totalNumberOfCategories()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
         
         
-        cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
+//        cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
+//        cell.title.text = modelAccess.databaseReference.categories[indexPath.row]
+        cell.title.text = modelAccess.getCategoryAt(index: indexPath.row)
         cell.layer.cornerRadius = 7
 
         
@@ -63,7 +69,10 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         
         
         // ESTHER, adicionar a imagem aqui
-        cell.backgroundImage.image = DatabaseAccess.sharedInstance.categoriesImages[indexPath.row]
+//        cell.backgroundImage.image = DatabaseAccess.sharedInstance.categoriesImages[indexPath.row]
+//        cell.backgroundImage.image = modelAccess.databaseReference.categoriesImages[indexPath.row]
+        cell.backgroundImage.image = modelAccess.getCategoryImageAt(index: indexPath.row)
+        
         cell.backgroundImage.layer.masksToBounds = true
         cell.backgroundImage.contentMode = .scaleAspectFill
         
@@ -110,21 +119,14 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
                 }) { (success: Bool) in
                     if success {
                         selectedCell.bounds = bounds
-                        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
+//                        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
+//                        self.fatherController.categorySelected = self.modelAccess.databaseReference.categories[indexPath.row]
+                        self.fatherController.categorySelected = self.modelAccess.getCategoryAt(index: indexPath.row)
                         self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
                     }
                 }
             
         }
-        
-        
-
-        
-
-        
-        
-
-        
 
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import FinalChallenge
+//@testable import FinalChallenge
 
 class FinalChallengeTests: XCTestCase {
     

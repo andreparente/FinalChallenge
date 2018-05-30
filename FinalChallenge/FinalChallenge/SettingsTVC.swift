@@ -36,6 +36,7 @@ extension SettingsCell: UITextFieldDelegate {
 }
 
 class SettingsTVC: UITableViewController {
+    var modelAccess : ModelAccessFacade!
 
     var headerView: HeaderSettings!
     var imagePicker: UIImagePickerController!
@@ -45,7 +46,7 @@ class SettingsTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.modelAccess = ModelAccessFacade.init()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -183,7 +184,19 @@ extension SettingsTVC: HeaderSettingsDelegate {
         dict["tel1"] = tel1
         dict["tel2"] = tel2
         
-        DatabaseAccess.sharedInstance.updateUserProfile(dict: dict) { (success:Bool) in
+//        DatabaseAccess.sharedInstance.updateUserProfile(dict: dict) { (success:Bool) in
+//            if success{
+//                print("update successful")
+//                self.showAlert(title: "Sucesso", message: "Seus dados foram atualizados com sucesso!")
+//            }
+//            else {
+//                print("update failed")
+//                self.showAlert(title: "Erro", message: "Não foi possível atualizar agora, tente novamente mais tarde")
+//                
+//            }
+//        }
+        
+        self.modelAccess.updateUserProfile(dict: dict, callback: { (success:Bool) in
             if success{
                 print("update successful")
                 self.showAlert(title: "Sucesso", message: "Seus dados foram atualizados com sucesso!")
@@ -193,8 +206,8 @@ extension SettingsTVC: HeaderSettingsDelegate {
                 self.showAlert(title: "Erro", message: "Não foi possível atualizar agora, tente novamente mais tarde")
                 
             }
-        }
-
+        })
+        
     }
     
     func didTapChangePicture() {
@@ -247,7 +260,9 @@ extension SettingsTVC: UINavigationControllerDelegate, UIImagePickerControllerDe
         imagePicker.dismiss(animated: true, completion: nil)
         
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            DatabaseAccess.sharedInstance.uploadProfileImage(image: picture, callback: { (success: Bool, response: String) in
+            
+            modelAccess.uploadProfileImage(image: picture, callback:{ (success: Bool, response: String) in
+//            DatabaseAccess.sharedInstance.uploadProfileImage(image: picture, callback: { (success: Bool, response: String) in
                 if success {
                     //deu certo pra guardar imagem
                     ("img updated")

@@ -24,6 +24,8 @@ class User {
     var tel1: String?
     var tel2: String?
     
+    var databaseReference = DatabaseAccess.sharedInstance
+    
     //Singleton!
     static let sharedInstance = User()
     var artWorks: [ArtWork] = []
@@ -105,4 +107,40 @@ class User {
         }
         return nil
     }
+    
+    //Databse Call Methods
+    func fetchUserInfoBy(id: String, callback: @escaping((_ success: Bool)->())) {
+        databaseReference.fetchUserInfoBy(id: id, callback: { (success: Bool) in
+            if success {
+                callback(true)
+            } else {
+                callback(false)
+            }
+        })
+    }
+    
+    func fetchUserInfo(email: String, callback: @escaping((_ success: Bool)->())) {
+        databaseReference.fetchUserInfo(email: email, callback:{ (success: Bool) in
+            if success {
+                callback(true)
+            } else {
+                callback(false)
+            }
+        })
+    }
+    
+    func databaseAccessWriteCreateUser(user:User) {
+        databaseReference.databaseAccessWriteCreateUser(user: user)
+    }
+    
+    func fetchFollowedArtistsIdsFor(callback: @escaping((_ success: Bool, _ response: String)->())){
+        databaseReference.fetchFollowedArtistsIdsFor(user: self, callback:{ (success: Bool, response: String) in
+            if success {
+                callback(true, "sucesso")
+            } else {
+                callback(false, "erro")
+            }
+        })
+    }
+    
 }

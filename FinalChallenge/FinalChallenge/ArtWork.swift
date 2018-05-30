@@ -24,6 +24,8 @@ class ArtWork: NSObject {
     var creatorName: String!
     var currentImage: UIImage?
     
+    var databaseReference = DatabaseAccess.sharedInstance
+    
     
    // var
     override init() {

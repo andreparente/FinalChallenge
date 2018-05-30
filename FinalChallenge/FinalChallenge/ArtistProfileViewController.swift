@@ -10,7 +10,9 @@ import UIKit
 import iCarousel
 
 class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
-
+    
+    var modelAccess : ModelAccessFacade!
+    
     var artist: Artist!
     @IBOutlet weak var telefoneLblConstraint: NSLayoutConstraint!
     @IBOutlet weak var emailLblConstraint: NSLayoutConstraint!
@@ -33,7 +35,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     override func viewDidLoad() {
         super.viewDidLoad()
         firstTime = true
-
+        modelAccess = ModelAccessFacade.init()
         
         profileImage.isHidden = true
         
@@ -51,7 +53,17 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         self.artWorkCarousel.alpha = 0
         
         print(artist.artWorks)
-        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
+//        DatabaseAccess.sharedInstance.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
+//            if success {
+//                self.artWorkCarousel.reloadData()
+//            } else {
+//                print("erro no fetchArtworks for artist")
+//                //self.showAlert(title: "Erro", message: "Não foi possível carregar as informações do criador, tente novamente mais tarde")
+//
+//            }
+//        }
+        
+        self.modelAccess.fetchArtWorksFor(artist: artist) { (success: Bool, response: String) in
             if success {
                 self.artWorkCarousel.reloadData()
             } else {
@@ -60,6 +72,7 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
                 
             }
         }
+        
         emailButton.layer.shadowColor = UIColor.black.cgColor
         emailButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         emailButton.layer.shadowRadius = 3
@@ -70,9 +83,8 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
         followButton.layer.shadowRadius = 3
         self.followButton.setTitle("Follow", for: .normal)
         
-        
-        
-        if User.sharedInstance.favoriteArtistsIds.contains(artist.id) {
+        if modelAccess.getUserFavoriteArtistsIds().contains(artist.id){
+//        if User.sharedInstance.favoriteArtistsIds.contains(artist.id) {
             followButton.setTitle("Unfollow", for: .normal)
         }
         
@@ -157,7 +169,19 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     @IBAction func didTapFollowArtist(_ sender: UIButton) {
         //fazer animação
         followButton.setTitle("Unfollow", for: .normal)
-        DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
+        
+        
+//        DatabaseAccess.sharedInstance.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
+//            if success {
+//                print(response)
+//                User.sharedInstance.didFavoriteArtist = true
+//            } else {
+//                self.followButton.setTitle("Follow", for: .normal)
+//                print(response)
+//            }
+//        })
+        
+        self.modelAccess.databaseAccessWriteFollowArtist(user: User.sharedInstance, artist: self.artist, callback: { (success: Bool, response: String) in
             if success {
                 print(response)
                 User.sharedInstance.didFavoriteArtist = true
@@ -230,7 +254,17 @@ class ArtistProfileViewController: UIViewController, iCarouselDataSource, iCarou
     
     func doubleTapped() {
         //fazer Animação
-        DatabaseAccess.sharedInstance.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
+//        DatabaseAccess.sharedInstance.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
+//            if success {
+//                print("DEU CERTO PORRA")
+//                User.sharedInstance.didLikeArtWork = true
+//            } else {
+//                print(response)
+//            }
+//        }
+        
+        
+        self.modelAccess.databaseAccessWriteLikeArtWork(artwork: artist.artWorks[self.artWorkCarousel.currentItemIndex]) { (success: Bool, response: String) in
             if success {
                 print("DEU CERTO PORRA")
                 User.sharedInstance.didLikeArtWork = true

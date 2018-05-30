@@ -12,13 +12,16 @@ private let reuseIdentifier = "Cell"
 
 class CategoryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout  {
 
+    var modelAccess : ModelAccessFacade!
+
+    
     var categoryArtWorks: [ArtWork] = []
     var isList: Bool = true
     var categoryName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        modelAccess = ModelAccessFacade.init()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,7 +33,7 @@ class CategoryCollectionViewController: UICollectionViewController, UICollection
 
         self.navigationController?.navigationBar.isHidden = true
         
-        DatabaseAccess.sharedInstance.fetchArtWorksFor(category: categoryName) { (success: Bool, response: String, auxArtWorks: [ArtWork]) in
+        modelAccess.fetchArtWorksFor(category: categoryName) { (success: Bool, response: String, auxArtWorks: [ArtWork]) in
             if success {
                 self.categoryArtWorks = auxArtWorks
                 if self.collectionView?.numberOfSections == 0 {

@@ -9,6 +9,7 @@
 import UIKit
 
 class ArtistsTVC: UITableViewController {
+    var modelAccess = ModelAccessFacade.init()
 
     var header: ArtistsHeader!
     
@@ -57,13 +58,16 @@ class ArtistsTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DatabaseAccess.sharedInstance.artists.count
+        //return DatabaseAccess.sharedInstance.artists.count
+        return modelAccess.totalNumberOfArtists()
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArtistCell", for: indexPath) as! ArtistTableViewCell
-        let artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+        let artist = modelAccess.getArtistAt(index: indexPath.row)
+        //let artist = modelAccess.databaseReference.artists[indexPath.row]
+        //let artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
         // Configure the cell...
         
         if let picture = artist.profilePictureURL {
@@ -109,7 +113,11 @@ class ArtistsTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let modalVC = storyboard.instantiateViewController(withIdentifier: "ArtistTVC") as! ArtistProfileViewController
-        modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+        
+        
+        modalVC.artist = modelAccess.getArtistAt(index: indexPath.row)
+//        modalVC.artist = DatabaseAccess.sharedInstance.artists[indexPath.row]
+        
         self.present(modalVC, animated: true, completion: nil)
     }
 

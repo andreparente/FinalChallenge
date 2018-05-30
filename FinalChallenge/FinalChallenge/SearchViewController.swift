@@ -11,14 +11,16 @@ import YNSearch
 
 
 class SearchViewController: YNSearchViewController, YNSearchDelegate {
-
+    
+    var modelAccess = ModelAccessFacade.init()
     var searchText: String!
 
     var categoryButtonClicked: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         let ynSearch = YNSearch()
-        ynSearch.setCategories(value: DatabaseAccess.sharedInstance.categories)
+//        ynSearch.setCategories(value: DatabaseAccess.sharedInstance.categories)
+        ynSearch.setCategories(value: modelAccess.getCategories())
         
         self.ynSearchinit()
 
@@ -73,8 +75,9 @@ class SearchViewController: YNSearchViewController, YNSearchDelegate {
     
     func ynSearchListView(_ ynSearchListView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let ynmodel = self.ynSearchView.ynSearchListView.searchResultDatabase[indexPath.row] as? YNSearchModel, let key = ynmodel.key {
-            self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(key: key)
-            self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(object: self.ynSearchView.ynSearchListView.database[indexPath.row])
+        self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(key: key)
+        self.ynSearchView.ynSearchListView.ynSearchListViewDelegate?.ynSearchListViewClicked(object: self.ynSearchView.ynSearchListView.database[indexPath.row])
+            
             self.ynSearchView.ynSearchListView.ynSearch.appendSearchHistories(value: key)
         }
     }

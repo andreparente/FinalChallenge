@@ -9,7 +9,9 @@
 import UIKit
 
 class AddArtWorkTVC: UITableViewController {
+    var modelAccess = ModelAccessFacade.init()
 
+    
     var tableHeader: AddArtWorkHeader!
     var tableFooter: UIView!
     var artWork: ArtWork!
@@ -65,7 +67,8 @@ class AddArtWorkTVC: UITableViewController {
            print("preencher campos vazios")
         }
         else {
-            DatabaseAccess.sharedInstance.databaseAccessWriteCreateArtwork(artwork: self.artWork, callback: { (success: Bool, response: String) in
+            
+            modelAccess.databaseAccessWriteCreateArtwork(artwork: self.artWork, callback: { (success: Bool, response: String) in
                 if success {
                     // 1
                     let optionMenu = UIAlertController(title: "Obra salva com sucesso!", message: "", preferredStyle: .alert)
@@ -75,16 +78,37 @@ class AddArtWorkTVC: UITableViewController {
                         (alert: UIAlertAction!) -> Void in
                         self.navigationController?.popViewController(animated: true)
                         User.sharedInstance.didAddArtWork = true
- 
+                        
                     })
                     // 3
                     optionMenu.addAction(okAction)
                     self.present(optionMenu, animated: true, completion: nil)
-
+                    
                 } else {
                     self.showAlert(title: "Erro", message: "Não foi possível salvar sua obra no momento, tente de novo por favor")
                 }
             })
+//            
+//            DatabaseAccess.sharedInstance.databaseAccessWriteCreateArtwork(artwork: self.artWork, callback: { (success: Bool, response: String) in
+//                if success {
+//                    // 1
+//                    let optionMenu = UIAlertController(title: "Obra salva com sucesso!", message: "", preferredStyle: .alert)
+//                    
+//                    // 2
+//                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: {
+//                        (alert: UIAlertAction!) -> Void in
+//                        self.navigationController?.popViewController(animated: true)
+//                        User.sharedInstance.didAddArtWork = true
+// 
+//                    })
+//                    // 3
+//                    optionMenu.addAction(okAction)
+//                    self.present(optionMenu, animated: true, completion: nil)
+//
+//                } else {
+//                    self.showAlert(title: "Erro", message: "Não foi possível salvar sua obra no momento, tente de novo por favor")
+//                }
+//            })
         }
         
         

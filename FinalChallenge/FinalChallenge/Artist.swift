@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import iCarousel
 
 class Artist {
@@ -29,6 +30,8 @@ class Artist {
     var cachedImage: UIImage?
     var tel1: String?
     var tel2: String?
+    
+    var databaseReference = DatabaseAccess.sharedInstance
     
     init() {
         
