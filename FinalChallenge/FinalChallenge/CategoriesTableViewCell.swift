@@ -47,18 +47,18 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return DatabaseAccess.sharedInstance.categories.count
+        return DatabaseAccess.sharedInstance.categories.count
 //        return modelAccess.databaseReference.categories.count
-        return modelAccess.totalNumberOfCategories()
+//        return modelAccess.totalNumberOfCategories()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddArtWorkCategoriesCVC", for: indexPath) as! AddArtWorkCategoriesCVC
         
         
-//        cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
+        cell.title.text = DatabaseAccess.sharedInstance.categories[indexPath.row]
 //        cell.title.text = modelAccess.databaseReference.categories[indexPath.row]
-        cell.title.text = modelAccess.getCategoryAt(index: indexPath.row)
+//        cell.title.text = modelAccess.getCategoryAt(index: indexPath.row)
         cell.layer.cornerRadius = 7
 
         
@@ -69,9 +69,9 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
         
         
         // ESTHER, adicionar a imagem aqui
-//        cell.backgroundImage.image = DatabaseAccess.sharedInstance.categoriesImages[indexPath.row]
+        cell.backgroundImage.image = DatabaseAccess.sharedInstance.categoriesImages[indexPath.row]
 //        cell.backgroundImage.image = modelAccess.databaseReference.categoriesImages[indexPath.row]
-        cell.backgroundImage.image = modelAccess.getCategoryImageAt(index: indexPath.row)
+//        cell.backgroundImage.image = modelAccess.getCategoryImageAt(index: indexPath.row)
         
         cell.backgroundImage.layer.masksToBounds = true
         cell.backgroundImage.contentMode = .scaleAspectFill
@@ -92,7 +92,7 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.fatherController.view.frame.width/2 - 10, height: 90)
-     //   return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
+//        return CGSize(width: DatabaseAccess.sharedInstance.categories[indexPath.item].width(withConstraintedHeight: 0, font: UIFont.systemFont(ofSize: 17, weight: UIFontWeightRegular)) + 30, height: DatabaseAccess.sharedInstance.categories[indexPath.item].height(withConstrainedWidth: 0, font: UIFont.systemFont(ofSize: 15, weight: UIFontWeightRegular)) + 15)
     }
     
     
@@ -108,25 +108,44 @@ extension CategoriesTableViewCell: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //ir para a tela de videos da modalidade x
         
-        
-        if let selectedCell = collectionView.cellForItem(at: indexPath) {
+        if let selectedCell = collectionView.cellForItem(at: indexPath){
             let bounds = selectedCell.contentView.bounds
+            
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: [.curveEaseIn, .curveEaseOut], animations: {
+                selectedCell.bounds = CGRect(x: bounds.origin.x - 5, y: bounds.origin.y, width: bounds.size.width + 5, height: bounds.size.height)
+                print("clicou numa categoria")
+                self.fatherController.categorySelected = self.modelAccess.getCategoryAt(index: indexPath.row)
+                self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
+            }, completion: { (success: Bool) in
+                print("merda de handler")
                 
-                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: [.curveEaseIn, .curveEaseOut], animations: {
-                    
-                    selectedCell.bounds = CGRect(x: bounds.origin.x - 5, y: bounds.origin.y, width: bounds.size.width + 5, height: bounds.size.height)
-                    
-                }) { (success: Bool) in
-                    if success {
-                        selectedCell.bounds = bounds
-//                        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
-//                        self.fatherController.categorySelected = self.modelAccess.databaseReference.categories[indexPath.row]
-                        self.fatherController.categorySelected = self.modelAccess.getCategoryAt(index: indexPath.row)
-                        self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
-                    }
-                }
+            })
             
         }
+        
+        
+//        if let selectedCell = collectionView.cellForItem(at: indexPath) {
+//            
+//            let bounds = selectedCell.contentView.bounds
+//            
+//                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: [.curveEaseIn, .curveEaseOut], animations: {
+//                    
+//                    selectedCell.bounds = CGRect(x: bounds.origin.x - 5, y: bounds.origin.y, width: bounds.size.width + 5, height: bounds.size.height)
+//                    
+//                }) { (success: Bool) in
+//                    print(success)
+//                    if success {
+//                        selectedCell.bounds = bounds
+////                        self.fatherController.categorySelected = DatabaseAccess.sharedInstance.categories[indexPath.row]
+////                        self.fatherController.categorySelected = self.modelAccess.databaseReference.categories[indexPath.row]
+//                        self.fatherController.categorySelected = self.modelAccess.getCategoryAt(index: indexPath.row)
+//                        self.fatherController.performSegue(withIdentifier: "HomeToCategory", sender: self.fatherController)
+//                    }
+//                    else{
+//                        print(success)
+//                    }
+//                }
+//        }
 
     }
 }
